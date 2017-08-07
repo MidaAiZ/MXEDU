@@ -1,0 +1,21 @@
+<!-- Small modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">登录</button>
+
+<div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_tag login_path, class: "form-inline" do %>
+        <div class="field">
+            <%= label_tag "user[phone]", "手机号" %>
+            <%= text_field_tag "user[phone]", '', placeholder: "输入手机号", class: "form-control" %>
+        </div>
+        <div class="field">
+            <%= label_tag "user[password]", "密码" %>
+            <%= password_field_tag "user[password]", '', placeholder: "输入密码", class: "form-control" %>
+        </div>
+        <div class="action">
+            <%= submit_tag "登录" %>
+        </div>
+      <% end %>
+  </div>
+</div>

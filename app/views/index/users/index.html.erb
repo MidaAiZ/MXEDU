@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Index Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Password digest</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @index_users.each do |index_user| %>
+      <tr>
+        <td><%= index_user.number %></td>
+        <td><%= index_user.password_digest %></td>
+        <td><%= index_user.phone %></td>
+        <td><%= index_user.email %></td>
+        <td><%= index_user.name %></td>
+        <td><%= index_user.sex %></td>
+        <td><%= index_user.info %></td>
+        <td><%= link_to 'Show', index_user %></td>
+        <td><%= link_to 'Edit', edit_index_user_path(index_user) %></td>
+        <td><%= link_to 'Destroy', index_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Index User', new_index_user_path %>

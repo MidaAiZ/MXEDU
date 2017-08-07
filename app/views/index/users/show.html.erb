@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @index_user.number %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @index_user.password_digest %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @index_user.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @index_user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @index_user.name %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @index_user.sex %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @index_user.info %>
+</p>
+
+<%= link_to 'Edit', edit_index_user_path(@index_user) %> |
+<%= link_to 'Back', index_users_path %>
