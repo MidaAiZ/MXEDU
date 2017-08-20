@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820162054) do
+ActiveRecord::Schema.define(version: 20170820163435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170820162054) do
   end
 
   create_table "index_orders", force: :cascade do |t|
-    t.integer "price"
+    t.float "price"
     t.string "product_name"
     t.bigint "user_id"
     t.string "products_type"
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 20170820162054) do
 
   create_table "index_products", force: :cascade do |t|
     t.string "name"
-    t.string "price"
     t.string "intro"
     t.string "type"
     t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "price", default: 0.0
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "type"], name: "index_index_products_on_name_and_type"
   end
