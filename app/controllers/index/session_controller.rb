@@ -28,8 +28,8 @@ class Index::SessionController < IndexController
         case prms[:login_type]
         when 'phone' #手机号+密码登录
           @user = Index::User.find_by_phone(prms[:phone]).try(:authenticate, prms[:password]) if prms[:phone] && prms[:password]
-        when 'email' #邮箱+密码登录
-          @user = Index::User.find_by_email(prms[:email]).try(:authenticate, prms[:password]) if prms[:email] && prms[:password]
+        # when 'email' #邮箱+密码登录
+        #   @user = Index::User.find_by_email(prms[:email]).try(:authenticate, prms[:password]) if prms[:email] && prms[:password]
         when 'msg_code' #手机号+短信验证码登录
           if prms[:phone] && prms[:msg_code]
             # 获取短信验证码记录
