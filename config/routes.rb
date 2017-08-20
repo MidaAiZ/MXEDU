@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :index do
+    resources :products
+  end
   scope module: :index do
     get 'login' => 'session#index', as: :login
     post 'login' => 'session#login'

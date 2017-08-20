@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Index Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Intro</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @index_products.each do |index_product| %>
+      <tr>
+        <td><%= index_product.name %></td>
+        <td><%= index_product.price %></td>
+        <td><%= index_product.intro %></td>
+        <td><%= index_product.info %></td>
+        <td><%= link_to 'Show', index_product %></td>
+        <td><%= link_to 'Edit', edit_index_product_path(index_product) %></td>
+        <td><%= link_to 'Destroy', index_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Index Product', new_index_product_path %>

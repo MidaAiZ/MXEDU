@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @index_product.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @index_product.price %>
+</p>
+
+<p>
+  <strong>Intro:</strong>
+  <%= @index_product.intro %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @index_product.info %>
+</p>
+
+<%= link_to 'Edit', edit_index_product_path(@index_product) %> |
+<%= link_to 'Back', index_products_path %>
