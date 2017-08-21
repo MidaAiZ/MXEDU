@@ -1,1 +1,1 @@
-json.partial! "index_users/index_user", index_user: @index_user
+json.partial! "index/users/index_user", index_user: @user
