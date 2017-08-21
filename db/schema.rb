@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820163435) do
+ActiveRecord::Schema.define(version: 20170821171230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,10 @@ ActiveRecord::Schema.define(version: 20170820163435) do
   create_table "index_histories", force: :cascade do |t|
     t.string "product_name"
     t.bigint "user_id"
-    t.string "products_type"
-    t.bigint "products_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id", "products_type"], name: "index_histories_on_product_id_type"
-    t.index ["products_type", "products_id"], name: "index_index_histories_on_products_type_and_products_id"
+    t.bigint "p_id"
+    t.index ["p_id"], name: "index_index_histories_on_p_id"
     t.index ["user_id"], name: "index_index_histories_on_user_id"
   end
 
@@ -42,13 +40,14 @@ ActiveRecord::Schema.define(version: 20170820163435) do
   create_table "index_products", force: :cascade do |t|
     t.string "name"
     t.string "intro"
-    t.string "type"
+    t.string "cate"
     t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "price", default: 0.0
+    t.string "details"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
-    t.index ["name", "type"], name: "index_index_products_on_name_and_type"
+    t.index ["name", "cate"], name: "index_index_products_on_name_and_cate"
   end
 
   create_table "index_users", force: :cascade do |t|

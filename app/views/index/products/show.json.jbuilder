@@ -1,1 +1,1 @@
-json.partial! "index_products/index_product", index_product: @index_product
+json.partial! "index/products/index_product", index_product: @product
