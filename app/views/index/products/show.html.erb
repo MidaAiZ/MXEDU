@@ -2,23 +2,23 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @index_product.name %>
+  <%= @product.name %>
 </p>
 
 <p>
   <strong>Price:</strong>
-  <%= @index_product.price %>
+  <%= @product.price %>
 </p>
 
 <p>
   <strong>Intro:</strong>
-  <%= @index_product.intro %>
+  <%= @product.intro %>
 </p>
 
 <p>
   <strong>Info:</strong>
-  <%= @index_product.info %>
+  <%= @product.info %>
 </p>
 
-<%= link_to 'Edit', edit_index_product_path(@index_product) %> |
+<%= link_to 'Edit', edit_index_product_path(@product) %> |
 <%= link_to 'Back', index_products_path %>

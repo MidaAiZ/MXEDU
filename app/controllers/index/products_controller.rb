@@ -5,7 +5,7 @@ class Index::ProductsController < IndexController
   # GET /index/products
   # GET /index/products.json
   def index
-    @products = Index::Product.all
+    @products = Index::Product.sort(params[:cate])
   end
 
   # GET /index/products/1

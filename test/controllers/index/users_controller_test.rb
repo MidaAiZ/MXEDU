@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Index::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @index_user = index_users(:one)
+    @user = index_users(:one)
   end
 
   test "should get index" do
@@ -17,30 +17,30 @@ class Index::UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create index_user" do
     assert_difference('Index::User.count') do
-      post index_users_url, params: { index_user: { email: @index_user.email, info: @index_user.info, name: @index_user.name, number: @index_user.number, password_digest: @index_user.password_digest, phone: @index_user.phone, sex: @index_user.sex } }
+      post index_users_url, params: { index_user: { email: @user.email, info: @user.info, name: @user.name, number: @user.number, password_digest: @user.password_digest, phone: @user.phone, sex: @user.sex } }
     end
 
     assert_redirected_to index_user_url(Index::User.last)
   end
 
   test "should show index_user" do
-    get index_user_url(@index_user)
+    get index_user_url(@user)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_index_user_url(@index_user)
+    get edit_index_user_url(@user)
     assert_response :success
   end
 
   test "should update index_user" do
-    patch index_user_url(@index_user), params: { index_user: { email: @index_user.email, info: @index_user.info, name: @index_user.name, number: @index_user.number, password_digest: @index_user.password_digest, phone: @index_user.phone, sex: @index_user.sex } }
-    assert_redirected_to index_user_url(@index_user)
+    patch index_user_url(@user), params: { index_user: { email: @user.email, info: @user.info, name: @user.name, number: @user.number, password_digest: @user.password_digest, phone: @user.phone, sex: @user.sex } }
+    assert_redirected_to index_user_url(@user)
   end
 
   test "should destroy index_user" do
     assert_difference('Index::User.count', -1) do
-      delete index_user_url(@index_user)
+      delete index_user_url(@user)
     end
 
     assert_redirected_to index_users_url
