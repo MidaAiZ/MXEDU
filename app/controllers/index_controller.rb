@@ -7,6 +7,7 @@ class IndexController < ApplicationController
 
     def require_login
       redirect_to login_path and return unless check_login
+      @user = Index::User.find session[:user_id]
     end
 
 end
