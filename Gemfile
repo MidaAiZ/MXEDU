@@ -37,11 +37,18 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# memcache插件，用于缓存
+gem 'dalli'
+
 # 分页插件
 gem 'kaminari'
 
 # 验证码插件
 gem 'rucaptcha'
+
+# rest-client,用于产生发送http请求和接受响应
+ gem 'rest-client'
+ gem 'mime-types'
 
 # 解决前后端分离跨域问题
 gem 'rack-cors', :require => 'rack/cors'

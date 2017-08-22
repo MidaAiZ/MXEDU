@@ -33,7 +33,7 @@ class Index::UsersController < IndexController
       msg_record = @cache[msg_cache_key] || { times: 0 } # 从缓存中获取短信验证码记录
 
       msg_code = params[:msg_code] # 从注册参数中获取短信验证码
-
+    
       # 验证注册传入的短信验证码是否正确
       if msg_code.nil? || (msg_code != msg_record[:code])
           # 每条验证码最多允许5次验证失败
@@ -54,8 +54,9 @@ class Index::UsersController < IndexController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
+        puts @code
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: { code: @code, errors: @user.errors }, status: :unprocessable_entity }
       end
     end
   end

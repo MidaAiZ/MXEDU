@@ -38,9 +38,9 @@ class Valicode
 
       url = "https://sms.aliyuncs.com/?Signature=#{signature}&#{args}"
 
-      response = RestIndex.post(url, '')
+      response = RestClient.post(url, '')
 
-    rescue RestIndex::Exception => e
+    rescue RestClient::Exception => e
       puts e.response
       return 'Fail'
       # res[:failed] = true

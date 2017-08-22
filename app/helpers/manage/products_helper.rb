@@ -1,2 +1,2 @@
-module Manage::ProductHelper
+module Manage::ProductsHelper
 end
