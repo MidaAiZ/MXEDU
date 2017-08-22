@@ -40,6 +40,12 @@ gem 'bcrypt', '~> 3.1.7'
 # 分页插件
 gem 'kaminari'
 
+# 验证码插件
+gem 'rucaptcha'
+
+# 解决前后端分离跨域问题
+gem 'rack-cors', :require => 'rack/cors'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
