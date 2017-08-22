@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @manage_admin.number %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @manage_admin.password_digest %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @manage_admin.name %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @manage_admin.role %>
+</p>
+
+<%= link_to 'Edit', edit_manage_admin_path(@manage_admin) %> |
+<%= link_to 'Back', manage_admins_path %>
