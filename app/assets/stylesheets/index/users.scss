@@ -1,0 +1,19 @@
+.phone-group {
+	input[type=text] {
+		width: 60%;
+		float: left;
+	}
+	a, button {
+		width: 38%;
+		height: 38px;
+		line-height: 25px;
+		float: right;
+	}
+}
+
+.base {
+}
+
+.detail {
+	display: none;
+}

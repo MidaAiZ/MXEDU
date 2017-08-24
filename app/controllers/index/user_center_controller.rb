@@ -1,5 +1,9 @@
-class Index::UserCenterController < ApplicationController
+class Index::UserCenterController < IndexController
 	before_action :require_login
+
+	def index
+
+	end
 
 	def orders
 		count = params[:count] || 15

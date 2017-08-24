@@ -1,5 +1,136 @@
-<h1>New Index User</h1>
 
-<%= render 'form', index_user: @user %>
 
-<%= link_to 'Back', index_users_path %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MXEDU</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'index/style', media: 'all' %>
+    <%= stylesheet_link_tag 'index/style-responsive', media: 'all' %>
+    <%= stylesheet_link_tag params[:controller], media: 'all' %>
+  </head>
+
+  <body class="login-body">
+
+	<div class="container">
+		<%= render 'form', index_user: @user %>
+	    <!-- main content end-->
+		<%= javascript_include_tag 'application' %>
+		<%= javascript_include_tag params[:controller] %>
+        <script>
+            $(function() {
+                var $phone = $("#phone"),
+                    $code = $("#code");
+                $code.on("click", function() {
+                    if($phone.val().length != 11) return false;
+                    $.ajax({
+                        url: "/send_msg",
+                        type: "post",
+                        data: {
+                            "phone": $phone.val(),
+                            "handle": "register"
+                        },
+                        dataType: "json",
+                        success: function(res) {
+                            if (res.code == 'Success') {
+                                $code.addClass("disabled");
+                                var time = 60;
+                                var i = setInterval(function() {
+                                    $code.text(--time + 'S');
+                                    if (time == 0) {
+                                        $code.removeClass("disabled");
+                                        $code.text("重新发送");
+                                        clearInterval(i);
+                                    }
+                                }, 1000)
+                            } else {
+                                alert("发送失败,请稍后尝试");
+                            }
+                        },
+                        error: function() {
+                            alert("发送失败,请稍后尝试");
+                        }
+                    })
+                })
+            });
+
+            $(function() {
+                $("#user_name").on("input propertychange", function() {
+                    var $this = $(this);
+
+                    if ($this.val().length > 1) {
+                        if ($("#code-text").hasClass("OK")) {
+                            $("#next").removeClass("disabled");
+                        }
+                    }
+                });
+
+                $("#code-text").on("input propertychange", function() {
+                    var $this = $(this);
+                    if ($this.val().length != 4) return false;
+                    $.ajax({
+                        url: "/verify_msg",
+                        type: "post",
+                        data: {
+                            "phone": $("#phone").val(),
+                            "msg_code": $this.val(),
+                            "handle": "register"
+                        },
+                        dataType: "json",
+                        success: function(res) {
+                            if (res.code == 'Success') {
+                                $this.css("color", "green");
+                                $this.addClass("OK");
+                                if ($("#user_name").val().length > 1) {
+                                    $("#next").removeClass("disabled");
+                                } else {
+                                    alert("请输入正确的姓名");
+                                }
+                            } else {
+                                $this.css("color", "red");
+                                $this.removeClass("OK");
+                                $("#next").addClass("disabled");
+                            }
+                        }
+                    })
+                })
+                $("#next").on("click", function() {
+                    $(".base").hide();
+                    $(".detail").show();
+                })
+            });
+
+            $(function(){
+                $("#register").on("click", function() {
+                    $.ajax({
+                        url: "/users",
+                        type: "post",
+                        data: $("#register-form").serialize(),
+                        dataType: "json",
+                        success: function(res) {
+                            if (res.code == 'Success') {
+                                window.location = "/"
+                            } else if (res.code == 'WrongMsgCode') {
+                                alert("验证码错误")
+                            } else {
+                                alert("注册失败")
+                            }
+                        },
+                        error: function() {
+                            alert("注册失败,请稍后尝试");
+                        }
+                    })
+
+                    return false;
+                })
+            });
+
+        </script>
+	</div>
+  </body>
+</html>

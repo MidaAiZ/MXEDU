@@ -1,3 +1,60 @@
 // Place all the styles related to the Index::main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.carousel {
+	width: 100%;
+	height: 400px;
+	.carousel-inner, .item, .c-bg {
+		width: 100%;
+		height: 100%;
+	}
+	.c-bg {
+		background-size: cover !important;
+	}
+}
+
+.menu {
+	margin-top: 10px;
+	.item {
+		height: 100%;
+		a {
+			width: 100%;
+		}
+	}
+	.item {
+		border-right: #ddd 0.5px solid;
+	}
+	.item:last-child {
+		border-right: 0;
+	}
+	.panel {
+		margin-bottom: 10px;
+	}
+
+}
+
+.panel {
+	border-radius: 0px !important;
+}
+
+section {
+	margin-bottom: 15px;
+}
+
+.wrapper {
+	padding: 0px !important;
+	.panel-heading {
+		background-color: white;
+
+	}
+	.panel-body {
+		padding-top: 0;
+		background-color: white;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.carousel {
+		height: 200px;
+	}
+}

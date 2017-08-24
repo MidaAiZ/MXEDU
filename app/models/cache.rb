@@ -50,9 +50,7 @@ class Cache
   private
 
   def full_key(name)
-    puts "MX-#{@prefix}-#{name}"
-     "MX-#{@prefix}-#{name}"
-
+    "MX-#{@prefix}-#{name}"
   end
 
   def expires(expire)

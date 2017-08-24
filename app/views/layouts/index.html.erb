@@ -2,14 +2,23 @@
 <html>
   <head>
     <title>MXEDU</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-	<%= javascript_include_tag params[:controller] %>
+    <%= stylesheet_link_tag params[:controller], media: 'all' %>
+    <%= stylesheet_link_tag 'index/style', media: 'all' %>
+    <%= stylesheet_link_tag 'index/style-responsive', media: 'all' %>
   </head>
 
-  <body>
+  <body class='left-side-collapsed'>
+    <%= render 'nav' %>
     <%= yield %>
-	<%= render 'nav' %>
+    </div>
+    </section>
+    <!-- main content end-->
 	<%= javascript_include_tag 'application' %>
 	<%= javascript_include_tag params[:controller] %>
   </body>

@@ -5,7 +5,10 @@ class Index::ProductsController < IndexController
   # GET /index/products
   # GET /index/products.json
   def index
-    @products = Index::Product.sort(params[:cate])
+    @liuxue = Index::Product.sort(:liuxue)
+    @products = Index::Product.sort(:yupei)
+    @products = Index::Product.sort(:kaoyan)
+    @products = Index::Product.sort(:jiakao)
   end
 
   # GET /index/products/1

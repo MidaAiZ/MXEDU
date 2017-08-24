@@ -5,19 +5,24 @@ Rails.application.routes.draw do
 
   scope module: :index do
     get 'login' => 'session#index', as: :login
-    post 'login' => 'session#login'
+    post 'login' => 'session#login', as: :do_login
     post 'logout' => 'session#logout'
 
-    resources :users, as: :index_user do
+    resources :users do
       collection do
         get 'profile' => 'users#show'
       end
     end
 
+    resources :products
+
     resources :products, as: :index_product
 
     #user center
-    scope 'ucenter' do
+    scope 'ucenter', as: :ucenter do
+        # profile
+        get '' => 'user_center#index'
+
         # orders
         get 'orders' => 'user_center#orders'
         get 'orders/:id' => 'user_center#order'

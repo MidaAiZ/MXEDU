@@ -37,6 +37,7 @@ class Index::VerifyController < IndexController
 
     # 验证短信验证码是否正确
     if msg_record
+      puts  msg_record[:code]
       if msg_code != msg_record[:code]
         # 每条验证码最多允许10次验证失败
         tem_cache = msg_record[:times] > 9 ? nil : { code: msg_record[:code], times: msg_record[:times] + 1 }

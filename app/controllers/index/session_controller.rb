@@ -1,4 +1,6 @@
 class Index::SessionController < IndexController
+  layout false
+
   def index
     # 判断视图是否显示验证码，连续登录失败两次后需输入验证码
     @show_code = true if get_record[:times] >= 2
@@ -14,7 +16,7 @@ class Index::SessionController < IndexController
     else
       prms = login_params
       # 检查登录失败次数判断是否需要输入验证码
-      @fail_times = get_record[:times]
+      @fail_times = 0 #get_record[:times] # 暂时关闭验证功能
       # 连续登录失败两次后要求输入密码,防止暴力破解
       if @fail_times >= 2 && !verify_rucaptcha?(params[:_rucaptcha]) #, keep_session: true)
         #当连续登录失败两次时返回验证码,如果第三次登录时验证码错误则返回'WrongMsgCode'
@@ -60,10 +62,11 @@ class Index::SessionController < IndexController
         @code = 'Success' # 登录成功
         session[:user_id] = @user.id
         clear_record
-        format.json { render 'index/users/show' }
+        format.json { render json: { code: @code } }
         format.html { redirect_to root_path }
       else
         record_fail
+        puts @code
         @code ||= 'Fail'
         format.json { render json: { code: @code } }
         format.html { redirect_to login_path, notice: @code }
