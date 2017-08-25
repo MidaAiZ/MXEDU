@@ -1,11 +1,15 @@
-class Manage::ProductController < ApplicationController
-
+class Manage::ProductsController < ManageController
+  before_action :require_login
   before_action :set_index_product, only: [:show, :edit, :update, :destroy]
 
   # GET /index/products
   # GET /index/products.json
   def index
-    @products = Index::Product.sort(params[:cate])
+      count = params[:count] || 15
+      page = params[:page] || 1
+
+      nonpaged_products = Index::Product.includes(:admin)
+      @products = nonpaged_products.page(page).per(count)
   end
 
   # GET /index/products/1

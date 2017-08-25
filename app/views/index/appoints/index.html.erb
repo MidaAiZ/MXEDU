@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Index Appoints</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Content</th>
+      <th>Time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @index_appoints.each do |index_appoint| %>
+      <tr>
+        <td><%= index_appoint.name %></td>
+        <td><%= index_appoint.phone %></td>
+        <td><%= index_appoint.content %></td>
+        <td><%= index_appoint.time %></td>
+        <td><%= link_to 'Show', index_appoint %></td>
+        <td><%= link_to 'Edit', edit_index_appoint_path(index_appoint) %></td>
+        <td><%= link_to 'Destroy', index_appoint, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Index Appoint', new_index_appoint_path %>

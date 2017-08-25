@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @index_appoint.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @index_appoint.phone %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @index_appoint.content %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @index_appoint.time %>
+</p>
+
+<%= link_to 'Edit', edit_index_appoint_path(@index_appoint) %> |
+<%= link_to 'Back', index_appoints_path %>

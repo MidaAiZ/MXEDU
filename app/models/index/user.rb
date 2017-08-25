@@ -1,15 +1,19 @@
 class Index::User < ApplicationRecord
-	# mount_uploader :avatar, UserAvatarUploader # 头像上传
+	mount_uploader :avatar, UserAvatarUploader # 头像上传
 
     # 用于上传头像时保存图片参数
     attr_accessor :x, :y, :width, :height, :rotate
-    store_accessor :info, :collage, :grade, :major 
+    store_accessor :info, :collage, :grade, :major
 
     # 使用插件建立用户密码验证体系
     has_secure_password
 
     has_many :histories,
             class_name: 'Index::History',
+            foreign_key: 'user_id'
+
+    has_many :appoints,
+            class_name: 'Index::Appoint',
             foreign_key: 'user_id'
 
     has_many :orders,

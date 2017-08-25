@@ -10,6 +10,7 @@ class Index::History < ApplicationRecord
 		h = self.find_or_create_by(p_id: p.id, user_id: uid)
 		h.product_name = p.name
 		h.updated_at = Time.now
+		h.times += 1
 		h.save!
 	end
 end

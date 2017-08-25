@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     end
 
     resources :products
-
-    resources :products, as: :index_product
+    resources :appoints
+    resources :orders
 
     #user center
     scope 'ucenter', as: :ucenter do
@@ -41,20 +41,36 @@ Rails.application.routes.draw do
   end
 
   namespace :manage do
-    resources :admins
+    resources :admins do
+    end
+
+    # root
+    get '' => 'main#index', as: :root
+
+    get 'profile' => 'admin#profile', as: :profile
 
     # session
-    get 'login' => 'session#index'
-    post 'login' => 'session#login'
-    post 'logout' => 'session#logout'
+    get 'login' => 'session#index', as: :login
+    post 'login' => 'session#login', as: :do_login
+    post 'logout' => 'session#logout', as: :logout
+
+    # counts
+    get 'counts' => 'main#counts'
+
+    # users
+    resources :users
+
+    # products
+    resources :products
+
+    # appoints
+    resources :appoints
 
     # orders
-    get 'orders' => 'orders#index'
-    get 'orders/:id' => 'orders#show'
+    resources :orders
 
     #histories
-    get 'histories' => 'histories#index'
-    get 'histories/:id' => 'histories#show'
+    resources :histories
   end
 
   root 'index/main#index'

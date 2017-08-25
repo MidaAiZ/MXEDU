@@ -1,0 +1,2 @@
+module Index::OrdersHelper
+end

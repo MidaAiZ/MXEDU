@@ -2,15 +2,25 @@
 <html>
   <head>
     <title>MXEDU</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-	<%= javascript_include_tag params[:controller] %>
+    <%= stylesheet_link_tag params[:controller], media: 'all' %>
+    <%= stylesheet_link_tag 'style', media: 'all' %>
+    <%= stylesheet_link_tag 'style-responsive', media: 'all' %>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
   </head>
 
-  <body>
+  <body class='left-side-collapsed'>
+    <%= render 'nav' %>
     <%= yield %>
-	<%= render 'nav' %>
-	<%= javascript_include_tag 'application' %>
+    </div>
+    </section>
+    <!-- main content end-->
+    <%= javascript_include_tag 'application' %>
 	<%= javascript_include_tag params[:controller] %>
   </body>
 </html>

@@ -1,4 +1,5 @@
 class Manage::OrdersController < ManageController
+	before_action :require_login
 	before_action :set_order, only: :show
 
 	def index

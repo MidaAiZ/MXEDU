@@ -53,6 +53,16 @@ gem 'rucaptcha'
 # 解决前后端分离跨域问题
 gem 'rack-cors', :require => 'rack/cors'
 
+# 前端图片上传裁剪jQuery插件
+gem 'cropper-rails'
+
+# 后端处理文件上传的插件
+gem 'carrierwave' #github: 'carrierwaveuploader/carrierwave'
+
+# rmagick 是ImageMagick的ruby接口，在图片上传时可以处理图片
+# gem 'rmagick', require: false
+gem 'mini_magick'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

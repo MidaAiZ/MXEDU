@@ -1,11 +1,12 @@
 class Manage::HistoriesController < ManageController
+	before_action :require_login
 	before_action :set_history, only: :show
 
 	def index
 	  count = params[:count] || 15
       page = params[:page] || 1
 
-	  nonpaged_histories = Index::Order.all
+	  nonpaged_histories = Index::Order.all.includes(:user)
       @histories = nonpaged_histories.page(page).per(count)
 	end
 

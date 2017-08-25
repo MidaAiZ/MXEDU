@@ -1,4 +1,5 @@
-class Manage::AdminsController < ApplicationController
+class Manage::AdminsController < ManageController
+  before_action :require_login, except: [:new, :create]
   before_action :set_manage_admin, only: [:show, :edit, :update, :destroy]
 
   # GET /manage/admins
@@ -10,6 +11,10 @@ class Manage::AdminsController < ApplicationController
   # GET /manage/admins/1
   # GET /manage/admins/1.json
   def show
+  end
+
+  def profile
+
   end
 
   # GET /manage/admins/new

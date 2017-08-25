@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822161624) do
+ActiveRecord::Schema.define(version: 20170825064444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "index_appoints", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "content"
+    t.string "time"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_index_appoints_on_product_id"
+    t.index ["user_id"], name: "index_index_appoints_on_user_id"
+  end
 
   create_table "index_histories", force: :cascade do |t|
     t.string "product_name"
@@ -21,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170822161624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "p_id"
+    t.integer "times", default: 0
     t.index ["p_id"], name: "index_index_histories_on_p_id"
     t.index ["user_id"], name: "index_index_histories_on_user_id"
   end
@@ -46,6 +60,10 @@ ActiveRecord::Schema.define(version: 20170822161624) do
     t.datetime "updated_at", null: false
     t.float "price", default: 0.0
     t.string "details"
+    t.string "cover"
+    t.integer "readtimes"
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_index_products_on_admin_id"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "cate"], name: "index_index_products_on_name_and_cate"
   end
@@ -60,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170822161624) do
     t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
     t.index ["info"], name: "index_users_on_info", using: :gin
   end
 

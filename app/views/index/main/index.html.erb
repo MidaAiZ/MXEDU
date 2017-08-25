@@ -48,23 +48,23 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-xs-6 col-md-2 col-md-offset-2 item">
-								<%= link_to '/' do %>
-								  阿三
+								<%= link_to products_url + '?type=yupei' do %>
+								  雅思托福
 								<% end %>
 							</div>
 							<div class="col-xs-6 col-md-2 item">
-								<%= link_to '/' do %>
-								  阿四
+								<%= link_to products_url + '?type=liuxue' do %>
+								  留学中介
 								<% end %>
 							</div>
 							<div class="col-xs-6 col-md-2 item">
-								<%= link_to '/' do %>
-								  阿五
+								<%= link_to products_url + '?type=kaoyan' do %>
+								  考研课程
 								<% end %>
 							</div>
 							<div class="col-xs-6 col-md-2 item">
-								<%= link_to '/' do %>
-								  阿六
+								<%= link_to products_url + '?type=jiakao' do %>
+								  驾考学车
 								<% end %>
 							</div>
 						</div>
@@ -78,336 +78,194 @@
     <div class="wrapper">
         <div class="row">
             <div class="col-sm-12">
-                <section id="yupei">
-                    <header class="panel-heading">
-                        Media Manager
-                    </header>
-                    <div class="panel-body">
-
-                        <!-- <ul id="filters" class="media-filter">
-                            <li><a href="#" data-filter="*"> All</a></li>
-                            <li><a href="#" data-filter="./assets">/assets</a></li>
-                            <li><a href="#" data-filter=".audio">Audio</a></li>
-                            <li><a href="#" data-filter=".video">Video</a></li>
-                            <li><a href="#" data-filter=".documents">Documents</a></li>
-                        </ul> -->
-
-                        <!-- <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Select all</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open"></i> Add New</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload New File</button>
-                        </div> -->
-
-						<div class="directory-info-row">
-			                <div class="row">
-			                    <div class="col-md-6 col-sm-6">
-			                        <div class="panel">
-			                            <div class="panel-body">
-			                                <h4>Margarita Rose <span class="text-muted small"> - Graphics Designer</span></h4>
-			                                <div class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-			                                    </a>
-			                                    <div class="media-body">
-			                                        <address>
-			                                            <strong>ABCDE, Inc.</strong><br>
-			                                            ABC Ave, Suite 14<br>
-			                                            BucketLand, Australia <br>
-			                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-			                                        </address>
-			                                        <ul class="social-links">
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-			                                        </ul>
-			                                    </div>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-
-			                    <div class="col-md-6 col-sm-6">
-			                        <div class="panel">
-			                            <div class="panel-body">
-			                                <h4>john Doe <span class="text-muted small"> - Frontend Developer</span></h4>
-			                                <div class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <img class="thumb media-object" src="/assets/photos/user1.png" alt="">
-			                                    </a>
-			                                    <div class="media-body">
-			                                        <address>
-			                                            <strong>ABCDE, Inc.</strong><br>
-			                                            ABC Ave, Suite 14<br>
-			                                            BucketLand, Australia <br>
-			                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-			                                        </address>
-			                                        <ul class="social-links">
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-			                                        </ul>
-			                                    </div>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
+				<% if @yupei.any? %>
+	                <section id="yupei">
+	                    <header class="panel-heading">
+	                        <%= link_to '雅思托福小语种', products_url + '?type=yupei'%>
+							<span class="tools pull-right">
+		                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+		                     </span>
+	                    </header>
+	                    <div class="panel-body">
+							<div class="directory-info-row">
+				                <div class="row">
+									<% @yupei.each do |yp| %>
+										<div class="col-md-6 col-sm-6">
+					                        <div class="panel">
+					                            <div class="panel-body">
+					                                <h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+					                                <div class="media">
+					                                    <a class="pull-left" href="#">
+					                                        <img class="thumb media-object" src="/assets/photos/user2.png" alt="">
+					                                    </a>
+					                                    <div class="media-body">
+					                                        <address>
+																<span><%= yp.intro %></span>
+					                                            <!-- <strong>ABCDE, Inc.</strong><br>
+					                                            ABC Ave, Suite 14<br>
+					                                            BucketLand, Australia <br> -->
+					                                            <!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
+					                                        </address>
+					                                        <!-- <ul class="social-links">
+					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+					                                        </ul> -->
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+									<% end %>
+								</div>
 							</div>
-						</div>
 
-						<%= link_to '更多>>', products_url, class: 'pull-right'  %>
-                    </div>
-                </section>
-
-				<section id="yupei">
-					<header class="panel-heading">
-						Media Manager
-					</header>
-					<div class="panel-body">
-
-						<!-- <ul id="filters" class="media-filter">
-							<li><a href="#" data-filter="*"> All</a></li>
-							<li><a href="#" data-filter="./assets">/assets</a></li>
-							<li><a href="#" data-filter=".audio">Audio</a></li>
-							<li><a href="#" data-filter=".video">Video</a></li>
-							<li><a href="#" data-filter=".documents">Documents</a></li>
-						</ul> -->
-
-						<!-- <div class="btn-group pull-right">
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Select all</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open"></i> Add New</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload New File</button>
-						</div> -->
-
-						<div class="directory-info-row">
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="panel">
-										<div class="panel-body">
-											<h4>Margarita Rose <span class="text-muted small"> - Graphics Designer</span></h4>
-											<div class="media">
-												<a class="pull-left" href="#">
-													<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-												</a>
-												<div class="media-body">
-													<address>
-														<strong>ABCDE, Inc.</strong><br>
-														ABC Ave, Suite 14<br>
-														BucketLand, Australia <br>
-														<abbr title="Phone">P:</abbr> (123) 456-7890
-													</address>
-													<ul class="social-links">
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-													</ul>
+							<%= link_to '更多>>', products_url + '?type=yupei', class: 'pull-right'  %>
+	                    </div>
+	                </section>
+				<% end %>
+				<% if @liuxue.any? %>
+					<section id="liuxue">
+						<header class="panel-heading">
+						    <%= link_to '留学机构', products_url + '?type=liuxue' %>
+							<span class="tools pull-right">
+								<a href="javascript:;" class="fa fa-chevron-down"></a>
+							</span>
+						</header>
+						<div class="panel-body">
+							<div class="directory-info-row">
+								<div class="row">
+									<% @liuxue.each do |yp| %>
+										<div class="col-md-6 col-sm-6">
+											<div class="panel">
+												<div class="panel-body">
+													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
+														</a>
+														<div class="media-body">
+															<address>
+																<span><%= yp.intro %></span>
+																<!-- <strong>ABCDE, Inc.</strong><br>
+																ABC Ave, Suite 14<br>
+																BucketLand, Australia <br> -->
+																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
+															</address>
+															<!-- <ul class="social-links">
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+															</ul> -->
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									<% end %>
 								</div>
+							</div>
 
-								<div class="col-md-6 col-sm-6">
-									<div class="panel">
-										<div class="panel-body">
-											<h4>john Doe <span class="text-muted small"> - Frontend Developer</span></h4>
-											<div class="media">
-												<a class="pull-left" href="#">
-													<img class="thumb media-object" src="/assets/photos/user1.png" alt="">
-												</a>
-												<div class="media-body">
-													<address>
-														<strong>ABCDE, Inc.</strong><br>
-														ABC Ave, Suite 14<br>
-														BucketLand, Australia <br>
-														<abbr title="Phone">P:</abbr> (123) 456-7890
-													</address>
-													<ul class="social-links">
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-													</ul>
+							<%= link_to '更多>>', products_url+ '?type=liuxue', class: 'pull-right'  %>
+						</div>
+					</section>
+				<% end %>
+				<% if @kaoyan.any? %>
+					<section id="kaoyan">
+						<header class="panel-heading">
+							<%= link_to '考研课程', products_url + '?type=kaoyan' %>
+							<span class="tools pull-right">
+								<a href="javascript:;" class="fa fa-chevron-down"></a>
+							</span>
+						</header>
+						<div class="panel-body">
+							<div class="directory-info-row">
+								<div class="row">
+									<% @kaoyan.each do |yp| %>
+										<div class="col-md-6 col-sm-6">
+											<div class="panel">
+												<div class="panel-body">
+													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
+														</a>
+														<div class="media-body">
+															<address>
+																<span><%= yp.intro %></span>
+																<!-- <strong>ABCDE, Inc.</strong><br>
+																ABC Ave, Suite 14<br>
+																BucketLand, Australia <br> -->
+																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
+															</address>
+															<!-- <ul class="social-links">
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+															</ul> -->
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									<% end %>
 								</div>
 							</div>
+
+							<%= link_to '更多>>', products_url+ '?type=kaoyan', class: 'pull-right'  %>
 						</div>
-
-						<%= link_to '更多>>', products_url, class: 'pull-right'  %>
-					</div>
-				</section>
-				<section id="yupei">
-					<header class="panel-heading">
-						Media Manager
-					</header>
-					<div class="panel-body">
-
-						<!-- <ul id="filters" class="media-filter">
-							<li><a href="#" data-filter="*"> All</a></li>
-							<li><a href="#" data-filter="./assets">/assets</a></li>
-							<li><a href="#" data-filter=".audio">Audio</a></li>
-							<li><a href="#" data-filter=".video">Video</a></li>
-							<li><a href="#" data-filter=".documents">Documents</a></li>
-						</ul> -->
-
-						<!-- <div class="btn-group pull-right">
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Select all</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open"></i> Add New</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-							<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload New File</button>
-						</div> -->
-
-						<div class="directory-info-row">
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="panel">
-										<div class="panel-body">
-											<h4>Margarita Rose <span class="text-muted small"> - Graphics Designer</span></h4>
-											<div class="media">
-												<a class="pull-left" href="#">
-													<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-												</a>
-												<div class="media-body">
-													<address>
-														<strong>ABCDE, Inc.</strong><br>
-														ABC Ave, Suite 14<br>
-														BucketLand, Australia <br>
-														<abbr title="Phone">P:</abbr> (123) 456-7890
-													</address>
-													<ul class="social-links">
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-													</ul>
+					</section>
+				<% end %>
+				<% if @jiakao.any? %>
+					<section id="jiakao">
+	                    <header class="panel-heading">
+							<%= link_to '驾校学车', products_url + '?type=kaoyan' %>
+							<span class="tools pull-right">
+								<a href="javascript:;" class="fa fa-chevron-down"></a>
+							</span>
+	                    </header>
+	                    <div class="panel-body">
+							<div class="directory-info-row">
+				                <div class="row">
+									<% @jiakao.each do |yp| %>
+										<div class="col-md-6 col-sm-6">
+											<div class="panel">
+												<div class="panel-body">
+													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %> </span></h4>
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
+														</a>
+														<div class="media-body">
+															<address>
+																<span><%= yp.intro %></span>
+																<!-- <strong>ABCDE, Inc.</strong><br>
+																ABC Ave, Suite 14<br>
+																BucketLand, Australia <br> -->
+																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
+															</address>
+															<!-- <ul class="social-links">
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+															</ul> -->
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-sm-6">
-									<div class="panel">
-										<div class="panel-body">
-											<h4>john Doe <span class="text-muted small"> - Frontend Developer</span></h4>
-											<div class="media">
-												<a class="pull-left" href="#">
-													<img class="thumb media-object" src="/assets/photos/user1.png" alt="">
-												</a>
-												<div class="media-body">
-													<address>
-														<strong>ABCDE, Inc.</strong><br>
-														ABC Ave, Suite 14<br>
-														BucketLand, Australia <br>
-														<abbr title="Phone">P:</abbr> (123) 456-7890
-													</address>
-													<ul class="social-links">
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-														<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
+									<% end %>
 								</div>
 							</div>
-						</div>
 
-						<%= link_to '更多>>', products_url, class: 'pull-right'  %>
-					</div>
-				</section>
-				<section id="yupei">
-                    <header class="panel-heading">
-                        Media Manager
-                    </header>
-                    <div class="panel-body">
-
-                        <!-- <ul id="filters" class="media-filter">
-                            <li><a href="#" data-filter="*"> All</a></li>
-                            <li><a href="#" data-filter="./assets">/assets</a></li>
-                            <li><a href="#" data-filter=".audio">Audio</a></li>
-                            <li><a href="#" data-filter=".video">Video</a></li>
-                            <li><a href="#" data-filter=".documents">Documents</a></li>
-                        </ul> -->
-
-                        <!-- <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Select all</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open"></i> Add New</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload New File</button>
-                        </div> -->
-
-						<div class="directory-info-row">
-			                <div class="row">
-			                    <div class="col-md-6 col-sm-6">
-			                        <div class="panel">
-			                            <div class="panel-body">
-			                                <h4>Margarita Rose <span class="text-muted small"> - Graphics Designer</span></h4>
-			                                <div class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-			                                    </a>
-			                                    <div class="media-body">
-			                                        <address>
-			                                            <strong>ABCDE, Inc.</strong><br>
-			                                            ABC Ave, Suite 14<br>
-			                                            BucketLand, Australia <br>
-			                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-			                                        </address>
-			                                        <ul class="social-links">
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-			                                        </ul>
-			                                    </div>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-
-			                    <div class="col-md-6 col-sm-6">
-			                        <div class="panel">
-			                            <div class="panel-body">
-			                                <h4>john Doe <span class="text-muted small"> - Frontend Developer</span></h4>
-			                                <div class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <img class="thumb media-object" src="/assets/photos/user1.png" alt="">
-			                                    </a>
-			                                    <div class="media-body">
-			                                        <address>
-			                                            <strong>ABCDE, Inc.</strong><br>
-			                                            ABC Ave, Suite 14<br>
-			                                            BucketLand, Australia <br>
-			                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-			                                        </address>
-			                                        <ul class="social-links">
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-			                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-			                                        </ul>
-			                                    </div>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-							</div>
-						</div>
-
-						<%= link_to '更多>>', products_url, class: 'pull-right'  %>
-                    </div>
-                </section>
-
+							<%= link_to '更多>>', products_url+ '?type=jiakao', class: 'pull-right'  %>
+	                    </div>
+	                </section>
+				<% end %>
             </div>
         </div>
     </div>

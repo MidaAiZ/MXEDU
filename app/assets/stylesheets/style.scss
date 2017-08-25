@@ -2376,7 +2376,7 @@ table.display tr.even.gradeX, table.display tr.gradeX, tr.even.gradeU td.sorting
 }
 
 .media-gal .item:hover {
-    background: #65CEA7;
+    // background: #65CEA7;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -2384,7 +2384,7 @@ table.display tr.even.gradeX, table.display tr.gradeX, tr.even.gradeU td.sorting
 }
 
 .media-gal .item:hover img {
-    opacity: .3;
+    opacity: .8;
 }
 
 .media-gal .item p {

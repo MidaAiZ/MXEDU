@@ -1,4 +1,4 @@
-<%= form_with(model: index_product, local: true) do |form| %>
+<%= form_for(@product, url: manage_products_path) do |form| %>
   <% if index_product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(index_product.errors.count, "error") %> prohibited this index_product from being saved:</h2>

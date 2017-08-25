@@ -5,10 +5,11 @@ class Index::ProductsController < IndexController
   # GET /index/products
   # GET /index/products.json
   def index
-    @liuxue = Index::Product.sort(:liuxue)
-    @products = Index::Product.sort(:yupei)
-    @products = Index::Product.sort(:kaoyan)
-    @products = Index::Product.sort(:jiakao)
+    count = params[:count] || 15
+    page = params[:page] || 1
+
+    nonpaged_products = Index::Product.sort(params[:type])
+    @products = nonpaged_products.page(page).per(count)
   end
 
   # GET /index/products/1

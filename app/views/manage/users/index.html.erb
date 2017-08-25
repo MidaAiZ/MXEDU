@@ -1,0 +1,78 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <h3>
+    全部用户信息
+  </h3>
+  <ul class="breadcrumb">
+    <li>
+      <a href="all_students.html">用户管理</a>
+    </li>
+    <li class="active">
+      全部用户信息
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+      <section class="panel">
+        <header class="panel-heading">
+          全部用户信息
+        </header>
+        <div class="panel-body">
+          <div class="adv-table editable-table ">
+            <div class="clearfix">
+              <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">工具
+                  <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li>
+                    <a href="javascript:void(0)" id="print">打印</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" id="export">导出为Excel</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="space15"></div>
+            <!--startprint-->
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th>联系方式</th>
+                  <th>院系</th>
+                  <th>年级</th>
+                  <th>专业</th>
+                  <th>详细信息</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 此处动态生成 -->
+				<% @users.each do |u| %>
+					<tr>
+					  <td><%= u.name %></td>
+					  <td><%= u.phone %></td>
+					  <td><%= u.collage %></td>
+					  <td><%= u.grade %></td>
+					  <td><%= u.major %></td>
+					  <td><%= link_to '查看', manage_user_path(u) %></td>
+					  </tr>
+					<% end %>
+              </tbody>
+            </table>
+			<%= paginate @users %>
+
+            <!--endprint-->
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--body wrapper end-->

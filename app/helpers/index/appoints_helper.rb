@@ -1,0 +1,2 @@
+module Index::AppointsHelper
+end

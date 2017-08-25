@@ -1,33 +1,51 @@
-<p id="notice"><%= notice %></p>
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <!-- <header class="panel-heading">
+                    Media Manager
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        <a href="javascript:;" class="fa fa-times"></a>
+                     </span>
+                </header> -->
+                <div class="panel-body">
 
-<h1>Index Products</h1>
+                    <ul id="filters" class="media-filter">
+                        <li><%= link_to '语培', products_url + '?type=yupei' %></li>
+                        <li><%= link_to '留学', products_url + '?type=liuxue' %></li>
+                        <li><%= link_to '考研', products_url + '?type=kaoyan' %></li>
+                        <li><%= link_to '驾校', products_url + '?type=jiakao' %></li>
+                        <li><%= link_to '娱乐', products_url + '?type=yule' %></li>
+                    </ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Intro</th>
-      <th>Info</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                    <div id="gallery" class="media-gal">
+                        <% @products.each do |p| %>
+                            <div class="item" >
+                                <%= link_to product_path(p) do %>
+                                    <img src="/assets/gallery/image1.jpg" alt="" />
+                                    <!-- <%=  image_tag p.cover.thumb %> -->
+                                <% end %>
+                                <div class="info">
+                                    <p class='p-info'>
+                                        <span class='company'><%= p.company %></span>
+                                        <span class='name'><%= p.name %></span>
+                                    </p>
+                                    <p class='p-intro'>
+                                        <span class="price"><%= p.price %></span>
+                                        <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                    </p>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
 
-  <tbody>
-    <% @products.each do |index_product| %>
-      <tr>
-        <td><%= index_product.name %></td>
-        <td><%= index_product.price %></td>
-        <td><%= index_product.intro %></td>
-        <td><%= index_product.info %></td>
-        <td><%= link_to 'Show', index_product %></td>
-        <td><%= link_to 'Edit', edit_index_product_path(index_product) %></td>
-        <td><%= link_to 'Destroy', index_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Index Product', new_index_product_path %>
+                    <div class="col-md-12 text-center clearfix">
+                        <%= paginate @products %>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

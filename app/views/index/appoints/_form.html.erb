@@ -1,0 +1,37 @@
+<%= form_with(model: index_appoint, local: true) do |form| %>
+  <% if index_appoint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(index_appoint.errors.count, "error") %> prohibited this index_appoint from being saved:</h2>
+
+      <ul>
+      <% index_appoint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :index_appoint_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone, id: :index_appoint_phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content, id: :index_appoint_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.text_field :time, id: :index_appoint_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
