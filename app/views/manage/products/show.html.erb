@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
+<!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                <%= @product.name %> <small><%= @product.company %></small>
+            </h3>
+        </div>
+        <!-- page heading end-->
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+        <!--body wrapper start-->
+        <div class="wrapper">
+        <div class="row blog">
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Intro:</strong>
-  <%= @product.intro %>
-</p>
-
-<p>
-  <strong>Info:</strong>
-  <%= @product.info %>
-</p>
-
-<%= link_to 'Edit', edit_index_product_path(@product) %> |
-<%= link_to 'Back', index_products_path %>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel">
+                <div class="panel-body">
+                    <%= @product.intro %>
+                </div>
+            </div>
+        <div class="blog">
+        <div class="single-blog">
+        <div class="panel">
+            <div class="panel-body">
+                <%= (@product.details || '').html_safe %>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <%= link_to '修改信息', edit_manage_product_url(@product), class: 'btn btn-primary btn-wide' %>
+        </div>
+        <!--body wrapper end-->

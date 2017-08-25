@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <p>
-                        <button class="btn btn-post-cmnt pull-right" type="button" id='submit-appoint'>提交</button>
+                        <button class="btn btn-post-cmnt btn-wide" type="button" id='submit-appoint'>提交</button>
                     </p>
                 <% end %>
                 <script>
@@ -65,7 +65,7 @@
                                 success: function(res) {
                                     if (res.code == 'Success') {
                                         alert("提交成功!我们的顾问将会尽快联系您.")
-                                        $form.find("input[type=text]").val("").end().find("textarea").val("");
+                                        $form.find("input[type=]").val("").end().find("textarea").val("");
                                     } else if (res.errors){
                                         alert("提交失败,请填写正确信息");
                                     } else {

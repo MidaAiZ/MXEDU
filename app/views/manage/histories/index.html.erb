@@ -55,7 +55,7 @@
                 <!-- 此处动态生成 -->
 				<% @histories.each do |h| %>
 					<tr>
-					  <td><%= link_to h.user.name, manage_user_path(h.user_id) %></td>
+					  <td><%= link_to h.user.name || '', manage_user_path(h.user_id) %></td>
 					  <td><%= h.user.phone %></td>
 					  <td><%= link_to h.product_name, product_url(h.p_id) %></td>
 					  <td><%= h.updated_at %></td>
@@ -64,9 +64,8 @@
 					<% end %>
               </tbody>
             </table>
-			<%= paginate @histories %>
-
             <!--endprint-->
+			<%= paginate @histories %>
           </div>
         </div>
       </section>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825064444) do
+ActiveRecord::Schema.define(version: 20170825165035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20170825064444) do
     t.float "price", default: 0.0
     t.string "details"
     t.string "cover"
-    t.integer "readtimes"
     t.bigint "admin_id"
+    t.integer "readtimes", default: 0
     t.index ["admin_id"], name: "index_index_products_on_admin_id"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "cate"], name: "index_index_products_on_name_and_cate"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170825064444) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
   end
 
 end

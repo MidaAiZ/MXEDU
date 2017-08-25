@@ -11,6 +11,8 @@ $(function() {
 			$("#v-count").text(res.v_count);
 			$("#a-count").text(res.a_count);
 			$("#p-count").text(res.p_count);
+			$("#t-a-count").text(res.t_a_count);
+			$("#t-v-count").text(res.t_v_count);
 		}
 	})
 })

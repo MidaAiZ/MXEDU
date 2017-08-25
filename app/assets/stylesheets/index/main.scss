@@ -14,7 +14,7 @@
 }
 
 .menu {
-	margin-top: 10px;
+	margin-top: 20px;
 	.item {
 		height: 100%;
 		a {
@@ -28,13 +28,9 @@
 		border-right: 0;
 	}
 	.panel {
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 	}
 
-}
-
-.panel {
-	border-radius: 0px !important;
 }
 
 section {
@@ -42,7 +38,6 @@ section {
 }
 
 .wrapper {
-	padding: 0px !important;
 	.panel-heading {
 		background-color: white;
 
@@ -57,4 +52,14 @@ section {
 	.carousel {
 		height: 200px;
 	}
+	.panel {
+		border-radius: 0px !important;
+	}
+	.wrapper {
+		padding: 0px !important;
+	}
+	.menu {
+		margin-top: 5px;
+	}
+
 }

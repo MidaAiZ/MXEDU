@@ -6,7 +6,7 @@ class Manage::HistoriesController < ManageController
 	  count = params[:count] || 15
       page = params[:page] || 1
 
-	  nonpaged_histories = Index::Order.all.includes(:user)
+	  nonpaged_histories = Index::History.all.includes(:user)
       @histories = nonpaged_histories.page(page).per(count)
 	end
 

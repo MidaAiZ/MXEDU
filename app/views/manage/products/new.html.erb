@@ -1,1 +1,38 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <h3>
+        新建产品
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">添加信息</a>
+        </li>
+        <li class="active"> 编辑 </li>
+    </ul>
+</div>
+<!-- page heading end-->
 <%= render 'form', index_product: @product %>
+
+<script>
+    $("body").on("submit", "#product-form", function() {
+        return false
+    })
+    $("body").on("click", "#product-submit", function() {
+        var fd = new FormData($("#product-form")[0]);
+        $.ajax({
+            url: '/manage/products',
+            data: fd,
+            type: 'post',
+            contentType: false,
+            processData: false,
+            success: function(res) {
+                window.location = res
+            },
+            error: function(res) {
+                $("#error").html($(res.responseText).find("#error").html());
+                window.scrollTo(0, 1);
+            }
+        })
+        return false;
+    })
+</script>

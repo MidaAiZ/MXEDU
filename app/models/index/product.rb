@@ -14,14 +14,25 @@ class Index::Product < ApplicationRecord
 				class_name: 'Manage::Admin',
 				foreign_key: :admin_id
 
-	validates :name, length: { minimum: 1, maximum: 32 },
-						 allow_blank: false
-    validates :cate, length: { minimum: 1, maximum: 16 },
-					  allow_blank: false
+	validates :name, length: { minimum: 1, too_short: '产品名不能为空', maximum: 32, too_long: '产品名最大长度为%{count}' }
+    validates :cate, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '产品名最大长度为%{count}'  }
+	validates :cate, length: { minimum: 1, too_short: '公司/机构不能为空', maximum: 128, too_long: '公司/机构名最大长度为%{count}' },
+			  inclusion: ['liuxue', 'yupei', 'jiakao', 'kaoyan']
 
-	validates :intro, length: { maximum: 128 }
-	validates :details, length: { maximum: 10000 }
+	validates :intro, length: { maximum: 128, too_long: '简介最长为%{count}个字符' }
+	validates :details, length: { minimum: 1, too_short: '详情不能为空', aximum: 10000, too_long: '详情最长为%{count}个字符' }
+	validates :cover, length: { minimum: 1, too_short: '封面不能为空' }
+
+	default_scope { order('index_products.readtimes DESC') }
 
 	# 筛选
-	scope :sort,  ->(cate) { where(cate: cate) }
+	def self.sort(cate)
+		if cate.nil?
+			self.all
+		elsif cate == 'else'
+			self.where.not(cate: [:liuxue, :yupei, :jiaxiao, :kaoyan])
+		else
+			self.where(cate: cate)
+		end
+	end
 end

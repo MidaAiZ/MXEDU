@@ -1833,6 +1833,12 @@ ul.user-states li {
     margin-right: 5px;
 }
 
+.btn-wide {
+    width: 80%;
+    max-width: 300px;
+    margin: auto;
+    display: table;
+}
 /*----------------------
     STAR RATINGS STYLES
 -----------------------*/
@@ -2185,6 +2191,12 @@ ul.user-states li {
 
 .border-top {
     border-top: 1px solid #ddd;
+}
+
+.pagination {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
 }
 
 .dataTables_paginate.paging_bootstrap.pagination li {
@@ -4703,4 +4715,8 @@ ol.comment-list {
     background: #EFF0F4;
     border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+img.cover {
+    max-width: 300px;
 }

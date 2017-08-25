@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gems.ruby-china.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -62,6 +62,12 @@ gem 'carrierwave' #github: 'carrierwaveuploader/carrierwave'
 # rmagick 是ImageMagick的ruby接口，在图片上传时可以处理图片
 # gem 'rmagick', require: false
 gem 'mini_magick'
+
+#froalaEditor 编辑器
+gem "wysiwyg-rails"
+
+#日期选择插件
+gem 'bootstrap-datepicker-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

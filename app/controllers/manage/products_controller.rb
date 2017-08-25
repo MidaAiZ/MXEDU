@@ -7,9 +7,8 @@ class Manage::ProductsController < ManageController
   def index
       count = params[:count] || 15
       page = params[:page] || 1
-
-      nonpaged_products = Index::Product.includes(:admin)
-      @products = nonpaged_products.page(page).per(count)
+      nonpaged_products = Index::Product.sort(params[:type])
+      @products = nonpaged_products.page(page).per(count).includes(:admin)
   end
 
   # GET /index/products/1
@@ -30,13 +29,13 @@ class Manage::ProductsController < ManageController
   # POST /index/products.json
   def create
     @product = Index::Product.new(index_product_params)
-
+    @product.admin = @admin
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        format.html { render html: manage_product_path(@product) }
+        format.json { render :show, status: :created }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -47,7 +46,7 @@ class Manage::ProductsController < ManageController
   def update
     respond_to do |format|
       if @product.update(index_product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -74,6 +73,6 @@ class Manage::ProductsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
-      params.require(:product).permit(:name, :cate, :price, :intro, :details)
+      params.require(:product).permit(:name, :cate, :price, :intro, :details, :company, :cover)
     end
 end

@@ -1,6 +1,40 @@
-<h1>Editing Index Product</h1>
+<!-- page heading start-->
+<div class="page-heading">
+    <h3>
+        修改产品
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">修改信息</a>
+        </li>
+        <li class="active"> 编辑 </li>
+    </ul>
+</div>
+<!-- page heading end-->
 
 <%= render 'form', index_product: @product %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', index_products_path %>
+<script>
+    $("body").on("submit", "#product-form", function() {
+        return false
+    })
+    $("body").on("click", "#product-submit", function() {
+		var $form = $("#product-form");
+        var fd = new FormData($form[0]);
+        $.ajax({
+            url: '/manage/products/' + $form.data("id"),
+            data: fd,
+            type: 'patch',
+            contentType: false,
+            processData: false,
+            success: function(res) {
+                window.location = res
+            },
+            error: function(res) {
+                $("#error").html($(res.responseText).find("#error").html());
+                window.scrollTo(0, 1);
+            }
+        })
+        return false;
+    })
+</script>

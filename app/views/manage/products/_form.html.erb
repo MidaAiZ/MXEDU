@@ -1,37 +1,108 @@
-<%= form_for(@product, url: manage_products_path) do |form| %>
-  <% if index_product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(index_product.errors.count, "error") %> prohibited this index_product from being saved:</h2>
 
-      <ul>
-      <% index_product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <%= form_for(@product, url: manage_products_path, html: { id: 'product-form', 'data-id' => @product.id }) do |f| %>
+                <div id="error">
+                <% if index_product.errors.any? %>
+                  <div id="error_explanation">
+                    <h3>存在<%= index_product.errors.count %>个错误信息</h3>
+
+                    <ul>
+                    <% index_product.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                </div>
+                <section class='panel'>
+                    <header class="panel-heading">
+                        基本信息
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="product_name">产品名</label>
+                                    <input type="text" id='product_name' name='product[name]' class="form-control" placeholder="输入产品名" value="<%= @product.name %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_cate">产品分类</label>
+                                    <input type="text" id='product_cate' name='product[cate]' class="form-control" placeholder="选择分类" value="<%= @product.cate %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_company">机构/公司</label>
+                                    <input type="text" id='product_company' name='product[company]' class="form-control" placeholder="所属机构/公司" value="<%= @product.company %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_intro">简介</label>
+                                    <textarea id='product_intro' name='product[intro]' class="form-control" placeholder="输入简介,最多64字"><%= @product.intro %></textarea>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">上传产品封面</label>
+                                    <div class="col-md-9">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="fileupload-new thumbnail" style="width: 360px; height: 270px;">
+                                                <img alt="" />
+                                            </div>
+                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 360px; max-height: 270px; line-height: 20px;"></div>
+                                            <div class='form-group'>
+                                                   <span class="btn btn-default btn-file" style='margin-left: 1px'>
+                                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 选择图片</span>
+                                                   <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改图片</span>
+                                                   <input type="file" class="default" name='product[cover]' value="<%= @product.cover %>"/>
+                                                   </span>
+                                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload" style='margin-left: 5px'><i class="fa fa-trash"></i> 移除</a>
+                                            </div>
+                                        </div>
+                                        <span class="label label-danger ">注意!</span>
+                                             <span>
+                                                上传的图片要求宽高比为4:3
+                                             </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        产品详情
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea id='froala-editor' class='hidden'><%= @product.details %></textarea>
+                                <input type="hidden" name='product[details]' id='editor-content' value="<%= @product.details %>">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="actions">
+                  <%= f.submit '保存产品信息', id: 'product-submit', class: 'btn btn-primary btn-wide' %>
+                </div>
+            <% end %>
+        </div>
     </div>
-  <% end %>
+</div>
+<%= stylesheet_link_tag 'manage/froala_editor' %>
+<%= javascript_include_tag 'manage/froala_editor' %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :index_product_name %>
-  </div>
+<%= stylesheet_link_tag 'file-upload/fileupload.min' %>
+<%= javascript_include_tag 'file-upload/fileupload.min' %>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :index_product_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :intro %>
-    <%= form.text_field :intro, id: :index_product_intro %>
-  </div>
-
-  <div class="field">
-    <%= form.label :info %>
-    <%= form.text_field :info, id: :index_product_info %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= stylesheet_link_tag 'tags-input/tagsinput' %>
+<%= javascript_include_tag 'tags-input/tagsinput.min' %>

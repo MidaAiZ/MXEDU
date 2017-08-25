@@ -93,11 +93,11 @@
 										<div class="col-md-6 col-sm-6">
 					                        <div class="panel">
 					                            <div class="panel-body">
-					                                <h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+					                                <h4><%= yp.link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
 					                                <div class="media">
-					                                    <a class="pull-left" href="#">
-					                                        <img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-					                                    </a>
+														<%= link_to product_url(yp), class: 'pull-left' do %>
+															<%= image_tag yp.cover.thumb, class: :cover %>
+														<% end %>
 					                                    <div class="media-body">
 					                                        <address>
 																<span><%= yp.intro %></span>
@@ -140,11 +140,11 @@
 										<div class="col-md-6 col-sm-6">
 											<div class="panel">
 												<div class="panel-body">
-													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+													<h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
 													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-														</a>
+  														<%= link_to product_url(yp), class: 'pull-left' do %>
+															<%= image_tag yp.cover.thumb, class: :cover %>
+														<% end %>
 														<div class="media-body">
 															<address>
 																<span><%= yp.intro %></span>
@@ -187,11 +187,11 @@
 										<div class="col-md-6 col-sm-6">
 											<div class="panel">
 												<div class="panel-body">
-													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %></span></h4>
+													<h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
 													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-														</a>
+														<%= link_to product_url(yp), class: 'pull-left' do %>
+															<%= image_tag yp.cover.thumb, class: :cover %>
+														<% end %>
 														<div class="media-body">
 															<address>
 																<span><%= yp.intro %></span>
@@ -234,11 +234,11 @@
 										<div class="col-md-6 col-sm-6">
 											<div class="panel">
 												<div class="panel-body">
-													<h4><%= yp.name %><span class="text-muted small"> - <%= yp.company %> </span></h4>
+													<h4><%= yp.link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %> </span></h4>
 													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="thumb media-object" src="/assets/photos/user2.png" alt="">
-														</a>
+														<%= link_to product_url(yp), class: 'pull-left' do %>
+															<%= image_tag yp.cover.thumb, class: :cover %>
+														<% end %>
 														<div class="media-body">
 															<address>
 																<span><%= yp.intro %></span>
