@@ -281,7 +281,7 @@
                                 </li>
                             </ul>
                         <% else %>
-                            <%= link_to '登录', login_path, type: "button", class: "btn btn-default", "data-toggle" => "modal", "data-target" => "login-modal", style: "margin-top: 8px;" %>
+                            <%= link_to '登录', login_path, type: "button", class: "btn btn-default", "data-toggle" => "modal", "data-target" => "#loginModal", style: "margin-top: 8px;" %>
                             <%= link_to '注册', new_user_path, type: "button", class: "btn btn-default", style: "margin-top: 8px;" %>
                         <% end %>
                     </li>
@@ -295,23 +295,36 @@
 
     <% unless session[:user_id] %>
         <!-- Small login modal -->
-        <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <%= form_tag login_path, class: "form-inline" do %>
-                <div class="field">
-                    <%= label_tag "user[phone]", "手机号" %>
-                    <%= text_field_tag "user[phone]", '', placeholder: "输入手机号", class: "form-control" %>
+        <!-- Modal -->
+        <div aria-hidden="true" aria-labelledby="loginModalLabel" role="dialog" tabindex="-1" id="loginModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <%= form_tag do_login_path, class: "form-signin", id: "login-form" do %>
+                        <div class="form-signin-heading text-center">
+                            <h1 class="sign-title">Sign In</h1>
+                            <img src="/assets/login-logo.png" alt=""/>
+                        </div>
+                        <div class="login-wrap">
+                            <%= hidden_field_tag "user[login_type]", :msg_code %>
+                            <div class="phone-group">
+                                <input type="text" id='phone' name='user[phone]' class="form-control" placeholder="手机号" autofocus>
+                                <a href="JavaScript:void(0)" id="code" class="btn btn-default">获取验证码</a>
+                            </div>
+                            <input type="text" name='user[msg_code]' class="form-control" placeholder="短信验证码">
+
+                            <button class="btn btn-lg btn-login btn-block" type="button" id="login">
+                                <i class="fa fa-check"></i>
+                            </button>
+
+                            <div class="registration">
+                                还没有帐号?
+                				<%= link_to '立即注册', new_user_path %>
+                            </div>
+                        </div>
+                    <% end %>
                 </div>
-                <div class="field">
-                    <%= label_tag "user[password]", "密码" %>
-                    <%= password_field_tag "user[password]", '', placeholder: "输入密码", class: "form-control" %>
-                </div>
-                <div class="action">
-                    <%= submit_tag "登录" %>
-                </div>
-              <% end %>
             </div>
-          </div>
         </div>
+        <%= stylesheet_link_tag 'index/session' %>
+        <%= javascript_include_tag 'index/session' %>
     <% end %>

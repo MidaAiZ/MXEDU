@@ -3,9 +3,9 @@ Template Name: AdminEx Dashboard
 Author: ThemeBucket
 -------------------------------------------*/
 
-@import url('bootstrap-reset.css');
-@import url('jquery-ui-1.10.3.css');
-@import url('/assets/css/font-awesome.min.css');
+@import 'bootstrap-reset';
+@import 'jquery-ui-1.10.3.css';
+@import '/assets/css/font-awesome.min.css';
 
 body {
     background: #424f63;

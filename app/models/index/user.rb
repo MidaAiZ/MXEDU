@@ -1,5 +1,5 @@
 class Index::User < ApplicationRecord
-	mount_uploader :avatar, UserAvatarUploader # 头像上传
+    mount_uploader :avatar, UserAvatarUploader # 头像上传
 
     # 用于上传头像时保存图片参数
     attr_accessor :x, :y, :width, :height, :rotate
@@ -20,13 +20,16 @@ class Index::User < ApplicationRecord
             class_name: 'Index::Order',
             foreign_key: 'user_id'
 
-    validates :number, presence: true, uniqueness: { message: '该帐号已被注册' },
+      validates :number, presence: true, uniqueness: { message: '该帐号已被注册' },
                          length: { minimum: 2, maximum: 16 },
                          format: { with: Validate::VALID_ACCOUNT_REGEX },
                          allow_blank: false
+      validates :name, presence: true,
+                   length: { minimum: 2, too_short: "名字长度应大于%{count}个字符",
+                             maximum: 32, too_long: '名字最长允许%{count}个字符' }
       validates :password, presence: true, length: { minimum: 6, maximum: 20 },
                            format: { with: Validate::VALID_PASSWORD_REGEX },
-                           allow_blank: false, on: [:create]
+                           allow_blank: false, on: [:create   ]
       validates :password_digest, presence: true, allow_blank: false, on: [:update]
       validates :email, presence: false, uniqueness: { message: '该邮箱已被注册' },
                         length: { maximum: 255 },

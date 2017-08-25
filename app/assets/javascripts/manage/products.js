@@ -11,4 +11,13 @@ $(function() {
 		$(".show-table").hide();
 		$(this).addClass("active").siblings().removeClass("active");
 	})
+
+	$("#del").click(function() {
+		var f = confirm("确定要删除该产品吗?");
+        if (f == false) {
+            return;
+        }
+
+		$("#del-product").trigger("submit")
+	})
 })

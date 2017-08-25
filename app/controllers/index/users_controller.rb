@@ -1,6 +1,5 @@
 class Index::UsersController < IndexController
-  # before_action :require_login
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:show, :edit]
   layout false, only: :new
 
   # GET /index/users/1
@@ -72,10 +71,6 @@ class Index::UsersController < IndexController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = Index::User.find(session[:user_id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params

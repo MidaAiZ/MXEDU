@@ -49,7 +49,7 @@ class Manage::ProductsController < ManageController
         format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :ok, location: @product }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -58,9 +58,10 @@ class Manage::ProductsController < ManageController
   # DELETE /index/products/1
   # DELETE /index/products/1.json
   def destroy
-    @product.destroy
+    @product.update is_deleted: true
+    puts @product.errors
     respond_to do |format|
-      format.html { redirect_to index_products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to manage_products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

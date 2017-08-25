@@ -71,7 +71,15 @@ Rails.application.routes.draw do
 
     #histories
     resources :histories
+
+    #images
+    resources :images
+
+    # 文件上传
+    post 'upload' => 'fileworkers#create', as: :upload
   end
+
+  get 'download/files/:id/:filename' => 'download#download'
 
   root 'index/main#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

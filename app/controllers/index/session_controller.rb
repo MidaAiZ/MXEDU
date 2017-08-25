@@ -76,9 +76,8 @@ class Index::SessionController < IndexController
 
   def logout
     session[:user_id] = nil
-    @code = session[:user_id] ? 'Fail' : 'Success'
     respond_to do |format|
-      format.json { render json: { code: @code } }
+      format.json { render json: { code: 'Success' } }
       format.html { redirect_to root_path }
     end
   end

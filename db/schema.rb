@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825165035) do
+ActiveRecord::Schema.define(version: 20170825180826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170825165035) do
     t.string "cover"
     t.bigint "admin_id"
     t.integer "readtimes", default: 0
+    t.boolean "is_deleted", default: false
     t.index ["admin_id"], name: "index_index_products_on_admin_id"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "cate"], name: "index_index_products_on_name_and_cate"
@@ -90,6 +91,18 @@ ActiveRecord::Schema.define(version: 20170825165035) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+  end
+
+  create_table "manage_fileworkers", force: :cascade do |t|
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manage_images", force: :cascade do |t|
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

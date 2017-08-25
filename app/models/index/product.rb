@@ -16,14 +16,12 @@ class Index::Product < ApplicationRecord
 
 	validates :name, length: { minimum: 1, too_short: '产品名不能为空', maximum: 32, too_long: '产品名最大长度为%{count}' }
     validates :cate, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '产品名最大长度为%{count}'  }
-	validates :cate, length: { minimum: 1, too_short: '公司/机构不能为空', maximum: 128, too_long: '公司/机构名最大长度为%{count}' },
-			  inclusion: ['liuxue', 'yupei', 'jiakao', 'kaoyan']
+	validates :cate, length: { minimum: 1, too_short: '公司/机构不能为空', maximum: 128, too_long: '公司/机构名最大长度为%{count}' }
 
 	validates :intro, length: { maximum: 128, too_long: '简介最长为%{count}个字符' }
 	validates :details, length: { minimum: 1, too_short: '详情不能为空', aximum: 10000, too_long: '详情最长为%{count}个字符' }
-	validates :cover, length: { minimum: 1, too_short: '封面不能为空' }
 
-	default_scope { order('index_products.readtimes DESC') }
+	default_scope { where(is_deleted: false).order('index_products.readtimes DESC') }
 
 	# 筛选
 	def self.sort(cate)

@@ -63,7 +63,7 @@
                 <div id="gallery" class="media-gal">
                     <% @products.each do |p| %>
                         <div class="item" >
-                            <%= link_to product_path(p) do %>
+                            <%= link_to manage_product_path(p) do %>
                                 <%=  image_tag p.cover.thumb %>
                             <% end %>
                             <div class="info">

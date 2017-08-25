@@ -8,25 +8,39 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
-        <div class="row blog">
+            <div class="row blog">
 
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel">
-                <div class="panel-body">
-                    <%= @product.intro %>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel">
+                    <div class="panel-body">
+                        <%= @product.intro %>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="single-blog">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <%= (@product.details || '').html_safe %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button data-toggle="dropdown" type="button" class="btn btn-default btn-sm dropdown-toggle">
+                        操作<span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu">
+                        <li>
+                            <%= link_to '修改信息', edit_manage_product_url(@product) %>
+                        </li>
+                        <li>
+                            <a href='JavaScript:void(0)' id='del'>删除</a>
+                            <%= form_tag manage_product_path(@product), method: :delete, id: 'del-product' do %>
+                            <%end %>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        <div class="blog">
-        <div class="single-blog">
-        <div class="panel">
-            <div class="panel-body">
-                <%= (@product.details || '').html_safe %>
-            </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <%= link_to '修改信息', edit_manage_product_url(@product), class: 'btn btn-primary btn-wide' %>
         </div>
         <!--body wrapper end-->

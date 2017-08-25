@@ -9,15 +9,15 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_link_tag 'style', media: 'all' %>
-  <%= stylesheet_link_tag params[:controller], media: 'all' %>
   <%= stylesheet_link_tag 'style-responsive', media: 'all' %>
+  <%= stylesheet_link_tag params[:controller], media: 'all' %>
 </head>
 
 <body class="login-body">
 
 <div class="container">
 
-    <%= form_tag do_login_path, class: "form-signin", id: "login-form" %>
+    <%= form_tag do_login_path, class: "form-signin", id: "login-form" do %>
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">Sign In</h1>
             <img src="/assets/login-logo.png" alt=""/>
@@ -47,99 +47,25 @@
             </label> -->
 
         </div>
+    <% end %>
 
         <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Forgot Password ?</h4>
-                    </div>
                     <div class="modal-body">
-                        <p>Enter your e-mail address below to reset your password.</p>
-                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                        <button class="btn btn-primary" type="button">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- modal -->
 
-    </form>
-
 </div>
-
-<!-- Placed js at the end of the document so the pages load faster -->
-
-<!-- Placed js at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'modernizr.min' %>
 <%= javascript_include_tag params[:controller] %>
-<script>
-    $(function() {
-        var $phone = $("#phone"),
-            $code = $("#code");
-        $code.on("click", function() {
-            if($phone.val().length != 11) return false;
-            $.ajax({
-                url: "/send_msg",
-                type: "post",
-                data: {
-                    "phone": $phone.val(),
-                    "handle": "login"
-                },
-                dataType: "json",
-                success: function(res) {
-                    if (res.code == 'Success') {
-                        $code.addClass("disabled");
-                        var time = 60;
-                        var i = setInterval(function() {
-                            $code.text(--time + 'S');
-                            if (time == 0) {
-                                $code.removeClass("disabled");
-                                $code.text("重新发送");
-                                clearInterval(i);
-                            }
-                        }, 1000)
-                    }
-                },
-                error: function() {
-                    alert("发送失败,请稍后尝试");
-                }
-            })
-        })
-    });
-
-    $(function(){
-        $("#login").on("click", function() {
-            $.ajax({
-                url: "/login",
-                type: "post",
-                data: $("#login-form").serialize(),
-                dataType: "json",
-                success: function(res) {
-                    if (res.code == 'Success') {
-                        window.location = "/"
-                    } else if (res.code == 'WrongMsgCode') {
-                        alert("验证码错误")
-                    } else {
-                        alert("登录失败")
-                    }
-                },
-                error: function() {
-                    alert("登录失败,请稍后尝试");
-                }
-            })
-
-            return false;
-        })
-    });
-
-</script>
 </body>
 </html>
