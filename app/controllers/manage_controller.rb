@@ -6,7 +6,7 @@ class ManageController < ApplicationController
     end
 
     def require_login
-        redirect_to mange_login_path and return unless check_login
+        redirect_to manage_login_path and return unless check_login
     end
 
     def can? role
