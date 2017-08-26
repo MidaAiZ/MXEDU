@@ -74,7 +74,13 @@ gem "wysiwyg-rails"
 gem 'bootstrap-datepicker-rails'
 
 # Use Capistrano for deployment
-gem 'capistrano-rails'
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-faster-assets'
+end
 
 gem 'listen', '>= 3.0.5', '< 3.2'
 
