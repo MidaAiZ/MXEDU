@@ -4720,3 +4720,137 @@ ol.comment-list {
 img.cover {
     max-width: 300px;
 }
+
+.recom {
+	margin-left: 15px;
+	.fa-star {
+		color: #ddd;
+		font-size: 1.8em;
+		&.active {
+			color:  #ffd708;
+		}
+	}
+}
+
+
+@media screen and (max-width: 768px) {
+    .product-row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .product-block {
+        width: 31.333%;
+        float: left;
+        margin-left: 1.333%;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .product-block {
+        width: 31.333%;
+        float: left;
+        margin-left: 1.333%;
+        img {
+            height: 150px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .product-block {
+        width: 48%;
+        float: left;
+        margin-left: 1%;
+        img {
+            height: 200px !important;
+        }
+    }
+    .wrapper {
+        padding: 0px;
+    }
+    .item {
+        &.product {
+            margin-bottom: 5px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .product-block {
+        img {
+            height: 150px !important;
+        }
+    }
+}
+@media screen and (max-width: 300px) {
+    .product-block {
+        width: 90%;
+        float: inherit;
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            height: 80% !important;
+        }
+    }
+}
+.item {
+    position: relative;
+    .tag {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        border-radius: 3px;
+        font-size: 1.1em;
+        font-weight: lighter;
+        color: white;
+        background-color: #ff5200;
+        z-index: 10;
+    }
+    &.product {
+        margin-bottom: 20px;
+    }
+}
+
+.p-info, .p-intro {
+	width: 100%;
+	text-align: left;
+	padding-left: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.media-gal .item p {
+	text-align: left !important;
+}
+
+.p-info {
+	.company {
+		padding: 2px;
+		border-radius: 3px;
+		font-size: 1.1em;
+		font-weight: lighter;
+		background-color: #ff5200;
+		color: white;
+	}
+	.name {
+		color: #5c5c5c;
+	}
+}
+
+.p-intro {
+	margin-top: 0 !important;
+	.price {
+		font-size: 1.2em;
+		color: #ff5200;
+	}
+	.readtimes {
+		margin-left: 8px;
+		color: #acacac;
+	}
+}
+.dis-price {
+    color: #7A7676;
+    text-decoration: line-through;
+}

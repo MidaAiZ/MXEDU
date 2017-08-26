@@ -21,26 +21,32 @@
                         <li><%= link_to '其它', products_url + '?type=else' %></li>
                     </ul>
 
-                    <div id="gallery" class="media-gal">
-                        <% @products.each do |p| %>
-                            <div class="item" >
-                                <%= link_to product_path(p) do %>
-                                    <%= image_tag p.cover.thumb %>
+                    <div class="show-block">
+                        <div id="gallery" class="media-gal">
+                            <div class="product-row">
+                                <% @products.each do |p| %>
+                                    <div class='product-block'>
+                                        <div class="item product" >
+                                            <%= link_to manage_product_path(p) do %>
+                                                <%=  image_tag p.cover.thumb %>
+                                            <% end %>
+                                            <div class="info">
+                                                <p class='p-info'>
+                                                    <span class='company'><%= p.company %></span>
+                                                    <span class='name'><%= p.name %></span>
+                                                </p>
+                                                <p class='p-intro'>
+                                                    <small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                    <span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                    <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <% end %>
-                                <div class="info">
-                                    <p class='p-info'>
-                                        <span class='company'><%= p.company %></span>
-                                        <span class='name'><%= p.name %></span>
-                                    </p>
-                                    <p class='p-intro'>
-                                        <span class="price"><small class='fa fa-rmb'></small><%= p.price %></span>
-                                        <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-                                    </p>
-                                </div>
                             </div>
-                        <% end %>
+                        </div>
                     </div>
-
                     <div class="col-md-12 text-center clearfix">
                         <%= paginate @products %>
                     </div>

@@ -5,7 +5,7 @@ class Manage::ProductsController < ManageController
   # GET /index/products
   # GET /index/products.json
   def index
-      count = params[:count] || 15
+      count = params[:count] || 20
       page = params[:page] || 1
       nonpaged_products = Index::Product.sort(params[:type])
       @products = nonpaged_products.page(page).per(count).includes(:admin)
@@ -74,6 +74,6 @@ class Manage::ProductsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
-      params.require(:product).permit(:name, :cate, :price, :intro, :details, :company, :cover)
+      params.require(:product).permit(:name, :cate, :price, :dis_price, :intro, :details, :company, :cover, :recommend, :tags)
     end
 end

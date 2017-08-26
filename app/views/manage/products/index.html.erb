@@ -61,23 +61,29 @@
             </ul>
             <div class="show-block">
                 <div id="gallery" class="media-gal">
-                    <% @products.each do |p| %>
-                        <div class="item" >
-                            <%= link_to manage_product_path(p) do %>
-                                <%=  image_tag p.cover.thumb %>
-                            <% end %>
-                            <div class="info">
-                                <p class='p-info'>
-                                    <span class='company'><%= p.company %></span>
-                                    <span class='name'><%= p.name %></span>
-                                </p>
-                                <p class='p-intro'>
-                                    <span class="price"><small class='fa fa-rmb'></small><%= p.price %></span>
-                                    <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-                                </p>
+                    <div class="product-row">
+                        <% @products.each do |p| %>
+                            <div class='product-block'>
+                                <div class="item product" >
+                                    <%= link_to manage_product_path(p) do %>
+                                        <span class="tag cate"><%= get_cate p.cate %></span>
+                                        <%=  image_tag p.cover.thumb %>
+                                    <% end %>
+                                    <div class="info">
+                                        <p class='p-info'>
+                                            <span class='company'><%= p.company %></span>
+                                            <span class='name'><%= p.name %></span>
+                                        </p>
+                                        <p class='p-intro'>
+                                            <small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                            <span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    <% end %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
             <!--startprint-->
@@ -98,8 +104,11 @@
                     <% @products.each do |p| %>
                         <tr>
                             <td><%= p.name %></td>
-                            <td><%= p.cate %></td>
-                            <td><%= p.price %></td>
+                            <td><%= get_cate p.cate %></td>
+                            <td>
+                                <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price%></small>
+                                <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
+                            </td>
                             <td><%= p.created_at %></td>
                             <td><%= p.admin.number %></td>
                             <td><%= link_to '查看', manage_product_path(p) %></td>

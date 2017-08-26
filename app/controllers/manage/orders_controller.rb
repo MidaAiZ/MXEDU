@@ -3,7 +3,7 @@ class Manage::OrdersController < ManageController
 	before_action :set_order, only: :show
 
 	def index
-	  count = params[:count] || 15
+	  count = params[:count] || 20
       page = params[:page] || 1
 
 	  nonpaged_orders = Index::Order.all

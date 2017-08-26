@@ -6,7 +6,7 @@ class Index::UserCenterController < IndexController
 	end
 
 	def orders
-		count = params[:count] || 15
+		count = params[:count] || 20
 	    page = params[:page] || 1
 
 	    nonpaged_orders = @user.orders
@@ -19,7 +19,7 @@ class Index::UserCenterController < IndexController
 	end
 
 	def histories
-	  count = params[:count] || 15
+	  count = params[:count] || 20
       page = params[:page] || 1
 
   	  nonpaged_histories = @user.histories

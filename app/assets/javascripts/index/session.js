@@ -17,6 +17,7 @@ $(function() {
 				if (res.code == 'Success') {
 					$code.addClass("disabled");
 					var time = 60;
+					$code.text("60s");
 					var i = setInterval(function() {
 						$code.text(--time + 'S');
 						if (time == 0) {

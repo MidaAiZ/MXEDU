@@ -49,22 +49,35 @@
 						<div class="row">
 							<div class="col-xs-6 col-md-2 col-md-offset-2 item">
 								<%= link_to products_url + '?type=yupei' do %>
-								  雅思托福
+									<span class="icon yp">
+										<i class='fa fa-cloud'></i>
+									</span>
+									<span>语言培训</span>
 								<% end %>
 							</div>
 							<div class="col-xs-6 col-md-2 item">
-								<%= link_to products_url + '?type=liuxue' do %>
-								  留学中介
+									<%= link_to products_url + '?type=liuxue' do %>
+										<span class="icon lx">
+											<i class='fa fa-plane'></i>
+										</span>
+										<span>留学中介</span>
+									<% end %>
+							</div>
+							<div class="col-xs-6 col-md-2 item">
+								<%= link_to products_url + '?type=jiakao' do %>
+									<span class="icon jk">
+										<i class='fa fa-rocket'></i>
+									</span>
+									<span>驾考学车</span>
+
 								<% end %>
 							</div>
 							<div class="col-xs-6 col-md-2 item">
 								<%= link_to products_url + '?type=kaoyan' do %>
-								  考研课程
-								<% end %>
-							</div>
-							<div class="col-xs-6 col-md-2 item">
-								<%= link_to products_url + '?type=jiakao' do %>
-								  驾考学车
+									<span class="icon ky">
+										<i class='fa fa-book'></i>
+									</span>
+									<span>考研课程</span>
 								<% end %>
 							</div>
 						</div>
@@ -81,13 +94,10 @@
 				<% if @yupei.any? %>
 	                <section id="yupei">
 	                    <header class="panel-heading">
-	                        <%= link_to '雅思托福小语种', products_url + '?type=yupei'%>
-							<span class="tools pull-right">
-		                        <a href="javascript:;" class="fa fa-chevron-down"></a>
-		                     </span>
+	                        <%= link_to '留学语培', products_url + '?type=yupei'%>
 	                    </header>
 	                    <div class="panel-body">
-							<div class="directory-info-row">
+							<!-- <div class="directory-info-row">
 				                <div class="row">
 									<% @yupei.each do |yp| %>
 										<div class="col-md-6 col-sm-6">
@@ -101,17 +111,7 @@
 					                                    <div class="media-body">
 					                                        <address>
 																<span><%= yp.intro %></span>
-					                                            <!-- <strong>ABCDE, Inc.</strong><br>
-					                                            ABC Ave, Suite 14<br>
-					                                            BucketLand, Australia <br> -->
-					                                            <!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
 					                                        </address>
-					                                        <!-- <ul class="social-links">
-					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-					                                            <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-					                                        </ul> -->
 					                                    </div>
 					                                </div>
 					                            </div>
@@ -119,7 +119,33 @@
 					                    </div>
 									<% end %>
 								</div>
-							</div>
+							</div> -->
+							<div class="show-block">
+		                        <div id="gallery" class="media-gal">
+		                            <div class="product-row">
+		                                <% @yupei.each do |p| %>
+		                                    <div class='product-block'>
+		                                        <div class="item product" >
+		                                            <%= link_to manage_product_path(p) do %>
+		                                                <%=  image_tag p.cover.thumb %>
+		                                            <% end %>
+		                                            <div class="info">
+		                                                <p class='p-info'>
+		                                                    <span class='company'><%= p.company %></span>
+		                                                    <span class='name'><%= p.name %></span>
+		                                                </p>
+		                                                <p class='p-intro'>
+		                                                    <small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+		                                                    <span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+		                                                    <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+		                                                </p>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                <% end %>
+		                            </div>
+		                        </div>
+		                    </div>
 
 							<%= link_to '更多>>', products_url + '?type=yupei', class: 'pull-right'  %>
 	                    </div>
@@ -128,43 +154,33 @@
 				<% if @liuxue.any? %>
 					<section id="liuxue">
 						<header class="panel-heading">
-						    <%= link_to '留学机构', products_url + '?type=liuxue' %>
-							<span class="tools pull-right">
-								<a href="javascript:;" class="fa fa-chevron-down"></a>
-							</span>
+						    <%= link_to '留学中介', products_url + '?type=liuxue' %>
 						</header>
 						<div class="panel-body">
-							<div class="directory-info-row">
-								<div class="row">
-									<% @liuxue.each do |yp| %>
-										<div class="col-md-6 col-sm-6">
-											<div class="panel">
-												<div class="panel-body">
-													<h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
-													<div class="media">
-  														<%= link_to product_url(yp), class: 'pull-left' do %>
-															<%= image_tag yp.cover.thumb, class: :cover %>
-														<% end %>
-														<div class="media-body">
-															<address>
-																<span><%= yp.intro %></span>
-																<!-- <strong>ABCDE, Inc.</strong><br>
-																ABC Ave, Suite 14<br>
-																BucketLand, Australia <br> -->
-																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
-															</address>
-															<!-- <ul class="social-links">
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-															</ul> -->
-														</div>
+							<div class="show-block">
+								<div id="gallery" class="media-gal">
+									<div class="product-row">
+										<% @liuxue.each do |p| %>
+											<div class='product-block'>
+												<div class="item product" >
+													<%= link_to manage_product_path(p) do %>
+														<%=  image_tag p.cover.thumb %>
+													<% end %>
+													<div class="info">
+														<p class='p-info'>
+															<span class='company'><%= p.company %></span>
+															<span class='name'><%= p.name %></span>
+														</p>
+														<p class='p-intro'>
+															<small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+															<span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+														</p>
 													</div>
 												</div>
 											</div>
-										</div>
-									<% end %>
+										<% end %>
+									</div>
 								</div>
 							</div>
 
@@ -176,42 +192,32 @@
 					<section id="kaoyan">
 						<header class="panel-heading">
 							<%= link_to '考研课程', products_url + '?type=kaoyan' %>
-							<span class="tools pull-right">
-								<a href="javascript:;" class="fa fa-chevron-down"></a>
-							</span>
 						</header>
 						<div class="panel-body">
-							<div class="directory-info-row">
-								<div class="row">
-									<% @kaoyan.each do |yp| %>
-										<div class="col-md-6 col-sm-6">
-											<div class="panel">
-												<div class="panel-body">
-													<h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
-													<div class="media">
-														<%= link_to product_url(yp), class: 'pull-left' do %>
-															<%= image_tag yp.cover.thumb, class: :cover %>
-														<% end %>
-														<div class="media-body">
-															<address>
-																<span><%= yp.intro %></span>
-																<!-- <strong>ABCDE, Inc.</strong><br>
-																ABC Ave, Suite 14<br>
-																BucketLand, Australia <br> -->
-																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
-															</address>
-															<!-- <ul class="social-links">
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-															</ul> -->
-														</div>
+							<div class="show-block">
+								<div id="gallery" class="media-gal">
+									<div class="product-row">
+										<% @kaoyan.each do |p| %>
+											<div class='product-block'>
+												<div class="item product" >
+													<%= link_to manage_product_path(p) do %>
+														<%=  image_tag p.cover.thumb %>
+													<% end %>
+													<div class="info">
+														<p class='p-info'>
+															<span class='company'><%= p.company %></span>
+															<span class='name'><%= p.name %></span>
+														</p>
+														<p class='p-intro'>
+															<small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+															<span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+														</p>
 													</div>
 												</div>
 											</div>
-										</div>
-									<% end %>
+										<% end %>
+									</div>
 								</div>
 							</div>
 
@@ -223,42 +229,32 @@
 					<section id="jiakao">
 	                    <header class="panel-heading">
 							<%= link_to '驾校学车', products_url + '?type=kaoyan' %>
-							<span class="tools pull-right">
-								<a href="javascript:;" class="fa fa-chevron-down"></a>
-							</span>
 	                    </header>
 	                    <div class="panel-body">
-							<div class="directory-info-row">
-				                <div class="row">
-									<% @jiakao.each do |yp| %>
-										<div class="col-md-6 col-sm-6">
-											<div class="panel">
-												<div class="panel-body">
-													<h4><%= yp.link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %> </span></h4>
-													<div class="media">
-														<%= link_to product_url(yp), class: 'pull-left' do %>
-															<%= image_tag yp.cover.thumb, class: :cover %>
-														<% end %>
-														<div class="media-body">
-															<address>
-																<span><%= yp.intro %></span>
-																<!-- <strong>ABCDE, Inc.</strong><br>
-																ABC Ave, Suite 14<br>
-																BucketLand, Australia <br> -->
-																<!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
-															</address>
-															<!-- <ul class="social-links">
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-																<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-															</ul> -->
-														</div>
+							<div class="show-block">
+								<div id="gallery" class="media-gal">
+									<div class="product-row">
+										<% @jiakao.each do |p| %>
+											<div class='product-block'>
+												<div class="item product" >
+													<%= link_to manage_product_path(p) do %>
+														<%=  image_tag p.cover.thumb %>
+													<% end %>
+													<div class="info">
+														<p class='p-info'>
+															<span class='company'><%= p.company %></span>
+															<span class='name'><%= p.name %></span>
+														</p>
+														<p class='p-intro'>
+															<small class='dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
+															<span class="price"><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+														</p>
 													</div>
 												</div>
 											</div>
-										</div>
-									<% end %>
+										<% end %>
+									</div>
 								</div>
 							</div>
 

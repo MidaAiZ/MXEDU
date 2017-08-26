@@ -5,7 +5,7 @@ class Index::ProductsController < IndexController
   # GET /index/products
   # GET /index/products.json
   def index
-    count = params[:count] || 15
+    count = params[:count] || 20
     page = params[:page] || 1
 
     nonpaged_products = Index::Product.sort(params[:type])
@@ -17,6 +17,7 @@ class Index::ProductsController < IndexController
   def show
     if @user && @product
        Index::History.add session[:user_id], @product
+       @likes = Index::Product.sort(@product.cate).where.not(id: @product.id).limit(5)
     end
   end
 
@@ -29,5 +30,9 @@ class Index::ProductsController < IndexController
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
       params.require(:product).permit(:name, :cate, :price, :intro, :details)
+    end
+
+    def get_likes
+
     end
 end

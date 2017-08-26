@@ -191,3 +191,14 @@ $(function() {
        window.print();
     })
 })
+
+$(function() {
+    //生成下拉列表
+    if ($.fn.editableSelect) {
+        $('select').editableSelect({
+            effects: 'slide',
+            duration: 200,
+            filter: false
+        });
+    }
+})

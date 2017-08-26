@@ -3,7 +3,7 @@ class Manage::HistoriesController < ManageController
 	before_action :set_history, only: :show
 
 	def index
-	  count = params[:count] || 15
+	  count = params[:count] || 20
       page = params[:page] || 1
 
 	  nonpaged_histories = Index::History.all.includes(:user)

@@ -20,4 +20,12 @@ $(function() {
 
 		$("#del-product").trigger("submit")
 	})
+
+	// 评星
+	$(".recom.editable").on("click", ".fa-star", function() {
+		var $this = $(this);
+		$this.prevAll().andSelf().addClass("active").end().end().nextAll().removeClass("active");
+		$("#product_recommend").val($this.index() + 1);
+	})
+
 })

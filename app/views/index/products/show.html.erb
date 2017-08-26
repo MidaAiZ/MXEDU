@@ -2,7 +2,7 @@
 <!-- page heading start-->
     <div class="page-heading">
         <h3>
-            <%= @product.name %> <small><%= @product.company %></small>
+            <%= @product.name %> <small> - <%= @product.company %></small>
         </h3>
     </div>
     <!-- page heading end-->
@@ -10,18 +10,35 @@
     <!--body wrapper start-->
     <div class="wrapper">
     <div class="row blog">
-
-    <div class="col-md-8">
+    <div class="col-md-8 col-xs-12">
         <div class="panel">
             <div class="panel-body">
-                <%= @product.intro %>
+                简介: <%= @product.intro %>
             </div>
         </div>
     <div class="blog">
     <div class="single-blog">
     <div class="panel">
+        <header class="panel-heading">
+            <span class='p-intro'>学吧优惠价:
+                <small class='dis-price'><i class='fa fa-rmb'></i><%= @product.price %></small>
+                <span class='price'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
+            </span>
+
+            <span class='recom'>推荐指数:
+                <% 5.times do |i| %>
+                  <i class='fa fa-star <%= 'active' if (@product.recommend.to_i || 0 ) > i %> '></i>
+                <% end %>
+            </span>
+        </header>
+
         <div class="panel-body">
             <%= (@product.details || '').html_safe %>
+        </div>
+        <div class="panel-body">
+            <div class="pull-right">
+                <%= @product.readtimes %>人浏览过
+            </div>
         </div>
     </div>
     <div class="panel">
@@ -51,7 +68,7 @@
                 </p>
             <% end %>
             <script>
-                window.onload = function() {
+                $(function() {
                     var $form = $("#appoint-form");
                     $form.on("submit", function() {
                         return false;
@@ -66,7 +83,7 @@
                             success: function(res) {
                                 if (res.code == 'Success') {
                                     alert("提交成功!我们的顾问将会尽快联系您.")
-                                    $form.find("input[type=]").val("").end().find("textarea").val("");
+                                    $form.find("input[type=text]").val("").end().find("textarea").val("");
                                 } else if (res.errors){
                                     alert("提交失败,请填写正确信息");
                                 } else {
@@ -78,7 +95,7 @@
                             }
                         })
                     })
-                }
+                });
             </script>
         </div>
     </div>
@@ -91,44 +108,34 @@
             <div class="panel-body">
                 <div class="blog-post">
                     <h3>猜你喜欢</h3>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img alt="" src="/assets/blog/blog-thumb-1.jpg" class=" ">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
+                    <% @likes.each do |l| %>
+                        <div class="media">
+                            <%= link_to product_path(l), class: "pull-left" do %>
+                              <%= image_tag l.cover.thumb, class: 'like-cover' %>
+                            <% end %>
+                            <div class="media-body">
+                                <div class="">
+                                    <h5 class="media-heading p-info">
+                                        <%= link_to l.name, product_path(l) %>
+                                    </h5>
+                                    <p class='p-intro'>
+                                        <%= l.intro %>
+                                    </p>
+                                    <p class='p-intro'>
+                                        <span class="price"><small class='fa fa-rmb'></small><%= l.price %></span>
+                                        <span class='readtimes'>浏览<%= l.readtimes %>次</span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img alt="" src="/assets/blog/blog-thumb-2.jpg" class=" ">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img alt="" src="/assets/blog/blog-thumb-3.jpg" class=" ">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
-                        </div>
-                    </div>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    <%= stylesheet_link_tag "froala_style.min" %>
+
     <!--body wrapper end-->
 <% else %>
     <script type="text/javascript">
