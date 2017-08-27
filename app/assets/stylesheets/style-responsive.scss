@@ -306,6 +306,30 @@
     .notification-menu .dropdown-menu-head {
         min-width: 100px;
     }
+
+    .p-info {
+    	.company {
+    		padding: 1px;
+    		border-radius: 2px;
+    		font-size: 12px;
+    	}
+        .name {
+            font-size: 10px;
+        }
+    }
+
+    .p-intro {
+    	.price {
+    		font-size: 9px;
+    	}
+    	.readtimes {
+            font-size: 8px;
+    	}
+    }
+    .dis-price {
+        font-size: 12px;
+    }
+
 }
 
 @media screen and (max-width: 680px) {

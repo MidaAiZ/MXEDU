@@ -36,8 +36,8 @@
                                     <%= f.select :cate, Index::Product.cates.map{|k| [get_cate(k), k]}, {}, {class: "form-control", name: 'product[cate]', id: 'product_cate'}  %>
                                 </div>
                                 <div class="form-group">
-                                    <label for="product_company">机构/公司</label>
-                                    <input type="text" id='product_company' name='product[company]' class="form-control" placeholder="所属机构/公司" value="<%= @product.company %>">
+                                    <label for="product_company">品牌</label>
+                                    <input type="text" id='product_company' name='product[company]' class="form-control" placeholder="所属品牌" value="<%= @product.company %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">价格</label>
@@ -86,7 +86,7 @@
                                         </div>
                                         <span class="label label-danger ">注意!</span>
                                              <span>
-                                                上传的图片要求宽高比为4:3
+                                                上传的图片要求宽高比为1:1
                                              </span>
                                     </div>
                                 </div>
