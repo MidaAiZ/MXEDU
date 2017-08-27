@@ -294,11 +294,17 @@
     .custom-nav {
         margin-bottom: 20px;
     }
+    .modal-dialog {
+        margin-top: 0;
+    }
     .login-body {
         padding-top: 20px;
     }
     .form-signin  {
         margin-top: 50px;
+    }
+    .notification-menu .dropdown-menu-head {
+        min-width: 100px;
     }
 }
 
