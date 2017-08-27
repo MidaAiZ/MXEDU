@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     # root
     get '' => 'main#index', as: :root
 
-    get 'profile' => 'admin#profile', as: :profile
+    get 'profile' => 'admins#profile', as: :profile
 
     # session
     get 'login' => 'session#index', as: :login

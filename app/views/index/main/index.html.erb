@@ -126,7 +126,7 @@
 		                                <% @yupei.each do |p| %>
 		                                    <div class='product-block'>
 		                                        <div class="item product" >
-		                                            <%= link_to manage_product_path(p) do %>
+		                                            <%= link_to product_path(p) do %>
 		                                                <%=  image_tag p.cover.thumb %>
 		                                            <% end %>
 		                                            <div class="info">
@@ -163,7 +163,7 @@
 										<% @liuxue.each do |p| %>
 											<div class='product-block'>
 												<div class="item product" >
-													<%= link_to manage_product_path(p) do %>
+													<%= link_to product_path(p) do %>
 														<%=  image_tag p.cover.thumb %>
 													<% end %>
 													<div class="info">
@@ -200,7 +200,7 @@
 										<% @kaoyan.each do |p| %>
 											<div class='product-block'>
 												<div class="item product" >
-													<%= link_to manage_product_path(p) do %>
+													<%= link_to product_path(p) do %>
 														<%=  image_tag p.cover.thumb %>
 													<% end %>
 													<div class="info">
@@ -237,7 +237,7 @@
 										<% @jiakao.each do |p| %>
 											<div class='product-block'>
 												<div class="item product" >
-													<%= link_to manage_product_path(p) do %>
+													<%= link_to product_path(p) do %>
 														<%=  image_tag p.cover.thumb %>
 													<% end %>
 													<div class="info">

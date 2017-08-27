@@ -8,4 +8,8 @@ class Manage::UsersController < ManageController
 	 	nonpaged_users = Index::User.all
 		@users = nonpaged_users.page(page).per(count)
 	end
+
+	def show
+		@user = Index::User.find params[:id]
+	end
 end

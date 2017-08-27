@@ -26,11 +26,6 @@
             <div class="panel-body">
                 <%= @product.intro %>
             </div>
-            <div class="panel-body">
-                <div class="pull-right">
-                    <%= @product.readtimes %>人浏览过
-                </div>
-            </div>
         </div>
         <div class="blog">
             <div class="single-blog">
@@ -38,10 +33,19 @@
                     <div class="panel-body">
                         <%= (@product.details || '').html_safe %>
                     </div>
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <span>今日<%= @t_v_count %>人浏览</span>
+                            <span class='p-l'>总共<%= @product.readtimes %>人浏览</span>
+                            <br>
+                            <span>今日<%= @t_a_count %>人咨询</span>
+                            <span class='p-l'>总共<%= @product.appoints.count %>人咨询</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="btn-group">
+        <div class="btn-group pull-right">
             <button data-toggle="dropdown" type="button" class="btn btn-default btn-sm dropdown-toggle">
                 操作<span class="caret"></span>
             </button>

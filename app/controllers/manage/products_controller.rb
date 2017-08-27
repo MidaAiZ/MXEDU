@@ -14,6 +14,8 @@ class Manage::ProductsController < ManageController
   # GET /index/products/1
   # GET /index/products/1.json
   def show
+    @t_a_count = Index::History.where(created_at: Time.now.midnight..Time.now).count # 今日预约数
+    @t_v_count = Index::Appoint.where(updated_at: Time.now.midnight..Time.now).count # 今日浏览量
   end
 
   # GET /index/products/new

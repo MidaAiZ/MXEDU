@@ -62,8 +62,8 @@ class Index::SessionController < IndexController
         @code = 'Success' # 登录成功
         session[:user_id] = @user.id
         clear_record
-        format.json { render json: { code: @code } }
-        format.html { redirect_to root_path }
+        format.json { render json: { code: @code, url: Cache.new[request.remote_ip + '_history'] || root_path } }
+        format.html { redirect_to Cache.new[request.remote_ip + '_history'] || root_path }
       else
         record_fail
         puts @code

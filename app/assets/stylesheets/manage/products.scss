@@ -1,6 +1,9 @@
 // Place all the styles related to the Manage::product controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html {
+	overflow-x: hidden;
+}
 button.active {
 	background: #ddd;
 }
@@ -11,4 +14,35 @@ button.active {
 
 .t-dis-price {
 	text-decoration: line-through;
+}
+
+.fileupload-new {
+  width: 360px !important;
+}
+
+.fileupload-preview{
+	max-width: 360px;
+	line-height: 20px;
+}
+
+.img-pre {
+	width: 100%;
+}
+
+.p-l {
+	padding-left: 10px;
+}
+@media screen and (max-width: 768px) {
+	.fileupload-new {
+	  width: 240px !important;
+	}
+
+	.fileupload-preview {
+		width: 240px !important;
+	}
+
+
+	.img-pre {
+		width: 270px;
+	}
 }

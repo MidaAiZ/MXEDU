@@ -1,1 +1,43 @@
-PROFILE
+<!-- page heading start-->
+<!--<div class="page-heading">-->
+    <!--Page Tittle goes here-->
+<!--</div>-->
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="profile-pic text-center">
+                                <%= image_tag @admin.avatar.thumb %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="p-info">
+                                <li>
+                                    <div class="title">帐号</div>
+                                    <div class="desk"><%= @admin.number %></div>
+                                </li>
+                                <li>
+                                    <div class="title">角色</div>
+                                    <div class="desk"><%= translate_role @admin.role %></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--body wrapper end-->

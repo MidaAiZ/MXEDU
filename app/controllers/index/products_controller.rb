@@ -19,6 +19,9 @@ class Index::ProductsController < IndexController
        Index::History.add session[:user_id], @product
        @likes = Index::Product.sort(@product.cate).where.not(id: @product.id).limit(5)
     end
+    unless @user
+      Cache.new[request.remote_ip + '_history'] = request.url
+    end
   end
 
   private

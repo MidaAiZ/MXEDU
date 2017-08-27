@@ -9,131 +9,133 @@
 
     <!--body wrapper start-->
     <div class="wrapper">
-    <div class="row blog">
-    <div class="col-md-8 col-xs-12">
-        <div class="panel">
-            <div class="panel-body">
-                简介: <%= @product.intro %>
-            </div>
-        </div>
-    <div class="blog">
-    <div class="single-blog">
-    <div class="panel">
-        <header class="panel-heading">
-            <span class='p-intro'>学吧优惠价:
-                <small class='dis-price'><i class='fa fa-rmb'></i><%= @product.price %></small>
-                <span class='price'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
-            </span>
-
-            <span class='recom'>推荐指数:
-                <% 5.times do |i| %>
-                  <i class='fa fa-star <%= 'active' if (@product.recommend.to_i || 0 ) > i %> '></i>
-                <% end %>
-            </span>
-        </header>
-
-        <div class="panel-body">
-            <%= (@product.details || '').html_safe %>
-        </div>
-        <div class="panel-body">
-            <div class="pull-right">
-                <%= @product.readtimes %>人浏览过
-            </div>
-        </div>
-    </div>
-    <div class="panel">
-        <div class="panel-body">
-            <h1 class="text-center cmnt-head ">预约顾问</h1>
-            <p class="text-center fade-txt">顾问老师会对你的问题进行回复哦</p>
-            <%= form_tag appoints_path, method: :post, role: :form, class: "form-horizontal leave-cmnt", id: "appoint-form" do%>
-                <%= hidden_field_tag 'appoint[product_id]', @product.id %>
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <input type="text" name='appoint[name]' class="col-lg-12 form-control" placeholder="姓名">
+        <div class="row blog">
+            <div class="col-md-8 col-xs-12" style='z-index: 1'>
+                <div class="panel">
+                    <div class="panel-body">
+                        简介: <%= @product.intro %>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <input type="text" name='appoint[phone]' class="col-lg-12 form-control" placeholder="电话">
-                    </div>
+                <div class="blog">
+                    <div class="single-blog">
+                        <div class="panel">
+                            <header class="panel-heading">
+                                <span class='p-intro'>学吧优惠价:
+                                    <small class='dis-price'><i class='fa fa-rmb'></i><%= @product.price %></small>
+                                    <span class='price'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
+                                </span>
 
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <textarea name='appoint[content]' class="form-control" rows="8" placeholder="想了解的内容或需要解答的疑问"></textarea>
-                    </div>
-                </div>
-                <p>
-                    <button class="btn btn-post-cmnt btn-wide" type="button" id='submit-appoint'>提交</button>
-                </p>
-            <% end %>
-            <script>
-                $(function() {
-                    var $form = $("#appoint-form");
-                    $form.on("submit", function() {
-                        return false;
-                        alert("提交成功! 我们的顾问将会尽快联系您,请耐心等候哦~");
-                    })
-                    $("#submit-appoint").on("click", function() {
-                        $.ajax({
-                            url: $form.attr("action"),
-                            type: $form.attr("method"),
-                            data: $form.serialize(),
-                            dataType: "JSON",
-                            success: function(res) {
-                                if (res.code == 'Success') {
-                                    alert("提交成功!我们的顾问将会尽快联系您.")
-                                    $form.find("input[type=text]").val("").end().find("textarea").val("");
-                                } else if (res.errors){
-                                    alert("提交失败,请填写正确信息");
-                                } else {
-                                    alert("提交失败,请稍后尝试");
-                                }
-                            },
-                            error: function(state, err) {
-                                alert("提交失败,请稍后尝试2");
-                            }
-                        })
-                    })
-                });
-            </script>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
+                                <span class='recom'>推荐指数:
+                                    <% 5.times do |i| %>
+                                      <i class='fa fa-star <%= 'active' if (@product.recommend.to_i || 0 ) > i %> '></i>
+                                    <% end %>
+                                </span>
+                            </header>
 
-    <div class="col-md-4">
-        <div class="panel">
-            <div class="panel-body">
-                <div class="blog-post">
-                    <h3>猜你喜欢</h3>
-                    <% @likes.each do |l| %>
-                        <div class="media">
-                            <%= link_to product_path(l), class: "pull-left" do %>
-                              <%= image_tag l.cover.thumb, class: 'like-cover' %>
-                            <% end %>
-                            <div class="media-body">
-                                <div class="">
-                                    <h5 class="media-heading p-info">
-                                        <%= link_to l.name, product_path(l) %>
-                                    </h5>
-                                    <p class='p-intro'>
-                                        <%= l.intro %>
-                                    </p>
-                                    <p class='p-intro'>
-                                        <span class="price"><small class='fa fa-rmb'></small><%= l.price %></span>
-                                        <span class='readtimes'>浏览<%= l.readtimes %>次</span>
-                                    </p>
+                            <div class="panel-body">
+                                <%= (@product.details || '').html_safe %>
+                            </div>
+                            <div class="panel-body">
+                                <div class="pull-right">
+                                    <%= @product.readtimes %>人浏览过
                                 </div>
                             </div>
                         </div>
-                    <% end %>
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h1 class="text-center cmnt-head ">预约顾问</h1>
+                                <p class="text-center fade-txt">顾问老师会对你的问题进行回复哦</p>
+                                <%= form_tag appoints_path, method: :post, role: :form, class: "form-horizontal leave-cmnt", id: "appoint-form" do%>
+                                    <%= hidden_field_tag 'appoint[product_id]', @product.id %>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <input type="text" name='appoint[name]' class="col-lg-12 form-control" placeholder="姓名" value='<%= @user.name %>'>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <input type="text" name='appoint[phone]' class="col-lg-12 form-control" placeholder="电话" value="<%= @user.phone %>">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <textarea name='appoint[content]' class="form-control" rows="8" placeholder="想了解的内容或需要解答的疑问"></textarea>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <button class="btn btn-post-cmnt btn-wide" type="button" id='submit-appoint'>提交</button>
+                                    </p>
+                                <% end %>
+                                <script>
+                                    $(function() {
+                                        var $form = $("#appoint-form");
+                                        $form.on("submit", function() {
+                                            return false;
+                                            alert("提交成功! 我们的顾问将会尽快联系您,请耐心等候哦~");
+                                        })
+                                        $("#submit-appoint").on("click", function() {
+                                            $.ajax({
+                                                url: $form.attr("action"),
+                                                type: $form.attr("method"),
+                                                data: $form.serialize(),
+                                                dataType: "JSON",
+                                                success: function(res) {
+                                                    if (res.code == 'Success') {
+                                                        alert("提交成功!我们的顾问将会尽快联系您.")
+                                                        $form.find("input[type=text]").val("").end().find("textarea").val("");
+                                                    } else if (res.errors){
+                                                        alert("提交失败,请填写正确信息");
+                                                    } else {
+                                                        alert("提交失败,请稍后尝试");
+                                                    }
+                                                },
+                                                error: function(state, err) {
+                                                    alert("提交失败,请稍后尝试2");
+                                                }
+                                            })
+                                        })
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="blog-post">
+                            <h3>猜你喜欢</h3>
+                            <% @likes.each do |l| %>
+                                <div class="media">
+                                    <%= link_to product_path(l), class: "pull-left" do %>
+                                      <%= image_tag l.cover.thumb, class: 'like-cover' %>
+                                    <% end %>
+                                    <div class="media-body">
+                                        <div class="">
+                                            <h5 class="media-heading p-info">
+                                                <%= link_to l.name, product_path(l) %>
+                                            </h5>
+                                            <p class='p-intro'>
+                                                <%= l.intro %>
+                                            </p>
+                                            <p class='p-intro'>
+                                                <span class="price"><small class='fa fa-rmb'></small><%= l.price %></span>
+                                                <span class='readtimes'>浏览<%= l.readtimes %>次</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
     <%= stylesheet_link_tag "froala_style.min" %>
 
     <!--body wrapper end-->

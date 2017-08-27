@@ -14,7 +14,7 @@ class Manage::AdminsController < ManageController
   end
 
   def profile
-
+    @admin = Manage::Admin.find session[:admin_id]
   end
 
   # GET /manage/admins/new

@@ -15,13 +15,13 @@ $(function() {
 			dataType: "json",
 			success: function(res) {
 				if (res.code == 'Success') {
-					$code.addClass("disabled");
+					$code.attr("disabled", "true");
 					var time = 60;
-					$code.text("60s");
+					$code.text(time + "S");
 					var i = setInterval(function() {
 						$code.text(--time + 'S');
 						if (time == 0) {
-							$code.removeClass("disabled");
+							$code.removeAttr("disabled");
 							$code.text("重新发送");
 							clearInterval(i);
 						}
@@ -44,11 +44,7 @@ $(function(){
 			dataType: "json",
 			success: function(res) {
 				if (res.code == 'Success') {
-					if (window.location.pathname = '/login') {
-						window.location = "/"
-					} else {
-						window.location.reload();
-					}
+					window.location = res.url
 				} else if (res.code == 'WrongMsgCode') {
 					alert("验证码错误")
 				} else {

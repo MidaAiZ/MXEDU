@@ -27,7 +27,10 @@
                 var $phone = $("#phone"),
                     $code = $("#code");
                 $code.on("click", function() {
-                    if($phone.val().length != 11) return false;
+                    if($phone.val().length != 11) {
+                        alert("请填写正确的手机号");
+                        return false;
+                    }
                     $.ajax({
                         url: "/send_msg",
                         type: "post",
@@ -40,6 +43,7 @@
                             if (res.code == 'Success') {
                                 $code.addClass("disabled");
                                 var time = 60;
+                                $code.text(time + 'S');
                                 var i = setInterval(function() {
                                     $code.text(--time + 'S');
                                     if (time == 0) {
@@ -87,14 +91,14 @@
                                 $this.css("color", "green");
                                 $this.addClass("OK");
                                 if ($("#user_name").val().length > 1) {
-                                    $("#next").removeClass("disabled");
+                                    $("#next").removeAttr("disabled");
                                 } else {
                                     alert("请输入正确的姓名");
                                 }
                             } else {
                                 $this.css("color", "red");
                                 $this.removeClass("OK");
-                                $("#next").addClass("disabled");
+                                $("#next").attr("disabled");
                             }
                         }
                     })
@@ -114,7 +118,7 @@
                         dataType: "json",
                         success: function(res) {
                             if (res.code == 'Success') {
-                                window.location = "/"
+                                window.location = res.url
                             } else if (res.code == 'WrongMsgCode') {
                                 alert("验证码错误")
                             } else {

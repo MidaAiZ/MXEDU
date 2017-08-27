@@ -711,7 +711,7 @@ h5.left-nav-title {
 
 .notification-menu .dropdown-menu-head {
     padding: 0;
-    min-width: 300px;
+    min-width: 200px;
 }
 
 .notification-menu .info-number {
@@ -3598,7 +3598,7 @@ ul.p-info {
 }
 
 ul.p-info li {
-    display: inline-block;
+    display: flex;
     width: 100%;
     margin-bottom: 10px;
 }

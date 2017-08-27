@@ -2,11 +2,6 @@ class Index::UsersController < IndexController
   before_action :require_login, only: [:show, :edit]
   layout false, only: :new
 
-  # GET /index/users/1
-  # GET /index/users/1.json
-  def show
-  end
-
   # GET /index/users/new
   def new
     @user = Index::User.new
@@ -47,8 +42,8 @@ class Index::UsersController < IndexController
       @code ||= 'Fail'
     respond_to do |format|
       if @code == 'Success'
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created }
+        format.html { redirect_to Cache.new[request.remote_ip + '_history'] || user_url(@user) }
+        format.json { render json: { code: @code, url: Cache.new[request.remote_ip + '_history'] } }
       else
         format.html { redirect_to new_user_path }
         format.json { render json: { code: @code, errors: @user.errors }, status: :unprocessable_entity }
@@ -60,8 +55,8 @@ class Index::UsersController < IndexController
   # PATCH/PUT /index/users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if @user.update(update_user_params)
+        format.html { redirect_to ucenter_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -74,6 +69,11 @@ class Index::UsersController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :collage, :majar, :grade)
+      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :collage, :major, :grade)
     end
+
+    def update_user_params
+      params.require(:index_user).permit(:password, :email, :name, :sex, :collage, :major, :grade)
+    end
+
 end
