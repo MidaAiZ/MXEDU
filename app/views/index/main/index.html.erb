@@ -103,10 +103,10 @@
 										<div class="col-md-6 col-sm-6">
 					                        <div class="panel">
 					                            <div class="panel-body">
-					                                <h4><%= yp.link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
+					                                <h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
 					                                <div class="media">
 														<%= link_to product_url(yp), class: 'pull-left' do %>
-															<%= image_tag yp.cover.thumb, class: :cover %>
+															<%= image_tag yp.cover, class: :cover %>
 														<% end %>
 					                                    <div class="media-body">
 					                                        <address>
@@ -127,7 +127,7 @@
 		                                    <div class='product-block'>
 		                                        <div class="item product" >
 		                                            <%= link_to product_path(p) do %>
-		                                                <%=  image_tag p.cover.thumb %>
+		                                                <%=  image_tag p.cover %>
 		                                            <% end %>
 		                                            <div class="info">
 		                                                <p class='p-info'>
@@ -164,7 +164,7 @@
 											<div class='product-block'>
 												<div class="item product" >
 													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover.thumb %>
+														<%=  image_tag p.cover %>
 													<% end %>
 													<div class="info">
 														<p class='p-info'>
@@ -201,7 +201,7 @@
 											<div class='product-block'>
 												<div class="item product" >
 													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover.thumb %>
+														<%=  image_tag p.cover %>
 													<% end %>
 													<div class="info">
 														<p class='p-info'>
@@ -238,7 +238,7 @@
 											<div class='product-block'>
 												<div class="item product" >
 													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover.thumb %>
+														<%=  image_tag p.cover %>
 													<% end %>
 													<div class="info">
 														<p class='p-info'>

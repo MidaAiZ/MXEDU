@@ -40,6 +40,6 @@ class Index::Product < ApplicationRecord
 	end
 
 	def self.cates
-		%w(liuxue yupei kaoyan jiaxiao else)
+		%w(yupei liuxue kaoyan jiaxiao else)
 	end
 end
