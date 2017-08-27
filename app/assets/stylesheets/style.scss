@@ -7,8 +7,13 @@ Author: ThemeBucket
 @import 'jquery-ui-1.10.3.css';
 @import '/assets/css/font-awesome.min.css';
 
+html {
+    height: 100%;
+}
+
 body {
-    background: #424f63;
+    height: 100%;
+    background: #eff0f4;
     font-family: 'Open Sans', sans-serif;
     color: #7a7676;
     line-height: 20px;
@@ -45,6 +50,9 @@ hr {
     border-color: #ddd;
 }
 
+section, .main-content {
+    min-height: 100%;
+}
 /*-------------------------------
             LOGIN STYLES
 -------------------------------*/
@@ -183,6 +191,8 @@ hr {
     position: absolute;
     top: 0;
     left: 0;
+    overflow-x: hidden;
+    background: #424f63;
 }
 
 .sticky-left-side {
@@ -898,8 +908,9 @@ h5.left-nav-title {
 
 .main-content {
     margin-left: 240px;
+    margin-bottom: 15px;
     background: #eff0f4;
-    min-height: 1000px;
+    min-height: 100%;
 }
 
 .page-heading {
@@ -936,7 +947,6 @@ h5.left-nav-title {
     clear: both;
     display: block;
     content: '';
-    margin-bottom: 30px;
 }
 
 /*-------------------------
@@ -4732,68 +4742,6 @@ img.cover {
 	}
 }
 
-
-@media screen and (max-width: 768px) {
-    .product-row {
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-    .product-block {
-        width: 31.333%;
-        float: left;
-        margin-left: 1.333%;
-    }
-}
-
-@media screen and (max-width: 680px) {
-    .product-block {
-        width: 31.333%;
-        float: left;
-        margin-left: 1.333%;
-        img {
-            height: 150px !important;
-        }
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .product-block {
-        width: 48%;
-        float: left;
-        margin-left: 1%;
-        img {
-            height: 200px !important;
-        }
-    }
-    .wrapper {
-        padding: 0px;
-    }
-    .item {
-        &.product {
-            margin-bottom: 5px !important;
-        }
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .product-block {
-        img {
-            height: 150px !important;
-        }
-    }
-}
-@media screen and (max-width: 300px) {
-    .product-block {
-        width: 90%;
-        float: inherit;
-        margin-left: auto;
-        margin-right: auto;
-
-        img {
-            height: 80% !important;
-        }
-    }
-}
 .item {
     position: relative;
     .tag {

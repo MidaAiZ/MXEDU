@@ -3,9 +3,10 @@
   <head>
     <title>MXEDU</title>
     <meta charset="utf-8">
+    <meta name="keywords" content="留学 考研 驾校 出国 娱乐 学习 四六级 河海大学 课程 中介">
+    <meta name="description" content="大学生都爱用的学习生活一站式综合门户,考研/留学/四六级/驾校学车/生活娱乐应有尽有,就等你来发现!">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_link_tag params[:controller], media: 'all' %>
@@ -20,6 +21,13 @@
     </div>
     </section>
     <!-- main content end-->
+    <!--footer section start-->
+    <% if params[:controller] == 'index/main' %>
+        <footer>
+            2017 &copy; 南京禾明新教育科技有限公司; Tel: 13151548010
+        </footer>
+    <% end %>
+    <!--footer section end-->
 	<%= javascript_include_tag 'application' %>
 	<%= javascript_include_tag params[:controller] %>
   </body>

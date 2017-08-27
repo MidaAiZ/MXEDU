@@ -18,24 +18,30 @@
 (function() {
     "use strict";
 
-    // custom scrollbar
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        // 手机端
+        $("body").removeClass("left-side-collapsed")
+    } else {
+        // PC端
+        // $("body").addClass('left-side-collapsed');
+        // custom scrollbar
+        $("html").niceScroll({styler:"fb",cursorcolor:"#65cea7", cursorwidth: '6', cursorborderradius: '0px', background: '#424f63', spacebarenabled:false, cursorborder: '0',  zindex: '1000'});
 
-    $("html").niceScroll({styler:"fb",cursorcolor:"#65cea7", cursorwidth: '6', cursorborderradius: '0px', background: '#424f63', spacebarenabled:false, cursorborder: '0',  zindex: '1000'});
-
-    $(".left-side").niceScroll({styler:"fb",cursorcolor:"#65cea7", cursorwidth: '3', cursorborderradius: '0px', background: '#424f63', spacebarenabled:false, cursorborder: '0'});
+        $(".left-side").niceScroll({styler:"fb",cursorcolor:"#65cea7", cursorwidth: '3', cursorborderradius: '0px', background: '#424f63', spacebarenabled:false, cursorborder: '0'});
 
 
-    $(".left-side").getNiceScroll();
-    if ($('body').hasClass('left-side-collapsed')) {
-        $(".left-side").getNiceScroll().hide();
+        $(".left-side").getNiceScroll();
+        if ($('body').hasClass('left-side-collapsed')) {
+            $(".left-side").getNiceScroll().hide();
+        }
     }
+
 
     // Toggle Left Menu
    jQuery('.menu-list > a').click(function() {
 
       var parent = jQuery(this).parent();
       var sub = parent.find('> ul');
-
       if(!jQuery('body').hasClass('left-side-collapsed')) {
          if(sub.is(':visible')) {
             sub.slideUp(200, function(){
@@ -107,12 +113,13 @@
          }
       } else {
 
-         if(body.hasClass('left-side-show'))
+         if(body.hasClass('left-side-show')) {
             body.removeClass('left-side-show');
-         else
-            body.addClass('left-side-show');
-
-         mainContentHeightAdjust();
+            jQuery('.main-content').css('height', '');
+         } else {
+             body.addClass('left-side-show');
+             mainContentHeightAdjust();
+         }
       }
 
    });
