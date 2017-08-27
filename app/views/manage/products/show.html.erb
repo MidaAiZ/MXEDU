@@ -31,7 +31,9 @@
             <div class="single-blog">
                 <div class="panel">
                     <div class="panel-body">
-                        <%= (@product.details || '').html_safe %>
+                        <div class="fr-view">
+                            <%= (@product.details || '').html_safe %>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="pull-right">
