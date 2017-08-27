@@ -42,8 +42,8 @@ class Index::UsersController < IndexController
       @code ||= 'Fail'
     respond_to do |format|
       if @code == 'Success'
-        format.html { redirect_to Cache.new[request.remote_ip + '_history'] || user_url(@user) }
-        format.json { render json: { code: @code, url: Cache.new[request.remote_ip + '_history'] } }
+        format.html { redirect_to Cache.new[request.remote_ip + '_history'] || root_path }
+        format.json { render json: { code: @code, url: Cache.new[request.remote_ip + '_history'] || root_path } }
       else
         format.html { redirect_to new_user_path }
         format.json { render json: { code: @code, errors: @user.errors }, status: :unprocessable_entity }

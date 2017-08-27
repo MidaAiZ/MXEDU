@@ -59,5 +59,5 @@ $(function() {
     }).on('froalaEditor.contentChanged', function() {
         $("#editor-content").val($('#froala-editor').froalaEditor('html.get'))
     });
-    $(".fr-wrapper ").next("div").remove();
+    $(".fr-wrapper ").find("div").eq(0).remove();
 });
