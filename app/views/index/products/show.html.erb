@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div class="row blog">
             <div class="col-md-8 col-xs-12" style='z-index: 1'>
-                <div class="panel">
+                <div class="panel no-m-b">
                     <div class="panel-body">
                         简介: <%= @product.intro %>
                     </div>
@@ -21,8 +21,8 @@
                         <div class="panel">
                             <header class="panel-heading">
                                 <span class='p-intro'>学吧优惠价:
-                                    <small class='dis-price'><i class='fa fa-rmb'></i><%= @product.price %></small>
-                                    <span class='price'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
+                                    <small class='price'><i class='fa fa-rmb'></i><%= @product.price %></small>
+                                    <span class='dis-price big'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
                                 </span>
 
                                 <span class='recom'>推荐指数:
@@ -124,7 +124,10 @@
                                                 <%= l.intro %>
                                             </p>
                                             <p class='p-intro'>
-                                                <span class="price"><small class='fa fa-rmb'></small><%= l.price %></span>
+                                                <span>
+                                                    <small class='price'><i class='fa fa-rmb'></i><%= l.price %></small>
+                                                    <span class='dis-price big'><i class='fa fa-rmb'></i><%= l.dis_price %></span>
+                                                </span>
                                                 <span class='readtimes'>浏览<%= l.readtimes %>次</span>
                                             </p>
                                         </div>

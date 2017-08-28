@@ -311,10 +311,10 @@
     	.company {
     		padding: 1px;
     		border-radius: 2px;
-    		font-size: 12px;
+    		font-size: 11.5px;
     	}
         .name {
-            font-size: 10px;
+            font-size: 11px;
         }
     }
 
@@ -323,13 +323,28 @@
     		font-size: 9px;
     	}
     	.readtimes {
-            font-size: 8px;
+            font-size: 9px;
     	}
     }
     .dis-price {
         font-size: 12px;
     }
 
+    .dis-price.big {
+        font-size: 14px;
+    }
+
+    .leave-cmnt {
+        width: 100%;
+        margin: 20px auto;
+    }
+    .recom {
+        display: block;
+        margin-left: 10px;
+    }
+    .no-m-b {
+        margin-bottom: 0px;
+    }
 }
 
 @media screen and (max-width: 680px) {

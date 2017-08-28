@@ -4777,7 +4777,7 @@ img.cover {
 	.company {
 		padding: 2px;
 		border-radius: 3px;
-		font-size: 1.1em;
+		font-size: 1em;
 		font-weight: lighter;
 		background-color: #ff5200;
 		color: white;
@@ -4790,17 +4790,18 @@ img.cover {
 .p-intro {
 	margin-top: 0 !important;
 	.price {
-		font-size: 1.2em;
-		color: #ff5200;
+        color: #7A7676;
+        text-decoration: line-through;
 	}
 	.readtimes {
 		margin-left: 8px;
-		color: #acacac;
+        font-size: 0.8em;
+		color: #7A7676;
 	}
 }
 .dis-price {
-    color: #7A7676;
-    text-decoration: line-through;
+    font-size: 1.2em;
+    color: #ff5200;
 }
 .u-ico-mini {
     width: 32px;
