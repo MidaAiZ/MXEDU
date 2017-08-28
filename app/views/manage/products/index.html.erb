@@ -113,7 +113,7 @@
                                 <% end %>
                                 <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
                             </td>
-                            <td><%= p.created_at %></td>
+                            <td><%= p.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
                             <td><%= p.admin.number %></td>
                             <td><%= link_to '查看', manage_product_path(p) %></td>
                         </tr>

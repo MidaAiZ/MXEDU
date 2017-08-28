@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="form-signin-heading text-center">
+  <div class="form-signin-heading text-center" style='padding-bottom: 0'>
       <h1 class="sign-title">注册新帐号</h1>
       <img src="/assets/login-logo.png" alt=""/>
   </div>
@@ -39,9 +39,11 @@
                   <input type="radio" value="女生" id="radio-02" name="index_user[sex]"> 女神
               </label>
           </div>
-          <%= f.text_field :collage, id: :user_collage, autofocus: "",  placeholder: "学院", class: 'form-control' %>
-          <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "专业", class: 'form-control' %>
-          <p>年级</p>
+          <small>学校</small>
+          <%= f.text_field :school, id: :user_school, autofocus: "",  placeholder: "在读/毕业学校", class: 'form-control' %>
+          <small>专业</small>
+          <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "就读专业", class: 'form-control' %>
+          <small>年级</small>
           <%= f.select :grade, get_grades, {}, {class: "form-control", id: 'user_grade', placeholder: '年级'} %>
           <!-- <label class="checkbox">
               <input type="checkbox" value="agree this condition"> I agree to the Terms of Service and Privacy Policy

@@ -69,11 +69,11 @@ class Index::UsersController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :collage, :major, :grade)
+      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :school, :major, :grade)
     end
 
     def update_user_params
-      params.require(:index_user).permit(:password, :email, :name, :sex, :collage, :major, :grade)
+      params.require(:index_user).permit(:password, :email, :name, :sex, :school, :major, :grade)
     end
 
 end

@@ -3,7 +3,7 @@ class Index::User < ApplicationRecord
 
     # 用于上传头像时保存图片参数
     attr_accessor :x, :y, :width, :height, :rotate
-    store_accessor :info, :collage, :grade, :major
+    store_accessor :info, :school, :grade, :major
 
     # 使用插件建立用户密码验证体系
     has_secure_password
@@ -39,5 +39,5 @@ class Index::User < ApplicationRecord
                         format: { with: Validate::VALID_PHONE_REGEX },
                         allow_blank: false
       validates :sex, length: { maximum: 2, too_long: '性别最长允许%{count}个字符' },
-                    inclusion: %w( 男 女 男生 女生 )
+                    inclusion: %w( 男 女 男生 女生 ), allow_blank: true
 end
