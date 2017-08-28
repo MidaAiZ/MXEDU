@@ -58,7 +58,10 @@ Rails.application.routes.draw do
     get 'counts' => 'main#counts'
 
     # users
-    resources :users
+    resources :users do
+        get 'appoints' => 'appoints#index', as: :appoints
+        get 'histories' => 'histories#index', as: :histories
+    end
 
     # products
     resources :products

@@ -75,8 +75,10 @@
                                             <span class='name'><%= p.name %></span>
                                         </p>
                                         <p class='p-intro'>
-                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                            <% if p.price > p.dis_price %>
+                                                <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                            <% end %>
+                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                             <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
                                         </p>
                                     </div>
@@ -106,7 +108,9 @@
                             <td><%= p.name %></td>
                             <td><%= get_cate p.cate %></td>
                             <td>
-                                <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price%></small>
+                                <% if p.price > p.dis_price %>
+                                    <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price%></small>
+                                <% end %>
                                 <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
                             </td>
                             <td><%= p.created_at %></td>

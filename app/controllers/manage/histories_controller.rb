@@ -5,9 +5,14 @@ class Manage::HistoriesController < ManageController
 	def index
 	  count = params[:count] || 20
       page = params[:page] || 1
-
-	  nonpaged_histories = Index::History.all.includes(:user)
-      @histories = nonpaged_histories.page(page).per(count)
+	  if params[:user_id]
+		@user = Index::User.find params[:user_id]
+		nonpaged_histories = @user.histories.includes(:user)
+		@histories = nonpaged_histories.page(page).per(count)
+	  else
+		nonpaged_histories = Index::History.all.includes(:user)
+		@histories = nonpaged_histories.page(page).per(count)
+	  end
 	end
 
 	def show

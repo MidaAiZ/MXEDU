@@ -21,7 +21,9 @@
                         <div class="panel">
                             <header class="panel-heading">
                                 <span class='p-intro'>学吧优惠价:
-                                    <small class='price'><i class='fa fa-rmb'></i><%= @product.price %></small>
+                                    <% if @product.price > @product.dis_price %>
+                                        <small class='price'><i class='fa fa-rmb'></i><%= @product.price %></small>
+                                    <% end %>
                                     <span class='dis-price big'><i class='fa fa-rmb'></i><%= @product.dis_price %> </span>
                                 </span>
 
@@ -125,7 +127,9 @@
                                             </p>
                                             <p class='p-intro'>
                                                 <span>
-                                                    <small class='price'><i class='fa fa-rmb'></i><%= l.price %></small>
+                                                    <% if l.price > l.dis_price %>
+                                                        <small class='price'><i class='fa fa-rmb'></i><%= l.price %></small>
+                                                    <% end %>
                                                     <span class='dis-price big'><i class='fa fa-rmb'></i><%= l.dis_price %></span>
                                                 </span>
                                                 <span class='readtimes'>浏览<%= l.readtimes %>次</span>

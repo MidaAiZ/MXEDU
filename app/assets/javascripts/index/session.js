@@ -4,7 +4,11 @@ $(function() {
 	var $phone = $("#phone"),
 		$code = $("#code");
 	$code.on("click", function() {
-		if($phone.val().length != 11) return false;
+		if($phone.val().length != 11) {
+			alert("请填写正确的手机号");
+			return false;
+		}
+		$code.addClass("disabled").text("发送中...");
 		$.ajax({
 			url: "/send_msg",
 			type: "post",
@@ -21,14 +25,18 @@ $(function() {
 					var i = setInterval(function() {
 						$code.text(--time + 'S');
 						if (time == 0) {
-							$code.removeAttr("disabled");
+							$code.removeClass("disabled");
 							$code.text("重新发送");
 							clearInterval(i);
 						}
 					}, 1000)
+				} else {
+					$code.removeAttr("disabled").text("获取验证码");
+					alert("发送失败,请稍后尝试");
 				}
 			},
 			error: function() {
+				$code.removeClass("disabled").text("获取验证码");
 				alert("发送失败,请稍后尝试");
 			}
 		})
@@ -37,6 +45,7 @@ $(function() {
 
 $(function(){
 	$("#login").on("click", function() {
+		$(this).attr("disabled", true).html("<small>登录中...</small>");
 		$.ajax({
 			url: "/login",
 			type: "post",
@@ -52,7 +61,10 @@ $(function(){
 				}
 			},
 			error: function() {
-				alert("登录失败,请稍后尝试");
+				alert("登录失败");
+			},
+			complete: function() {
+				$("#login").removeAttr("disabled", true).html("<i class='fa fa-check'></i>");
 			}
 		})
 

@@ -1,267 +1,269 @@
 
-	<!-- Carouel -->
-	<div id="carousel-generic" class="carousel slide" data-ride="carousel">
-	  <!-- Indicators -->
-	  <ol class="carousel-indicators">
-	    <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
-	    <li data-target="#carousel-generic" data-slide-to="1"></li>
-	    <li data-target="#carousel-generic" data-slide-to="2"></li>
-	  </ol>
+    <!-- Carouel -->
+    <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-generic" data-slide-to="2"></li>
+      </ol>
 
-	  <!-- Wrapper for slides -->
-	  <div class="carousel-inner" role="listbox">
-	    <div class="item active">
-	      <div class='c-bg' style="background: url(/assets/gallery/image1.jpg)"></div>
-	      <div class="carousel-caption">
-	        ...
-	      </div>
-	    </div>
-	    <div class="item">
-	      <div class='c-bg' style="background: url(/assets/gallery/image2.jpg)"></div>
-	      <div class="carousel-caption">
-	        ...
-	      </div>
-	    </div>
-		<div class="item">
-	      <div class='c-bg' style="background: url(/assets/gallery/image3.jpg)"></div>
-	      <div class="carousel-caption">
-	        ...
-	      </div>
-	    </div>
-	  </div>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <div class='c-bg' style="background: url(/assets/gallery/image1.jpg)"></div>
+          <div class="carousel-caption">
+            ...
+          </div>
+        </div>
+        <div class="item">
+          <div class='c-bg' style="background: url(/assets/gallery/image2.jpg)"></div>
+          <div class="carousel-caption">
+            ...
+          </div>
+        </div>
+        <div class="item">
+          <div class='c-bg' style="background: url(/assets/gallery/image3.jpg)"></div>
+          <div class="carousel-caption">
+            ...
+          </div>
+        </div>
+      </div>
 
-	  <!-- Controls -->
-	  <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
-	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
-	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
-	</div>
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 
-	<div class="menu">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="panel">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-xs-6 col-md-2 col-md-offset-2 item">
-								<%= link_to products_url + '?type=yupei' do %>
-									<span class="icon yp">
-										<i class='fa fa-cloud'></i>
-									</span>
-									<span>语言培训</span>
-								<% end %>
-							</div>
-							<div class="col-xs-6 col-md-2 item">
-									<%= link_to products_url + '?type=liuxue' do %>
-										<span class="icon lx">
-											<i class='fa fa-plane'></i>
-										</span>
-										<span>留学中介</span>
-									<% end %>
-							</div>
-							<div class="col-xs-6 col-md-2 item">
-								<%= link_to products_url + '?type=jiakao' do %>
-									<span class="icon jk">
-										<i class='fa fa-rocket'></i>
-									</span>
-									<span>驾考学车</span>
+    <div class="menu">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-2 col-md-offset-2 item">
+                                <%= link_to products_url + '?type=yupei' do %>
+                                    <span class="icon yp">
+                                        <i class='fa fa-cloud'></i>
+                                    </span>
+                                    <span>语言培训</span>
+                                <% end %>
+                            </div>
+                            <div class="col-xs-6 col-md-2 item">
+                                    <%= link_to products_url + '?type=liuxue' do %>
+                                        <span class="icon lx">
+                                            <i class='fa fa-plane'></i>
+                                        </span>
+                                        <span>留学中介</span>
+                                    <% end %>
+                            </div>
+                            <div class="col-xs-6 col-md-2 item">
+                                <%= link_to products_url + '?type=jiakao' do %>
+                                    <span class="icon jk">
+                                        <i class='fa fa-rocket'></i>
+                                    </span>
+                                    <span>驾考学车</span>
 
-								<% end %>
-							</div>
-							<div class="col-xs-6 col-md-2 item">
-								<%= link_to products_url + '?type=kaoyan' do %>
-									<span class="icon ky">
-										<i class='fa fa-book'></i>
-									</span>
-									<span>考研课程</span>
-								<% end %>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <% end %>
+                            </div>
+                            <div class="col-xs-6 col-md-2 item">
+                                <%= link_to products_url + '?type=kaoyan' do %>
+                                    <span class="icon ky">
+                                        <i class='fa fa-book'></i>
+                                    </span>
+                                    <span>考研课程</span>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--body wrapper start-->
     <div class="wrapper">
         <div class="row">
             <div class="col-sm-12">
-				<% if @yupei.any? %>
-	                <section id="yupei">
-	                    <header class="panel-heading">
-	                        <%= link_to '留学语培', products_url + '?type=yupei'%>
-	                    </header>
-	                    <div class="panel-body">
-							<!-- <div class="directory-info-row">
-				                <div class="row">
-									<% @yupei.each do |yp| %>
-										<div class="col-md-6 col-sm-6">
-					                        <div class="panel">
-					                            <div class="panel-body">
-					                                <h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
-					                                <div class="media">
-														<%= link_to product_url(yp), class: 'pull-left' do %>
-															<%= image_tag yp.cover, class: :cover %>
-														<% end %>
-					                                    <div class="media-body">
-					                                        <address>
-																<span><%= yp.intro %></span>
-					                                        </address>
-					                                    </div>
-					                                </div>
-					                            </div>
-					                        </div>
-					                    </div>
-									<% end %>
-								</div>
-							</div> -->
-							<div class="show-block">
-		                        <div id="gallery" class="media-gal">
-		                            <div class="product-row">
-		                                <% @yupei.each do |p| %>
-		                                    <div class='product-block'>
-		                                        <div class="item product" >
-		                                            <%= link_to product_path(p) do %>
-		                                                <%=  image_tag p.cover %>
-		                                            <% end %>
-		                                            <div class="info">
-		                                                <p class='p-info'>
-		                                                    <span class='company'><%= p.company %></span>
-		                                                    <span class='name'><%= p.name %></span>
-		                                                </p>
-		                                                <p class='p-intro'>
-		                                                    <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-		                                                    <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-		                                                    <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-		                                                </p>
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                <% end %>
-		                            </div>
-		                        </div>
-		                    </div>
+                <% if @yupei.any? %>
+                    <section id="yupei">
+                        <header class="panel-heading">
+                            <%= link_to '留学语培', products_url + '?type=yupei'%>
+                        </header>
+                        <div class="panel-body">
+                            <!-- <div class="directory-info-row">
+                                <div class="row">
+                                    <% @yupei.each do |yp| %>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="panel">
+                                                <div class="panel-body">
+                                                    <h4><%= link_to yp.name, product_url(yp) %><span class="text-muted small"> - <%= yp.company %></span></h4>
+                                                    <div class="media">
+                                                        <%= link_to product_url(yp), class: 'pull-left' do %>
+                                                            <%= image_tag yp.cover, class: :cover %>
+                                                        <% end %>
+                                                        <div class="media-body">
+                                                            <address>
+                                                                <span><%= yp.intro %></span>
+                                                            </address>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div> -->
+                            <div class="show-block">
+                                <div id="gallery" class="media-gal">
+                                    <div class="product-row">
+                                        <% @yupei.each do |p| %>
+                                            <div class='product-block'>
+                                                <div class="item product" >
+                                                    <%= link_to product_path(p) do %>
+                                                        <%=  image_tag p.cover %>
+                                                    <% end %>
+                                                    <div class="info">
+                                                        <p class='p-info'>
+                                                            <span class='company'><%= p.company %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        </p>
+                                                        <p class='p-intro'>
+                                                            <% if p.price > p.dis_price %>
+                                                                <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                            <% end %>
+                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
 
-							<%= link_to '更多>>', products_url + '?type=yupei', class: 'pull-right'  %>
-	                    </div>
-	                </section>
-				<% end %>
-				<% if @liuxue.any? %>
-					<section id="liuxue">
-						<header class="panel-heading">
-						    <%= link_to '留学中介', products_url + '?type=liuxue' %>
-						</header>
-						<div class="panel-body">
-							<div class="show-block">
-								<div id="gallery" class="media-gal">
-									<div class="product-row">
-										<% @liuxue.each do |p| %>
-											<div class='product-block'>
-												<div class="item product" >
-													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover %>
-													<% end %>
-													<div class="info">
-														<p class='p-info'>
-															<span class='company'><%= p.company %></span>
-															<span class='name'><%= p.name %></span>
-														</p>
-														<p class='p-intro'>
-															<small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-															<small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-														</p>
-													</div>
-												</div>
-											</div>
-										<% end %>
-									</div>
-								</div>
-							</div>
+                            <%= link_to '更多>>', products_url + '?type=yupei', class: 'pull-right'  %>
+                        </div>
+                    </section>
+                <% end %>
+                <% if @liuxue.any? %>
+                    <section id="liuxue">
+                        <header class="panel-heading">
+                            <%= link_to '留学中介', products_url + '?type=liuxue' %>
+                        </header>
+                        <div class="panel-body">
+                            <div class="show-block">
+                                <div id="gallery" class="media-gal">
+                                    <div class="product-row">
+                                        <% @liuxue.each do |p| %>
+                                            <div class='product-block'>
+                                                <div class="item product" >
+                                                    <%= link_to product_path(p) do %>
+                                                        <%=  image_tag p.cover %>
+                                                    <% end %>
+                                                    <div class="info">
+                                                        <p class='p-info'>
+                                                            <span class='company'><%= p.company %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        </p>
+                                                        <p class='p-intro'>
+                                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
 
-							<%= link_to '更多>>', products_url+ '?type=liuxue', class: 'pull-right'  %>
-						</div>
-					</section>
-				<% end %>
-				<% if @kaoyan.any? %>
-					<section id="kaoyan">
-						<header class="panel-heading">
-							<%= link_to '考研课程', products_url + '?type=kaoyan' %>
-						</header>
-						<div class="panel-body">
-							<div class="show-block">
-								<div id="gallery" class="media-gal">
-									<div class="product-row">
-										<% @kaoyan.each do |p| %>
-											<div class='product-block'>
-												<div class="item product" >
-													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover %>
-													<% end %>
-													<div class="info">
-														<p class='p-info'>
-															<span class='company'><%= p.company %></span>
-															<span class='name'><%= p.name %></span>
-														</p>
-														<p class='p-intro'>
-															<small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-															<small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-														</p>
-													</div>
-												</div>
-											</div>
-										<% end %>
-									</div>
-								</div>
-							</div>
+                            <%= link_to '更多>>', products_url+ '?type=liuxue', class: 'pull-right'  %>
+                        </div>
+                    </section>
+                <% end %>
+                <% if @kaoyan.any? %>
+                    <section id="kaoyan">
+                        <header class="panel-heading">
+                            <%= link_to '考研课程', products_url + '?type=kaoyan' %>
+                        </header>
+                        <div class="panel-body">
+                            <div class="show-block">
+                                <div id="gallery" class="media-gal">
+                                    <div class="product-row">
+                                        <% @kaoyan.each do |p| %>
+                                            <div class='product-block'>
+                                                <div class="item product" >
+                                                    <%= link_to product_path(p) do %>
+                                                        <%=  image_tag p.cover %>
+                                                    <% end %>
+                                                    <div class="info">
+                                                        <p class='p-info'>
+                                                            <span class='company'><%= p.company %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        </p>
+                                                        <p class='p-intro'>
+                                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
 
-							<%= link_to '更多>>', products_url+ '?type=kaoyan', class: 'pull-right'  %>
-						</div>
-					</section>
-				<% end %>
-				<% if @jiakao.any? %>
-					<section id="jiakao">
-	                    <header class="panel-heading">
-							<%= link_to '驾校学车', products_url + '?type=kaoyan' %>
-	                    </header>
-	                    <div class="panel-body">
-							<div class="show-block">
-								<div id="gallery" class="media-gal">
-									<div class="product-row">
-										<% @jiakao.each do |p| %>
-											<div class='product-block'>
-												<div class="item product" >
-													<%= link_to product_path(p) do %>
-														<%=  image_tag p.cover %>
-													<% end %>
-													<div class="info">
-														<p class='p-info'>
-															<span class='company'><%= p.company %></span>
-															<span class='name'><%= p.name %></span>
-														</p>
-														<p class='p-intro'>
-															<small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-															<small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-															<span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-														</p>
-													</div>
-												</div>
-											</div>
-										<% end %>
-									</div>
-								</div>
-							</div>
+                            <%= link_to '更多>>', products_url+ '?type=kaoyan', class: 'pull-right'  %>
+                        </div>
+                    </section>
+                <% end %>
+                <% if @jiakao.any? %>
+                    <section id="jiakao">
+                        <header class="panel-heading">
+                            <%= link_to '驾校学车', products_url + '?type=kaoyan' %>
+                        </header>
+                        <div class="panel-body">
+                            <div class="show-block">
+                                <div id="gallery" class="media-gal">
+                                    <div class="product-row">
+                                        <% @jiakao.each do |p| %>
+                                            <div class='product-block'>
+                                                <div class="item product" >
+                                                    <%= link_to product_path(p) do %>
+                                                        <%=  image_tag p.cover %>
+                                                    <% end %>
+                                                    <div class="info">
+                                                        <p class='p-info'>
+                                                            <span class='company'><%= p.company %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        </p>
+                                                        <p class='p-intro'>
+                                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
 
-							<%= link_to '更多>>', products_url+ '?type=jiakao', class: 'pull-right'  %>
-	                    </div>
-	                </section>
-				<% end %>
+                            <%= link_to '更多>>', products_url+ '?type=jiakao', class: 'pull-right'  %>
+                        </div>
+                    </section>
+                <% end %>
             </div>
         </div>
     </div>

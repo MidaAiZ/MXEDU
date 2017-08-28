@@ -1,16 +1,30 @@
 <!-- page heading start-->
 <div class="page-heading">
-  <h3>
-    全部预约信息
-  </h3>
-  <ul class="breadcrumb">
-    <li>
-      <a href="all_students.html">预约管理</a>
-    </li>
-    <li class="active">
-      全部预约信息
-    </li>
-  </ul>
+    <% if @user %>
+        <h3>
+            用户预约记录
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <%= link_to @user.name + '的个人资料', manage_user_path(@user) %>
+            </li>
+            <li class="active">
+                预约记录
+            </li>
+        </ul>
+    <% else %>
+      <h3>
+          全部预约记录
+      </h3>
+      <ul class="breadcrumb">
+        <li>
+          <a href="all_students.html">预约管理</a>
+        </li>
+        <li class="active">
+          全部预约信息
+        </li>
+      </ul>
+  <% end %>
 </div>
 <!-- page heading end-->
 

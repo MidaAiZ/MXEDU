@@ -1,17 +1,32 @@
 <!-- page heading start-->
 <div class="page-heading">
-  <h3>
-    全部浏览历史信息
-  </h3>
-  <ul class="breadcrumb">
-    <li>
-      <a href="all_students.html">浏览历史管理</a>
-    </li>
-    <li class="active">
-      全部浏览历史信息
-    </li>
-  </ul>
-</div>
+  <% if @user %>
+      <h3>
+          用户浏览历史
+      </h3>
+      <ul class="breadcrumb">
+          <li>
+              <%= link_to @user.name + '的个人资料', manage_user_path(@user) %>
+          </li>
+          <li class="active">
+              浏览历史
+          </li>
+      </ul>
+    </div>
+  <% else %>
+      <h3>
+          全部浏览记录
+      </h3>
+      <ul class="breadcrumb">
+          <li>
+              <a href="all_students.html">浏览历史管理</a>
+          </li>
+          <li class="active">
+              所有记录
+          </li>
+      </ul>
+    </div>
+  <% end %>
 <!-- page heading end-->
 
 <!--body wrapper start-->
