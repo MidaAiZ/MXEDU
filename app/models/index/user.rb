@@ -38,6 +38,6 @@ class Index::User < ApplicationRecord
       validates :phone, presence: true, uniqueness: { message: '该手机号已被注册' },
                         format: { with: Validate::VALID_PHONE_REGEX },
                         allow_blank: false
-      validates :name, length: { maximum: 2, too_long: '性别最长允许%{count}个字符' },
+      validates :sex, length: { maximum: 2, too_long: '性别最长允许%{count}个字符' },
                     inclusion: %w( 男 女 男生 女生 )
 end
