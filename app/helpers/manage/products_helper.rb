@@ -7,7 +7,7 @@ module Manage::ProductsHelper
 			'语培'
 		when 'kaoyan'
 			'考研'
-		when 'jiaxiao'
+		when 'jiakao'
 			'驾校'
 	    else
 			'其它'

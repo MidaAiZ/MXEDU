@@ -16,7 +16,7 @@ class Index::Product < ApplicationRecord
 
 	validates :name, length: { minimum: 1, too_short: '产品名不能为空', maximum: 32, too_long: '产品名最大长度为%{count}' }
     validates :cate, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '产品名最大长度为%{count}'  },
-					inclusion: %w(liuxue yupei kaoyan jiaxiao else)
+					inclusion: %w(liuxue yupei kaoyan jiakao else)
 	validates :company, length: { minimum: 1, too_short: '公司/机构不能为空', maximum: 128, too_long: '公司/机构名最大长度为%{count}' }
 	validates :price, numericality: { greater_than_or_equal_to: 0 }, length: { minimum: 0, too_short: '原价不能为空' }
 	validates :dis_price, numericality: { greater_than_or_equal_to: 0 }, length: { minimum: 0, too_short: '优惠价不能为空' }
@@ -32,13 +32,13 @@ class Index::Product < ApplicationRecord
 		if cate.nil?
 			self.all
 		elsif cate == 'else'
-			self.where.not(cate: [:liuxue, :yupei, :jiaxiao, :kaoyan])
+			self.where.not(cate: [:liuxue, :yupei, :jiakao, :kaoyan])
 		else
 			self.where(cate: cate)
 		end
 	end
 
 	def self.cates
-		%w(yupei liuxue kaoyan jiaxiao else)
+		%w(yupei liuxue kaoyan jiakao else)
 	end
 end
