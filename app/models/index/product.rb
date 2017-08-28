@@ -38,6 +38,10 @@ class Index::Product < ApplicationRecord
 		end
 	end
 
+	def fake_readtimes
+		(self.readtimes || 0)+ (self.id % 11 + 3) * 21
+	end
+
 	def self.cates
 		%w(yupei liuxue kaoyan jiakao else)
 	end
