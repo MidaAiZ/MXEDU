@@ -12,8 +12,8 @@ class Manage::MainController < ManageController
 	   a_count = Index::Appoint.count # 预约总数
 	   v_count = Index::Product.sum("readtimes") # 总浏览量
        t_u_count = Index::History.where(created_at: Time.now.midnight..Time.now).count # 今日新增用户
-       t_a_count = Index::History.where(created_at: Time.now.midnight..Time.now).count # 今日预约数
-       t_v_count = Index::Appoint.where(updated_at: Time.now.midnight..Time.now).count # 今日浏览量
+       t_a_count = Index::Appoint.where(created_at: Time.now.midnight..Time.now).count # 今日浏览量
+       t_v_count = Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日预约数
 
        render json: {
 		  u_count: u_count,
