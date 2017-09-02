@@ -64,7 +64,7 @@
 }
 
 section {
-	// margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .wrapper {
@@ -87,6 +87,9 @@ section {
 	}
 	.wrapper {
 		padding: 0px !important;
+	}
+	section {
+		margin-bottom:5px;
 	}
 	.menu {
 		margin-top: 5px;
