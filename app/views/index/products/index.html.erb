@@ -13,13 +13,13 @@
                 <div class="panel-body">
 
                     <ul id="filters" class="media-filter">
-                        <li><%= link_to '全部', products_url %></li>
-                        <li><%= link_to '语培', products_url + '?type=yupei' %></li>
-                        <li><%= link_to '留学', products_url + '?type=liuxue' %></li>
-                        <li><%= link_to '考研', products_url + '?type=kaoyan' %></li>
-                        <li><%= link_to '驾校', products_url + '?type=jiakao' %></li>
-                        <li><%= link_to '娱乐', products_url + '?type=yule' %></li>
-                        <li><%= link_to '其它', products_url + '?type=else' %></li>
+                        <li data-type='all'><%= link_to '全部', products_url %></li>
+                        <li data-type='yupei'><%= link_to '语培', products_url + '?type=yupei' %></li>
+                        <li data-type='liuxue'><%= link_to '留学', products_url + '?type=liuxue' %></li>
+                        <li data-type='kaoyan'><%= link_to '考研', products_url + '?type=kaoyan' %></li>
+                        <li data-type='jiakao'><%= link_to '驾校', products_url + '?type=jiakao' %></li>
+                        <li data-type='yule'><%= link_to '娱乐', products_url + '?type=yule' %></li>
+                        <li data-type='else'><%= link_to '其它', products_url + '?type=else' %></li>
                     </ul>
 
                     <div class="show-block">
@@ -40,7 +40,7 @@
                                                     <% if p.price > p.dis_price %>
                                                         <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
                                                     <% end %>
-                                                    <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                    <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                     <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                 </p>
                                             </div>

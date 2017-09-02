@@ -52,13 +52,13 @@
             <div class="space15"></div>
             <% cache @products.cache_key, expires_in: 10.minutes do %>
                 <ul id="filters" class="media-filter">
-                    <li><%= link_to '全部', manage_products_url %></li>
-                    <li><%= link_to '语培', manage_products_url + '?type=yupei' %></li>
-                    <li><%= link_to '留学', manage_products_url + '?type=liuxue' %></li>
-                    <li><%= link_to '考研', manage_products_url + '?type=kaoyan' %></li>
-                    <li><%= link_to '驾校', manage_products_url + '?type=jiakao' %></li>
-                    <li><%= link_to '娱乐', manage_products_url + '?type=yule' %></li>
-                    <li><%= link_to '其它', manage_products_url + '?type=else' %></li>
+                    <li data-type='all'><%= link_to '全部', manage_products_url %></li>
+                    <li data-type='yupei'><%= link_to '语培', manage_products_url + '?type=yupei' %></li>
+                    <li data-type='liuxue'><%= link_to '留学', manage_products_url + '?type=liuxue' %></li>
+                    <li data-type='kaoyan'><%= link_to '考研', manage_products_url + '?type=kaoyan' %></li>
+                    <li data-type='jiakao'><%= link_to '驾校', manage_products_url + '?type=jiakao' %></li>
+                    <li data-type='yule'><%= link_to '娱乐', manage_products_url + '?type=yule' %></li>
+                    <li data-type='else'><%= link_to '其它', manage_products_url + '?type=else' %></li>
                 </ul>
                 <div class="show-block">
                     <div id="gallery" class="media-gal">

@@ -2384,6 +2384,9 @@ table.display tr.even.gradeX, table.display tr.gradeX, tr.even.gradeU td.sorting
     border-color: #4c9b7e;
     color: #fff;
 }
+.media-filter li.active a {
+    background: #424F63;
+}
 
 .media-gal {
     float: left;

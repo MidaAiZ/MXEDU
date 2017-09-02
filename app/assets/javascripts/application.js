@@ -199,13 +199,20 @@ $(function() {
     })
 })
 
-$(function() {
-    //生成下拉列表
-    if ($.fn.editableSelect) {
-        $('select').editableSelect({
-            effects: 'slide',
-            duration: 200,
-            filter: false
-        });
-    }
-})
+// $(function() {
+//     //生成下拉列表
+//     if ($.fn.editableSelect) {
+//         $('select').editableSelect({
+//             effects: 'slide',
+//             duration: 200,
+//             filter: false
+//         });
+//     }
+// })
+
+//获取参数方法
+function getQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+}
