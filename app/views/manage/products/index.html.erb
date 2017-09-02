@@ -50,79 +50,85 @@
               </div>
             </div>
             <div class="space15"></div>
-
-            <ul id="filters" class="media-filter">
-                <li><%= link_to '全部', manage_products_url %></li>
-                <li><%= link_to '语培', manage_products_url + '?type=yupei' %></li>
-                <li><%= link_to '留学', manage_products_url + '?type=liuxue' %></li>
-                <li><%= link_to '考研', manage_products_url + '?type=kaoyan' %></li>
-                <li><%= link_to '驾校', manage_products_url + '?type=jiakao' %></li>
-                <li><%= link_to '其它', manage_products_url + '?type=else' %></li>
-            </ul>
-            <div class="show-block">
-                <div id="gallery" class="media-gal">
-                    <div class="product-row">
-                        <% @products.each do |p| %>
-                            <div class='product-block'>
-                                <div class="item product" >
-                                    <%= link_to manage_product_path(p) do %>
-                                        <span class="tag cate"><%= get_cate p.cate %></span>
-                                        <%=  image_tag p.cover %>
-                                    <% end %>
-                                    <div class="info">
-                                        <p class='p-info'>
-                                            <span class='company'><%= p.company %></span>
-                                            <span class='name'><%= p.name %></span>
-                                        </p>
-                                        <p class='p-intro'>
-                                            <% if p.price > p.dis_price %>
-                                                <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                            <% end %>
-                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-                                            <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
-                                        </p>
+            <% cache @products.cache_key, expires_in: 10.minutes do %>
+                <ul id="filters" class="media-filter">
+                    <li><%= link_to '全部', manage_products_url %></li>
+                    <li><%= link_to '语培', manage_products_url + '?type=yupei' %></li>
+                    <li><%= link_to '留学', manage_products_url + '?type=liuxue' %></li>
+                    <li><%= link_to '考研', manage_products_url + '?type=kaoyan' %></li>
+                    <li><%= link_to '驾校', manage_products_url + '?type=jiakao' %></li>
+                    <li><%= link_to '娱乐', manage_products_url + '?type=yule' %></li>
+                    <li><%= link_to '其它', manage_products_url + '?type=else' %></li>
+                </ul>
+                <div class="show-block">
+                    <div id="gallery" class="media-gal">
+                        <div class="product-row">
+                            <% @products.each do |p| %>
+                              <% cache p.cache_key, expires_in: 10.minutes do %>
+                                <div class='product-block'>
+                                    <div class="item product" >
+                                        <%= link_to manage_product_path(p) do %>
+                                            <span class="tag cate"><%= get_cate p.cate %></span>
+                                            <%=  image_tag p.cover %>
+                                        <% end %>
+                                        <div class="info">
+                                            <p class='p-info'>
+                                                <span class='company'><%= p.company %></span>
+                                                <span class='name'><%= p.name %></span>
+                                            </p>
+                                            <p class='p-intro'>
+                                                <% if p.price > p.dis_price %>
+                                                    <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                <% end %>
+                                                <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                <span class="readtimes"><%= p.readtimes || 0 %>人浏览</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <% end %>
+                              <% end %>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--startprint-->
-            <div class="show-table">
-                <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                  <thead>
-                    <tr>
-                      <th>名称</th>
-                      <th>分类</th>
-                      <th>价格</th>
-                      <th>发布日期</th>
-                      <th>发布者</th>
-                      <th>详情</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- 此处动态生成 -->
-                    <% @products.each do |p| %>
+                <!--startprint-->
+                <div class="show-table">
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                      <thead>
                         <tr>
-                            <td><%= p.name %></td>
-                            <td><%= get_cate p.cate %></td>
-                            <td>
-                                <% if p.price > p.dis_price %>
-                                    <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price%></small>
-                                <% end %>
-                                <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
-                            </td>
-                            <td><%= p.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-                            <td><%= p.admin.number %></td>
-                            <td><%= link_to '查看', manage_product_path(p) %></td>
+                          <th>名称</th>
+                          <th>分类</th>
+                          <th>价格</th>
+                          <th>发布日期</th>
+                          <th>发布者</th>
+                          <th>详情</th>
                         </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-            </div>
-            <!--endprint-->
-            <%= paginate @products %>
+                      </thead>
+                      <tbody>
+                        <!-- 此处动态生成 -->
+                        <% @products.each do |p| %>
+                          <% cache p.cache_key, expires_in: 10.minutes do %>
+                            <tr>
+                                <td><%= p.name %></td>
+                                <td><%= get_cate p.cate %></td>
+                                <td>
+                                    <% if p.price > p.dis_price %>
+                                        <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price%></small>
+                                    <% end %>
+                                    <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
+                                </td>
+                                <td><%= p.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                                <td><%= p.admin.number %></td>
+                                <td><%= link_to '查看', manage_product_path(p) %></td>
+                            </tr>
+                          <% end %>
+                        <% end %>
+                      </tbody>
+                    </table>
+                </div>
+                <!--endprint-->
+                <%= paginate @products %>
+            <% end %>
           </div>
         </div>
       </section>

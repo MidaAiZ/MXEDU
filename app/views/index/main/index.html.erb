@@ -91,7 +91,8 @@
     <div class="wrapper">
         <div class="row">
             <div class="col-sm-12">
-                <% if @yupei.any? %>
+                <% if @products[:yupei].any? %>
+                  <% cache @products[:yupei].cache_key, expires_in: 10.minutes do %>
                     <section id="yupei">
                         <header class="panel-heading">
                             <%= link_to '留学语培', products_url + '?type=yupei'%>
@@ -99,7 +100,7 @@
                         <div class="panel-body">
                             <!-- <div class="directory-info-row">
                                 <div class="row">
-                                    <% @yupei.each do |yp| %>
+                                    <% @products[:yupei].each do |yp| %>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="panel">
                                                 <div class="panel-body">
@@ -123,7 +124,8 @@
                             <div class="show-block">
                                 <div id="gallery" class="media-gal">
                                     <div class="product-row">
-                                        <% @yupei.each do |p| %>
+                                        <% @products[:yupei].each do |p| %>
+                                          <% cache p.cache_key, expires_in: 10.minutes do %>
                                             <div class='product-block'>
                                                 <div class="item product" >
                                                     <%= link_to product_path(p) do %>
@@ -144,16 +146,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <% end %>
                                         <% end %>
                                     </div>
                                 </div>
                             </div>
-
                             <%= link_to '更多>>', products_url + '?type=yupei', class: 'pull-right'  %>
                         </div>
                     </section>
+                  <% end %>
                 <% end %>
-                <% if @liuxue.any? %>
+                <% if @products[:liuxue].any? %>
+                  <% cache @products[:liuxue].cache_key, expires_in: 10.minutes do %>
                     <section id="liuxue">
                         <header class="panel-heading">
                             <%= link_to '留学中介', products_url + '?type=liuxue' %>
@@ -162,7 +166,8 @@
                             <div class="show-block">
                                 <div id="gallery" class="media-gal">
                                     <div class="product-row">
-                                        <% @liuxue.each do |p| %>
+                                        <% @products[:liuxue].each do |p| %>
+                                          <% cache p.cache_key, expires_in: 10.minutes do %>
                                             <div class='product-block'>
                                                 <div class="item product" >
                                                     <%= link_to product_path(p) do %>
@@ -181,6 +186,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <% end %>
                                         <% end %>
                                     </div>
                                 </div>
@@ -189,8 +195,10 @@
                             <%= link_to '更多>>', products_url+ '?type=liuxue', class: 'pull-right'  %>
                         </div>
                     </section>
+                  <% end %>
                 <% end %>
-                <% if @kaoyan.any? %>
+                <% if @products[:kaoyan].any? %>
+                  <% cache @products[:kaoyan].cache_key, expires_in: 10.minutes do %>
                     <section id="kaoyan">
                         <header class="panel-heading">
                             <%= link_to '考研课程', products_url + '?type=kaoyan' %>
@@ -199,7 +207,8 @@
                             <div class="show-block">
                                 <div id="gallery" class="media-gal">
                                     <div class="product-row">
-                                        <% @kaoyan.each do |p| %>
+                                        <% @products[:kaoyan].each do |p| %>
+                                          <% cache p.cache_key, expires_in: 10.minutes do %>
                                             <div class='product-block'>
                                                 <div class="item product" >
                                                     <%= link_to product_path(p) do %>
@@ -218,6 +227,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <% end %>
                                         <% end %>
                                     </div>
                                 </div>
@@ -226,8 +236,10 @@
                             <%= link_to '更多>>', products_url+ '?type=kaoyan', class: 'pull-right'  %>
                         </div>
                     </section>
+                  <% end %>
                 <% end %>
-                <% if @jiakao.any? %>
+                <% if @products[:jiakao].any? %>
+                  <% cache @products[:jiakao], expires_in: 10.minutes do %>
                     <section id="jiakao">
                         <header class="panel-heading">
                             <%= link_to '驾校学车', products_url + '?type=kaoyan' %>
@@ -236,7 +248,8 @@
                             <div class="show-block">
                                 <div id="gallery" class="media-gal">
                                     <div class="product-row">
-                                        <% @jiakao.each do |p| %>
+                                        <% @products[:jiakao].each do |p| %>
+                                          <% cache p.cache_key, expires_in: 10.minutes do %>
                                             <div class='product-block'>
                                                 <div class="item product" >
                                                     <%= link_to product_path(p) do %>
@@ -255,6 +268,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <% end %>
                                         <% end %>
                                     </div>
                                 </div>
@@ -263,6 +277,48 @@
                             <%= link_to '更多>>', products_url+ '?type=jiakao', class: 'pull-right'  %>
                         </div>
                     </section>
+                  <% end %>
+                <% end %>
+                <% if @products[:yule].any? %>
+                  <% cache @products[:yule].cache_key, expires_in: 10.munites do %>
+                    <section id="kaoyan">
+                        <header class="panel-heading">
+                            <%= link_to '生活娱乐', products_url + '?type=yule' %>
+                        </header>
+                        <div class="panel-body">
+                            <div class="show-block">
+                                <div id="gallery" class="media-gal">
+                                    <div class="product-row">
+                                        <% @products[:yule].each do |p| %>
+                                         <% cache p.cache_key, expires_in: 10.munites do %>
+                                            <div class='product-block'>
+                                                <div class="item product" >
+                                                    <%= link_to product_path(p) do %>
+                                                        <%=  image_tag p.cover %>
+                                                    <% end %>
+                                                    <div class="info">
+                                                        <p class='p-info'>
+                                                            <span class='company'><%= p.company %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        </p>
+                                                        <p class='p-intro'>
+                                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%= link_to '更多>>', products_url+ '?type=yule', class: 'pull-right'  %>
+                        </div>
+                    </section>
+                  <% end %>
                 <% end %>
             </div>
         </div>

@@ -15,12 +15,12 @@ class Index::ProductsController < IndexController
   # GET /index/products/1
   # GET /index/products/1.json
   def show
-    if @user && @product
-       Index::History.add session[:user_id], @product
-       @likes = Index::Product.sort(@product.cate).where.not(id: @product.id).limit(5)
-    end
-    unless @user
+    if !@user && @product.need_login?
       Cache.new[request.remote_ip + '_history'] = request.url
+    else
+        Index::History.add @user, @product, request.remote_ip
+        @likes = Index::Product.sort(@product.cate).where.not(id: @product.id).limit(5)
+        @user ||= Index::User.new
     end
   end
 

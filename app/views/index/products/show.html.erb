@@ -1,4 +1,4 @@
-<% if @user %>
+<% if @user || !@product.need_login? %>
 <!-- page heading start-->
     <div class="page-heading">
         <h3>
@@ -36,7 +36,9 @@
 
                             <div class="panel-body">
                                 <div class="fr-view">
+                                  <% cache @product.cache_key, 3.minutes do %>
                                     <%= (@product.details || '').html_safe %>
+                                  <% end %>
                                 </div>
                             </div>
                             <div class="panel-body">

@@ -54,16 +54,20 @@
               </thead>
               <tbody>
                 <!-- 此处动态生成 -->
-				<% @users.each do |u| %>
-					<tr>
-					  <td><%= u.name %></td>
-					  <td><%= u.phone %></td>
-					  <td><%= u.school %></td>
-					  <td><%= u.grade %></td>
-					  <td><%= u.major %></td>
-					  <td><%= link_to '查看', manage_user_path(u) %></td>
-					  </tr>
-					<% end %>
+                <% cache @users.cache_key, expires_in: 10.minutes do %>
+    				<% @users.each do |u| %>
+                      <% cache u.cache_key, expires_in: 10.minutes do %>
+    					<tr>
+    					  <td><%= u.name %></td>
+    					  <td><%= u.phone %></td>
+    					  <td><%= u.school %></td>
+    					  <td><%= u.grade %></td>
+    					  <td><%= u.major %></td>
+    					  <td><%= link_to '查看', manage_user_path(u) %></td>
+    					  </tr>
+                       <% end %>
+    				<% end %>
+                <% end %>
               </tbody>
             </table>
 			<!--endprint-->

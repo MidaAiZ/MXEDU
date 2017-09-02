@@ -24,6 +24,7 @@
                       <i class='fa fa-star <%= 'active' if (@product.recommend.to_i || 0 ) > i %> '></i>
                     <% end %>
                 </span>
+                <span class='p-intro'>登录才能查看: <%= @product.need_login? ? '是' : '否' %></span>
             </header>
             <div class="panel-body">
                 <%= @product.intro %>

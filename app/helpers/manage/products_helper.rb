@@ -9,6 +9,8 @@ module Manage::ProductsHelper
 			'考研'
 		when 'jiakao'
 			'驾校'
+		when 'yule'
+			'娱乐'
 	    else
 			'其它'
 		end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826074412) do
+ActiveRecord::Schema.define(version: 20170902060243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 20170826074412) do
     t.datetime "updated_at", null: false
     t.bigint "p_id"
     t.integer "times", default: 0
+    t.string "remote_ip"
     t.index ["p_id"], name: "index_index_histories_on_p_id"
+    t.index ["remote_ip"], name: "index_histories_on_remote_ip"
     t.index ["user_id"], name: "index_index_histories_on_user_id"
   end
 

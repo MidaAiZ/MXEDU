@@ -59,7 +59,7 @@
             <table class="table table-striped table-hover table-bordered" id="editable-sample">
               <thead>
                 <tr>
-                  <th>用户姓名</th>
+                  <th>用户姓名/IP地址</th>
                   <th>联系方式</th>
                   <th>浏览产品</th>
                   <th>上次浏览时间</th>
@@ -68,15 +68,24 @@
               </thead>
               <tbody>
                 <!-- 此处动态生成 -->
-				<% @histories.each do |h| %>
-					<tr>
-					  <td><%= link_to h.user.name || '', manage_user_path(h.user_id) %></td>
-					  <td><%= h.user.phone %></td>
-					  <td><%= link_to h.product_name, manage_product_url(h.p_id) %></td>
-					  <td><%= h.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-					  <td><%= h.times %></td>
-					</tr>
-					<% end %>
+                <% cache @histories.cache_key, expires_in: 10.minutes do %>
+				  <% @histories.each do |h| %>
+                    <% cache h.cache_key, expires_in: 10.minutes do %>
+    					<tr>
+                          <% if h.user %>
+                              <td><%= link_to h.user.name || '', manage_user_path(h.user_id) %></td>
+                              <td><%= h.user.phone %></td>
+                          <% else %>
+                              <td>IP: <%= h.remote_ip %></td>
+                              <td>无</td>
+                          <% end %>
+    					  <td><%= link_to h.product_name, manage_product_url(h.p_id) %></td>
+    					  <td><%= h.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+    					  <td><%= h.times %></td>
+    					</tr>
+                      <% end %>
+				   <% end %>
+                <% end %>
               </tbody>
             </table>
             <!--endprint-->
