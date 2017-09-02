@@ -43,7 +43,7 @@ $(function(){
             backgroundColor: false,
             labelColor: '#fff',
             colors: [
-                '#5ab6df','#49e08c','#c15fff','#fb8575', '#ffed16', '#c5c5c5'
+                '#5ab6df','#4bccae','#6a8bbe','#fb8575', '#febd48', '#c5c5c5'
             ],
             formatter: function (x, data) { return data.formatted; }
         });
