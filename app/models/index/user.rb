@@ -40,4 +40,8 @@ class Index::User < ApplicationRecord
                         allow_blank: false
       validates :sex, length: { maximum: 2, too_long: '性别最长允许%{count}个字符' },
                     inclusion: %w( 男 女 男生 女生 ), allow_blank: true
+
+      default_scope { order('index_users.created_at DESC') }
+      scope :new_user, ->() { where(created_at: 1.week.ago.midnight..Time.now).limit(8) }
+
 end

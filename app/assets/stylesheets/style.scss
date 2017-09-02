@@ -1232,7 +1232,7 @@ footer.sticky-footer {
 
 ul.bar-legend {
     list-style-type: none;
-    margin-top: 55px;
+    margin-top: 30px;
     padding-left: 0px;
 }
 
@@ -1255,15 +1255,23 @@ ul.bar-legend li span.blue {
 }
 
 ul.bar-legend li span.green {
-    background: #4bcacc;
+    background: #49e08c;
 }
 
 ul.bar-legend li span.purple {
-    background: #6a8bbe;
+    background: #c15fff;
 }
 
 ul.bar-legend li span.red {
     background: #fb8575;
+}
+
+ul.bar-legend li span.yellow {
+    background: #ffed16;
+}
+
+ul.bar-legend li span.grey {
+    background: #c5c5c5;
 }
 
 /*-----------------------------------

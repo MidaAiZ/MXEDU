@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
     # counts
     get 'counts' => 'main#counts'
+    get 'products_count' => 'main#products_count'
+    get 'viewers_count' => 'main#viewers_count'
 
     # users
     resources :users do

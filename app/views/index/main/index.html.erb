@@ -140,7 +140,7 @@
                                                             <% if p.price > p.dis_price %>
                                                                 <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
                                                             <% end %>
-                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                             <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                         </p>
                                                     </div>
@@ -180,7 +180,7 @@
                                                         </p>
                                                         <p class='p-intro'>
                                                             <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                             <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                         </p>
                                                     </div>
@@ -221,7 +221,7 @@
                                                         </p>
                                                         <p class='p-intro'>
                                                             <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                             <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                         </p>
                                                     </div>
@@ -262,7 +262,7 @@
                                                         </p>
                                                         <p class='p-intro'>
                                                             <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                             <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                         </p>
                                                     </div>
@@ -280,7 +280,7 @@
                   <% end %>
                 <% end %>
                 <% if @products[:yule].any? %>
-                  <% cache @products[:yule].cache_key, expires_in: 10.munites do %>
+                  <% cache @products[:yule].cache_key, expires_in: 10.minutes do %>
                     <section id="kaoyan">
                         <header class="panel-heading">
                             <%= link_to '生活娱乐', products_url + '?type=yule' %>
@@ -290,7 +290,7 @@
                                 <div id="gallery" class="media-gal">
                                     <div class="product-row">
                                         <% @products[:yule].each do |p| %>
-                                         <% cache p.cache_key, expires_in: 10.munites do %>
+                                         <% cache p.cache_key, expires_in: 10.minutes do %>
                                             <div class='product-block'>
                                                 <div class="item product" >
                                                     <%= link_to product_path(p) do %>
@@ -303,7 +303,7 @@
                                                         </p>
                                                         <p class='p-intro'>
                                                             <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                            <small class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                            <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
                                                             <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
                                                         </p>
                                                     </div>

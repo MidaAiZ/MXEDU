@@ -3,7 +3,7 @@ class Manage::MainController < ManageController
 	before_action :check_super, except: :index
 
     def index
-        @new_users = Index::User.where(created_at: Time.now.midnight..Time.now) if @admin.super?
+        @new_users = Index::User.new_user if @admin.super?
     end
 
     def counts
@@ -14,8 +14,8 @@ class Manage::MainController < ManageController
     	     a_count: Index::Appoint.count, # 预约总数
     	     v_count: Index::Product.sum("readtimes"), # 总浏览量
              t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
-             t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日浏览量
-             t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日预约数
+             t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
+             t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times) # 今日浏览量
           }
        end
 
@@ -30,5 +30,60 @@ class Manage::MainController < ManageController
 		}
     end
 
+    def products_count
+        info = Rails.cache.fetch("#{cache_key}", expires_in: 10.minutes) do
+           {
+             yp_count: Index::Product.sort(:yupei).count, # 语培总数
+             lx_count: Index::Product.sort(:liuxue).count, # 留学总数
+     	     jk_count: Index::Product.sort(:jiakao).count, # 驾考总数
+     	     ky_count: Index::Product.sort(:kaoyan).count, # 考研总数
+             yl_count: Index::Product.sort(:yule).count, # 娱乐总数
+             qt_count: Index::Product.sort(:else).count # 其它总数
+           }
+        end
+
+        render json: {
+ 		  yp_count: info[:yp_count],
+ 		  lx_count: info[:lx_count],
+ 		  jk_count: info[:jk_count],
+ 		  ky_count: info[:ky_count],
+          yl_count: info[:yl_count],
+          qt_count: info[:qt_count]
+ 		}
+    end
+
+    def viewers_count
+        if Time.now - Time.now.midnight < 6.hours
+            info = set_v_info
+        else
+            info = Rails.cache.fetch("#{cache_key}", expires_in: 6.hours) do
+                set_v_info
+            end
+        end
+
+        render json: {
+            v_1_count: info[:v_1_count],
+            v_2_count: info[:v_2_count],
+            v_3_count: info[:v_3_count],
+            v_4_count: info[:v_4_count],
+            v_5_count: info[:v_5_count],
+            v_6_count: info[:v_6_count],
+            v_7_count: info[:v_7_count]
+ 		}
+    end
+
+    private
+
+    def set_v_info
+        {
+          v_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天浏览量
+          v_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天浏览量
+          v_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天浏览量
+          v_4_count: Index::History.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).sum(:times), # 前四天浏览量
+          v_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天浏览量
+          v_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天浏览量
+          v_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天浏览量
+        }
+    end
 
 end
