@@ -44,14 +44,14 @@
 
             <!--sidebar nav start-->
           <ul class="nav nav-pills nav-stacked custom-nav">
-            <li class="active">
+            <li class='<%= 'active' if params[:controller] == 'manage/main' %>'>
               <a href="/manage">
                 <i class="fa fa-home"></i>
                 <span>首页</span>
               </a>
             </li>
 
-            <li class="menu-list">
+            <li class="menu-list <%= check_cur_ctrl 'manage/products' %>">
               <a href="">
                 <i class="fa fa-book"></i>
                 <span>产品管理</span>
@@ -66,7 +66,7 @@
               </ul>
             </li>
 
-            <li class="menu-list">
+            <li class="menu-list <%= check_cur_ctrl 'manage/appoints' %>">
               <a href="">
                 <i class="fa fa-coffee"></i>
                 <span>预约管理</span>
@@ -78,7 +78,7 @@
               </ul>
             </li>
 
-            <li class="menu-list">
+            <li class="menu-list <%= check_cur_ctrl 'manage/histories' %>">
               <a href="">
                 <i class="fa fa-clock-o"></i>
                 <span>浏览记录</span>
@@ -90,7 +90,7 @@
               </ul>
             </li>
 
-            <li class="menu-list">
+            <li class="menu-list <%= check_cur_ctrl 'manage/users' %>">
               <a href="">
                 <i class="fa fa-user"></i>
                 <span>用户管理</span>
