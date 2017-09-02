@@ -77,7 +77,13 @@
     					  <td><%= a.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
     					  <td><%= a.content %></td>
     					  <td><%= a.time || '无说明' %></td>
-    					  <td><%= link_to a.user_id, manage_user_path(a.user_id) %></td>
+    					  <td>
+                              <% if a.user %>
+                                  <%= link_to a.user_id, manage_user_path(a.user_id) %>
+                              <% else %>
+                                  <%= '无' %>
+                              <% end %>
+                          </td>
     					</tr>
                      <% end %>
 				  <% end %>

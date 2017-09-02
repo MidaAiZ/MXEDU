@@ -1,5 +1,6 @@
 class Index::AppointsController < IndexController
-  before_action :require_login
+  before_action :check_login, only: :create
+  before_action :require_login, except: :create
   before_action :set_index_appoint, only: [:show, :edit, :update, :destroy]
 
 

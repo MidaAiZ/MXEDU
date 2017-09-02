@@ -62,7 +62,11 @@
                                         <div class="col-lg-12">
                                             <input type="text" name='appoint[phone]' class="col-lg-12 form-control" placeholder="电话" value="<%= @user.phone %>">
                                         </div>
-
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <input type="text" name='appoint[time]' class="col-lg-12 form-control" placeholder="方便联系您的时间">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-12">
@@ -97,7 +101,7 @@
                                                     }
                                                 },
                                                 error: function(state, err) {
-                                                    alert("提交失败,请稍后尝试2");
+                                                    alert("提交失败,请稍后尝试");
                                                 }
                                             })
                                         })
