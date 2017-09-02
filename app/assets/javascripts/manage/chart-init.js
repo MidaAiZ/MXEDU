@@ -142,7 +142,11 @@ $(function() {
             },
             xaxis: {
                 tickSize: 1,
-                tickFormatter: function(v, axis) { console.log(axis);return '前' + (8-v) + '天' }
+                tickFormatter: function(v, axis) {
+                                    if (8 - v == 1) return '昨天';
+                                    else if ( 8 - v == 2) return '前天';
+                                    else return (8-v) + '天前';
+                                }
             },
             yaxis: {
                 // tickFormatter: function(v, axis) { return v + '人' }
