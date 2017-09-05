@@ -222,9 +222,10 @@ $(function() {
 
 //构建用于ajax交互的表单
 function buildForm($inputEle) {
+    if (!$inputEle) $inputEle = "";
     var $form = $("<form id='ajaxForm' method='post'></form>"),
         csrfToken = $('meta[name=csrf-token]').attr('content'),
-        csrfParam = $('meta[name=csrf-param]').attr('content')
+        csrfParam = $('meta[name=csrf-param]').attr('content');
 
     if (csrfParam !== undefined && csrfToken !== undefined) {
         $form.append($('<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />'));
