@@ -14,7 +14,6 @@
 //= require bootstrap
 //= require nicescroll
 
-
 (function() {
     "use strict";
 
@@ -234,8 +233,6 @@ function buildForm($inputEle = "") {
     $form.append($inputEle);
     return $form;
 }
-
-
 
 //获取参数方法
 function getQueryString(name){

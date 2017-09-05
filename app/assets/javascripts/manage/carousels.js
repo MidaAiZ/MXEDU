@@ -30,7 +30,7 @@ $(function() {
 var imageFile = $('#imagefile'),
     options = {
         //在这里改变裁剪框默认大小 删除即不制定裁剪比例
-        aspectRatio: 5 / 2,
+        aspectRatio: 2 / 1,
         preview: '.imgpreview',
         //the crop box should be within the canvas 0:后端补白
         viewMode: 1,
