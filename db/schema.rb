@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902060243) do
+ActiveRecord::Schema.define(version: 20170905171701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 20170902060243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+  end
+
+  create_table "manage_carousels", force: :cascade do |t|
+    t.string "image"
+    t.string "link"
+    t.boolean "show", default: true
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "manage_fileworkers", force: :cascade do |t|

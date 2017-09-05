@@ -15,7 +15,7 @@ class Index::ProductsController < IndexController
   # GET /index/products/1
   # GET /index/products/1.json
   def show
-    if !@user && @product.need_login?
+    if !@user && @product.need_login
       Cache.new[request.remote_ip + '_history'] = request.url
     else
         Index::History.add @user, @product, request.remote_ip

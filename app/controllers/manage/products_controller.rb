@@ -30,7 +30,9 @@ class Manage::ProductsController < ManageController
   # POST /index/products
   # POST /index/products.json
   def create
-    @product = Index::Product.new(index_product_params)
+    prms = index_product_params
+    @product = Index::Product.new(prms)
+    @product.need_login = prms[:need_login] ? true : false
     @product.admin = @admin
     respond_to do |format|
       if @product.save
@@ -46,8 +48,10 @@ class Manage::ProductsController < ManageController
   # PATCH/PUT /index/products/1
   # PATCH/PUT /index/products/1.json
   def update
+    prms = index_product_params
+    @product.need_login = prms[:need_login] ? true : false
     respond_to do |format|
-      if @product.update(index_product_params)
+      if @product.update(prms)
         format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -76,6 +80,6 @@ class Manage::ProductsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
-      params.require(:product).permit(:name, :cate, :price, :dis_price, :intro, :details, :company, :cover, :recommend, :tags, :need_login?)
+      params.require(:product).permit(:name, :cate, :price, :dis_price, :intro, :details, :company, :cover, :recommend, :tags, :need_login)
     end
 end

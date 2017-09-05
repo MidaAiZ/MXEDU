@@ -1,45 +1,41 @@
 
     <!-- Carouel -->
+  <% if @carousels.any? %>
     <div id="carousel-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-generic" data-slide-to="2"></li>
-      </ol>
-
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <div class='c-bg' style="background: url(/assets/gallery/image1.jpg)"></div>
-          <div class="carousel-caption">
-            ...
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% index = 0 %>
+          <% @carousels.each do |c| %>
+            <li data-target="#carousel-generic" data-slide-to="<%= index %>" class="indicator <%= 'active' if index == 0 %>"></li>
+            <% index +=1 %>
+          <% end %>
+        </ol>
+        <% index = 0 %>
+        <% @carousels.each do |c| %>
+          <div class="item <%= 'active' if index == 0 %>">
+            <a href="<%= c.link %>">
+              <div class="c-bg" style="background: url('<%= c.image %>')"></div>
+              <div class="carousel-caption">
+              </div>
+            </a>
           </div>
-        </div>
-        <div class="item">
-          <div class='c-bg' style="background: url(/assets/gallery/image2.jpg)"></div>
-          <div class="carousel-caption">
-            ...
-          </div>
-        </div>
-        <div class="item">
-          <div class='c-bg' style="background: url(/assets/gallery/image3.jpg)"></div>
-          <div class="carousel-caption">
-            ...
-          </div>
-        </div>
+          <% index += 1 %>
+        <% end %>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
+  <% end %>
+
 
     <div class="menu">
         <div class="row">

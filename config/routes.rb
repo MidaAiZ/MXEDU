@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :manage do
+    resources :carousels
+  end
   # OPTIONS请求
   match 'controller', to: 'controller#action', via: [:options]
   resources :controller
@@ -82,6 +85,20 @@ Rails.application.routes.draw do
 
     # 文件上传
     post 'upload' => 'fileworkers#create', as: :upload
+
+    # 轮播图
+    resources :carousels do
+        collection do
+            get 'histories/all' => 'carousels#history', as: :history
+            post '/:id' => 'carousels#update'
+            post 'unshow/:id' => 'carousels#unshow', as: :unshow
+            post 'reshow/:id' => 'carousels#reshow', as: :reshow
+            post 'location/:id' => 'carousels#set_location', as: :lct_control
+            delete '/:id' => 'carousels#destroy', as: :delete
+        end
+    end
+
+
   end
 
   get 'download/files/:id/:filename' => 'download#download'

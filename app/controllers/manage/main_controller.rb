@@ -62,6 +62,7 @@ class Manage::MainController < ManageController
         end
 
         render json: {
+            v_0_count: info[:v_0_count],
             v_1_count: info[:v_1_count],
             v_2_count: info[:v_2_count],
             v_3_count: info[:v_3_count],
@@ -76,6 +77,7 @@ class Manage::MainController < ManageController
 
     def set_v_info
         {
+          v_0_count: Index::History.where(updated_at: Time.now..Time.now.midnight).sum(:times), # 今天浏览量
           v_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天浏览量
           v_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天浏览量
           v_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天浏览量

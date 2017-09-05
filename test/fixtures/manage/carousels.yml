@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  link: MyString
+  show: false
+  index: 1
+
+two:
+  image: MyString
+  link: MyString
+  show: false
+  index: 1

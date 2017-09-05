@@ -1,0 +1,45 @@
+<div class="carousel-edit">
+  <%= form_for @carousel do |f| %>
+    <%= f.hidden_field :image %>
+    <%= f.hidden_field :link %>
+    <div class="editarea">
+      <div class="croparea">
+        <a class="btn-sm btn-primary file-beauty" role='file-beauty'>
+          <span class="glyphicon glyphicon-arrow-up">添加图片</span>
+          <input type="file" class="cropable" id="inputFile"/>
+        </a>
+        <p id="file-tip" class="file-tip"></p>
+        <div  class="showpics">
+          <%= image_tag @carousel.image, id:'imagefile' %>
+          <div class="img-bg"><span>请添加图片</span></div>
+        </div>
+        <div class="btn-group">
+          <a type="button" class="btn-sm btn-primary" id="lrotate" disabled="disabled">
+            <span class="glyphicon glyphicon-share-alt rotatey"></span>
+          </a>
+          <a type="button" class="btn-sm btn-primary" id="rrotate" disabled="disabled">
+            <span class="glyphicon glyphicon-share-alt"></span>
+          </a>
+        </div>
+          <a type="button" class="btn-sm btn-primary" id="reset" disabled="disabled">
+            <span class="glyphicon glyphicon-repeat"></span>
+          </a>
+      </div>
+      <!-- <div class="previewarea">
+      <p>图片预览</p>
+      <div class="previewcrop">
+        <div id="large" class="imgpreview"> </div>
+        <p>200px*500px</p>
+      </div>
+    </div> -->
+    </div>
+    <div class="field">
+      <%= f.label :link, "添加链接:" %>
+      <%= f.text_field :link, class: "form-control", role: "add-link", disabled: :true %>
+    </div>
+    <br>
+    <div class="action">
+      <%= f.submit '上传', type: "button", class: "btn btn-primary btn-wide", id: "subcrop", disabled: :true %>
+    </div>
+  <% end %>
+</div>

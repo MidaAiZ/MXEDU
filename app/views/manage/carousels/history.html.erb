@@ -1,0 +1,51 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <h3>
+      轮播图历史
+  </h3>
+  <ul class="breadcrumb">
+      <li>
+          <%= link_to '轮播图设置', manage_carousels_path %>
+      </li>
+      <li class="active">
+          所有历史
+      </li>
+  </ul>
+</div>
+
+<!-- page heading end-->
+
+<!--body wrapper start-->
+
+<div class="wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+		<% if @carousels.any? %>
+	      <section class="panel">
+	        <div class="panel-body">
+				<div class="carousel-history">
+				  <ul class="carousel-list">
+				    <% @carousels.each do |c| %>
+				      <li data-carousel-id="<%= c.id %>">
+				        <div class="btn-group right">
+				          <a id="reshow-carousel" href="javascript: void(0)" data-href="<%= reshow_manage_carousels_path(c) %>" class="btn-sm btn-primary">重新展示</a>
+				          <a id="delete-carousel" href="javascript: void(0)" data-href="<%= delete_manage_carousels_url(c) + "?page="+ (params[:page] || "1") %>" class="btn-sm btn-primary">彻底删除</a>
+				        </div>
+				        <%= image_tag c.image.thumb %>
+				        <a href="<%= c.link %>" class="link"><%= c.link %></a>
+				      </li>
+				    <% end %>
+				  </ul>
+				</div>
+				<div class="fix-center page">
+				  <%= paginate @carousels %>
+				</div>
+	        </div>
+	      </section>
+	   <% else %>
+	     <p>暂无历史</p>
+	   <% end %>
+    </div>
+  </div>
+</div>
+<!--body wrapper end-->

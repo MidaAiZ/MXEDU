@@ -43,7 +43,9 @@
                                     <i class="fa fa-user"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value" id='u-count'>-</div>
+                                    <div class="value">
+                                        <%= link_to '-', manage_users_path, id: 'u-count' %>
+                                    </div>
                                     <div class="title">用户数</div>
                                 </div>
                             </div>
@@ -54,7 +56,9 @@
                                     <i class="fa fa-tags"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value" id='p-count'>-</div>
+                                    <div class="value">
+                                        <%= link_to '-', manage_products_path, id: 'p-count' %>
+                                    </div>
                                     <div class="title">产品数</div>
                                 </div>
                             </div>
@@ -67,7 +71,9 @@
                                     <i class="fa fa-clock-o"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value" id='a-count'>-</div>
+                                    <div class="value">
+                                        <%= link_to '-', manage_appoints_path, id: 'a-count' %>
+                                    </div>
                                     <div class="title"> 总预约量</div>
                                 </div>
                             </div>
@@ -78,7 +84,9 @@
                                     <i class="fa fa-eye"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value" id='v-count'>-</div>
+                                    <div class="value">
+                                        <%= link_to '-', manage_histories_path, id: 'v-count' %>
+                                    </div>
                                     <div class="title"> 总访客量</div>
                                 </div>
                             </div>

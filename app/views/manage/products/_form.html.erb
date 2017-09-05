@@ -67,7 +67,11 @@
                                     </div>
                                     <div class="col-xs-4 col-sm-4">
                                         <label for="">登录才能查看</label>
-                                        <input type="checkbox" name='product[need_login?]'>
+                                        <% if @product.need_login %>
+                                          <input type="checkbox" name='product[need_login]' checked>
+                                        <% else %>
+                                          <input type="checkbox" name='product[need_login]'>
+                                        <% end %>
                                     </div>
                                 </div>
                             </div>

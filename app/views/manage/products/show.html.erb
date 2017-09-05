@@ -10,7 +10,7 @@
 <div class="wrapper">
     <div class="row blog">
 
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-xs-12">
         <div class="panel">
             <header class="panel-heading">
                 <span class='p-intro'>学吧优惠价:
@@ -24,7 +24,7 @@
                       <i class='fa fa-star <%= 'active' if (@product.recommend.to_i || 0 ) > i %> '></i>
                     <% end %>
                 </span>
-                <span class='p-intro'>登录才能查看: <%= @product.need_login? ? '是' : '否' %></span>
+                <span class='p-intro'>登录才能查看: <%= @product.need_login ? '是' : '否' %></span>
             </header>
             <div class="panel-body">
                 <%= @product.intro %>
@@ -77,7 +77,11 @@
             </ul>
         </div>
     </div>
-</div>
+    <div class="col-md-8 col-xs-12">
+        <div class="panel">
+            <header class="panel-heading">
+            
+  </div>
 </div>
 <!--body wrapper end-->
 <%= stylesheet_link_tag "froala_style.min" %>

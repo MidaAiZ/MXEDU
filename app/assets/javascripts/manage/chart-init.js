@@ -72,7 +72,8 @@ $(function() {
             [4, data.v_4_count],
             [5, data.v_3_count],
             [6, data.v_2_count],
-            [7, data.v_1_count]
+            [7, data.v_1_count],
+            [8, data.v_0_count]
         ];
         // var d2 = [
         //     [0, 401],
@@ -143,9 +144,10 @@ $(function() {
             xaxis: {
                 tickSize: 1,
                 tickFormatter: function(v, axis) {
+                                    if (8 - v == 0) return '今天';
                                     if (8 - v == 1) return '昨天';
-                                    else if ( 8 - v == 2) return '前天';
-                                    else return (8-v) + '天前';
+                                    else if (8 - v == 2) return '前天';
+                                    else return (8 - v) + '天前';
                                 }
             },
             yaxis: {

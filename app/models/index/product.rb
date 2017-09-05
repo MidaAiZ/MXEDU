@@ -4,7 +4,7 @@ class Index::Product < ApplicationRecord
 	# 用于上传头像时保存图片参数
 	attr_accessor :x, :y, :width, :height, :rotate
 
-	store_accessor :info, :company, :tag, :recommend, :need_login?
+	store_accessor :info, :company, :tag, :recommend, :need_login
 
 	has_many :appoints,
 			 class_name: 'Index::Appoint',

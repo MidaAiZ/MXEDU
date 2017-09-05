@@ -210,6 +210,33 @@ $(function() {
 //     }
 // })
 
+// $(document).ready(function() {
+//     // lazy load image after document has been ready
+//     $("img").each(function() {
+//         var _this = $(this);
+//         _this.attr("src", _this.data("src")).addClass("loader").on("load", function() {
+//             $(this).removeClass("loader");
+//         });
+//     });
+//
+// })
+
+//构建用于ajax交互的表单
+function buildForm($inputEle = "") {
+    var $form = $("<form id='ajaxForm' method='post'></form>"),
+        csrfToken = $('meta[name=csrf-token]').attr('content'),
+        csrfParam = $('meta[name=csrf-param]').attr('content')
+
+    if (csrfParam !== undefined && csrfToken !== undefined) {
+        $form.append($('<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />'));
+    }
+
+    $form.append($inputEle);
+    return $form;
+}
+
+
+
 //获取参数方法
 function getQueryString(name){
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
