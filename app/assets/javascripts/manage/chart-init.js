@@ -66,6 +66,17 @@ $(function() {
     function build_v_chart(data) {
 
         var d1 = [
+            [1, data.u_7_count],
+            [2, data.u_6_count],
+            [3, data.u_5_count],
+            [4, data.u_4_count],
+            [5, data.u_3_count],
+            [6, data.u_2_count],
+            [7, data.u_1_count],
+            [8, data.u_0_count]
+        ];
+
+        var d2 = [
             [1, data.v_7_count],
             [2, data.v_6_count],
             [3, data.v_5_count],
@@ -75,43 +86,30 @@ $(function() {
             [7, data.v_1_count],
             [8, data.v_0_count]
         ];
-        // var d2 = [
-        //     [0, 401],
-        //     [1, 520],
-        //     [2, 337],
-        //     [3, 261],
-        //     [4, 449],
-        //     [5, 518],
-        //     [6, 470],
-        //     [7, 658],
-        //     [8, 558],
-        //     [9, 438],
-        //     [10, 388]
-        // ];
 
-        var data = ([{
-            label: "产品浏览次数",
-            data: d1,
-            lines: {
-                show: true,
-                fill: true,
-                fillColor: {
-                    colors: ["rgba(255,255,255,.4)", "rgba(183,236,240,.4)"]
+        var data = ([
+            {
+                label: "产品点击量",
+                data: d2,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: ["rgba(255,255,255,.4)", "rgba(183,236,240,.4)"]
+                    }
+                }
+            },
+            {
+                label: "访客数量",
+                data: d1,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: ["rgba(255,255,255,.0)", "rgba(253,96,91,.7)"]
+                    }
                 }
             }
-        }
-        // ,
-        //     {
-        //         label: "未登录用户",
-        //         data: d2,
-        //         lines: {
-        //             show: true,
-        //             fill: true,
-        //             fillColor: {
-        //                 colors: ["rgba(255,255,255,.0)", "rgba(253,96,91,.7)"]
-        //             }
-        //         }
-        //     }
         ]);
 
         var options = {

@@ -54,23 +54,40 @@ class Manage::MainController < ManageController
 
     def viewers_count
 
-        info = Rails.cache.fetch("#{cache_key}", expires_in: 6.hours) do
+        info = Rails.cache.fetch("#{cache_key}", expires_in: 8.hours) do
             set_v_info
         end
-        
-        v_0_count = Rails.cache.fetch("#{cache_key}_v_0", expires_in: 1.minutes) do
-            Index::History.where(updated_at: Time.now..Time.now.midnight).sum(:times) # 今天浏览量
+
+        # 每新的一天清除旧缓存
+        interval = Time.now - Time.now.midnight
+        if (interval < 8.hours) && (interval < Time.now - Time.parse(info[:time]))
+            Rails.cache.delete cache_key
+            info = set_v_info
+            info_0 = set_v_info_0
+        else
+            info_0 = Rails.cache.fetch("#{cache_key}_0", expires_in: 1.minutes) do
+                set_v_info_0
+            end        
         end
 
         render json: {
-            v_0_count: v_0_count,
+            v_0_count: info_0[:v_0_count],
             v_1_count: info[:v_1_count],
             v_2_count: info[:v_2_count],
             v_3_count: info[:v_3_count],
             v_4_count: info[:v_4_count],
             v_5_count: info[:v_5_count],
             v_6_count: info[:v_6_count],
-            v_7_count: info[:v_7_count]
+            v_7_count: info[:v_7_count],
+
+            u_0_count: info_0[:u_0_count],
+            u_1_count: info[:u_1_count],
+            u_2_count: info[:u_2_count],
+            u_3_count: info[:u_3_count],
+            u_4_count: info[:u_4_count],
+            u_5_count: info[:u_5_count],
+            u_6_count: info[:u_6_count],
+            u_7_count: info[:u_7_count],
  		}
     end
 
@@ -78,6 +95,7 @@ class Manage::MainController < ManageController
 
     def set_v_info
         {
+          # 产品点击量
           v_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天浏览量
           v_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天浏览量
           v_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天浏览量
@@ -85,6 +103,25 @@ class Manage::MainController < ManageController
           v_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天浏览量
           v_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天浏览量
           v_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天浏览量
+
+          # 访客量
+          u_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).count, # 昨天访客量
+          u_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).count, # 前天访客量
+          u_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).count, # 大前天访客量
+          u_4_count: Index::History.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).count, # 前四天访客量
+          u_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).count, # 前六天访客量
+          u_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).count, # 前五天访客量
+          u_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).count, # 前七天访客量
+
+          # 记录缓存时间
+          time: Time.now
+        }
+    end
+
+    def set_v_info_0
+        {
+            v_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 今天浏览量
+            u_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count  # 今天访客量
         }
     end
 
