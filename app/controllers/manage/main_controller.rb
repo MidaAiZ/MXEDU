@@ -15,7 +15,7 @@ class Manage::MainController < ManageController
     	     v_count: Index::Product.sum("readtimes"), # 总浏览量
              t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
              t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
-             t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times) # 今日浏览量
+             t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
           }
        end
 
@@ -67,7 +67,7 @@ class Manage::MainController < ManageController
         else
             info_0 = Rails.cache.fetch("#{cache_key}_0", expires_in: 1.minutes) do
                 set_v_info_0
-            end        
+            end
         end
 
         render json: {
