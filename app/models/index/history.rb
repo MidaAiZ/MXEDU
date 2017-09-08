@@ -31,7 +31,6 @@ class Index::History < ApplicationRecord
 		  elsif (Time.now - h.updated_at > (Time.now - 6.hours.ago))
 			p.update readtimes: (p.readtimes + 1)
 		  end
-		  h.updated_at = Time.now
 		else
 			p.update readtimes: (p.readtimes + 1)
 		end
@@ -49,7 +48,6 @@ class Index::History < ApplicationRecord
   		  elsif (Time.now - h.updated_at > (Time.now - 6.hours.ago))
   			p.update readtimes: (p.readtimes + 1)
   		  end
-  		  h.updated_at = Time.now
 		else
 			p.update readtimes: (p.readtimes + 1)
 		end

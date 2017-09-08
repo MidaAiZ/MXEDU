@@ -60,7 +60,7 @@ class Manage::MainController < ManageController
 
         # 每新的一天清除旧缓存
         interval = Time.now - Time.now.midnight
-        if (interval < 8.hours) && (interval < Time.now - Time.parse(info[:time]))
+        if (interval < 8.hours) && (interval < Time.now - info[:time])
             Rails.cache.delete cache_key
             info = set_v_info
             info_0 = set_v_info_0
