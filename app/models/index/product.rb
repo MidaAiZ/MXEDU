@@ -15,7 +15,7 @@ class Index::Product < ApplicationRecord
 				foreign_key: :admin_id
 
 	validates :name, length: { minimum: 1, too_short: '产品名不能为空', maximum: 32, too_long: '产品名最大长度为%{count}' }
-    validates :cate, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '产品名最大长度为%{count}'  },
+    validates :cate, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '类型名最大长度为%{count}'  },
 					inclusion: %w(liuxue yupei kaoyan jiakao yule else)
 	validates :company, length: { minimum: 1, too_short: '公司/机构不能为空', maximum: 128, too_long: '公司/机构名最大长度为%{count}' }
 	validates :price, numericality: { greater_than_or_equal_to: 0 }, length: { minimum: 0, too_short: '原价不能为空' }

@@ -10,6 +10,10 @@ class Manage::Admin < ApplicationRecord
              class_name: 'Index::Product',
              foreign_key: :admin_id
 
+    has_many :materials,
+             class_name: 'Index::materials',
+             foreign_key: :admin_id
+
      validates :number, presence: true, uniqueness: { message: '该帐号已被注册' },
                         length: { minimum: 2, maximum: 16 },
                         format: { with: Validate::VALID_ACCOUNT_REGEX },

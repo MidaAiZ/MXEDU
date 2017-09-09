@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Index Meterials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cate</th>
+      <th>Tag</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @index_meterials.each do |index_meterial| %>
+      <tr>
+        <td><%= index_meterial.name %></td>
+        <td><%= index_meterial.cate %></td>
+        <td><%= index_meterial.tag %></td>
+        <td><%= index_meterial.info %></td>
+        <td><%= link_to 'Show', index_meterial %></td>
+        <td><%= link_to 'Edit', edit_index_meterial_path(index_meterial) %></td>
+        <td><%= link_to 'Destroy', index_meterial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Index Meterial', new_index_meterial_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905171701) do
+ActiveRecord::Schema.define(version: 20170909090443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,24 @@ ActiveRecord::Schema.define(version: 20170905171701) do
     t.index ["p_id"], name: "index_index_histories_on_p_id"
     t.index ["remote_ip"], name: "index_histories_on_remote_ip"
     t.index ["user_id"], name: "index_index_histories_on_user_id"
+  end
+
+  create_table "index_meterials", force: :cascade do |t|
+    t.string "name"
+    t.string "cate"
+    t.string "tag"
+    t.string "attach"
+    t.bigint "school_id"
+    t.bigint "admin_id"
+    t.jsonb "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_index_meterials_on_admin_id"
+    t.index ["admin_id"], name: "index_meterials_on_admin_id"
+    t.index ["cate", "tag"], name: "index_meterials_on_cate_tag"
+    t.index ["name"], name: "index_meterials_on_name"
+    t.index ["school_id"], name: "index_index_meterials_on_school_id"
+    t.index ["school_id"], name: "index_meterials_on_scholl_id"
   end
 
   create_table "index_orders", force: :cascade do |t|
@@ -113,6 +131,16 @@ ActiveRecord::Schema.define(version: 20170905171701) do
 
   create_table "manage_images", force: :cascade do |t|
     t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manage_schools", force: :cascade do |t|
+    t.string "city"
+    t.string "name"
+    t.string "cate"
+    t.string "sign"
+    t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

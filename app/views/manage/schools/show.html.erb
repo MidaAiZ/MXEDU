@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>City:</strong>
+  <%= @manage_school.city %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @manage_school.name %>
+</p>
+
+<p>
+  <strong>Cate:</strong>
+  <%= @manage_school.cate %>
+</p>
+
+<p>
+  <strong>Sign:</strong>
+  <%= @manage_school.sign %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @manage_school.info %>
+</p>
+
+<%= link_to 'Edit', edit_manage_school_path(@manage_school) %> |
+<%= link_to 'Back', manage_schools_path %>

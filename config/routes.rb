@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  namespace :manage do
-    resources :carousels
-  end
+
   # OPTIONS请求
   match 'controller', to: 'controller#action', via: [:options]
   resources :controller
@@ -17,9 +15,17 @@ Rails.application.routes.draw do
       end
     end
 
+    # 产品
     resources :products
+
+    # 预约
     resources :appoints
+
+    # 订单
     resources :orders
+
+    # 资料
+    resources :meterials
 
     #user center
     scope 'ucenter', as: :ucenter do
@@ -82,6 +88,12 @@ Rails.application.routes.draw do
 
     #images
     resources :images
+
+    # schools
+    resources :schools
+
+    # 轮播图
+    resources :carousels
 
     # 文件上传
     post 'upload' => 'fileworkers#create', as: :upload

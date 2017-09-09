@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Manage Schools</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>Name</th>
+      <th>Cate</th>
+      <th>Sign</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @manage_schools.each do |manage_school| %>
+      <tr>
+        <td><%= manage_school.city %></td>
+        <td><%= manage_school.name %></td>
+        <td><%= manage_school.cate %></td>
+        <td><%= manage_school.sign %></td>
+        <td><%= manage_school.info %></td>
+        <td><%= link_to 'Show', manage_school %></td>
+        <td><%= link_to 'Edit', edit_manage_school_path(manage_school) %></td>
+        <td><%= link_to 'Destroy', manage_school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Manage School', new_manage_school_path %>
