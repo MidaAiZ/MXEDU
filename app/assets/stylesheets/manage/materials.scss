@@ -88,10 +88,15 @@ fieldset {
         top: 0;
     }
     .filename {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
         padding: 3px;
         border-radius: 2px;
         background: rgba(0, 0, 0, 0.5);
         color: white;
+		z-index: 10;
     }
     .no-wp {
         white-space: nowrap;
