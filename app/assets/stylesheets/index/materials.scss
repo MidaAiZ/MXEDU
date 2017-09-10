@@ -68,10 +68,20 @@
 }
 .media {
 	margin-top: 0 !important;
+	.pull-left {
+		width: 35%;
+	}
+
 	.cover {
+		width: 100%;
 		max-width: 200px;
 		border-radius: 10px;
 		margin-right: 15px;
+	}
+
+	.media-body {
+		width: 65%;
+		float: left;
 	}
 }
 
@@ -99,12 +109,6 @@
 
 .media.like {
 	margin-bottom: 10px;
-}
-
-
-.media-body {
-	max-width: 60%;
-	display: inline-block;
 }
 
 .file-pre {
