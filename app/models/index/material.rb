@@ -1,6 +1,5 @@
 class Index::Material < ApplicationRecord
 	mount_uploader :cover, MaterialCoverUploader
-	mount_uploader :attach, MaterialAttachUploader
 
 	store_accessor :info, :intro, :details, :d_times, :need_login, :recommend, :grade
 
@@ -17,6 +16,10 @@ class Index::Material < ApplicationRecord
 				class_name: 'Manage::MaterialCate',
 				foreign_key: :cate_id,
 				optional: true
+
+	has_many :files,
+			  class_name: 'Manage::MaterialFile',
+			  foreign_key: :material_id
 
 	validates :name, length: { minimum: 1, too_short: '资料名不能为空', maximum: 64, too_long: '资料名最大长度为%{count}' }
     validates :cate_id, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '类型名最大长度为%{count}'  }

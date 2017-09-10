@@ -25,3 +25,31 @@ $(function() {
 	if (!type) type = 'all';
 	$("#filters").find("li[data-type=" + type + "]").addClass("active");
 })
+
+
+function filesize(size) {
+  var string;
+  if (size >= 100000000000) {
+	size = size / 100000000000;
+	string = "TB";
+  } else if (size >= 100000000) {
+	size = size / 100000000;
+	string = "GB";
+  } else if (size >= 100000) {
+	size = size / 100000;
+	string = "MB";
+  } else if (size >= 100) {
+	size = size / 100;
+	string = "KB";
+  } else {
+	size = size * 10;
+	string = "b";
+  }
+  return ((Math.round(size) / 10) + string);
+};
+
+$(function() {
+	$(".size").each(function() {
+		$(this).text(filesize($(this).text()));
+	})
+})

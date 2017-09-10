@@ -1,11 +1,14 @@
 <!-- page heading start-->
 <div class="page-heading">
     <h3>
-        新建资料
+        学习资料
     </h3>
     <ul class="breadcrumb">
+		<li>
+			<%= link_to '全部资料', manage_materials_path %>
+		</li>
         <li>
-            <%= link_to '全部资料', manage_materials_path %>
+            <%= link_to @material.name, manage_material_path(@material) %>
         </li>
         <li class="active"> 上传资料 </li>
     </ul>
@@ -32,13 +35,13 @@
 	                    <% end %>
                     </div>
 
-                    <fieldset title="第一步">
+                    <fieldset title="第一步" class='unshow'>
                         <legend>填写资料信息</legend>
                         <section class='panel'>
                         </section>
                     </fieldset>
 
-                    <fieldset title="第二步">
+                    <fieldset title="第二步" class='unshow'>
                         <legend>资料详情</legend>
                         <section class="panel">
                         </section>
@@ -49,8 +52,49 @@
 	                        <div class="panel-body">
 								<%= form_tag manage_material_uploader_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @material.id do %>
 								<% end %>
+								<br>
+								<a href="javascript: void(0)" id="ok" class='btn btn-primary btn-wide'>完成</a>
 	                        </div>
 	                    </section>
+						<section class="panel">
+							<header>
+								<div class="panel-heading">已上传的资料</div>
+							</header>
+							<div class="panel-body">
+								<div class="files">
+									<div class="row">
+										<% @material.files.each do |f| %>
+											<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+												<div class="file-pre">
+													<div class="details">
+														<div class="top">
+															<div class="filename no-wp">
+																<span><%= f.name %></span>
+															</div>
+															<br>
+															<!-- <div>
+																<span>上传日期:</span>
+																<p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
+															</div> -->
+															<div>
+																<strong class='size'>
+																	<%= f.size %>
+																</strong>
+															</div>
+														</div>
+														<% if /\A(image)/.match(f.f_type) %>
+															<%= image_tag f.file %>
+														<% else %>
+															<i class="fa fa-file-text ico"></i>
+														<% end %>
+													</div>
+												</div>
+											</div>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						</section>
 	                </fieldset>
 				</div>
             </div>
@@ -68,19 +112,32 @@
     /*=====STEPY WIZARD====*/
     $(function() {
         $("fieldset").show();
-        $('#material-form').stepy({
-            backLabel: '上一步',
-            block: true,
-            nextLabel: '下一步',
-            titleClick: true,
-            titleTarget: '.stepy-tab',
-            legend: false,
-            errorImage: true,
-            finishButton: false
-        });
-		$("#material-form-title-2").trigger("click");
-		$("#material-form-titles li").off("click");
-		$(".button-back").addClass("disabled").attr("disabled", true);
+		if (getQueryString("step")) {
+			$(".unshow").remove();
+		} else {
+			$('#material-form').stepy({
+				backLabel: '上一步',
+				block: true,
+				nextLabel: '下一步',
+				titleClick: true,
+				titleTarget: '.stepy-tab',
+				legend: false,
+				errorImage: true,
+				finishButton: false
+			});
+			$("#material-form-title-2").trigger("click");
+			$("#material-form-titles li").off("click");
+			$(".button-back").remove();
+		}
+
+		$("a#ok").click(function() {
+			window.location = '/manage/materials/' + $("#my-awesome-dropzone").data("id");
+		})
+
+		$("#material-form-title-0, #material-form-title-1").click(function() {
+			window.location = '/manage/materials/' + $("#my-awesome-dropzone").data("id") + '/edit?step=' + $(this).attr("id");
+		})
+
     });
 
 </script>

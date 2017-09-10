@@ -28,7 +28,7 @@
             contentType: false,
             processData: false,
             success: function(res) {
-                // window.location = res
+                window.location = res
             },
             error: function(res) {
                 $("#error").html($(res.responseText).find("#error").html());

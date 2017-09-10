@@ -65,3 +65,80 @@
 fieldset {
     display: none;
 }
+
+.file-pre {
+    margin: 10px auto;
+    width: 120px;
+    height: 120px;
+    padding: 10px 10px 25px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    .details {
+        width: 100%;
+        height: 100%;
+        background: #ddd + 10;
+        position: relative;
+    }
+    .top {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .filename {
+        padding: 3px;
+        border-radius: 2px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+    .no-wp {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .size {
+        position: absolute;
+        bottom: -25px;
+        left: 3px;
+        height: 25px;
+        line-height: 25px;
+    }
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    .ico {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        font-size: 50px;
+        text-align: center;
+        line-height: 110px;
+        color: #fdd749;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .file-pre {
+        width: 200px;
+        height: 200px;
+        .ico {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            font-size: 100px;
+            text-align: center;
+            line-height: 180px;
+        }
+    }
+}

@@ -132,23 +132,6 @@
                         </div>
                     </fieldset>
                 <% end %>
-                <fieldset title="第三步">
-                    <legend>上传资料</legend>
-                    <section class="panel">
-                        <header class="panel-heading">
-                            上传资料
-                            <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>
-                             </span>
-                        </header>
-                        <div class="panel-body">
-                            <%= form_tag "/manage", id: "my-awesome-dropzone", class: "dropzone" do %>
-                                <%= submit_tag '提交', class: 'btn btn-info finish' %>
-                            <% end %>
-                        </div>
-                    </section>
-                </fieldset>
-
             </div>
         </div>
     </div>
@@ -189,7 +172,7 @@
         $("#material-form-titles").append('\
             <li id="material-form-title-2" class=""><div>第三步</div><span>上传资料</span></li>\
         ');
-        
+
         $('#material-form').validate({
             errorPlacement: function(error, element) {
                 $('#material-form div.stepy-error').append(error);

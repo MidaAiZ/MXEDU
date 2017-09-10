@@ -41,4 +41,15 @@
         })
         return false;
     })
+    $(function() {
+        $("#material-form-title-2").click(function() {
+            // $(this).addClass("current-step").siblings().removeClass("current-step");
+            $("#material-submit").trigger("click");
+        })
+
+        if (getQueryString("step")) {
+			$("#" + getQueryString("step")).trigger("click");
+        }
+
+    })
 </script>

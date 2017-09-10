@@ -25,6 +25,7 @@ class Manage::MaterialsController < ManageController
 
   # GET /index/materials/1/edit
   def edit
+    set_select_cache
   end
 
   # POST /index/materials
@@ -37,8 +38,8 @@ class Manage::MaterialsController < ManageController
 
     respond_to do |format|
       if @material.save
-        format.html { redirect_to manage_material_path(@material), notice: 'Material was successfully created.' }
-        format.json { render :show, status: :created, location: @material }
+        format.html { render html: manage_material_upload_path(@material) }
+        format.json { render json: { url: manage_material_upload_path(@material) }, status: :created }
       else
         set_select_cache
         format.html { render :new }
@@ -52,8 +53,9 @@ class Manage::MaterialsController < ManageController
   end
 
   def uploader
+      @file = Manage::MaterialFile.upload(params, @material)
       respond_to do |format|
-        if @material.update(attach: params[:file])
+        if @file.save
           format.html { render html: manage_material_path(@material) }
           format.json { render json: { code: :Success } }
         else
@@ -70,7 +72,7 @@ class Manage::MaterialsController < ManageController
 	  @material.need_login = prms[:need_login] ? true : false
 	  respond_to do |format|
 		if @material.update(prms)
-		  format.html { render html: manage_material_path(@material) }
+		  format.html { render html: manage_material_upload_path(@material) }
 		  format.json { render :show, status: :ok, location: @material }
 		else
 		  format.html { render :edit, status: :unprocessable_entity }
@@ -97,7 +99,7 @@ class Manage::MaterialsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
-      params.require(:material).permit(:name, :cate_id, :tag, :school_id, :intro, :details, :cover, :attach, :recommend, :grade)
+      params.require(:material).permit(:name, :cate_id, :tag, :school_id, :intro, :details, :cover, :attach, :recommend, :grade, :need_login)
     end
 
     def set_select_cache
