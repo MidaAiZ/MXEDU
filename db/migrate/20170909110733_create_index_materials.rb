@@ -1,6 +1,5 @@
 class CreateIndexMaterials < ActiveRecord::Migration[5.1]
   def change
-    drop_table :index_materials
     create_table :index_materials do |t|
         t.string :name
         t.string :cate
