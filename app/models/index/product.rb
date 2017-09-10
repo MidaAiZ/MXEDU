@@ -25,7 +25,7 @@ class Index::Product < ApplicationRecord
 	validates :intro, length: { maximum: 128, too_long: '简介最长为%{count}个字符' }
 	validates :details, length: { minimum: 1, too_short: '详情不能为空', aximum: 10000, too_long: '详情最长为%{count}个字符' }
 
-	default_scope { where(is_deleted: false).order('index_products.readtimes DESC') }
+	default_scope { where(is_deleted: false).order(readtimes: :DESC) }
 
 	# 筛选
 	def self.sort(cate)

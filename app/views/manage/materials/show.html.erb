@@ -1,0 +1,81 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <h3>
+        <%= @material.name %> <small><%= @material.cate.name %></small>
+    </h3>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+
+    <div class="col-md-8 col-xs-12">
+        <div class="panel">
+            <header class="panel-heading">
+                <span class='recom'>推荐指数:
+                    <% 5.times do |i| %>
+                      <i class='fa fa-star <%= 'active' if (@material.recommend.to_i || 0 ) > i %> '></i>
+                    <% end %>
+                </span>
+                <span class='p-intro'>登录后才能查看: <%= @material.need_login ? '是' : '否' %></span>
+            </header>
+            <div class="panel-body">
+                <%= @material.intro %>
+            </div>
+        </div>
+        <div class="blog">
+            <div class="single-blog">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="fr-view">
+                            <%= (@material.details || '').html_safe %>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <!-- <span>今日<%#= @t_v_count %>人浏览</span> -->
+                            <span class='p-l'>总共<%= @material.readtimes %>人浏览</span>
+                            <br>
+                            <!-- <span>今日<%#= @t_a_count %>人咨询</span> -->
+                            <span class='p-l'>总共<%= @material.d_times %>人下载</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pull-left">
+            <p>
+                <span>发布时间: <i><%= @material.created_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <br>
+                <span>更新时间: <i><%= @material.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <br>
+                <span>发布者: <%#= @material.admin.number %></span>
+            </p>
+            <span>
+            </span>
+        </div>
+        <div class="btn-group pull-right">
+            <button data-toggle="dropdown" type="button" class="btn btn-default btn-sm dropdown-toggle">
+                操作<span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+                <li>
+                    <%= link_to '修改信息', edit_manage_material_url(@material) %>
+                </li>
+                <li>
+                    <a href='JavaScript:void(0)' id='del'>删除</a>
+                    <%= form_tag manage_material_path(@material), method: :delete, id: 'del-material' do %>
+                    <%end %>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="panel">
+            <header class="panel-heading">
+
+  </div>
+</div>
+<!--body wrapper end-->
+<%= stylesheet_link_tag "froala_style.min" %>

@@ -1,0 +1,90 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <h3>
+        新建资料
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <%= link_to '全部资料', manage_materials_path %>
+        </li>
+        <li class="active"> 上传资料 </li>
+    </ul>
+</div>
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget-container">
+                <div class="stepy-tab"></div>
+				<div id="material-form">
+                    <div id="error">
+	                    <% if @material.errors.any? %>
+	                      <div id="error_explanation">
+	                        <h3>存在<%= @material.errors.count %>个错误信息</h3>
+
+	                        <ul>
+	                        <% @material.errors.full_messages.each do |message| %>
+	                          <li><%= message %></li>
+	                        <% end %>
+	                        </ul>
+	                      </div>
+	                    <% end %>
+                    </div>
+
+                    <fieldset title="第一步">
+                        <legend>填写资料信息</legend>
+                        <section class='panel'>
+                        </section>
+                    </fieldset>
+
+                    <fieldset title="第二步">
+                        <legend>资料详情</legend>
+                        <section class="panel">
+                        </section>
+                    </fieldset>
+	                <fieldset title="第三步">
+	                    <legend>上传资料</legend>
+	                    <section class="panel">
+	                        <div class="panel-body">
+								<%= form_tag manage_material_uploader_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @material.id do %>
+								<% end %>
+	                        </div>
+	                    </section>
+	                </fieldset>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= stylesheet_link_tag 'stepy/jquery.stepy' %>
+<%= javascript_include_tag 'stepy/jquery.stepy' %>
+
+<%= stylesheet_link_tag 'dropzone/css/dropzone' %>
+<%= javascript_include_tag 'dropzone/dropzone' %>
+
+<script>
+    /*=====STEPY WIZARD====*/
+    $(function() {
+        $("fieldset").show();
+        $('#material-form').stepy({
+            backLabel: '上一步',
+            block: true,
+            nextLabel: '下一步',
+            titleClick: true,
+            titleTarget: '.stepy-tab',
+            legend: false,
+            errorImage: true,
+            finishButton: false
+        });
+		$("#material-form-title-2").trigger("click");
+		$("#material-form-titles li").off("click");
+		$(".button-back").addClass("disabled").attr("disabled", true);
+    });
+
+</script>
+
+<!--
+<script src="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.js"></script>
+<link href="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.css" rel="stylesheet"> -->

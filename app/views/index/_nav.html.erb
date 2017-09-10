@@ -71,6 +71,11 @@
                         <li><%= link_to '娱乐', products_url + '?type=yule' %></li>
                     </ul>
                 </li>
+                <li class="menu-list <%= check_cur_ctrl 'index/materials' %>"><a href="/materials"><i class="fa fa-files-o"></i> <span>学习资料</span></a>
+                    <ul class="sub-menu-list">
+                        <li><%= link_to '资料', materials_url %></li>
+                    </ul>
+                </li>
             </ul>
             <!--sidebar nav end-->
 

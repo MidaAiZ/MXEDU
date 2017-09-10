@@ -6,4 +6,6 @@ class Manage::School < ApplicationRecord
 	 validates :city, length: { minimum: 1, too_short: '城市不能为空', maximum: 16, too_long: '城市名最大长度为%{count}' }
 	 validates :name, length: { minimum: 1, too_short: '学校名不能为空', maximum: 64, too_long: '学校名最大长度为%{count}' }
      validates :cate, length: { minimum: 1, too_short: '分类不能为空', maximum: 16, too_long: '分类名最大长度为%{count}'  }
+
+	 default_scope { where(is_deleted: false).order(created_at: :DESC) }
 end

@@ -53,7 +53,7 @@
 
             <li class="menu-list <%= check_cur_ctrl 'manage/products' %>">
               <a href="">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-laptop"></i>
                 <span>产品管理</span>
               </a>
               <ul class="sub-menu-list">
@@ -62,6 +62,24 @@
                 </li>
                 <li>
                   <a href="/manage/products/new">新建产品</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="menu-list <%= check_cur_ctrl 'manage/appoints' %>">
+              <a href="">
+                <i class="fa fa-file-text"></i>
+                <span>资料管理</span>
+              </a>
+              <ul class="sub-menu-list">
+                <li>
+                  <a href="/manage/materials">全部资料</a>
+                </li>
+                <li>
+                  <a href="/manage/materials/new">新建资料</a>
+                </li>
+                <li>
+                  <a href="/manage/material_cates">分类设置</a>
                 </li>
               </ul>
             </li>
@@ -109,6 +127,9 @@
               <ul class="sub-menu-list">
                 <li>
                     <%= link_to '轮播图', manage_carousels_path %>
+                </li>
+                <li>
+                    <%= link_to '院校管理', manage_schools_path %>
                 </li>
                 <!-- <li>
                   <a href="/manage/profile">管理员信息</a>

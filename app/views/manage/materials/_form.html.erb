@@ -1,0 +1,224 @@
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget-container">
+                <div class="stepy-tab"></div>
+                <%= form_for(@material, url: manage_materials_path, html: { id: 'material-form', 'data-id' => @material.id }) do |f| %>
+                    <div id="error">
+                    <% if @material.errors.any? %>
+                      <div id="error_explanation">
+                        <h3>存在<%= @material.errors.count %>个错误信息</h3>
+
+                        <ul>
+                        <% @material.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                    </div>
+
+                    <fieldset title="第一步">
+                        <legend>填写资料信息</legend>
+                        <section class='panel'>
+                            <header class="panel-heading">
+                                基本信息
+                                <span class="tools pull-right">
+                                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                 </span>
+                            </header>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="material_name">资料名</label>
+                                            <input type="text" id='material_name' name='material[name]' class="form-control" placeholder="输入资料名" value="<%= @material.name %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="material_cate">资料分类</label>
+                                            <% cache @cates.cache_key, expires_in: 1.hours do %>
+                                              <%= f.select :cate_id, @cates.map{|c| [c.name, c.id]}, {}, {class: "form-control", name: 'material[cate_id]', id: 'material_cate'}  %>
+                                            <% end %>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="material_school">院校</label>
+                                            <% cache @schools.cache_key, expires_in: 1.hours do %>
+                                              <%= f.select :school_id, @schools.all.map{|s| [s.name, s.id]}, {}, {class: "form-control", name: 'material[school_id]', id: 'material_school'}  %>
+                                            <% end %>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="material_tag">年级</label>
+                                            <input type="text" id='material_grade' name='material[grade]' class="form-control" placeholder="资料适合的年级" value="<%= @material.grade %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="material_intro">简介</label>
+                                            <textarea id='material_intro' name='material[intro]' class="form-control" placeholder="输入简介,最多64字"><%= @material.intro %></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-8 col-sm-8 col-md-6">
+                                                <label for="material_recommend">推荐指数</label>
+                                                <span class='recom editable'>
+                                                    <% 5.times do |i| %>
+                                                      <i class='fa fa-star <%= 'active' if (@material.recommend || 5 ).to_i > i %> '></i>
+                                                    <% end %>
+                                                </span>
+                                                <input type="hidden" id='material_recommend' name='material[recommend]' class="form-control" placeholder="推荐指数" value="<%= @material.recommend || 5 %>">
+                                            </div>
+                                            <div class="col-xs-4 col-sm-4 col-md-6">
+                                                <label for="">登录后才能下载</label>
+                                                <span style="margin-left: 10px;">
+                                                    <% if @material.need_login %>
+                                                        <input type="checkbox" class="js-switch" name='material[need_login]' checked/>
+                                                    <% else %>
+                                                        <input type="checkbox" class="js-switch" name='material[need_login]' />
+                                                    <% end %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group last">
+                                            <label class="control-label col-md-3">上传资料封面</label>
+                                            <div class="col-md-9">
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="fileupload-new thumbnail">
+                                                        <%= image_tag @material.cover, class: 'img-pre'%>
+                                                    </div>
+                                                    <div class="fileupload-preview fileupload-exists thumbnail">
+                                                    </div>
+                                                    <div class='form-group'>
+                                                           <span class="btn btn-default btn-file" style='margin-left: 1px'>
+                                                           <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 选择图片</span>
+                                                           <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改图片</span>
+                                                           <input type="file" class="default" name='material[cover]' value="<%= @material.cover %>"/>
+                                                           </span>
+                                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload" style='margin-left: 5px'><i class="fa fa-trash"></i> 移除</a>
+                                                    </div>
+                                                </div>
+                                                <span class="label label-danger ">注意!</span>
+                                                     <span>
+                                                        上传的图片要求宽高比为1:1
+                                                     </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+
+                    <fieldset title="第二步">
+                        <legend>资料详情</legend>
+                        <section class="panel">
+                            <header class="panel-heading">
+                                资料详情
+                                <span class="tools pull-right">
+                                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                 </span>
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea id='froala-editor' class='hidden'><%= @material.details %></textarea>
+                                        <input type="hidden" name='material[details]' id='editor-content' value="<%= @material.details %>">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="actions">
+                          <%= f.submit '保存信息', id: 'material-submit', class: 'btn btn-primary finish' %>
+                        </div>
+                    </fieldset>
+                <% end %>
+                <fieldset title="第三步">
+                    <legend>上传资料</legend>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            上传资料
+                            <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                             </span>
+                        </header>
+                        <div class="panel-body">
+                            <%= form_tag "/manage", id: "my-awesome-dropzone", class: "dropzone" do %>
+                                <%= submit_tag '提交', class: 'btn btn-info finish' %>
+                            <% end %>
+                        </div>
+                    </section>
+                </fieldset>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= stylesheet_link_tag 'stepy/jquery.stepy' %>
+<%= javascript_include_tag 'stepy/jquery.stepy' %>
+
+<%= stylesheet_link_tag 'file-upload/fileupload.min' %>
+<%= javascript_include_tag 'file-upload/fileupload.min' %>
+
+<%= stylesheet_link_tag 'tags-input/tagsinput' %>
+<%= javascript_include_tag 'tags-input/tagsinput.min' %>
+
+<%= stylesheet_link_tag 'dropzone/css/dropzone' %>
+<%= javascript_include_tag 'dropzone/dropzone' %>
+
+<%= stylesheet_link_tag 'share/froala_editor' %>
+<%= javascript_include_tag 'share/froala_editor' %>
+
+<%= javascript_include_tag 'jquery.validate.min' %>
+
+<script>
+    /*=====STEPY WIZARD====*/
+    $(function() {
+        $("fieldset").show();
+        $('#material-form').stepy({
+            backLabel: '上一步',
+            block: true,
+            nextLabel: '下一步',
+            titleClick: true,
+            titleTarget: '.stepy-tab',
+            legend: false,
+            errorImage: true,
+            finishButton: false,
+            validate: true
+        });
+        $("#material-form-titles").append('\
+            <li id="material-form-title-2" class=""><div>第三步</div><span>上传资料</span></li>\
+        ');
+        
+        $('#material-form').validate({
+            errorPlacement: function(error, element) {
+                $('#material-form div.stepy-error').append(error);
+            },
+            rules: {
+                'material[name]': 'required',
+                'material[cate_id]': 'required',
+                'material[school_id]': 'required',
+                'material[grade]': 'required'
+            },
+            messages: {
+                'material[name]': {
+                    required: '资料名不能为空'
+                },
+                'material[cate_id]': {
+                    required: '请选择分类'
+                },
+                'material[school_id]': {
+                    required: '请选择院校'
+                },
+                'material[grade]': {
+                    required: '请选择年级'
+                }
+            }
+        });
+    });
+
+</script>
+
+<!--
+<script src="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.js"></script>
+<link href="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.css" rel="stylesheet"> -->

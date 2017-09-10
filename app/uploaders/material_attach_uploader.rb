@@ -1,4 +1,4 @@
-class MarerialAttachUploader < CarrierWave::Uploader::Base
+class MaterialAttachUploader < CarrierWave::Uploader::Base
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 

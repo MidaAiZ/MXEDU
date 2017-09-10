@@ -1,1 +1,1 @@
-json.partial! "manage_schools/manage_school", manage_school: @manage_school
+json.partial! "manage/schools/manage_school", manage_school: @school

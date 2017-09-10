@@ -66,12 +66,14 @@
                                         <input type="hidden" id='product_recommend' name='product[recommend]' class="form-control" placeholder="推荐指数" value="<%= @product.recommend || 5 %>">
                                     </div>
                                     <div class="col-xs-4 col-sm-4">
-                                        <label for="">登录才能查看</label>
-                                        <% if @product.need_login %>
-                                          <input type="checkbox" name='product[need_login]' checked>
-                                        <% else %>
-                                          <input type="checkbox" name='product[need_login]'>
-                                        <% end %>
+                                        <label for="">登录后才能查看</label>
+                                        <span style="margin-left: 10px;">
+                                            <% if @product.need_login %>
+                                              <input type="checkbox" class="js-switch" name='product[need_login]' checked>
+                                            <% else %>
+                                              <input type="checkbox" class="js-switch" name='product[need_login]'>
+                                            <% end %>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -137,6 +139,10 @@
 
 <%= stylesheet_link_tag 'tags-input/tagsinput' %>
 <%= javascript_include_tag 'tags-input/tagsinput.min' %>
+
+<%= stylesheet_link_tag 'ios-switch/switchery' %>
+<%= javascript_include_tag 'ios-switch/switchery' %>
+<%= javascript_include_tag 'ios-switch/ios-init' %>
 <!--
 <script src="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.js"></script>
 <link href="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.css" rel="stylesheet"> -->

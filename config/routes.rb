@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :orders
 
     # 资料
-    resources :meterials
+    resources :materials
 
     #user center
     scope 'ucenter', as: :ucenter do
@@ -89,11 +89,20 @@ Rails.application.routes.draw do
     #images
     resources :images
 
+    # materials
+    resources :materials do
+        get 'upload' => 'materials#upload', as: :upload
+        post 'upload' => 'materials#uploader', as: :uploader
+    end
+
     # schools
     resources :schools
 
     # 轮播图
     resources :carousels
+
+    #资料分类
+    resources :material_cates
 
     # 文件上传
     post 'upload' => 'fileworkers#create', as: :upload

@@ -1,0 +1,28 @@
+.d {
+	background: #424f63;
+}
+.media {
+	margin-top: 0 !important;
+	.cover {
+		max-width: 200px;
+		border-radius: 10px;
+		margin-right: 15px;
+	}
+}
+
+@media screen and (max-width: 1500px) {
+	.media {
+		.cover {
+			max-width: 150px;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.media {
+		.cover {
+			max-width: 120px;
+		}
+
+	}
+}

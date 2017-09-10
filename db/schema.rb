@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909090443) do
+ActiveRecord::Schema.define(version: 20170909183904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,8 @@ ActiveRecord::Schema.define(version: 20170909090443) do
     t.index ["user_id"], name: "index_index_histories_on_user_id"
   end
 
-  create_table "index_meterials", force: :cascade do |t|
+  create_table "index_materials", force: :cascade do |t|
     t.string "name"
-    t.string "cate"
     t.string "tag"
     t.string "attach"
     t.bigint "school_id"
@@ -51,12 +50,14 @@ ActiveRecord::Schema.define(version: 20170909090443) do
     t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_index_meterials_on_admin_id"
-    t.index ["admin_id"], name: "index_meterials_on_admin_id"
-    t.index ["cate", "tag"], name: "index_meterials_on_cate_tag"
-    t.index ["name"], name: "index_meterials_on_name"
-    t.index ["school_id"], name: "index_index_meterials_on_school_id"
-    t.index ["school_id"], name: "index_meterials_on_scholl_id"
+    t.string "cover"
+    t.boolean "is_deleted", default: false
+    t.integer "readtimes", default: 0
+    t.bigint "cate_id"
+    t.index ["admin_id"], name: "index_materials_on_admin_id"
+    t.index ["cate_id"], name: "index_materials_on_cate_id"
+    t.index ["name"], name: "index_materials_on_name"
+    t.index ["school_id"], name: "index_materials_on_school_id"
   end
 
   create_table "index_orders", force: :cascade do |t|
@@ -135,6 +136,14 @@ ActiveRecord::Schema.define(version: 20170909090443) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "manage_material_cates", force: :cascade do |t|
+    t.string "name"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
+  end
+
   create_table "manage_schools", force: :cascade do |t|
     t.string "city"
     t.string "name"
@@ -143,6 +152,7 @@ ActiveRecord::Schema.define(version: 20170909090443) do
     t.jsonb "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
 end
