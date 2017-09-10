@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910103042) do
+ActiveRecord::Schema.define(version: 20170910151651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170910103042) do
     t.datetime "updated_at", null: false
     t.string "cover"
     t.boolean "is_deleted", default: false
-    t.integer "readtimes", default: 0
     t.bigint "cate_id"
+    t.integer "readtimes", default: 0
     t.index ["admin_id"], name: "index_materials_on_admin_id"
     t.index ["cate_id"], name: "index_materials_on_cate_id"
     t.index ["name"], name: "index_materials_on_name"
