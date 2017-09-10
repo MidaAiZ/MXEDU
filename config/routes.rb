@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     resources :orders
 
     # 资料
-    resources :materials
+    resources :materials do
+        collection do
+            get 'download/:file_id/:filename' => 'materials#download'
+        end
+    end
 
     #user center
     scope 'ucenter', as: :ucenter do
@@ -93,6 +97,9 @@ Rails.application.routes.draw do
     resources :materials do
         get 'upload' => 'materials#upload', as: :upload
         post 'upload' => 'materials#uploader', as: :uploader
+        collection do
+            get 'download/:file_id/:filename' => 'materials#download'
+        end
     end
 
     # schools

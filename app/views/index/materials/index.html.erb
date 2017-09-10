@@ -57,7 +57,7 @@
                                     <div>
                                         ABC Ave, Suite 14<br>
                                         <span><%= m.intro %></span><br>
-                                        <span class='small'>阅读量: <%= m.readtimes || 0 %> | 下载量: <%= m.d_times || 0 %> </span>
+                                        <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
                                     </div>
                                     <ul class="social-links">
                                         <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -70,6 +70,7 @@
                         </div>
                     </div>
                 </div>
+                <%= paginate @materials %>
             <% end %>
         </div>
     </div>

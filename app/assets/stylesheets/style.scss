@@ -2431,7 +2431,7 @@ table.display tr.even.gradeX, table.display tr.gradeX, tr.even.gradeU td.sorting
 }
 
 .media-gal .item img {
-    // height: 200px;
+    height: 200px;
     width: 100%;
 }
 
@@ -4809,7 +4809,6 @@ img.cover {
         text-decoration: line-through;
 	}
 	.readtimes {
-		margin-left: 8px;
         font-size: 0.8em;
 		color: #7A7676;
 	}
@@ -4821,4 +4820,10 @@ img.cover {
 .u-ico-mini {
     width: 32px;
     height: 32px;
+}
+
+.no-wp {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

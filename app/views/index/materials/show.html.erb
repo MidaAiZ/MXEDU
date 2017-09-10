@@ -1,94 +1,146 @@
-<% if @user || !@material.need_login %>
 <!-- page heading start-->
-    <div class="page-heading">
-        <h3>
-            <%= @material.name %> <small> - <%= @material.cate %></small>
-        </h3>
-    </div>
-    <!-- page heading end-->
+<div class="page-heading">
+    <h3>
+        <%= @material.name %> <small> - <%= @material.cate.name %></small>
+    </h3>
+</div>
+<!-- page heading end-->
 
-    <!--body wrapper start-->
-    <div class="wrapper">
-        <div class="row blog">
-            <div class="col-md-8 col-xs-12" style='z-index: 1'>
-                <div class="panel no-m-b">
-                    <div class="panel-body">
-                        简介: <%= @material.intro %>
-                    </div>
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+        <div class="col-md-8 col-xs-12" style='z-index: 1'>
+            <div class="panel no-m-b">
+                <div class="panel-body">
+                    简介: <%= @material.intro %>
                 </div>
-                <div class="blog">
-                    <div class="single-blog">
-                        <div class="panel">
-                            <header class="panel-heading">
-                                <span class='recom'>推荐指数:
-                                    <% 5.times do |i| %>
-                                      <i class='fa fa-star <%= 'active' if (@material.recommend.to_i || 0 ) > i %> '></i>
-                                    <% end %>
-                                </span>
-                            </header>
+            </div>
+            <div class="blog">
+                <div class="single-blog">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            <span class='recom'>推荐指数:
+                                <% 5.times do |i| %>
+                                  <i class='fa fa-star <%= 'active' if (@material.recommend.to_i || 0 ) > i %> '></i>
+                                <% end %>
+                            </span>
+                        </header>
 
-                            <div class="panel-body">
-                                <div class="fr-view">
-                                  <% cache @material.cache_key, 3.minutes do %>
-                                    <%= (@material.details || '').html_safe %>
-                                  <% end %>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div class="pull-right">
-                                    <%= @material.readtimes %>人浏览过
-                                </div>
+                        <div class="panel-body">
+                            <div class="fr-view">
+                              <% cache @material.cache_key, 3.minutes do %>
+                                <center><span>资料详情</span></center>
+                                <%= (@material.details || '暂无内容').html_safe %>
+                              <% end %>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <section class="panel">
+                        <header>
+                            <div class="panel-heading">资料文件</div>
+                        </header>
+                        <div class="panel-body">
+                            <div class="files">
+                                <div class="row">
+                                    <% if !@user && @material.need_login %>
+                                        <center>
+                                            <span style='color: red'>该资料需要登录后才能下载</span>
+                                            <a type="button" class="btn btn-default" data-toggle="modal" data-target="#loginModal" href="/login">点此登录</a>
+                                        </center>
+                                    <% else %>
+                                        <%= "<center><span>暂无资料</span></center>".html_safe if @materials.nil? %>
+                                        <% @material.files.each do |f| %>
+                                            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                                                <div class="file-pre">
+                                                    <div class="details">
+                                                        <div class="top">
+                                                            <div class="filename no-wp">
+                                                                <span><%= f.name %></span>
+                                                            </div>
+                                                            <br>
+                                                            <!-- <div>
+                                                                <span>上传日期:</span>
+                                                                <p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
+                                                            </div> -->
+                                                            <div>
+                                                                <strong class='size'>
+                                                                    <%= f.size %>
+                                                                </strong>
+                                                            </div>
+                                                        </div>
+                                                        <% if /\A(image)/.match(f.f_type) %>
+                                                            <%= image_tag f.file %>
+                                                        <% else %>
+                                                            <i class="fa fa-file-text ico f-type"></i>
+                                                        <% end %>
 
-            <div class="col-md-4">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="blog-post">
-                            <h3>猜你喜欢</h3>
-                            <% @likes.each do |l| %>
-                                <div class="media">
-                                    <%= link_to material_path(l), class: "pull-left" do %>
-                                      <%= image_tag l.cover.thumb, class: 'like-cover' %>
+                                                        <a class="dload" data-src="<%= f.dload_url %>">
+                                                            <i class="fa fa-download ico"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
                                     <% end %>
-                                    <div class="media-body">
-                                        <div class="">
-                                            <h5 class="media-heading p-info">
-                                                <%= link_to l.name, material_path(l) %>
-                                            </h5>
-                                            <p class='p-intro'>
-                                                <%= l.intro %>
-                                            </p>
-                                            <p class='p-intro'>
-                                                <span class='readtimes'>浏览<%= l.readtimes %>次</span>
-                                                <span class='readtimes'>下载<%= l.d_times %>次</span>
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
-                            <% end %>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <%= @material.fake_readtimes %>人浏览 |
+                            <%= @material.fake_d_times %>人下载
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="blog-post">
+                        <h3>猜你喜欢</h3>
+                        <% @likes.each do |l| %>
+                            <div class="media like">
+                                <%= link_to material_path(l), class: "pull-left" do %>
+                                  <%= image_tag l.cover.thumb, class: 'like-cover' %>
+                                <% end %>
+                                <div class="media-body">
+                                    <div class="">
+                                        <h5 class="media-heading p-info">
+                                            <%= link_to l.name, material_path(l) %>
+                                        </h5>
+                                        <p class='p-intro no-wp'>
+                                            <%= l.intro %>
+                                        </p>
+                                        <p class='p-intro no-wp'>
+                                            <span class='readtimes'>浏览<%= l.fake_readtimes %>次</span>
+                                            <span class='readtimes'>下载<%= l.fake_d_times %>次</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <%= stylesheet_link_tag "froala_style.min" %>
+<%= stylesheet_link_tag "froala_style.min" %>
 
-    <!--body wrapper end-->
-<% else %>
+<!--body wrapper end-->
+<% if !@user && @material.need_login %>
     <script type="text/javascript">
-        alert("该资料包含专属优惠,需要登录后才可以查看哦~");
-        $(function() {
-            $("#loginModal").modal({
-                'show': true,
-                'keyboard': false
+        setTimeout(function() {
+            $(".login-wrap").before("<p style='color: red; text-align: center;'>\
+                                        <i class='fa fa-exclamation-circle'></i>登录后即可下载该资料\
+                                     </p>");
+            $(function() {
+                $("#loginModal").modal("show")
             })
-            $(".modal").unbind("click");
-        })
+        }, 200)
     </script>
 <% end %>

@@ -52,4 +52,11 @@ $(function() {
 	$(".size").each(function() {
 		$(this).text(filesize($(this).text()));
 	})
+
+	$(".dload").on("click", function() {
+		var $form = buildForm();
+		$form.attr("action", $(this).data("src"))
+		$form.attr("method", "get");
+		$form.trigger("submit");
+	})
 })

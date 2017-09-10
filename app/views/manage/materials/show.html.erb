@@ -28,8 +28,55 @@
             <div class="single-blog">
                 <div class="panel">
                     <div class="panel-body">
+                        <center><p>资料详情</p></center>
                         <div class="fr-view">
-                            <%= (@material.details || '').html_safe %>
+                            <%= (@material.details || '暂无内容').html_safe %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blog">
+            <div class="single-blog">
+                <div class="panel">
+                    <header class="panel-heading">
+                        资料文件
+                    </header>
+                    <div class="panel-body">
+                        <div class="files">
+                            <div class="row">
+                                <% @material.files.each do |f| %>
+                                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                                        <div class="file-pre mini">
+                                            <div class="details">
+                                                <div class="top">
+                                                    <div class="filename no-wp">
+                                                        <span><%= f.name %></span>
+                                                    </div>
+                                                    <br>
+                                                    <!-- <div>
+                                                        <span>上传日期:</span>
+                                                        <p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
+                                                    </div> -->
+                                                    <div>
+                                                        <strong class='size'>
+                                                            <%= f.size %>
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                <% if /\A(image)/.match(f.f_type) %>
+                                                    <%= image_tag f.file %>
+                                                <% else %>
+                                                    <i class="fa fa-file-text ico-mini f-type"></i>
+                                                <% end %>
+                                                <a class="dload" data-src="<%= f.manage_dload_url %>">
+                                                    <i class="fa fa-download ico-mini"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -38,7 +85,7 @@
                             <span class='p-l'>总共<%= @material.readtimes %>人浏览</span>
                             <br>
                             <!-- <span>今日<%#= @t_a_count %>人咨询</span> -->
-                            <span class='p-l'>总共<%= @material.d_times %>人下载</span>
+                            <span class='p-l'>总共<%= @material.d_times || 0 %>人下载</span>
                         </div>
                     </div>
                 </div>
@@ -74,10 +121,6 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-8 col-xs-12">
-        <div class="panel">
-            <header class="panel-heading">
-
   </div>
 </div>
 <!--body wrapper end-->

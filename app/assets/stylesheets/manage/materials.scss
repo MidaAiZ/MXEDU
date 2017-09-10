@@ -73,6 +73,7 @@ fieldset {
     padding: 10px 10px 25px;
     border-radius: 5px;
     border: 1px solid #ddd;
+    cursor: pointer;
     .details {
         width: 100%;
         height: 100%;
@@ -82,7 +83,6 @@ fieldset {
     .top {
         width: 100%;
         height: 100%;
-        z-index: 10;
         position: absolute;
         left: 0;
         top: 0;
@@ -111,9 +111,8 @@ fieldset {
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 0;
     }
-    .ico {
+    .ico, .ico-mini {
         position: absolute;
         top: 0;
         left: 0;
@@ -124,6 +123,33 @@ fieldset {
         line-height: 110px;
         color: #fdd749;
     }
+    .dload {
+        display: none;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+        * {
+            color: white;
+            font-size: 40px !important;
+        }
+    }
+    &:hover {
+        .dload {
+            display: inline-block;
+        }
+        .f-type {
+            display: none;
+        }
+        .filename {
+            // display: none;
+            background-color: transparent;
+        }
+        img {
+            opacity: 0.4;
+        }
+    }
 }
 
 @media screen and (min-width: 1500px) {
@@ -131,14 +157,21 @@ fieldset {
         width: 200px;
         height: 200px;
         .ico {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
             font-size: 100px;
-            text-align: center;
             line-height: 180px;
+        }
+        &.mini {
+            width: 150px;
+            height: 150px;
+            .ico-mini {
+                font-size: 80px;
+                line-height: 130px;
+            }
+        }
+        .dload {
+            * {
+                font-size: 60px !important;
+            }
         }
     }
 }

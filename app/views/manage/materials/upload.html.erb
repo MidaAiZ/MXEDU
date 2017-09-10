@@ -67,27 +67,30 @@
 											<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
 												<div class="file-pre">
 													<div class="details">
-														<div class="top">
-															<div class="filename no-wp">
-																<span><%= f.name %></span>
-															</div>
-															<br>
-															<!-- <div>
-																<span>上传日期:</span>
-																<p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
-															</div> -->
-															<div>
-																<strong class='size'>
-																	<%= f.size %>
-																</strong>
-															</div>
-														</div>
-														<% if /\A(image)/.match(f.f_type) %>
-															<%= image_tag f.file %>
-														<% else %>
-															<i class="fa fa-file-text ico"></i>
-														<% end %>
-													</div>
+		                                                <div class="top">
+		                                                    <div class="filename no-wp">
+		                                                        <span><%= f.name %></span>
+		                                                    </div>
+		                                                    <br>
+		                                                    <!-- <div>
+		                                                        <span>上传日期:</span>
+		                                                        <p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
+		                                                    </div> -->
+		                                                    <div>
+		                                                        <strong class='size'>
+		                                                            <%= f.size %>
+		                                                        </strong>
+		                                                    </div>
+		                                                </div>
+		                                                <% if /\A(image)/.match(f.f_type) %>
+		                                                    <%= image_tag f.file %>
+		                                                <% else %>
+		                                                    <i class="fa fa-file-text ico f-type"></i>
+		                                                <% end %>
+														<a class="dload" data-src="<%= f.manage_dload_url %>">
+															<i class="fa fa-download ico"></i>
+														</a>
+		                                            </div>
 												</div>
 											</div>
 										<% end %>

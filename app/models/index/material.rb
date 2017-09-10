@@ -35,4 +35,12 @@ class Index::Material < ApplicationRecord
 			self.where(cate: cate)
 		end
 	end
+
+	def fake_readtimes
+		(self.readtimes || 0)+ (self.id % 11 + 3) * 35
+	end
+
+	def fake_d_times
+		(self.d_times || 0)+ (self.id % 11 + 3) * 17
+	end
 end

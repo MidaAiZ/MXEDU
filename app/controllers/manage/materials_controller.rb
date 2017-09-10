@@ -81,6 +81,13 @@ class Manage::MaterialsController < ManageController
 	  end
   end
 
+  def download
+      @file = Manage::MaterialFile.find params[:file_id]
+      file_path = "#{Rails.root}/public#{@file.file.url}"
+      file_name = params[:filename]; file_name += ".#{params[:format]}" if params[:format]
+      send_file(file_path, filename: file_name)
+  end
+
   # DELETE /index/materials/1
   # DELETE /index/materials/1.json
   def destroy
