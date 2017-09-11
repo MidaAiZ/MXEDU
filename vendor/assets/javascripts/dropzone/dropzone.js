@@ -426,11 +426,11 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
 
     Dropzone.prototype.defaultOptions = {
       url: null,
-      parallelUploads: 2,
+      parallelUploads: 4,
       maxFilesize: 256,
       paramName: "file",
       createImageThumbnails: true,
-      maxThumbnailFilesize: 2,
+      maxThumbnailFilesize: 4,
       thumbnailWidth: 100,
       thumbnailHeight: 100,
       params: {},
@@ -846,7 +846,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("Cache-Control", "no-cache");
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      xhr.setRequestHeader("X-File-Name", file.name);
+    //   xhr.setRequestHeader("X-File-Name", file.name); // 上传中文名会出错
       formData = new FormData();
       if (this.options.params) {
         _ref1 = this.options.params;

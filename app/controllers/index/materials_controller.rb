@@ -24,9 +24,26 @@ class Index::MaterialsController < IndexController
   def download
       @file = Manage::MaterialFile.find params[:file_id]
       redirect_to login_path and return if (!@user && @file.material.need_login)
-      file_path = "#{Rails.root}/public#{@file.file.url}"
-      file_name = params[:filename]; file_name += ".#{params[:format]}" if params[:format]
-      send_file(file_path, filename: file_name)
+
+      begin
+        filepath = "#{Rails.root}/public#{@file.file.url}"
+        filename = @file.name;
+        if Rails.env == 'production'
+            return head(
+                    'X-Accel-Redirect' => filepath,
+                    'Content-Length' => @file.size,
+                    'Content-Type' => @file.f_type,
+                    'Content-Disposition' => "attachment; filename=\"#{@file.name}\""
+                )
+        else
+            puts "下载"
+            send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
+        end
+      rescue Exception
+        redirect_to '500'
+      ensure
+        logger.info response.headers
+      end
   end
 
   private

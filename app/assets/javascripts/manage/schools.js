@@ -57,7 +57,8 @@ var EditableTable = function () {
 						oTable.fnDraw();
 					},
 					error: function(err) {
-						for(var i in err) alert(err[i]);
+						// for(var i in err) alert(err[i]);
+                        alert("创建失败!");
 						cancelEditRow(oTable, nRow);
 					}
 				})
@@ -128,7 +129,8 @@ var EditableTable = function () {
 						oTable.fnDeleteRow(nRow);
 					},
 					error: function(err) {
-						for(var i in err) alert(err[i]);
+						// for(var i in err) alert(err[i]);
+                        alert("删除失败!");
 					}
 				})
 
