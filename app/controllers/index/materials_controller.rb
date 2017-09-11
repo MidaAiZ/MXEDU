@@ -36,11 +36,10 @@ class Index::MaterialsController < IndexController
                     'Content-Disposition' => "attachment; filename=\"#{@file.name}\""
                 )
         else
-            puts "下载"
             send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
         end
       rescue Exception
-        redirect_to '500'
+        redirect_to '/500'
       ensure
         logger.info response.headers
       end
