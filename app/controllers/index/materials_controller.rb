@@ -25,24 +25,9 @@ class Index::MaterialsController < IndexController
       @file = Manage::MaterialFile.find params[:file_id]
       redirect_to login_path and return if (!@user && @file.material.need_login)
 
-      begin
-        filepath = "#{Rails.root}/public#{@file.file.url}"
-        filename = @file.name;
-        if Rails.env == 'production'
-            return head(
-                    'X-Accel-Redirect' => filepath,
-                    'Content-Length' => @file.size,
-                    'Content-Type' => @file.f_type,
-                    'Content-Disposition' => "attachment; filename=\"#{@file.name}\""
-                )
-        else
-            send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
-        end
-      rescue Exception
-        redirect_to '/500'
-      ensure
-        logger.info response.headers
-      end
+      filepath = "#{Rails.root}/public#{@file.file.url}"
+      filename = @file.name;
+      send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
   end
 
   private
