@@ -22,18 +22,21 @@ class Index::Material < ApplicationRecord
 			  foreign_key: :material_id
 
 	validates :name, length: { minimum: 1, too_short: '资料名不能为空', maximum: 64, too_long: '资料名最大长度为%{count}' }
-    validates :cate_id, length: { minimum: 1, too_short: '类型不能为空', maximum: 16, too_long: '类型名最大长度为%{count}'  }
 	validates :tag, length: { maximum: 32, too_long: '标签最大长度为%{count}' }
+	validates :cate, length: { minimum: 1, too_short: '类型不能为空' }
 
 	default_scope { where(is_deleted: false).order(readtimes: :DESC) }
 
-	# 筛选
-	def self.sort(cate)
-		if cate.nil?
-			self.all
-		else
-			self.where(cate: cate)
-		end
+	# 复杂条件筛选
+	def self.sort(cons = {})
+		_self = self
+		_self = _self.where(cate_id: cons[:cate]) if cons[:cate]
+		_self = _self.where(grade: cons[:grade]) if cons[:grade]
+		_self = _self.where(school_id: cons[:school]) if cons[:school]
+		_self = _self.where("index_materials.tag LIKE ?", cons[:tag] ) if cons[:tag]
+		_self = _self.where("index_materials.name LIKE ?", cons[:name] ) if cons[:name]
+
+		_self ||= self.all
 	end
 
 	def fake_readtimes

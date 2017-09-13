@@ -81,6 +81,12 @@ Rails.application.routes.draw do
     # products
     resources :products
 
+    # products cate
+    resources :product_cates
+
+    # products company
+    resources :product_companies
+
     # appoints
     resources :appoints
 

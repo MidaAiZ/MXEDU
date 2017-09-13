@@ -3,10 +3,15 @@ class Index::User < ApplicationRecord
 
     # 用于上传头像时保存图片参数
     attr_accessor :x, :y, :width, :height, :rotate
-    store_accessor :info, :school, :grade, :major
+    store_accessor :info, :collage, :grade, :major
 
     # 使用插件建立用户密码验证体系
     has_secure_password
+
+    belongs_to :school,
+                class_name: 'Manage::School',
+                foreign_key: 'school_id',
+                optional: true
 
     has_many :histories,
             class_name: 'Index::History',

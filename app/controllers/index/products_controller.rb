@@ -7,9 +7,10 @@ class Index::ProductsController < IndexController
   def index
     count = params[:count] || 20
     page = params[:page] || 1
-
-    nonpaged_products = Index::Product.sort(params[:type])
-    @products = nonpaged_products.page(page).per(count)
+    cons = set_rec_cons params.slice(:name, :school, :cate, :tag)
+    nonpaged_products = Index::Product.sort(cons)
+    @products = nonpaged_products.page(page).per(count).includes(:cate, :company, :school)
+    set_cdts
   end
 
   # GET /index/products/1
@@ -19,7 +20,7 @@ class Index::ProductsController < IndexController
       Cache.new[request.remote_ip + '_history'] = request.url
     else
         Index::History.add @user, @product, request.remote_ip
-        @likes = Index::Product.sort(@product.cate).where.not(id: @product.id).limit(5)
+        @likes = Index::Product.sort({school: @product.school_id, cate: @product.cate_id}).where.not(id: @product.id).limit(5)
         @user ||= Index::User.new
     end
   end
@@ -30,12 +31,25 @@ class Index::ProductsController < IndexController
       @product = Index::Product.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def index_product_params
-      params.require(:product).permit(:name, :cate, :price, :intro, :details)
-    end
-
     def get_likes
 
+    end
+
+    def set_cdts
+        cons = Rails.cache.fetch("#{cache_key}_cd", expires_in: 10.minutes) do
+          {
+            schools: Manage::School.limit(8),
+            cates: Manage::ProductCate.limit(10),
+            companies: Manage::ProductCompany.limit(8)
+          }
+        end
+        @schools = cons[:schools]
+        @cates = cons[:cates]
+        @companies = cons[:companies]
+    end
+
+    def set_rec_cons cons
+        cons[:school] = @user.school_id if @user && cons[:school].nil? # 院校资料推荐
+        cons
     end
 end

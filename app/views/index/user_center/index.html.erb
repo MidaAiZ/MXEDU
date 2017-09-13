@@ -28,12 +28,16 @@
                                             <div class="desk"><%= @user.name %></div>
                                         </li>
                                         <li>
+                                            <div class="title">电话</div>
+                                            <div class="desk"><%= @user.phone %></div>
+                                        </li>
+                                        <li>
                                             <div class="title">性别</div>
                                             <div class="desk"><%= @user.sex %></div>
                                         </li>
                                         <li>
                                             <div class="title">学校</div>
-                                            <div class="desk"><%= @user.school %></div>
+                                            <div class="desk"><%= @user.school.name if @user.school %></div>
                                         </li>
                                         <li>
                                             <div class="title">专业</div>

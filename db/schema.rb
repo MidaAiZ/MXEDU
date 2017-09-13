@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910151651) do
+ActiveRecord::Schema.define(version: 20170913172024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,9 +86,16 @@ ActiveRecord::Schema.define(version: 20170910151651) do
     t.integer "readtimes", default: 0
     t.boolean "is_deleted", default: false
     t.float "dis_price"
+    t.bigint "school_id"
+    t.bigint "cate_id"
+    t.bigint "company_id"
     t.index ["admin_id"], name: "index_index_products_on_admin_id"
+    t.index ["cate_id"], name: "index_products_on_cate_id"
+    t.index ["company_id"], name: "index_index_products_on_company_id"
+    t.index ["company_id"], name: "index_products_on_company_id"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "cate"], name: "index_index_products_on_name_and_cate"
+    t.index ["school_id"], name: "index_products_on_school_id"
   end
 
   create_table "index_users", force: :cascade do |t|
@@ -102,7 +109,9 @@ ActiveRecord::Schema.define(version: 20170910151651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.bigint "school_id"
     t.index ["info"], name: "index_users_on_info", using: :gin
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
   create_table "manage_admins", force: :cascade do |t|
@@ -154,6 +163,21 @@ ActiveRecord::Schema.define(version: 20170910151651) do
     t.datetime "updated_at", null: false
     t.index ["material_id"], name: "index_manage_material_files_on_material_id"
     t.index ["name"], name: "index_manage_material_files_on_name"
+  end
+
+  create_table "manage_product_cates", force: :cascade do |t|
+    t.string "name"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manage_product_companies", force: :cascade do |t|
+    t.string "name"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "cate"
   end
 
   create_table "manage_schools", force: :cascade do |t|

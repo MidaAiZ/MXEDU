@@ -1,17 +1,24 @@
 class Index::MainController < IndexController
+	before_action :check_login
 	def index
-		@products = Rails.cache.fetch("#{cache_key}", expires_in: 10.minutes) do
-	      {
-			  liuxue: Index::Product.sort(:liuxue).limit(6) || Index::Product.none,
-			  yupei: Index::Product.sort(:yupei).limit(6) || Index::Product.none,
-			  kaoyan: Index::Product.sort(:kaoyan).limit(6) || Index::Product.none,
-			  jiakao: Index::Product.sort(:jiakao).limit(6) || Index::Product.none,
-			  yule: Index::Product.sort(:yule).limit(6) || Index::Product.none
-		   }
+		school = @user.school_id if @user
+		@products = Rails.cache.fetch("#{cache_key}_p_s_#{school}", expires_in: 10.minutes) do
+		  cates = Manage::ProductCate.limit(5)
+		  info = {}
+		  cates.each do |c|
+			  info[c.name] = []
+			  info[c.name].push c.id
+			  info[c.name].push Index::Product.sort({school: school, cate: c.id}).limit(6) || Index::Product.none
+		  end
+		  info
 	    end
 
-		@carousels = #Rails.cache.fetch("#{cache_key}", expires_in: 2.minutes) do
+		@materials = Rails.cache.fetch("#{cache_key}_m_s_#{school}", expires_in: 10.minutes) do
+	      Index::Material.sort({school: school}).limit(6).includes(:school, :cate)
+	    end
+
+		@carousels = Rails.cache.fetch("#{cache_key}", expires_in: 2.minutes) do
 			Manage::Carousel.where(show: true).order(index: :desc)
-		# end
+		end
 	end
 end

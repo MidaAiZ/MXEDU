@@ -55,8 +55,8 @@ class Manage::MaterialCatesController < ManageController
   # DELETE /manage/material_cates/1
   # DELETE /manage/material_cates/1.json
   def destroy
-    if @material_cate.materials.empty?
-      @material_cate.update is_deleted: true
+    unless @material_cate.materials.any?
+      @material_cate.destroy
       @code = 'Success'
     end
     respond_to do |format|

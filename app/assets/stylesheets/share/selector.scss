@@ -1,0 +1,57 @@
+.cdts-panel {
+    .panel-heading.c {
+        border-bottom: 0px;
+    }
+    .tools a {
+        padding: 6px;
+    }
+}
+
+ul.cdts {
+    padding-left: 0px;
+    padding-top: 10px;
+    > li {
+        list-style: none;
+        margin-bottom: 5px;
+        display: inline-block;;
+        width: 100%;
+        li {
+            width: auto;
+            min-width: 25px;
+            a {
+                padding: 3px;
+                font-size: 9px;
+                &:hover {
+                    color: #65CEA7;
+                    background: white;
+                }
+            }
+            &.active a {
+                color: white;
+                background: #65CEA7;
+            }
+        }
+    }
+    .con-item {
+        background: white;
+        margin-right: 5px;
+        padding: 3px;
+        color: #65CEA7;
+        font-size: 11px;
+        // display:
+    }
+}
+
+@media screen and (max-width: 768px) {
+    ul.cdts {
+        margin-top: 15px;
+        padding-left: 15px;
+        padding-top: 0px;
+        > li {
+            margin-bottom: 0px;
+        }
+    }
+    .wrapper .directory-info-row {
+        margin-top: 0px;
+    }
+}

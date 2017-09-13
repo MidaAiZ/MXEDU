@@ -4772,6 +4772,8 @@ img.cover {
     }
     &.product {
         margin-bottom: 20px;
+        border-radius: 5px;
+        overflow: hidden;
     }
 }
 

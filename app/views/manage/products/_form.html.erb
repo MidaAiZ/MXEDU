@@ -33,11 +33,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="product_cate">产品分类</label>
-                                    <%= f.select :cate, Index::Product.cates.map{|k| [get_cate(k), k]}, {}, {class: "form-control", name: 'product[cate]', id: 'product_cate'}  %>
+                                    <% cache @cates.cache_key, expires_in: 1.hours do %>
+                                      <%= f.select :cate_id, @cates.map{|c| [c.name, c.id]}, {}, {class: "form-control", name: 'product[cate_id]', id: 'product_cate'}  %>
+                                    <% end %>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_cate">针对院校</label>
+                                    <% cache @schools.cache_key, expires_in: 1.hours do %>
+                                      <%= f.select :school_id, @schools.map{|s| [s.name, s.id]}, {}, {class: "form-control", name: 'product[school_id]', id: 'product_school'}  %>
+                                    <% end %>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_company">品牌</label>
-                                    <input type="text" id='product_company' name='product[company]' class="form-control" placeholder="所属品牌" value="<%= @product.company %>">
+                                    <% cache @companies.cache_key, expires_in: 1.hours do %>
+                                      <%= f.select :cate_id, @companies.map{|c| [c.name, c.id]}, {}, {class: "form-control", name: 'product[company_id]', id: 'product_company'}  %>
+                                    <% end %>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">价格</label>

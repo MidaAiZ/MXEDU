@@ -1,5 +1,6 @@
 class Index::UsersController < IndexController
   before_action :require_login, only: [:show, :edit]
+  before_action :set_select_cache, only: [:index, :new, :edit]
   layout false, only: :new
 
   # GET /index/users/new
@@ -59,6 +60,7 @@ class Index::UsersController < IndexController
         format.html { redirect_to ucenter_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
+        set_select_cache
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -69,11 +71,15 @@ class Index::UsersController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :school, :major, :grade)
+      params.require(:index_user).permit(:number, :password, :phone, :email, :name, :sex, :school_id, :major, :grade)
     end
 
     def update_user_params
-      params.require(:index_user).permit(:password, :email, :name, :sex, :school, :major, :grade)
+      params.require(:index_user).permit(:password, :email, :name, :sex, :school_id, :major, :grade)
+    end
+
+    def set_select_cache
+        @schools = Manage::School.all
     end
 
 end

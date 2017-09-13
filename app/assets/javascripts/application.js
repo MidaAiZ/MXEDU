@@ -160,6 +160,21 @@
             el.slideDown(200); }
     });
 
+    // panel collapsible
+    $('.cdts-panel .tools .fa').click(function () {
+        var el = $(this).parents(".cdts-panel").children(".cdts");
+        var fa = $(this).parents(".panel-heading");
+        if ($(this).hasClass("fa-chevron-down")) {
+            $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            fa.addClass("close");
+            el.slideUp(200);
+        } else {
+            $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            fa.removeClass("c");
+            el.slideDown(200); }
+    });
+
+
     $('.todo-check label').click(function () {
         $(this).parents('li').children('.todo-title').toggleClass('line-through');
     });

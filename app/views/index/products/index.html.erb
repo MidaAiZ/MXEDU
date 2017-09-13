@@ -1,5 +1,50 @@
 <!--body wrapper start-->
 <div class="wrapper">
+    <div class="cdts-panel">
+        <header class="panel-heading">
+            <small>条件筛选</small>
+            <span class="tools pull-right">
+                <a class="fa fa-chevron-down" href="javascript:;"></a>
+             </span>
+        </header>
+
+        <ul class='cdts' id="cdts">
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id="school" data-name="school">院校</li>
+                    <% cache @schools.cache_key, expires_in: 10.minutes do %>
+                        <% @schools.each do |s| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id='cate' data-name="cate">分类</li>
+                    <% cache @cates.cache_key, expires_in: 10.minutes do %>
+                        <% @cates.each do |c| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id='cate' data-name="company">品牌</li>
+                    <% cache @companies.cache_key, expires_in: 10.minutes do %>
+                        <% @companies.each do |c| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                    <% end %>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
     <div class="row">
         <div class="col-sm-12">
             <section class="panel">
@@ -12,7 +57,7 @@
                 </header> -->
                 <div class="panel-body">
 
-                    <ul id="filters" class="media-filter">
+                    <!-- <ul id="filters" class="media-filter">
                         <li data-type='all'><%= link_to '全部', products_url %></li>
                         <li data-type='yupei'><%= link_to '语培', products_url + '?type=yupei' %></li>
                         <li data-type='liuxue'><%= link_to '留学', products_url + '?type=liuxue' %></li>
@@ -20,41 +65,47 @@
                         <li data-type='jiakao'><%= link_to '驾校', products_url + '?type=jiakao' %></li>
                         <li data-type='yule'><%= link_to '娱乐', products_url + '?type=yule' %></li>
                         <li data-type='else'><%= link_to '其它', products_url + '?type=else' %></li>
-                    </ul>
-
-                    <div class="show-block">
-                        <div id="gallery" class="media-gal">
-                            <div class="product-row">
-                                <% @products.each do |p| %>
-                                    <div class='product-block'>
-                                        <div class="item product" >
-                                            <%= link_to product_path(p) do %>
-                                                <%=  image_tag p.cover %>
-                                            <% end %>
-                                            <div class="info">
-                                                <p class='p-info'>
-                                                    <span class='company'><%= p.company %></span>
-                                                    <span class='name'><%= p.name %></span>
-                                                </p>
-                                                <p class='p-intro'>
-                                                    <% if p.price > p.dis_price %>
-                                                        <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                    <% end %>
-                                                    <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-                                                    <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
-                                                </p>
+                    </ul> -->
+                    <div id="pjax-replace">
+                        <div class="show-block">
+                            <div id="gallery" class="media-gal">
+                                <div class="product-row">
+                                    <% @products.each do |p| %>
+                                        <div class='product-block'>
+                                            <div class="item product" >
+                                                <%= link_to product_path(p) do %>
+                                                    <%=  image_tag p.cover %>
+                                                <% end %>
+                                                <div class="info">
+                                                    <p class='p-info'>
+                                                        <%  if p.company %>
+                                                            <span class='company'><%= p.company.name %></span>
+                                                            <span class='name'><%= p.name %></span>
+                                                        <% end %>
+                                                    </p>
+                                                    <p class='p-intro'>
+                                                        <% if p.price > p.dis_price %>
+                                                            <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
+                                                        <% end %>
+                                                        <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
+                                                        <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                <% end %>
+                                    <% end %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <%= paginate @products %>
+                        <div class="col-md-12">
+                            <%= paginate @products %>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 </div>
+
+<%= stylesheet_link_tag 'share/selector' %>
+<%= javascript_include_tag 'share/selector' %>

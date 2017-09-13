@@ -1,15 +1,16 @@
 class Manage::MaterialsController < ManageController
   before_action :require_login
   before_action :set_material, only: [:show, :edit, :update, :destroy, :upload, :uploader]
+  before_action :set_select_cache, only: [:index, :new, :edit]
 
   # GET /index/materials
   # GET /index/materials.json
   def index
     count = params[:count] || 20
     page = params[:page] || 1
-
-    nonpaged_materials = Index::Material.sort(params[:type])
-    @materials = nonpaged_materials.page(page).per(count)
+    cons = params.slice(:name, :school, :cate, :tag, :grade)
+    nonpaged_materials = Index::Material.sort(cons)
+    @materials = nonpaged_materials.page(page).per(count).includes(:school, :cate)
   end
 
   # GET /index/materials/1
@@ -20,12 +21,10 @@ class Manage::MaterialsController < ManageController
   # GET /index/materials/new
   def new
     @material = Index::Material.new
-    set_select_cache
   end
 
   # GET /index/materials/1/edit
   def edit
-    set_select_cache
   end
 
   # POST /index/materials
@@ -75,6 +74,7 @@ class Manage::MaterialsController < ManageController
 		  format.html { render html: manage_material_upload_path(@material) }
 		  format.json { render :show, status: :ok, location: @material }
 		else
+          set_select_cache
 		  format.html { render :edit, status: :unprocessable_entity }
 		  format.json { render json: @material.errors, status: :unprocessable_entity }
 		end

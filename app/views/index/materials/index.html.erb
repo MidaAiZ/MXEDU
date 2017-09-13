@@ -1,35 +1,50 @@
 
 <!--body wrapper start-->
 <div class="wrapper">
-    <ul class="directory-list">
-        <li><a href="#">a</a></li>
-        <li><a href="#">b</a></li>
-        <li><a href="#">c</a></li>
-        <li><a href="#">d</a></li>
-        <li><a href="#">e</a></li>
-        <li><a href="#">f</a></li>
-        <li><a href="#">g</a></li>
-        <li><a href="#">h</a></li>
-        <li><a href="#">i</a></li>
-        <li><a href="#">j</a></li>
-        <li><a href="#">k</a></li>
-        <li><a href="#">l</a></li>
-        <li><a href="#">m</a></li>
-        <li><a href="#">n</a></li>
-        <li><a href="#">o</a></li>
-        <li><a href="#">p</a></li>
-        <li><a href="#">q</a></li>
-        <li><a href="#">r</a></li>
-        <li><a href="#">s</a></li>
-        <li><a href="#">t</a></li>
-        <li><a href="#">u</a></li>
-        <li><a href="#">v</a></li>
-        <li><a href="#">w</a></li>
-        <li><a href="#">x</a></li>
-        <li><a href="#">y</a></li>
-        <li><a href="#">z</a></li>
-    </ul>
-    <div class="directory-info-row">
+    <div class="cdts-panel">
+        <header class="panel-heading">
+            <small>条件筛选</small>
+            <span class="tools pull-right">
+                <a class="fa fa-chevron-down" href="javascript:;"></a>
+             </span>
+        </header>
+
+        <ul class='cdts' id="cdts">
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id="school" data-name="school">院校</li>
+                    <% cache @schools.cache_key, expires_in: 10.minutes do %>
+                        <% @schools.each do |s| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id='cate' data-name="cate">分类</li>
+                    <% cache @cates.cache_key, expires_in: 10.minutes do %>
+                        <% @cates.each do |c| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <li>
+                <ul class="directory-list">
+                    <li class='con-item' id='grade' data-name="grade">年级</li>
+                    <li><a href="javascript: void(0)" data-value='大一'>大一</a></li>
+                    <li><a href="javascript: void(0)" data-value='大二'>大二</a></li>
+                    <li><a href="javascript: void(0)" data-value='大三'>大三</a></li>
+                    <li><a href="javascript: void(0)" data-value='大四'>大四</a></li>
+                    <li><a href="javascript: void(0)">不限</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="directory-info-row" id="pjax-replace">
         <div class="row">
             <% @materials.each do |m| %>
                 <div class="col-lg-4 col-md-6 col-sm-6">
@@ -42,7 +57,7 @@
                                 <% end %>
                                 <div class="media-body">
                                     <div>
-                                        ABC Ave, Suite 14<br>
+                                        <span><%= m.school.name %></span><small> <%= m.grade %></small></%><br>
                                         <span class='no-wp'><%= m.intro %></span><br>
                                         <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
                                     </div>
@@ -57,9 +72,11 @@
                         </div>
                     </div>
                 </div>
-                <%= paginate @materials %>
             <% end %>
         </div>
+        <%= paginate @materials %>
     </div>
 </div>
 <!--body wrapper end-->
+<%= stylesheet_link_tag 'share/selector' %>
+<%= javascript_include_tag 'share/selector' %>

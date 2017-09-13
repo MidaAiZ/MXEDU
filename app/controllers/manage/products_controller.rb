@@ -1,14 +1,16 @@
 class Manage::ProductsController < ManageController
   before_action :require_login
   before_action :set_index_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_select_cache, only: [:index, :new, :edit]
 
   # GET /index/products
   # GET /index/products.json
   def index
       count = params[:count] || 20
       page = params[:page] || 1
-      nonpaged_products = Index::Product.sort(params[:type])
-      @products = nonpaged_products.page(page).per(count).includes(:admin)
+      cons = params.slice(:name, :school, :cate, :tag)
+      nonpaged_products = Index::Product.sort(cons)
+      @products = nonpaged_products.page(page).per(count).includes(:cate, :company, :school)
   end
 
   # GET /index/products/1
@@ -39,6 +41,7 @@ class Manage::ProductsController < ManageController
         format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :created }
       else
+        set_select_cache
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -55,6 +58,7 @@ class Manage::ProductsController < ManageController
         format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :ok, location: @product }
       else
+        set_select_cache
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -80,6 +84,20 @@ class Manage::ProductsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
-      params.require(:product).permit(:name, :cate, :price, :dis_price, :intro, :details, :company, :cover, :recommend, :tags, :need_login)
+      params.require(:product).permit(:name, :cate_id, :school_id, :price, :dis_price, :intro, :details, :company_id, :cover, :recommend, :tags, :need_login)
     end
+
+    def set_select_cache
+        info = Rails.cache.fetch("#{cache_key}", expires_in: 1.minutes) do
+            {
+                schools: Manage::School.all,
+                cates: Manage::ProductCate.all,
+                companies: Manage::ProductCompany.limit(8)
+            }
+        end
+        @schools = info[:schools]
+        @cates = info[:cates]
+        @companies = info[:companies]
+    end
+
 end

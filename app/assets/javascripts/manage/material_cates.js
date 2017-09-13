@@ -45,13 +45,18 @@ var EditableTable = function () {
 						oTable.fnUpdate(res.name, nRow, 0, false);
 						oTable.fnUpdate(res.count, nRow, 1, false);
 						oTable.fnUpdate(res.created_at, nRow, 2, false);
-						oTable.fnUpdate('<a class="edit" href="" data-id=' + res.id + '>编辑</a>', nRow, 4, false);
-						oTable.fnUpdate('<a class="delete" href="" data-id=' + res.id + '>删除</a>', nRow, 5, false);
+						oTable.fnUpdate('<a class="edit" href="" data-id=' + res.id + '>编辑</a>', nRow, 3, false);
+						oTable.fnUpdate('<a class="delete" href="" data-id=' + res.id + '>删除</a>', nRow, 4, false);
 						oTable.fnDraw();
 					},
 					error: function(err) {
-						alert("创建失败!");
-						cancelEditRow(oTable, nRow);
+                        if (id) {
+							alert("修改失败!");
+							cancelEditRow(oTable, nRow);
+						} else {
+							alert("创建失败!");
+							oTable.fnDeleteRow(nRow);
+						}
 					}
 				})
             }
@@ -59,7 +64,8 @@ var EditableTable = function () {
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, 4, false);
+                oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, 3, false);
+                oTable.fnUpdate('<a class="delete" href="">删除</a>', nRow, 4, false);
                 oTable.fnDraw();
             }
 
@@ -93,8 +99,8 @@ var EditableTable = function () {
 
             $('#editable-sample_new').click(function (e) {
                 e.preventDefault();
-                var aiNew = oTable.fnAddData(['', '', '', '',
-                        '<a class="edit" href="">编辑</a>', '<a class="cancel" data-mode="new" href="">取消</a>'
+                var aiNew = oTable.fnAddData(['', '', '',
+                        '<a class="edit" href="">保存</a>', '<a class="cancel" data-mode="new" href="">取消</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
@@ -119,7 +125,7 @@ var EditableTable = function () {
 					},
 					error: function(err) {
 						// for(var i in err) alert(err[i]);
-                        alert("删除失败!");
+                        alert("删除失败,该分类已绑定相关资料!");
 					}
 				})
 

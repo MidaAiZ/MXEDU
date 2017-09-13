@@ -58,8 +58,13 @@ var EditableTable = function () {
 					},
 					error: function(err) {
 						// for(var i in err) alert(err[i]);
-                        alert("创建失败!");
-						cancelEditRow(oTable, nRow);
+                        if (id) {
+                            alert("修改失败!");
+                            cancelEditRow(oTable, nRow);
+                        } else {
+                            alert("创建失败!");
+                            oTable.fnDeleteRow(nRow);
+                        }
 					}
 				})
             }
@@ -71,6 +76,7 @@ var EditableTable = function () {
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                 oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, 4, false);
+                oTable.fnUpdate('<a class="delete" href="">删除</a>', nRow, 5, false);
                 oTable.fnDraw();
             }
 
@@ -130,7 +136,7 @@ var EditableTable = function () {
 					},
 					error: function(err) {
 						// for(var i in err) alert(err[i]);
-                        alert("删除失败!");
+                        alert("删除失败,该院校已绑定相关资源!");
 					}
 				})
 

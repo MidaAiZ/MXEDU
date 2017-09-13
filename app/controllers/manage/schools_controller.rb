@@ -55,8 +55,9 @@ class Manage::SchoolsController < ManageController
   # DELETE /manage/schools/1
   # DELETE /manage/schools/1.json
   def destroy
-    if @school.materials.nil?
-      @school.update is_deleted: true
+    if @school.materials.any? || @school.products.any?
+    else
+      @school.destroy
       @code = 'Success'
     end
     respond_to do |format|
@@ -64,7 +65,7 @@ class Manage::SchoolsController < ManageController
         format.html { redirect_to schools_url, notice: 'School was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to schools_url, notice: '删除失败,该院校已经绑定相关资料', status: 422 }
+         format.html { redirect_to schools_url, notice: '删除失败,该院校已经绑定相关资料', status: 422 }
         format.json { render json: { error: '删除失败,该院校已经绑定相关资料' }, status: 422 }
       end
     end

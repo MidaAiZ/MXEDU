@@ -40,7 +40,9 @@
               </label>
           </div>
           <small>学校</small>
-          <%= f.text_field :school, id: :user_school, autofocus: "",  placeholder: "在读/毕业学校", class: 'form-control' %>
+          <% cache @schools.cache_key, expires_in: 1.hours do %>
+            <%= f.select :school_id, @schools.all.map{|s| [s.name, s.id]}, {}, {class: "form-control", id: 'user_school', style: "margin-bottom: 15px;"}  %>
+          <% end %>
           <small>专业</small>
           <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "就读专业", class: 'form-control' %>
           <small>年级</small>
