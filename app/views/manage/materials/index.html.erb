@@ -1,8 +1,5 @@
 <!-- page heading start-->
 <div class="page-heading">
-    <h3>
-        全部资料
-    </h3>
     <ul class="breadcrumb">
         <li>
             <a href="">资料管理</a>
@@ -14,72 +11,74 @@
 
 <!--body wrapper start-->
 <div class="wrapper">
-    <div class="clearfix">
-      <div class="btn-group">
-        <%= link_to new_manage_material_path do %>
-          <button class="btn btn-primary">
-            新建资料
-            <i class="fa fa-plus"></i>
-          </button>
-        <% end %>
-      </div>
-      <div class="btn-group pull-right">
-        <button id='btn-show-block' class="btn btn-default active" ><i class="fa fa-th-large"></i></button>
-        <button id='btn-show-table' class="btn btn-default"><i class="fa fa-bars"></i></button>
-        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">工具
-          <i class="fa fa-angle-down"></i>
-        </button>
-        <ul class="dropdown-menu pull-right">
-          <li>
-            <a href="javascript:void(0)" id="print">打印</a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" id="export">导出为Excel</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="space15"></div>
-    <div class="cdts-panel">
-        <header class="panel-heading c">
-            <small>条件筛选</small>
-            <span class="tools pull-right">
-                <a class="fa fa-chevron-down" href="javascript:;"></a>
-             </span>
-        </header>
-        <ul class='cdts' id="cdts" style="display: none;">
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id="school" data-name="school">院校</li>
-                    <% cache @schools.cache_key, expires_in: 10.minutes do %>
-                    <% @schools.each do |s| %>
-                    <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
-                    <% end %>
-                    <li><a href="JavaScript: void(0)">不限</a></li>
-                    <% end %>
-                </ul>
-            </li>
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id='cate' data-name="cate">分类</li>
-                    <% cache @cates.cache_key, expires_in: 10.minutes do %>
-                    <% @cates.each do |c| %>
-                    <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
-                    <% end %>
-                    <li><a href="JavaScript: void(0)">不限</a></li>
-                    <% end %>
-                </ul>
-            </li>
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id='grade' data-name="grade">年级</li>
-                    <% get_grades.each do |g| %>
-                        <li><a href="JavaScript: void(0)" data-value="<%= g %>"><%= g %></a></li>
-                    <% end %>
-                    <li><a href="javascript: void(0)">不限</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div class="panel">
+        <div class="panel-body">
+          <div class="btn-group">
+            <%= link_to new_manage_material_path do %>
+              <button class="btn btn-primary">
+                新建资料
+                <i class="fa fa-plus"></i>
+              </button>
+            <% end %>
+          </div>
+          <div class="btn-group pull-right">
+            <button id='btn-show-block' class="btn btn-default active" ><i class="fa fa-th-large"></i></button>
+            <button id='btn-show-table' class="btn btn-default"><i class="fa fa-bars"></i></button>
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">工具
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:void(0)" id="print">打印</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" id="export">导出为Excel</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="space15"></div>
+        <div class="cdts-panel">
+            <header class="panel-heading c">
+                <small>条件筛选</small>
+                <span class="tools pull-right">
+                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                 </span>
+            </header>
+            <ul class='cdts' id="cdts" style="display: none;">
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id="school" data-name="school">院校</li>
+                        <% cache @schools.cache_key, expires_in: 10.minutes do %>
+                        <% @schools.each do |s| %>
+                        <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                        <% end %>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id='cate' data-name="cate">分类</li>
+                        <% cache @cates.cache_key, expires_in: 10.minutes do %>
+                        <% @cates.each do |c| %>
+                        <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+                        <% end %>
+                        <li><a href="JavaScript: void(0)">不限</a></li>
+                        <% end %>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id='grade' data-name="grade">年级</li>
+                        <% get_grades.each do |g| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= g %>"><%= g %></a></li>
+                        <% end %>
+                        <li><a href="javascript: void(0)">不限</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="directory-info-row">
         <div id="pjax-replace">

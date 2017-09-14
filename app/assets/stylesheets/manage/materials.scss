@@ -1,5 +1,9 @@
 @import "ios-switch/switchery";
 
+.show-table {
+	display: none;
+}
+
 .fileupload-new {
   width: 360px !important;
 }
@@ -57,7 +61,6 @@
 }
 
 .cdts-panel {
-    margin-top: 10px;
     margin-bottom: -20px;
 }
 
@@ -76,7 +79,7 @@
 		}
 	}
     .cdts-panel {
-        margin-top: 5px;
+        margin-top: -2px;
         margin-bottom: 0px;
     }
 }
