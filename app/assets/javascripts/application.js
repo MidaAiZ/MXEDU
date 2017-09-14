@@ -152,11 +152,11 @@
     // panel collapsible
     $('.tools .toggle-show').click(function () {
         var el = $(this).parents(".panel").children(".panel-body");
-        if ($(this).hasClass("fa-chevron-down")) {
-            $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+        if ($(this).hasClass("fa-chevron-up")) {
+            $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
             el.slideUp(200);
         } else {
-            $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
             el.slideDown(200); }
     });
 
@@ -164,12 +164,12 @@
     $('.cdts-panel .tools .fa').click(function () {
         var el = $(this).parents(".cdts-panel").children(".cdts");
         var fa = $(this).parents(".panel-heading");
-        if ($(this).hasClass("fa-chevron-down")) {
-            $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+        if ($(this).hasClass("fa-chevron-up")) {
+            $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
             fa.addClass("c");
             el.slideUp(200);
         } else {
-            $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
             fa.removeClass("c");
             el.slideDown(200);
         }
