@@ -4772,7 +4772,6 @@ img.cover {
     }
     &.product {
         margin-bottom: 20px;
-        border-radius: 5px;
         overflow: hidden;
     }
 }
@@ -4829,4 +4828,9 @@ img.cover {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.cdts-panel .tools .fa {
+    margin-left: 15px;
+    margin-top: 5px;
 }

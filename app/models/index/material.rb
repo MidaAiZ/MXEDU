@@ -1,7 +1,7 @@
 class Index::Material < ApplicationRecord
 	mount_uploader :cover, MaterialCoverUploader
 
-	store_accessor :info, :intro, :details, :d_times, :need_login, :recommend, :grade
+	store_accessor :info, :intro, :details, :d_times, :need_login, :recommend
 
 	belongs_to :admin,
 				class_name: 'Manage::Admin',

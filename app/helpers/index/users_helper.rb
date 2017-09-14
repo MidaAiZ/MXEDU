@@ -1,5 +1,5 @@
 module Index::UsersHelper
-	def get_grades
+	def set_grades
 		y = Time.now.year
 		ys = []
 		6.times do |i|

@@ -7,7 +7,7 @@ class Index::ProductsController < IndexController
   def index
     count = params[:count] || 20
     page = params[:page] || 1
-    cons = set_rec_cons params.slice(:name, :school, :cate, :tag)
+    cons = set_rec_cons params.slice(:name, :school, :company, :cate, :tag)
     nonpaged_products = Index::Product.sort(cons)
     @products = nonpaged_products.page(page).per(count).includes(:cate, :company, :school)
     set_cdts

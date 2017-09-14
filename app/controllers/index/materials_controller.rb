@@ -7,7 +7,7 @@ class Index::MaterialsController < IndexController
   def index
     count = params[:count] || 20
     page = params[:page] || 1
-    cons = set_rec_cons params.slice(:name, :school, :cate, :tag)
+    cons = set_rec_cons params.slice(:name, :school, :cate, :tag, :grade)
     nonpaged_materials = Index::Material.sort(cons)
     @materials = nonpaged_materials.page(page).per(count).includes(:cate, :school)
     set_cdts

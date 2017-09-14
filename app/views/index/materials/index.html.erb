@@ -1,77 +1,91 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">学习资料 </li>
+    </ul>
+</div>
+<!-- page heading end-->
 
 <!--body wrapper start-->
 <div class="wrapper">
-    <div class="cdts-panel">
-        <header class="panel-heading">
-            <small>条件筛选</small>
-            <span class="tools pull-right">
-                <a class="fa fa-chevron-down" href="javascript:;"></a>
-             </span>
-        </header>
-
-        <ul class='cdts' id="cdts">
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id="school" data-name="school">院校</li>
-                    <% cache @schools.cache_key, expires_in: 10.minutes do %>
-                        <% @schools.each do |s| %>
-                            <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
-                        <% end %>
-                        <li><a href="JavaScript: void(0)">不限</a></li>
-                    <% end %>
-                </ul>
-            </li>
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id='cate' data-name="cate">分类</li>
-                    <% cache @cates.cache_key, expires_in: 10.minutes do %>
-                        <% @cates.each do |c| %>
-                            <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
-                        <% end %>
-                        <li><a href="JavaScript: void(0)">不限</a></li>
-                    <% end %>
-                </ul>
-            </li>
-            <li>
-                <ul class="directory-list">
-                    <li class='con-item' id='grade' data-name="grade">年级</li>
-                    <li><a href="javascript: void(0)" data-value='大一'>大一</a></li>
-                    <li><a href="javascript: void(0)" data-value='大二'>大二</a></li>
-                    <li><a href="javascript: void(0)" data-value='大三'>大三</a></li>
-                    <li><a href="javascript: void(0)" data-value='大四'>大四</a></li>
-                    <li><a href="javascript: void(0)">不限</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
     <div class="directory-info-row" id="pjax-replace">
+        <div class="cdts-panel">
+            <header class="panel-heading c">
+                <small>条件筛选</small>
+                <span class="tools pull-right">
+                    <a class="fa fa-chevron-up" href="javascript:;"></a>
+                 </span>
+            </header>
+
+            <ul class='cdts' id="cdts" style="display: none;">
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id="school" data-name="school">院校</li>
+                        <% cache @schools.cache_key, expires_in: 10.minutes do %>
+                            <% @schools.each do |s| %>
+                                <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
+                            <% end %>
+                            <li><a href="JavaScript: void(0)">不限</a></li>
+                        <% end %>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id='cate' data-name="cate">分类</li>
+                        <% cache @cates.cache_key, expires_in: 10.minutes do %>
+                            <% @cates.each do |c| %>
+                                <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+                            <% end %>
+                            <li><a href="JavaScript: void(0)">不限</a></li>
+                        <% end %>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="directory-list">
+                        <li class='con-item' id='grade' data-name="grade">年级</li>
+                        <% get_grades.each do |g| %>
+                            <li><a href="JavaScript: void(0)" data-value="<%= g %>"><%= g %></a></li>
+                        <% end %>
+                        <li><a href="javascript: void(0)">不限</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
         <div class="row">
-            <% @materials.each do |m| %>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="panel">
-                        <div class="panel-body">
-                            <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name %></span><br></h4>
-                            <div class="media">
-                                <%= link_to material_path(m), class: 'pull-left' do %>
-                                    <%= image_tag m.cover.thumb, class: :cover %>
-                                <% end %>
-                                <div class="media-body">
-                                    <div>
-                                        <span><%= m.school.name %></span><small> <%= m.grade %></small></%><br>
-                                        <span class='no-wp'><%= m.intro %></span><br>
-                                        <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
+            <% cache @materials.cache_key, expires_in: 10.minutes do %>
+                <% @materials.each do |m| %>
+                    <% cache m.cache_key, expires_in: 20.minutes do %>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name %></span><br></h4>
+                                    <div class="media">
+                                        <%= link_to material_path(m), class: 'pull-left' do %>
+                                            <%= image_tag m.cover.thumb, class: :cover %>
+                                        <% end %>
+                                        <div class="media-body">
+                                            <div>
+                                                <span><%= m.school.name if m.school %></span> <small> <%= m.grade %></small><br>
+                                                <span class='no-wp'><%= m.intro %></span><br>
+                                                <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
+                                            </div>
+                                            <!-- <ul class="social-links">
+                                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                                            </ul> -->
+                                        </div>
                                     </div>
-                                    <ul class="social-links">
-                                        <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    <% end %>
+                <% end %>
             <% end %>
         </div>
         <%= paginate @materials %>

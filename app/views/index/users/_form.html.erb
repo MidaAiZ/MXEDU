@@ -46,7 +46,7 @@
           <small>专业</small>
           <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "就读专业", class: 'form-control' %>
           <small>年级</small>
-          <%= f.select :grade, get_grades, {}, {class: "form-control", id: 'user_grade', placeholder: '年级'} %>
+          <%= f.select :grade, set_grades, {}, {class: "form-control", id: 'user_grade', placeholder: '年级'} %>
           <!-- <label class="checkbox">
               <input type="checkbox" value="agree this condition"> I agree to the Terms of Service and Privacy Policy
           </label> -->

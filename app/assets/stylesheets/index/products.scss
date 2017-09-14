@@ -23,3 +23,13 @@
 		float: left;
     }
 }
+
+@media screen and (max-width: 768px) {
+	.cdts-panel {
+		margin-top: 5px;
+		margin-bottom: -30px;
+		.panel-heading {
+			padding-bottom: 10px;
+		}
+	}
+}

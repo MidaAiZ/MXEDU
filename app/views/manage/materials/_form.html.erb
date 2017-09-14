@@ -26,7 +26,7 @@
                             <header class="panel-heading">
                                 基本信息
                                 <span class="tools pull-right">
-                                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                    <a class="fa fa-chevron-down toggle-show" href="javascript:;"></a>
                                  </span>
                             </header>
                             <div class="panel-body">
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="material_tag">年级</label>
-                                            <input type="text" id='material_grade' name='material[grade]' class="form-control" placeholder="资料适合的年级" value="<%= @material.grade %>">
+                                            <%= f.select :grade, get_grades.map{|s| [s, s]}, {}, {class: "form-control", name: 'material[grade]', id: 'material_grade'}  %>
                                         </div>
                                         <div class="form-group">
                                             <label for="material_intro">简介</label>
@@ -115,7 +115,7 @@
                             <header class="panel-heading">
                                 资料详情
                                 <span class="tools pull-right">
-                                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                    <a class="fa fa-chevron-down toggle-show" href="javascript:;"></a>
                                  </span>
                             </header>
                             <div class="panel-body">

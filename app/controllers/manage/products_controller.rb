@@ -8,7 +8,7 @@ class Manage::ProductsController < ManageController
   def index
       count = params[:count] || 20
       page = params[:page] || 1
-      cons = params.slice(:name, :school, :cate, :tag)
+      cons = params.slice(:name, :school, :company, :cate, :tag)
       nonpaged_products = Index::Product.sort(cons)
       @products = nonpaged_products.page(page).per(count).includes(:cate, :company, :school)
   end

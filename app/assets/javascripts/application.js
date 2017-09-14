@@ -150,7 +150,7 @@
    }
 
     // panel collapsible
-    $('.panel .tools .fa').click(function () {
+    $('.tools .toggle-show').click(function () {
         var el = $(this).parents(".panel").children(".panel-body");
         if ($(this).hasClass("fa-chevron-down")) {
             $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
@@ -166,12 +166,14 @@
         var fa = $(this).parents(".panel-heading");
         if ($(this).hasClass("fa-chevron-down")) {
             $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-            fa.addClass("close");
+            fa.addClass("c");
             el.slideUp(200);
         } else {
             $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
             fa.removeClass("c");
-            el.slideDown(200); }
+            el.slideDown(200);
+        }
+        return false;
     });
 
 
