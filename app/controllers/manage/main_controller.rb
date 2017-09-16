@@ -8,48 +8,24 @@ class Manage::MainController < ManageController
 
     def counts
        info = Rails.cache.fetch("#{cache_key}", expires_in: 5.minutes) do
-          {
-             u_count: Index::User.count, # 用户总数
-      	     p_count: Index::Product.count, # 产品总数
-    	     a_count: Index::Appoint.count, # 预约总数
-    	     v_count: Index::Product.sum("readtimes"), # 总浏览量
-             t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
-             t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
-             t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
-          }
+         set_counts
        end
 
-       render json: {
-		  u_count: info[:u_count],
-		  p_count: info[:p_count],
-		  a_count: info[:a_count],
-		  v_count: info[:v_count],
-          t_u_count: info[:t_u_count],
-          t_a_count: info[:t_a_count],
-          t_v_count: info[:t_v_count]
-		}
+       render json: info.to_json
     end
 
     def products_count
         info = Rails.cache.fetch("#{cache_key}", expires_in: 10.minutes) do
-           {
-             yp_count: Index::Product.sort(:yupei).count, # 语培总数
-             lx_count: Index::Product.sort(:liuxue).count, # 留学总数
-     	     jk_count: Index::Product.sort(:jiakao).count, # 驾考总数
-     	     ky_count: Index::Product.sort(:kaoyan).count, # 考研总数
-             yl_count: Index::Product.sort(:yule).count, # 娱乐总数
-             qt_count: Index::Product.sort(:else).count # 其它总数
-           }
+           cates = Manage::ProductCate.limit(5)
+           counts = {}
+           cates.each do |c|
+             counts[c.name] = c.products_count
+           end
+           counts["其它"] = (counts["其它"] || 0 ) + Manage::ProductCate.where.not(id: cates.map{|c| c.id}).sum(:products_count)
+           counts
         end
 
-        render json: {
- 		  yp_count: info[:yp_count],
- 		  lx_count: info[:lx_count],
- 		  jk_count: info[:jk_count],
- 		  ky_count: info[:ky_count],
-          yl_count: info[:yl_count],
-          qt_count: info[:qt_count]
- 		}
+        render json: info.to_json
     end
 
     def viewers_count
@@ -70,28 +46,22 @@ class Manage::MainController < ManageController
             end
         end
 
-        render json: {
-            v_0_count: info_0[:v_0_count],
-            v_1_count: info[:v_1_count],
-            v_2_count: info[:v_2_count],
-            v_3_count: info[:v_3_count],
-            v_4_count: info[:v_4_count],
-            v_5_count: info[:v_5_count],
-            v_6_count: info[:v_6_count],
-            v_7_count: info[:v_7_count],
-
-            u_0_count: info_0[:u_0_count],
-            u_1_count: info[:u_1_count],
-            u_2_count: info[:u_2_count],
-            u_3_count: info[:u_3_count],
-            u_4_count: info[:u_4_count],
-            u_5_count: info[:u_5_count],
-            u_6_count: info[:u_6_count],
-            u_7_count: info[:u_7_count],
- 		}
+        render json: info.merge(info_0).to_json
     end
 
     private
+
+    def set_counts
+        {
+           u_count: Index::User.count, # 用户总数
+           p_count: Index::Product.count, # 产品总数
+           a_count: Index::Appoint.count, # 预约总数
+           v_count: Index::Product.sum("readtimes"), # 总浏览量
+           t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
+           t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
+           t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
+        }
+    end
 
     def set_v_info
         {

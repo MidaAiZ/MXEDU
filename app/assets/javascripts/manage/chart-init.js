@@ -17,29 +17,10 @@ $(function(){
         }
     })
     function build_chart(data) {
-        var yp_count = data.yp_count,
-            lx_count = data.lx_count,
-            jk_count = data.jk_count,
-            ky_count = data.ky_count,
-            yl_count = data.yl_count,
-            qt_count = data.qt_count,
-            total_count = 0;
-
-            for(var i in data) {
-                total_count += data[i];
-            }
-
         // Use Morris.Area instead of Morris.Line
         Morris.Donut({
             element: 'graph-donut',
-            data: [
-                {value: yp_count, label: '语言培训', formatted: '总数 ' + yp_count },
-                {value: lx_count, label: '留学中介', formatted: '总数 ' + lx_count },
-                {value: ky_count, label: '考研课程', formatted: '总数 ' + ky_count },
-                {value: jk_count, label: '驾校学车', formatted: '总数 ' + jk_count },
-                {value: yl_count, label: '生活娱乐', formatted: '总数 ' + yl_count },
-                {value: qt_count, label: '其它', formatted: '总数 ' + qt_count }
-            ],
+            data: get_cates(data),
             backgroundColor: false,
             labelColor: '#fff',
             colors: [
@@ -47,6 +28,29 @@ $(function(){
             ],
             formatter: function (x, data) { return data.formatted; }
         });
+        set_color_labels(data);
+    }
+
+    function get_cates(data) {
+        var arr = [];
+        for (var i in data) {
+            arr.push({
+                value: data[i],
+                label: i,
+                formatted: '总数' + data[i]
+            })
+        }
+        return arr;
+    }
+
+    function set_color_labels(data) {
+        var $labels = $(".bar-legend");
+        var index = 0;
+        var classes = ['blue', 'green', 'purple', 'red', 'yellow', 'grey'];
+        for(var i in data) {
+            $labels.append("<li><span class='" + classes[index] + "'></span>" + i + "</li>");
+            index ++;
+        }
     }
 })
 
