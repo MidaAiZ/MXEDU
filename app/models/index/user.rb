@@ -9,6 +9,7 @@ class Index::User < ApplicationRecord
     has_secure_password
 
     belongs_to :school,
+                counter_cache: true,
                 class_name: 'Manage::School',
                 foreign_key: 'school_id',
                 optional: true

@@ -7,15 +7,18 @@ class Index::Product < ApplicationRecord
 	store_accessor :info, :tag, :recommend, :need_login
 
 	belongs_to :school,
+				counter_cache: true,
 				class_name: 'Manage::School',
 				foreign_key: :school_id,
 				optional: true
 
 	belongs_to :cate,
+				counter_cache: true,
 				class_name: 'Manage::ProductCate',
 				foreign_key: :cate_id
 
 	belongs_to :company,
+				counter_cache: true,
 				class_name: 'Manage::ProductCompany',
 				foreign_key: :company_id
 

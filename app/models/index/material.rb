@@ -8,11 +8,13 @@ class Index::Material < ApplicationRecord
 				foreign_key: 'admin_id'
 
 	belongs_to :school,
+	 			counter_cache: true,
 				class_name: 'Manage::School',
 				foreign_key: :school_id,
 				optional: true
 
 	belongs_to :cate,
+				counter_cache: true,
 				class_name: 'Manage::MaterialCate',
 				foreign_key: :cate_id,
 				optional: true

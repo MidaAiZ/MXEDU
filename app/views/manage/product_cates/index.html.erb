@@ -60,7 +60,7 @@
                                     <% @product_cates.each do |m| %>
                                         <tr class="">
                                             <td><%= m.name %></td>
-                                            <td><%= m.count || 0 %></td>
+                                            <td><%= m.products_count %></td>
                                             <td><%= m.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
                                             <td><a class="edit" href="javascript:;" data-id='<%= m.id %>'>编辑</a></td>
                                             <td><a class="delete" href="javascript:;" data-id='<%= m.id %>'>删除</a></td>

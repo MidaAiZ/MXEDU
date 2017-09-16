@@ -4825,8 +4825,9 @@ img.cover {
 
 .no-wp {
     width: 100%;
-	white-space: nowrap;
 	overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
 	text-overflow: ellipsis;
 }
 

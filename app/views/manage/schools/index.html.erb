@@ -51,18 +51,24 @@
                                 <th>所属城市</th>
                                 <th>院校性质</th>
                                 <th>级别</th>
+                                <th>用户数</th>
+                                <th>产品数</th>
+                                <th>资料数</th>
                                 <th>编辑</th>
                                 <th>删除</th>
                             </tr>
                         </thead>
                             <tbody>
-                                <% cache @schools.cache_key, expires_in: 1.day do %>
+                                <% cache @schools.cache_key, expires_in: 1.hour do %>
                                     <% @schools.each do |s| %>
                                         <tr class="">
                                             <td><%= s.name %></td>
                                             <td><%= s.city %></td>
                                             <td><%= s.cate %></td>
-                                            <td class="center"><%= s.sign %></td>
+                                            <td><%= s.sign %></td>
+                                            <td><%= s.users_count %></td>
+                                            <td><%= s.products_count %></td>
+                                            <td><%= s.materials_count %></td>
                                             <td><a class="edit" href="javascript:;" data-id='<%= s.id %>'>编辑</a></td>
                                             <td><a class="delete" href="javascript:;" data-id='<%= s.id %>'>删除</a></td>
                                         </tr>

@@ -43,7 +43,7 @@ var EditableTable = function () {
 					dataType: 'JSON',
 					success: function(res) {
 						oTable.fnUpdate(res.name, nRow, 0, false);
-						oTable.fnUpdate(res.count, nRow, 1, false);
+						oTable.fnUpdate(res.materials_count, nRow, 1, false);
 						oTable.fnUpdate(res.created_at, nRow, 2, false);
 						oTable.fnUpdate('<a class="edit" href="" data-id=' + res.id + '>编辑</a>', nRow, 3, false);
 						oTable.fnUpdate('<a class="delete" href="" data-id=' + res.id + '>删除</a>', nRow, 4, false);

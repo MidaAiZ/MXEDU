@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914081333) do
+ActiveRecord::Schema.define(version: 20170916061800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,10 +146,10 @@ ActiveRecord::Schema.define(version: 20170914081333) do
 
   create_table "manage_material_cates", force: :cascade do |t|
     t.string "name"
-    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_deleted", default: false
+    t.integer "materials_count", default: 0
   end
 
   create_table "manage_material_files", force: :cascade do |t|
@@ -166,17 +166,17 @@ ActiveRecord::Schema.define(version: 20170914081333) do
 
   create_table "manage_product_cates", force: :cascade do |t|
     t.string "name"
-    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "products_count", default: 0
   end
 
   create_table "manage_product_companies", force: :cascade do |t|
     t.string "name"
-    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cate"
+    t.integer "products_count", default: 0
   end
 
   create_table "manage_schools", force: :cascade do |t|
@@ -188,6 +188,9 @@ ActiveRecord::Schema.define(version: 20170914081333) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_deleted", default: false
+    t.integer "users_count", default: 0
+    t.integer "products_count", default: 0
+    t.integer "materials_count", default: 0
   end
 
 end
