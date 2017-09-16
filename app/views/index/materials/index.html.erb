@@ -11,7 +11,7 @@
 
 <!--body wrapper start-->
 <div class="wrapper">
-    <div class="directory-info-row" id="pjax-replace">
+    <div class="directory-info-row">
         <div class="cdts-panel">
             <header class="panel-heading c">
                 <small>条件筛选</small>
@@ -55,7 +55,7 @@
             </ul>
         </div>
 
-        <div class="row">
+        <div class="row" id="pjax-replace">
             <% cache @materials.cache_key, expires_in: 10.minutes do %>
                 <% @materials.each do |m| %>
                     <% cache m.cache_key, expires_in: 20.minutes do %>
@@ -69,7 +69,7 @@
                                         <% end %>
                                         <div class="media-body">
                                             <div>
-                                                <span><%= m.school.name if m.school %></span> <small> <%= m.grade %></small><br>
+                                                <span><%= m.school.name if m.school %></span> <small class='small'> <%= m.grade %></small><br>
                                                 <span class='no-wp'><%= m.intro %></span><br>
                                                 <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
                                             </div>

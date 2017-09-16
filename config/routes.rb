@@ -71,11 +71,13 @@ Rails.application.routes.draw do
     get 'counts' => 'main#counts'
     get 'products_count' => 'main#products_count'
     get 'viewers_count' => 'main#viewers_count'
+    get 'total_count' => 'main#total_count'
 
     # users
     resources :users do
         get 'appoints' => 'appoints#index', as: :appoints
         get 'histories' => 'histories#index', as: :histories
+        get 'mat_histories' => 'mat_histories#index', as: :mat_histories
     end
 
     # products
@@ -95,6 +97,7 @@ Rails.application.routes.draw do
 
     #histories
     resources :histories
+    resources :mat_histories
 
     #images
     resources :images

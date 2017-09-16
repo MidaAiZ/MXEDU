@@ -2,7 +2,7 @@
 <div class="page-heading">
   <% if @user %>
       <h3>
-          产品浏览历史
+          资料浏览历史
       </h3>
       <ul class="breadcrumb">
           <li>
@@ -14,7 +14,7 @@
       </ul>
   <% else %>
       <h3>
-          产品浏览记录
+          资料浏览记录
       </h3>
       <ul class="breadcrumb">
           <li>
@@ -61,7 +61,7 @@
                 <tr>
                   <th>用户姓名/IP地址</th>
                   <th>联系方式</th>
-                  <th>浏览产品</th>
+                  <th>浏览资料</th>
                   <th>上次浏览时间</th>
 				  <th>浏览次数</th>
                 </tr>
@@ -79,7 +79,7 @@
                               <td>IP: <%= h.remote_ip %></td>
                               <td>无</td>
                           <% end %>
-    					  <td><%= link_to h.product_name, manage_product_url(h.p_id) %></td>
+    					  <td><%= link_to h.material_name, manage_material_url(h.material_id) %></td>
     					  <td><%= h.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
     					  <td><%= h.times %></td>
     					</tr>

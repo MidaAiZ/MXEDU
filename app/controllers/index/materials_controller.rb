@@ -16,10 +16,9 @@ class Index::MaterialsController < IndexController
   # GET /index/materials/1
   # GET /index/materials/1.json
   def show
-    if !@user && @material.need_login
-      Cache.new[request.remote_ip + '_history'] = request.url
-    end
-    @likes = Index::Material.sort({cate: @material.cate_id, school: @material.school_id}).where.not(id: @material.id).limit(5)
+    Index::MatHistory.add @user, @material, request.remote_ip
+    @likes = Index::Material.sort({school: @material.school_id, cate: @material.cate_id}).where.not(id: @material.id).limit(5)
+    @user ||= Index::User.new
   end
 
   def download
@@ -29,6 +28,8 @@ class Index::MaterialsController < IndexController
       filepath = "#{Rails.root}/public#{@file.file.url}"
       filename = @file.name;
       send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
+      @file.update dload_count: @file.dload_count + 1
+      @file.material.update dload_count: @file.material.dload_count + 1
   end
 
   private

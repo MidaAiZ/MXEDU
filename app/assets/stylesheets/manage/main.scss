@@ -20,6 +20,21 @@
 	color: white;
 }
 
+.extra-pad {
+	height: 160px;
+	overflow: hidden;
+}
+
+.panel.green-box {
+  box-shadow: none;
+}
+
+.t-v {
+	width: 100%;
+	text-align: center;
+	color: #65cea7;
+}
+
 @media screen and (max-width: 500px) {
 	.wrapper {
 	    padding: 15px !important;

@@ -1,4 +1,4 @@
-class Manage::HistoriesController < ManageController
+class Manage::MatHistoriesController < ManageController
 	before_action :require_login
 	before_action :set_history, only: :show
 
@@ -7,10 +7,10 @@ class Manage::HistoriesController < ManageController
       page = params[:page] || 1
 	  if params[:user_id]
 		@user = Index::User.find params[:user_id]
-		nonpaged_histories = @user.histories.includes(:user)
+		nonpaged_histories = @user.mat_histories.includes(:user)
 		@histories = nonpaged_histories.page(page).per(count)
 	  else
-		nonpaged_histories = Index::History.all.includes(:user)
+		nonpaged_histories = Index::MatHistory.all.includes(:user)
 		@histories = nonpaged_histories.page(page).per(count)
 	  end
 	end
@@ -21,7 +21,7 @@ class Manage::HistoriesController < ManageController
 
 	private
 	def set_history
-		@history = Index::History.find_by_id params[:id]
+		@history = Index::MatHistory.find_by_id params[:id]
 		@code = 404 unless @history
 	end
 end

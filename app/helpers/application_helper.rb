@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def check_cur_ctrl(ctrl)
-	  if params[:controller] == ctrl
+	  if ctrl.include? params[:controller]
 		'nav-active'
 	  else
 		''
@@ -8,7 +8,7 @@ module ApplicationHelper
 	end
 
 	def check_cur_act(action)
-	  if params[:action] == action
+	  if action.include? params[:action]
 		'active'
 	  else
 		''

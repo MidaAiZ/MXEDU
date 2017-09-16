@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916061800) do
+ActiveRecord::Schema.define(version: 20170916184528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20170916061800) do
     t.index ["user_id"], name: "index_index_histories_on_user_id"
   end
 
+  create_table "index_mat_histories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "remote_ip"
+    t.bigint "material_id"
+    t.integer "times", default: 0
+    t.string "material_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index__mat_histories_on_mat_id"
+    t.index ["user_id"], name: "index__mat_histories_on_user_id"
+  end
+
   create_table "index_materials", force: :cascade do |t|
     t.string "name"
     t.string "tag"
@@ -55,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170916061800) do
     t.bigint "cate_id"
     t.integer "readtimes", default: 0
     t.string "grade"
+    t.integer "dload_count", default: 0
     t.index ["admin_id"], name: "index_materials_on_admin_id"
     t.index ["cate_id"], name: "index_materials_on_cate_id"
     t.index ["grade"], name: "index_materials_on_grade"
@@ -160,6 +173,7 @@ ActiveRecord::Schema.define(version: 20170916061800) do
     t.string "f_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dload_count", default: 0
     t.index ["material_id"], name: "index_manage_material_files_on_material_id"
     t.index ["name"], name: "index_manage_material_files_on_name"
   end

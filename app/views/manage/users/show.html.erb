@@ -28,12 +28,16 @@
                                     <div class="desk"><%= @user.name %></div>
                                 </li>
                                 <li>
+                                    <div class="title">电话</div>
+                                    <div class="desk"><%= @user.phone %></div>
+                                </li>
+                                <li>
                                     <div class="title">性别</div>
                                     <div class="desk"><%= @user.sex %></div>
                                 </li>
                                 <li>
                                     <div class="title">学校</div>
-                                    <div class="desk"><%= @user.school %></div>
+                                    <div class="desk"><%= @user.school.name if @user.school %></div>
                                 </li>
                                 <li>
                                     <div class="title">专业</div>
@@ -54,10 +58,19 @@
                 <div class="col-md-12">
                     <div class="panel">
                         <div class="panel-body p-states">
-                            <div class="summary pull-left">
-                                <h4>浏览记录</h4>
-                                <span>总次数</span>
-                                <h3><%= link_to @user.histories.sum(:times), manage_user_histories_path(@user) %></h3>
+                            <div class="col-xs-6">
+                                <div class="summary pull-left">
+                                    <h4>产品浏览记录</h4>
+                                    <span>总次数</span>
+                                    <h3><%= link_to @user.histories.sum(:times), manage_user_histories_path(@user) %></h3>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="summary pull-left">
+                                    <h4>资料浏览记录</h4>
+                                    <span>总次数</span>
+                                    <h3><%= link_to @user.mat_histories.sum(:times), manage_user_mat_histories_path(@user) %></h3>
+                                </div>
                             </div>
                             <div id="expense" class="chart-bar"></div>
                         </div>

@@ -74,7 +74,7 @@
                                     <div class="value">
                                         <%= link_to '-', manage_appoints_path, id: 'a-count' %>
                                     </div>
-                                    <div class="title"> 总预约量</div>
+                                    <div class="title"> 预约量</div>
                                 </div>
                             </div>
                         </div>
@@ -85,9 +85,9 @@
                                 </div>
                                 <div class="state-value">
                                     <div class="value">
-                                        <%= link_to '-', manage_histories_path, id: 'v-count' %>
+                                        <%= link_to '-', manage_materials_path, id: 'm-count' %>
                                     </div>
-                                    <div class="title"> 总访客量</div>
+                                    <div class="title"> 资料数</div>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                         <div class="panel-body">
                             <div class="row revenue-states">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <h4>近期流量统计</h4>
+                                    <h4>产品流量统计</h4>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <ul class="revenue-nav">
@@ -186,7 +186,7 @@
                                                  - <%= u.phone %>
                                             </div>
                                             <div class="u-info">
-                                                <p><span>学校: <%= u.school %></span> - 专业: <span><%= u.major %></span> - <span>年级: <%= u.grade %></span></p>
+                                                <p><span>学校: <%= u.school.name if u.school %></span> - 专业: <span><%= u.major %></span> - <span>年级: <%= u.grade %></span></p>
                                             </div>
                                         </div>
                                     </li>
@@ -197,7 +197,83 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body extra-pad">
+                            <h4 class="pros-title">资料统计 <span></span></h4>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-1"></div>
+                                    <p class="p-chart-title">今日访问量</p>
+                                    <div class="v-value" id='m-t-v-count'>-</div>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-2"></div>
+                                    <p class="p-chart-title">总访问量</p>
+                                    <div class="v-value" id='m-v-count'>-</div>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-3"></div>
+                                    <p class="p-chart-title">下载总次数</p>
+                                    <div class="v-value" id='m-d-count'>-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body extra-pad">
+                            <h4 class="pros-title">产品统计 <span></span></h4>
+                            <div class="col-sm-6 col-xs-6">
+                                <div id="visit-1"></div>
+                                <div class="v-info">今日访问量</div>
+                                <div class="v-value" id='p-t-v-count'>-</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div id="visit-2"></div>
+                                <div class="v-info">总访问量</div>
+                                <div class="v-value" id='p-v-count'>-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel green-box">
+                        <div class="panel-body extra-pad">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="knob">
+                                        <span class="chart" data-percent="0" id='p-v-count-percent'>
+                                            <span class="percent"><span id='p-v-count-percent-v'>- </span><span class="sm">产品访客占比</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="knob">
+                                        <span class="chart" data-percent="0" id='m-v-count-percent'>
+                                            <span class="percent"><span id='m-v-count-percent-v'>- </span><span class="sm">资料访客占比</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-xs-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class='t-v'>
+                                <h4>
+                                    <i class='fa fa-globe'></i>本站总访客量: <span id="v-total"> -</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!--body wrapper end-->
 

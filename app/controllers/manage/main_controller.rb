@@ -3,7 +3,7 @@ class Manage::MainController < ManageController
 	before_action :check_super, except: :index
 
     def index
-        @new_users = Index::User.new_user if @admin.super?
+        @new_users = Index::User.new_user.includes(:school) if @admin.super?
     end
 
     def counts
@@ -19,10 +19,20 @@ class Manage::MainController < ManageController
            cates = Manage::ProductCate.limit(5)
            counts = {}
            cates.each do |c|
-             counts[c.name] = c.products_count
+             counts[c.name] = c.products.count
            end
-           counts["其它"] = (counts["其它"] || 0 ) + Manage::ProductCate.where.not(id: cates.map{|c| c.id}).sum(:products_count)
+           counts["其它"] = (counts["其它"] || 0 ) +
+                            Index::Product.where.not(cate_id: cates.map{|c| c.id}).count +
+                            Index::Product.where(cate_id: nil).count
            counts
+        end
+
+        render json: info.to_json
+    end
+
+    def total_count
+        info = Rails.cache.fetch("#{cache_key}", expires_in: 10.minutes) do
+          set_m_p_v_info
         end
 
         render json: info.to_json
@@ -56,10 +66,11 @@ class Manage::MainController < ManageController
            u_count: Index::User.count, # 用户总数
            p_count: Index::Product.count, # 产品总数
            a_count: Index::Appoint.count, # 预约总数
-           v_count: Index::Product.sum("readtimes"), # 总浏览量
-           t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
+           m_count: Index::Material.count, # 总资料数
+        #    t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
            t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
-           t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
+           t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count +
+                      Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
         }
     end
 
@@ -95,4 +106,13 @@ class Manage::MainController < ManageController
         }
     end
 
+    def set_m_p_v_info
+        {
+            m_t_v_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).count,  # 今天访客量
+            m_v_count: Index::MatHistory.count,  # 资料总访客量
+            m_d_count: Index::Material.sum(:dload_count),  # 总下载次数
+            p_t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count,  # 今天访客量
+            p_v_count: Index::History.count,  # 产品总访客量
+        }
+    end
 end

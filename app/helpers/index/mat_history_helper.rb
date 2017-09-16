@@ -1,0 +1,2 @@
+module Index::MatHistoryHelper
+end

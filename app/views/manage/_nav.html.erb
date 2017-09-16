@@ -51,7 +51,7 @@
               </a>
             </li>
 
-            <li class="menu-list <%= check_cur_ctrl 'manage/products' %>">
+            <li class="menu-list <%= check_cur_ctrl ['manage/products', 'manage/product_cates', 'manage/product_companies'] %>">
               <a href="">
                 <i class="fa fa-laptop"></i>
                 <span>产品管理</span>
@@ -72,7 +72,7 @@
               </ul>
             </li>
 
-            <li class="menu-list <%= check_cur_ctrl 'manage/materials' %>">
+            <li class="menu-list <%= check_cur_ctrl ['manage/materials', 'manage/material_cates'] %>">
               <a href="">
                 <i class="fa fa-file-text"></i>
                 <span>资料管理</span>
@@ -102,14 +102,15 @@
               </ul>
             </li>
 
-            <li class="menu-list <%= check_cur_ctrl 'manage/histories' %>">
+            <li class="menu-list <%= check_cur_ctrl ['manage/histories', 'manage/mat_histories'] %>">
               <a href="">
                 <i class="fa fa-clock-o"></i>
                 <span>浏览记录</span>
               </a>
               <ul class="sub-menu-list">
                 <li>
-                  <a href="/manage/histories">全部记录</a>
+                  <a href="/manage/histories">产品记录</a>
+                  <a href="/manage/mat_histories">资料记录</a>
                 </li>
               </ul>
             </li>
@@ -125,7 +126,7 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-list">
+            <li class="menu-list <%= check_cur_ctrl ['manage/carousels', 'manage/schools'] %>">
               <a href="">
                 <i class="fa fa-cog"></i>
                 <span>系统设置</span>
