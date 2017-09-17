@@ -1,1 +1,2 @@
-json.extract! manage_material_cate, :id, :name, :products_count, :created_at, :updated_at
+json.extract! manage_material_cate, :id, :name, :materials_count
+json.created_at manage_material_cate.created_at.strftime('%Y-%m-%d %H:%M:%S')

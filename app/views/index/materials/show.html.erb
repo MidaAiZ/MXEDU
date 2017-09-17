@@ -3,6 +3,7 @@
     <h3>
         <%= @material.name %> <small> - <%= @material.cate.name %></small>
     </h3>
+    <small class="small">适用: <%= @material.school.name if @material.school %>&nbsp<%= @material.grade %></small>
 </div>
 <!-- page heading end-->
 
@@ -92,7 +93,8 @@
                     </section>
                     <div class="panel-body">
                         <div class="pull-right">
-                            <%= @material.fake_readtimes %>人浏览 |
+                            <%= @material.fake_readtimes %>人浏览
+                            &nbsp|&nbsp
                             <%= @material.fake_d_times %>人下载
                         </div>
                     </div>
@@ -113,12 +115,13 @@
                                     <div class="">
                                         <h5 class="media-heading p-info">
                                             <%= link_to l.name, material_path(l) %>
+                                            <small class='small'><%= l.cate.name if l.cate.name if l.cate %></small>
                                         </h5>
                                         <p class='p-intro no-wp'>
                                             <%= l.intro %>
                                         </p>
                                         <p class='p-intro no-wp'>
-                                            <span class='readtimes'>浏览<%= l.fake_readtimes %>次</span>
+                                            <span class='readtimes'>浏览<%= l.fake_readtimes %>次</span>&nbsp
                                             <span class='readtimes'>下载<%= l.fake_d_times %>次</span>
                                         </p>
                                     </div>

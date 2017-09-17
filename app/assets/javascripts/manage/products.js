@@ -51,3 +51,20 @@ function onChangeTag(input,tag) {
 $(function() {
     $('#tags_input').tagsInput({width:'auto'});
 });
+
+$(function() {
+    $("#proSearch").on("submit", function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        var value = $this.find("input").val();
+        if (value)
+            window.location = '/manage//products?name=' + value + '&tag=' + value;
+        else
+            window.location = '/manage/products';
+        return false;
+	})
+
+	if(getQueryString("name")) {
+		$("#proSearch").find("input").attr("placeholder", getQueryString("name"));
+	}
+})

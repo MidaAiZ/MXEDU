@@ -18,8 +18,8 @@
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
                     <%= image_tag @admin.avatar.mini, class: "media-object admin-avatar"  %>
-                    <div class="media-body">
-                        <h4><a href="#"><%= @admin.name %></a></h4>
+                    <div class="nav-u-info">
+                        <h5><a href="/manage/profile"><%= @admin.number %></a></h5>
                         <span><%= translate_role @admin.role %></span>
                     </div>
                 </div>
@@ -126,26 +126,23 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-list <%= check_cur_ctrl ['manage/carousels', 'manage/schools'] %>">
+            <li class="menu-list <%= check_cur_ctrl ['manage/admins', 'manage/carousels', 'manage/schools'] %>">
               <a href="">
                 <i class="fa fa-cog"></i>
                 <span>系统设置</span>
               </a>
               <ul class="sub-menu-list">
                 <li>
-                    <%= link_to '轮播图', manage_carousels_path %>
-                </li>
-                <li>
                     <%= link_to '院校管理', manage_schools_path %>
                 </li>
-                <!-- <li>
-                  <a href="/manage/profile">管理员信息</a>
+                <li>
+                    <%= link_to '轮播图设置', manage_carousels_path %>
                 </li>
                 <% if @admin.super? %>
                     <li>
-                      <a href="/manage/admins">全部管理员</a>
+                      <a href="/manage/admins">管理员设置</a>
                     </li>
-                <% end %> -->
+                <% end %>
               </ul>
             </li>
           </ul>
@@ -166,9 +163,9 @@
             <!--toggle button end-->
 
             <!--search start-->
-            <form class="searchform" action="/" method="post">
+            <!-- <form class="searchform" action="/" method="post">
                 <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
-            </form>
+            </form> -->
             <!--search end-->
 
             <!--notification menu start -->
@@ -215,59 +212,29 @@
                         </div>
                     </li>
                     <li>
-                        <!-- 判断是否登录 -->
-                        <% if session[:admin_id] %>
-                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <%= image_tag @admin.avatar.mini, class: "admin-avatar" %>
-                                <%= @admin.name %>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                <li>
-                                    <%= link_to manage_profile_path do %>
-                                      <i class="fa fa-user"></i> <span>个人中心</span>
-                                    <% end %>
-                                </li>
-                                <!-- <li>
-                                    <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                                </li> -->
-                                <li>
-                                    <%= link_to manage_logout_path, method: :post do %>
-                                      <i class="fa fa-sign-out"></i> <span>退出</span>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        <% else %>
-                            <%= link_to '登录', manage_login_path, type: "button", class: "btn btn-default", style: "margin-top: 8px;" %>
-                        <% end %>
+                        <a href="/manage/profile" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <%= image_tag @admin.avatar.mini, class: "admin-avatar" %>
+                            <%= @admin.number %>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li>
+                                <%= link_to manage_profile_path do %>
+                                  <i class="fa fa-user"></i> <span>个人中心</span>
+                                <% end %>
+                            </li>
+                            <!-- <li>
+                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            </li> -->
+                            <li>
+                                <%= link_to manage_logout_path, method: :post do %>
+                                  <i class="fa fa-sign-out"></i> <span>退出</span>
+                                <% end %>
+                            </li>
+                        </ul>
                     </li>
-
                 </ul>
             </div>
             <!--notification menu end -->
         </div>
         <!-- header section end-->
-
-
-    <% unless session[:admin_id] %>
-        <!-- Small login modal -->
-        <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <%= form_tag login_path, class: "form-inline" do %>
-                <div class="field">
-                    <%= label_tag "user[phone]", "手机号" %>
-                    <%= text_field_tag "user[phone]", '', placeholder: "输入手机号", class: "form-control" %>
-                </div>
-                <div class="field">
-                    <%= label_tag "user[password]", "密码" %>
-                    <%= password_field_tag "user[password]", '', placeholder: "输入密码", class: "form-control" %>
-                </div>
-                <div class="action">
-                    <%= submit_tag "登录" %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-    <% end %>

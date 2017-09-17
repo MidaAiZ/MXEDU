@@ -5,6 +5,11 @@
             <a href="">资料管理</a>
         </li>
         <li class="active">所有记录 </li>
+        <li class="pull-right flex">
+            <form class="" id='matSearch' method="get">
+                <input type="text" class="form-control" name="name" placeholder="搜索资料" />
+            </form>
+        </li>
     </ul>
 </div>
 <!-- page heading end-->
@@ -99,7 +104,7 @@
                                                     <div>
                                                         <span><%= m.school.name if m.school %></span> <small> <%= m.grade %></small><br>
                                                         <span class='no-wp'><%= m.intro %></span><br>
-                                                        <span class='small'>阅读量: <%= m.readtimes || 0 %> | 下载量: <%= m.d_times || 0 %> </span>
+                                                        <span class='small'>阅读量: <%= m.readtimes || 0 %>&nbsp |&nbsp下载量: <%= m.d_times || 0 %> </span>
                                                     </div>
                                                     <div class="social-links">
                                                         <div class="tags-pane">

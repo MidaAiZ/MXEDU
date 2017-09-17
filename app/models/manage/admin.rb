@@ -20,7 +20,8 @@ class Manage::Admin < ApplicationRecord
                         allow_blank: false
      validates :role, presence: true,
                   length: { minimum: 1, too_short: "管理员角色不能为空",
-                            maximum: 32, too_long: '角色名%{count}个字符' }
+                            maximum: 32, too_long: '角色名%{count}个字符' },
+                  inclusion: ['super', 'common']
      validates :password, presence: true, length: { minimum: 6, maximum: 20 },
                           format: { with: Validate::VALID_PASSWORD_REGEX },
                           allow_blank: false, on: [:create   ]
@@ -29,6 +30,8 @@ class Manage::Admin < ApplicationRecord
 
     # validates :number, uniqueness: true
     # validates :password_digest, allow_blank: false
+
+    scope :un_deleted, ->() { where(is_deleted: false) }
 
     def super?
         self.role == 'super'

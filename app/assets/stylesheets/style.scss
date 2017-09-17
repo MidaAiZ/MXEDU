@@ -4759,16 +4759,17 @@ img.cover {
 
 .item {
     position: relative;
-    .tag {
+    .cate {
         position: absolute;
         left: 5px;
         top: 5px;
         border-radius: 3px;
-        font-size: 1.1em;
+        font-size: 1em;
         font-weight: lighter;
         color: white;
-        background-color: #ff5200;
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 10;
+        padding: 1px 2px;
     }
     &.product {
         margin-bottom: 20px;
@@ -4853,8 +4854,36 @@ img.cover {
   }
 }
 
-
 .form-group {
     display: inline-block;
     width: 100%;
+}
+
+.nav-u-info {
+    display: inline-block;
+    margin-left: 5px;
+    h5 {
+        margin-bottom: 0px;
+    }
+    a {
+        color: white;
+    }
+    span {
+        color: #ddd;
+        font-size: 12px;
+    }
+}
+
+.n-p-t {
+    padding-top: 0;
+}
+
+li.flex {
+    display: flex;
+}
+
+.t-center {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
 }

@@ -257,3 +257,15 @@ function getQueryString(name){
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  decodeURI(r[2]); return null;
 }
+
+// 导航栏搜索功能
+$("#navSearch").on("submit", function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var value = $this.find("input").val();
+    if (value)
+        window.location = '/materials?school=NONE&name=' + value + '&tag=' + value;
+    else
+        window.location = '/materials?school=NONE';
+    return false;
+})

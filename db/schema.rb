@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916184528) do
+ActiveRecord::Schema.define(version: 20170917181602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170916184528) do
     t.index ["admin_id"], name: "index_materials_on_admin_id"
     t.index ["cate_id"], name: "index_materials_on_cate_id"
     t.index ["grade"], name: "index_materials_on_grade"
-    t.index ["name"], name: "index_materials_on_name"
+    t.index ["name", "tag"], name: "index_materials_on_name_tag"
     t.index ["school_id"], name: "index_materials_on_school_id"
   end
 
@@ -103,10 +103,12 @@ ActiveRecord::Schema.define(version: 20170916184528) do
     t.bigint "school_id"
     t.bigint "cate_id"
     t.bigint "company_id"
+    t.string "tag"
     t.index ["admin_id"], name: "index_index_products_on_admin_id"
     t.index ["cate_id"], name: "index_products_on_cate_id"
     t.index ["company_id"], name: "index_products_on_company_id"
     t.index ["info"], name: "index_index_products_on_info", using: :gin
+    t.index ["name", "tag"], name: "index_products_on_name_tag"
     t.index ["school_id"], name: "index_products_on_school_id"
   end
 
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 20170916184528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.boolean "is_deleted", default: false
   end
 
   create_table "manage_carousels", force: :cascade do |t|

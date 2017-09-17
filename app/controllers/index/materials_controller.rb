@@ -17,7 +17,7 @@ class Index::MaterialsController < IndexController
   # GET /index/materials/1.json
   def show
     Index::MatHistory.add @user, @material, request.remote_ip
-    @likes = Index::Material.sort({school: @material.school_id, cate: @material.cate_id}).where.not(id: @material.id).limit(5)
+    @likes = Index::Material.sort({school: @material.school_id, cate: @material.cate_id}).where.not(id: @material.id).limit(5).includes(:cate)
     @user ||= Index::User.new
   end
 

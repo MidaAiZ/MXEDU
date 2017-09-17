@@ -4,7 +4,7 @@ class Index::Product < ApplicationRecord
 	# 用于上传头像时保存图片参数
 	attr_accessor :x, :y, :width, :height, :rotate
 
-	store_accessor :info, :tag, :recommend, :need_login
+	store_accessor :info, :recommend, :need_login
 
 	belongs_to :school,
 				counter_cache: true,
@@ -47,10 +47,14 @@ class Index::Product < ApplicationRecord
 	def self.sort(cons = {})
 		_self = self
 		_self = _self.where(cate_id: cons[:cate]) if cons[:cate]
-		_self = _self.where(school_id: cons[:school]) if cons[:school]
+		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
 		_self = _self.where(company_id: cons[:company]) if cons[:company]
-		_self = _self.where("index_materials.name LIKE ?", cons[:name] ) if cons[:name]
-		_self = _self.where("index_materials.tag LIKE ?", cons[:tag] ) if cons[:tag]
+		if cons[:name] && cons[:tag]
+			_self = _self.where("index_products.name LIKE ? OR index_products.tag LIKE ?", "%#{cons[:name]}%", "%#{cons[:tag]}%")
+		else
+			_self = _self.where("index_products.name LIKE ?", "%#{cons[:name]}%" ) if cons[:name]
+			_self = _self.where("index_products.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
+		end
 
 		_self ||= self.all
 	end

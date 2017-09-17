@@ -17,5 +17,5 @@ class Manage::School < ApplicationRecord
 	 validates :city, length: { minimum: 1, too_short: '城市不能为空', maximum: 16, too_long: '城市名最大长度为%{count}' }
 	 validates :name, uniqueness: { message: "该学校已经存在" }, length: { minimum: 1, too_short: '学校名不能为空', maximum: 64, too_long: '学校名最大长度为%{count}' }
 
-	 default_scope { where(is_deleted: false).order(users_count: :DESC) }
+	 default_scope { order(users_count: :DESC) }
 end

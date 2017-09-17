@@ -22,6 +22,18 @@
     }
 }
 
+.cdts-panel + .panel-body {
+	padding-top: 0px;
+	margin-top: -15px;
+}
+
+.cdts-panel {
+	ul.cdts {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+
 @media screen and (max-width: 768px) {
 	.cdts-panel {
 		margin-top: 5px;

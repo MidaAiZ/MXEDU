@@ -17,6 +17,16 @@
 	padding-left: 10px;
 }
 
+.page-heading + .wrapper {
+    margin-top: -15px;
+}
+
+.wrapper {
+    .directory-info-row {
+        margin-top: 0;
+    }
+}
+
 @media screen and (max-width: 768px) {
 	.fileupload-new {
 	  width: 240px !important;

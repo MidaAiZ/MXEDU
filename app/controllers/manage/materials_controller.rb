@@ -91,7 +91,7 @@ class Manage::MaterialsController < ManageController
   # DELETE /index/materials/1
   # DELETE /index/materials/1.json
   def destroy
-    @material.destroy
+    @material.update is_deleted: true
     respond_to do |format|
       format.html { redirect_to materials_url, notice: 'Material was successfully destroyed.' }
       format.json { head :no_content }

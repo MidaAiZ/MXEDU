@@ -5,7 +5,16 @@
             <a href="/">首页</a>
         </li>
         <li class="active">校园产品 </li>
+        <li class="pull-right flex">
+            <form class="" id='proSearch' method="get">
+                <input type="text" class="form-control" name="name" placeholder="搜索产品" />
+            </form>
+        </li>
     </ul>
+    <div class="pull-right">
+        <!--search start-->
+        <!--search end-->
+    </div>
 </div>
 <!-- page heading end-->
 
@@ -30,7 +39,7 @@
                                     <% @schools.each do |s| %>
                                         <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
                                     <% end %>
-                                    <li><a href="JavaScript: void(0)">不限</a></li>
+                                    <li><a href="JavaScript: void(0)" data-value="NONE">不限</a></li>
                                 <% end %>
                             </ul>
                         </li>
@@ -70,6 +79,7 @@
                                                 <div class='product-block'>
                                                     <div class="item product" >
                                                         <%= link_to product_path(p) do %>
+                                                            <span class="cate small"><%= "#{p.school.name} " if p.school %><%= p.cate.name if p.cate %></span>
                                                             <%=  image_tag p.cover %>
                                                         <% end %>
                                                         <div class="info">
@@ -90,6 +100,9 @@
                                                     </div>
                                                 </div>
                                             <% end %>
+                                        <% end %>
+                                        <% if @products.empty? %>
+                                            <center><h4>暂无相关产品</h4></center>
                                         <% end %>
                                     <% end %>
                                 </div>

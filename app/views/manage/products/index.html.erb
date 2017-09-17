@@ -7,6 +7,11 @@
     <li class="active">
       所有记录
     </li>
+    <li class="pull-right flex">
+        <form class="" id='proSearch' method="get">
+            <input type="text" class="form-control" name="name" placeholder="搜索产品" />
+        </form>
+    </li>
   </ul>
 </div>
 <!-- page heading end-->
@@ -97,7 +102,7 @@
                                     <div class='product-block'>
                                         <div class="item product" >
                                             <%= link_to manage_product_path(p) do %>
-                                                <span class="tag cate"><%= p.cate.name if p.cate %></span>
+                                                <span class="cate small"><%= "#{p.school.name} " if p.school %><%= p.cate.name if p.cate %></span>
                                                 <%=  image_tag p.cover %>
                                             <% end %>
                                             <div class="info">

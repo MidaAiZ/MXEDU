@@ -34,3 +34,20 @@ $(function() {
 	})
 })// Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+
+$(function() {
+    $("#matSearch").on("submit", function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        var value = $this.find("input").val();
+        if (value)
+            window.location = '/materials?school=NONE&name=' + value + '&tag=' + value;
+        else
+            window.location = '/materials?school=NONE';
+        return false;
+    });
+
+    if(getQueryString("name")) {
+        $("#matSearch").find("input").attr("placeholder", getQueryString("name"));
+    }
+})

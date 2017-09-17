@@ -1,9 +1,8 @@
 class Manage::MainController < ManageController
     before_action :require_login
-	before_action :check_super, except: :index
 
     def index
-        @new_users = Index::User.new_user.includes(:school) if @admin.super?
+        @new_users = Index::User.new_user.includes(:school)
     end
 
     def counts

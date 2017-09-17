@@ -27,7 +27,7 @@ class Index::MatHistory < ApplicationRecord
 	   if h.id
 		 if (Time.now - h.updated_at > (Time.now - Time.now.midnight))
 		   h = self.new(material_id: m.id, user_id: u.id)
-		   m.update readtimes: (material.readtimes + 1)
+		   m.update readtimes: (m.readtimes + 1)
 		 elsif (Time.now - h.updated_at > (Time.now - 6.hours.ago))
 		   m.update readtimes: (m.readtimes + 1)
 		 end

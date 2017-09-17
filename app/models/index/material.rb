@@ -34,10 +34,13 @@ class Index::Material < ApplicationRecord
 		_self = self
 		_self = _self.where(cate_id: cons[:cate]) if cons[:cate]
 		_self = _self.where(grade: cons[:grade]) if cons[:grade]
-		_self = _self.where(school_id: cons[:school]) if cons[:school]
-		_self = _self.where("index_materials.tag LIKE ?", cons[:tag] ) if cons[:tag]
-		_self = _self.where("index_materials.name LIKE ?", cons[:name] ) if cons[:name]
-
+		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
+		if cons[:name] && cons[:tag]
+			_self = _self.where("index_materials.name LIKE ? OR index_materials.tag LIKE ?", "%#{cons[:name]}%", "%#{cons[:tag]}%")
+		else
+			_self = _self.where("index_materials.name LIKE ?", "%#{cons[:name]}%" ) if cons[:name]
+			_self = _self.where("index_materials.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
+		end
 		_self ||= self.all
 	end
 

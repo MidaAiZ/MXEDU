@@ -5,12 +5,17 @@
             <a href="/">首页</a>
         </li>
         <li class="active">学习资料 </li>
+        <li class="pull-right flex">
+            <form class="" id='matSearch' method="get">
+                <input type="text" class="form-control" name="name" placeholder="搜索资料" />
+            </form>
+        </li>
     </ul>
 </div>
 <!-- page heading end-->
 
 <!--body wrapper start-->
-<div class="wrapper">
+<div class="wrapper n-p-t">
     <div class="directory-info-row">
         <div class="cdts-panel">
             <header class="panel-heading c">
@@ -28,7 +33,7 @@
                             <% @schools.each do |s| %>
                                 <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
                             <% end %>
-                            <li><a href="JavaScript: void(0)">不限</a></li>
+                            <li><a href="JavaScript: void(0)" data-value="NONE">不限</a></li>
                         <% end %>
                     </ul>
                 </li>
@@ -71,7 +76,7 @@
                                             <div>
                                                 <span><%= m.school.name if m.school %></span> <small class='small'> <%= m.grade %></small><br>
                                                 <span class='no-wp'><%= m.intro %></span><br>
-                                                <span class='small'>阅读量: <%= m.fake_readtimes %> | 下载量: <%= m.fake_d_times %> </span>
+                                                <span class='small'>阅读量: <%= m.fake_readtimes %>&nbsp |&nbsp下载量: <%= m.fake_d_times %> </span>
                                             </div>
                                             <div class="social-links">
                                                 <div class="tags-pane">
@@ -90,6 +95,9 @@
                             </div>
                         </div>
                     <% end %>
+                <% end %>
+                <% if @materials.empty? %>
+                    <center><h4>暂无相关资料</h4></center>
                 <% end %>
             <% end %>
         </div>

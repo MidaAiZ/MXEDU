@@ -1,43 +1,30 @@
 class Manage::AdminsController < ManageController
-  before_action :require_login, except: [:new, :create]
-  before_action :set_manage_admin, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+  before_action :check_super, except: [:profile, :update_avatar]
+  before_action :set_manage_admin, only: [:update, :destroy]
 
   # GET /manage/admins
   # GET /manage/admins.json
   def index
-    @manage_admins = Manage::Admin.all
-  end
-
-  # GET /manage/admins/1
-  # GET /manage/admins/1.json
-  def show
+    @admins = Manage::Admin.un_deleted.all
   end
 
   def profile
-    @admin = Manage::Admin.find session[:admin_id]
-  end
-
-  # GET /manage/admins/new
-  def new
-    @manage_admin = Manage::Admin.new
-  end
-
-  # GET /manage/admins/1/edit
-  def edit
   end
 
   # POST /manage/admins
   # POST /manage/admins.json
   def create
-    @manage_admin = Manage::Admin.new(manage_admin_params)
+    @edit_admin = Manage::Admin.new(manage_admin_params)
+    @edit_admin.role = 'common'
 
     respond_to do |format|
-      if @manage_admin.save
-        format.html { redirect_to @manage_admin, notice: 'Admin was successfully created.' }
-        format.json { render :show, status: :created, location: @manage_admin }
+      if @edit_admin.save
+        format.html { redirect_to @edit_admin, notice: 'Admin was successfully created.' }
+        format.json { render :show, status: :created, location: @edit_admin }
       else
         format.html { render :new }
-        format.json { render json: @manage_admin.errors, status: :unprocessable_entity }
+        format.json { render json: @edit_admin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,12 +33,12 @@ class Manage::AdminsController < ManageController
   # PATCH/PUT /manage/admins/1.json
   def update
     respond_to do |format|
-      if @manage_admin.update(manage_admin_params)
-        format.html { redirect_to @manage_admin, notice: 'Admin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @manage_admin }
+      if @edit_admin.update(manage_admin_params)
+        format.html { redirect_to @edit_admin, notice: 'Admin was successfully updated.' }
+        format.json { render :show, status: :ok, location: @edit_admin }
       else
         format.html { render :edit }
-        format.json { render json: @manage_admin.errors, status: :unprocessable_entity }
+        format.json { render json: @edit_admin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -78,21 +65,28 @@ class Manage::AdminsController < ManageController
   # DELETE /manage/admins/1
   # DELETE /manage/admins/1.json
   def destroy
-    @manage_admin.destroy
+    unless @edit_admin.super?
+        @code = @edit_admin.update(is_deleted: true)
+    end
     respond_to do |format|
-      format.html { redirect_to manage_admins_url, notice: 'Admin was successfully destroyed.' }
-      format.json { head :no_content }
+      if @code
+        format.html { redirect_to manage_material_cates_url, notice: 'MaterialCate was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manage_material_cates_url, notice: '删除失败,无法删除超级管理员', status: 422 }
+        format.json { render json: { error: '删除失败,无法删除超级管理员' }, status: 422 }
+      end
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_manage_admin
-      @manage_admin = Manage::Admin.find(params[:id])
+      @edit_admin = Manage::Admin.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manage_admin_params
-      params.require(:manage_admin).permit(:number, :password_digest, :name, :role)
+      params.require(:admin).permit(:number, :password, :name)
     end
 end
