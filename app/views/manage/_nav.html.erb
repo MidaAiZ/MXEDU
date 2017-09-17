@@ -17,7 +17,7 @@
             <!-- visible to small devices only -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
-                    <%= image_tag @admin.avatar.mini, class: "media-object"  %>
+                    <%= image_tag @admin.avatar.mini, class: "media-object admin-avatar"  %>
                     <div class="media-body">
                         <h4><a href="#"><%= @admin.name %></a></h4>
                         <span><%= translate_role @admin.role %></span>
@@ -218,7 +218,7 @@
                         <!-- 判断是否登录 -->
                         <% if session[:admin_id] %>
                             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <%= image_tag @admin.avatar.mini %>
+                                <%= image_tag @admin.avatar.mini, class: "admin-avatar" %>
                                 <%= @admin.name %>
                                 <span class="caret"></span>
                             </a>

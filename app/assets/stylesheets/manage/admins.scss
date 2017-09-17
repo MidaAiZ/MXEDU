@@ -1,3 +1,28 @@
-// Place all the styles related to the Manage::admins controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#cropfile {
+	width: 150px;
+	height: auto;
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+	.fa {
+		position: absolute;
+		width: 140px;
+		height: 140px;
+		top: 15px;
+		left: 5px;
+		font-size: 60px;
+		line-height: 150px;
+		display: none;
+		background: rgba(0, 0, 0, 0.5);
+		color: white;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+
+	&:hover .fa {
+		display: inline-block;
+	}
+
+}

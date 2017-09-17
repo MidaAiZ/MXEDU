@@ -29,13 +29,13 @@ $(function() {
 			$("#p-v-count").text(res.p_v_count);
 
 			var total = res.m_v_count + res.p_v_count,
-				mPercent = (res.m_v_count / total).toFixed(2) * 100,
-			    pPercent = (res.p_v_count / total).toFixed(2) * 100;
+				pPercent = ((res.p_v_count / total) * 100).toFixed(1),
+				mPercent = ((res.m_v_count / total) * 100).toFixed(1);
 			$("#v-total").text(total);
-			$("#p-v-count-percent").attr("data-percent", mPercent);
-			$("#m-v-count-percent").attr("data-percent", pPercent);
-			$("#p-v-count-percent-v").text(mPercent + "%");
-			$("#m-v-count-percent-v").text(pPercent + "%");
+			$("#p-v-count-percent").attr("data-percent", pPercent);
+			$("#m-v-count-percent").attr("data-percent", mPercent);
+			$("#p-v-count-percent-v").text(pPercent + "%");
+			$("#m-v-count-percent-v").text(mPercent + "%");
 
 			$('.chart').easyPieChart({
 				//your configuration goes here

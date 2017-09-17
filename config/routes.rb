@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         get 'profile' => 'users#show'
+        post 'update/avatar' => 'users#update_avatar'
       end
     end
 
@@ -55,6 +56,9 @@ Rails.application.routes.draw do
 
   namespace :manage do
     resources :admins do
+        collection do
+            post 'update/avatar' => 'admins#update_avatar'
+        end
     end
 
     # root

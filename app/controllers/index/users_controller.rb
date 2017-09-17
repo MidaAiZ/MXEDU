@@ -58,11 +58,29 @@ class Index::UsersController < IndexController
     respond_to do |format|
       if @user.update(update_user_params)
         format.html { redirect_to ucenter_path, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.json { render :show, status: :ok }
       else
         set_select_cache
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_avatar
+    prms = params
+    @user.x = prms[:x]
+    @user.y = prms[:y]
+    @user.width = prms[:width]
+    @user.height = prms[:height]
+    @user.rotate = prms[:rotate]
+    avatar = prms[:avatar]
+    avatar = @user.avatar.thumb if avatar.blank?
+    respond_to do |format|
+      if @user.update(avatar: avatar)
+        format.json { render :show }
+      else
+        format.json { render json: @user.errors }
       end
     end
   end

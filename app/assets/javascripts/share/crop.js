@@ -14,8 +14,8 @@ var x = $("#posi_x"),
 var options = {
     //在这里改变裁剪框默认大小 删除即不制定裁剪比例
     aspectRatio: 1 / 1,
-    minContainerHeight: 100,
-    minContainerWidth: 100,
+    minContainerHeight: 200,
+    minContainerWidth: 400,
     preview: '.imgpreview',
     //the crop box should be within the canvas 0:后端补白
     viewMode: 1,
@@ -48,8 +48,7 @@ function croppics() {
 function showModal() {
     //启用模态框以及初始化裁剪(因为退出modal摧毁了画布所以要重新初始化)
     croppics();
-
-    imageFile.cropper(options);
+    // imageFile.cropper(options);
     $('#cropModal').modal();
     //裁剪图片
     inputFile.change(imageCrop);
@@ -78,11 +77,11 @@ function imageCrop() {
                 imageFile.cropper('replace', url);
             }
             reader.readAsDataURL(this.files.item(0));
-        } else $('#alertType').text("！ 请上传正确格式图片");
+        } else $('#alertType').text("请上传正确格式图片");
     }
 }
 
-function uploadCrop(name, ajaxUrl, successUrl) {
+function uploadCrop(ajaxUrl, successCb, method) {
     var url = imageFile.attr("src");
     // 上传后端进行压缩处理
     var croppedImage = imageFile.cropper("getCroppedCanvas");
@@ -90,52 +89,38 @@ function uploadCrop(name, ajaxUrl, successUrl) {
         var fd = new FormData($("#cropForm")[0]);
         $.ajax({
             url: ajaxUrl,
-            type: "POST",
+            type: method,
             data: fd,
             processData: false,
             contentType: false,
-            success: function() {
+            success: function(res) {
+                successCb(res);
                 $('#cropModal').modal('hide');
-                var accountId = $('#navAvatar').data("id");
-                $.ajax({
-                    url: successUrl + accountId,
-                    type: "get",
-                    dataType: "json",
-                    success: function(data, status) {
-                        var avatarUrl = data.avatar.url;
-                        if (avatarUrl) {
-                            $('#manAvatar').attr("src", avatarUrl);
-                            $('#navAvatar').attr("src", avatarUrl);
-                        } else {
-                            window.location = location;
-                        }
-                    },
-                    error: function() {
-                        window.location = location;
-                    }
-                });
+                $('#imagefile').attr("src", res.avatar.url)
             },
             error: function() {
-                alert("上传失败,请重新上传！ :)");
-            },
+                alert("上传失败，请刷新页面后重试！)");
+            }
         });
     } catch (e) {
-        alert(e)
+        console.log(e);
     } finally {
 
     }
 }
 
-// 检查浏览器是否支持blob，如果不支持则生成blob函数
+
 function checkBlob() {
     var array = new Int8Array([17, -45.3]);
 
     try {
         var jpeg = new Blob([array], {
-            type: "image/npg"
+            type: "image/png"
         });
+
     } catch (e) {
         // TypeError old chrome and FF
+
         window.BlobBuilder = window.BlobBuilder ||
             window.WebKitBlobBuilder ||
             window.MozBlobBuilder ||
@@ -153,9 +138,12 @@ function checkBlob() {
             // We're screwed, blob constructor unsupported entirely
         }
     }
+
+
 }
+// 检查浏览器是否支持blob，如果不支持则生成blob函数
+// 设置模态框显示
 $(document).ready(function() {
     checkBlob();
-    // 设置模态框
     $('#cropfile').on("click", showModal);
 })

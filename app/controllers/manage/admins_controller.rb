@@ -56,6 +56,25 @@ class Manage::AdminsController < ManageController
     end
   end
 
+  def update_avatar
+    prms = params
+    @admin.x = prms[:x]
+    @admin.y = prms[:y]
+    @admin.width = prms[:width]
+    @admin.height = prms[:height]
+    @admin.rotate = prms[:rotate]
+    avatar = prms[:avatar]
+    avatar = @admin.avatar.thumb if avatar.blank?
+    respond_to do |format|
+      if @admin.update(avatar: avatar)
+        format.json { render :show }
+      else
+        format.json { render json: @admin.errors }
+      end
+    end
+  end
+
+
   # DELETE /manage/admins/1
   # DELETE /manage/admins/1.json
   def destroy

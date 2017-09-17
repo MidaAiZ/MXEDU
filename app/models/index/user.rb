@@ -52,6 +52,6 @@ class Index::User < ApplicationRecord
                     inclusion: %w( 男 女 男生 女生 ), allow_blank: true
 
       default_scope { order('index_users.created_at DESC') }
-      scope :new_user, ->() { limit(4) }
+      scope :new_user, ->() { limit(3) }
 
 end
