@@ -24,10 +24,11 @@ var EditableTable = function () {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
                 jqTds[0].innerHTML = '<input type="text" class="form-control small" value="' + aData[0] + '">';
-				jqTds[1].innerHTML = '<input type="text" class="form-control small">';
-                jqTds[4].innerHTML = '<a class="edit" href="">保存</a>';
-				if (id) $(jqTds[4]).find("a.edit").attr("data-id", id);
-                jqTds[5].innerHTML = '<a class="cancel" href="">取消</a>';
+				jqTds[1].innerHTML = '<input type="text" class="form-control small" value="' + aData[1] + '">';
+				jqTds[2].innerHTML = '<input type="text" class="form-control small">';
+                jqTds[5].innerHTML = '<a class="edit" href="">保存</a>';
+				if (id) $(jqTds[5]).find("a.edit").attr("data-id", id);
+                jqTds[6].innerHTML = '<a class="cancel" href="">取消</a>';
             }
 
             function saveRow(oTable, nRow, id) {
@@ -39,17 +40,19 @@ var EditableTable = function () {
 					url:  url,
 					data: {
 						'admin[number]': jqInputs[0].value,
-						'admin[password]': jqInputs[1].value
+						'admin[name]': jqInputs[1].value,
+						'admin[password]': jqInputs[2].value
 					},
 					type: type,
 					dataType: 'JSON',
 					success: function(res) {
 						oTable.fnUpdate(res.number, nRow, 0, false);
-						oTable.fnUpdate(res.password, nRow, 1, false);
-						oTable.fnUpdate(res.role, nRow, 2, false);
-						oTable.fnUpdate(res.created_at, nRow, 3, false);
-						oTable.fnUpdate('<a class="edit" href="" data-id=' + res.id + '>编辑</a>', nRow, 4, false);
-						oTable.fnUpdate('<a class="delete" href="" data-id=' + res.id + '>删除</a>', nRow, 5, false);
+						oTable.fnUpdate(res.name, nRow, 1, false);
+						oTable.fnUpdate(res.password, nRow, 2, false);
+						oTable.fnUpdate(res.role, nRow, 3, false);
+						oTable.fnUpdate(res.created_at, nRow, 4, false);
+						oTable.fnUpdate('<a class="edit" href="" data-id=' + res.id + '>编辑</a>', nRow, 5, false);
+						oTable.fnUpdate('<a class="delete" href="" data-id=' + res.id + '>删除</a>', nRow, 6, false);
 						oTable.fnDraw();
 					},
 					error: function(err) {
@@ -102,7 +105,7 @@ var EditableTable = function () {
 
             $('#editable-sample_new').click(function (e) {
                 e.preventDefault();
-                var aiNew = oTable.fnAddData(['', '', '', '',
+                var aiNew = oTable.fnAddData(['', '', '', '', '',
                         '<a class="edit" href="">保存</a>', '<a class="cancel" data-mode="new" href="">取消</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
