@@ -1,6 +1,9 @@
 //= require ios-switch/switchery
 //= require ios-switch/ios-init
 
+//= require tags-input/tagsinput.min
+//= require share/tagsinput-init
+
 $(function() {
 	$("#btn-show-table").click(function() {
 		$(".show-table").show();
@@ -71,3 +74,18 @@ $(function() {
 		$form.trigger("submit");
 	})
 })
+
+function onAddTag(tag) {
+    alert("添加标签" + tag);
+}
+function onRemoveTag(tag) {
+    alert("删除标签 " + tag);
+}
+
+function onChangeTag(input,tag) {
+    alert("修改标签 " + tag);
+}
+
+$(function() {
+    $('#tags_input').tagsInput({width:'auto'});
+});

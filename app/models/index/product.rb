@@ -36,6 +36,7 @@ class Index::Product < ApplicationRecord
 	validates :price, numericality: { greater_than_or_equal_to: 0 }, length: { minimum: 0, too_short: '原价不能为空' }
 	validates :dis_price, numericality: { greater_than_or_equal_to: 0 }, length: { minimum: 0, too_short: '优惠价不能为空' }
 	validates :recommend, numericality: { less_than_or_equal_to: 5, greater_than_or_equal_to: 0 }
+	validates :tag, length: { maximum: 15, too_long: '标签最大长度为%{count}' }
 
 	validates :intro, length: { maximum: 128, too_long: '简介最长为%{count}个字符' }
 	validates :details, length: { minimum: 1, too_short: '详情不能为空', aximum: 10000, too_long: '详情最长为%{count}个字符' }

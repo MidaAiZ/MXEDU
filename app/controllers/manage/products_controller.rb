@@ -84,7 +84,7 @@ class Manage::ProductsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def index_product_params
-      params.require(:product).permit(:name, :cate_id, :school_id, :price, :dis_price, :intro, :details, :company_id, :cover, :recommend, :tags, :need_login)
+      params.require(:product).permit(:name, :cate_id, :school_id, :price, :dis_price, :intro, :details, :company_id, :cover, :recommend, :tag, :need_login)
     end
 
     def set_select_cache

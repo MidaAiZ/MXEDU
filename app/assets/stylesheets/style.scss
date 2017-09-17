@@ -2773,7 +2773,7 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
        TAGS INPUT STYLE
 -----------------------------*/
 
-div.tagsinput span.tag {
+span.tag {
     background: #65CEA7 !important;
     border-color: #65CEA7;
     color: #fff;
@@ -2782,7 +2782,7 @@ div.tagsinput span.tag {
     padding: 2px 10px;
 }
 
-div.tagsinput span.tag a {
+span.tag a {
     color: #43886e;
 }
 
@@ -4851,4 +4851,10 @@ img.cover {
     right: 0;
     opacity: 0;
   }
+}
+
+
+.form-group {
+    display: inline-block;
+    width: 100%;
 }

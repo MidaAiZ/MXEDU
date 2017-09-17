@@ -3,6 +3,7 @@
     <h3>
         <%= @material.name %> <small><%= @material.cate.name %></small>
     </h3>
+    <small class="small">适用: <%= @material.school.name if @material.school %>&nbsp<%= @material.grade %></small>
 </div>
 <!-- page heading end-->
 
@@ -31,6 +32,11 @@
                         <center><p>资料详情</p></center>
                         <div class="fr-view">
                             <%= (@material.details || '暂无内容').html_safe %>
+                        </div>
+                        <div class="pull-left">
+                            <div class="tags-pane">
+                                <%= @material.tag %>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,10 +88,9 @@
                     <div class="panel-body">
                         <div class="pull-right">
                             <!-- <span>今日<%#= @t_v_count %>人浏览</span> -->
-                            <span class='p-l'>总共<%= @material.readtimes %>人浏览</span>
-                            <br>
-                            <!-- <span>今日<%#= @t_a_count %>人咨询</span> -->
-                            <span class='p-l'>总共<%= @material.d_times || 0 %>人下载</span>
+                            <span class='p-l'><%= @material.readtimes %>人浏览</span>
+                             <span class="">&nbsp|&nbsp</span>
+                             <span class=''><%= @material.d_times || 0 %>人下载</span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +102,7 @@
                 <br>
                 <span>更新时间: <i><%= @material.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
                 <br>
-                <span>发布者: <%#= @material.admin.number %></span>
+                <span>发布者: <%= @material.admin.number if @material.admin %></span>
             </p>
             <span>
             </span>

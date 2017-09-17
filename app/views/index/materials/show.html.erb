@@ -33,6 +33,11 @@
                                 <%= (@material.details || '暂无内容').html_safe %>
                               <% end %>
                             </div>
+                            <div class="pull-left">
+                                <div class="tags-pane">
+                                    <%= @material.tag %>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <section class="panel">

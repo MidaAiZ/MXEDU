@@ -21,7 +21,7 @@
                     </div>
 
                     <fieldset title="第一步">
-                        <legend>填写资料信息</legend>
+                        <legend>基本信息</legend>
                         <section class='panel'>
                             <header class="panel-heading">
                                 基本信息
@@ -103,6 +103,13 @@
                                                      </span>
                                             </div>
                                         </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label class=" col-md-2 control-label">资料标签</label>
+                                            <div class="col-md-10">
+                                                <input id="tags_input" type="text" class="tags form-control" name="material[tag]" value="<%= @material.tag %>" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -142,9 +149,6 @@
 
 <%= stylesheet_link_tag 'file-upload/fileupload.min' %>
 <%= javascript_include_tag 'file-upload/fileupload.min' %>
-
-<%= stylesheet_link_tag 'tags-input/tagsinput' %>
-<%= javascript_include_tag 'tags-input/tagsinput.min' %>
 
 <%= stylesheet_link_tag 'dropzone/css/dropzone' %>
 <%= javascript_include_tag 'dropzone/dropzone' %>

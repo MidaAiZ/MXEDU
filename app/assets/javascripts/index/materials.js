@@ -1,3 +1,5 @@
+//= require share/tagsinput-init
+
 function filesize(size) {
   var string;
   if (size >= 100000000000) {

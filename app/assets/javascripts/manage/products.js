@@ -1,5 +1,6 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+//= require tags-input/tagsinput.min
+//= require share/tagsinput-init
+
 $(function() {
 	$("#btn-show-table").click(function() {
 		$(".show-table").show();
@@ -35,3 +36,18 @@ $(function() {
 	if (!type) type = 'all';
 	$("#filters").find("li[data-type=" + type + "]").addClass("active");
 })
+
+function onAddTag(tag) {
+    alert("添加标签" + tag);
+}
+function onRemoveTag(tag) {
+    alert("删除标签 " + tag);
+}
+
+function onChangeTag(input,tag) {
+    alert("修改标签 " + tag);
+}
+
+$(function() {
+    $('#tags_input').tagsInput({width:'auto'});
+});

@@ -1,5 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+//= require share/tagsinput-init
+
 $(function() {
 	// var type = getQueryString('type');
 	// if (!type) type = 'all';

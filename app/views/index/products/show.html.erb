@@ -2,7 +2,7 @@
 <!-- page heading start-->
     <div class="page-heading">
         <h3>
-            <%= @product.name %> <small> - <%= @product.company %></small>
+            <%= @product.name %> <small> - <%= @product.company.name if @product.company %></small>
         </h3>
     </div>
     <!-- page heading end-->
@@ -42,6 +42,11 @@
                                 </div>
                             </div>
                             <div class="panel-body">
+                                <div class="pull-left">
+                                    <div class="tags-pane">
+                                        <%= @product.tag %>
+                                    </div>
+                                </div>
                                 <div class="pull-right">
                                     <%= @product.fake_readtimes %>人浏览过
                                 </div>
