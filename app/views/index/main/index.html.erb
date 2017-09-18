@@ -127,7 +127,7 @@
                             <header class="panel-heading">
                                 <% c_id = @products[key][0] %>
 
-                                <%= link_to key, "#{products_url}?cate_id=#{c_id}" %>
+                                <%= link_to key, "#{products_url}?cate=#{c_id}" %>
                             </header>
                             <div class="panel-body">
                                 <div class="show-block">
@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%= link_to '更多>>', "#{products_url}?cate_id=#{c_id}", class: 'pull-right'  %>
+                                <%= link_to '更多>>', "#{products_url}?cate=#{c_id}", class: 'pull-right'  %>
                             </div>
                         </section>
                      <% end %>
