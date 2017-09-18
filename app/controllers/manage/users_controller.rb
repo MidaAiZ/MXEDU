@@ -7,7 +7,7 @@ class Manage::UsersController < ManageController
 		page = params[:page] || 1
 
 	 	nonpaged_users = Index::User.all
-		@users = nonpaged_users.page(page).per(count)
+		@users = nonpaged_users.page(page).per(count).includes(:school)
 	end
 
 	def show
