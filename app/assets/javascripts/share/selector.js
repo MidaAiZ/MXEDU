@@ -95,8 +95,10 @@ $(function() {
 	var cons = [];
 	var arg = [];
 	for (var i in arr) {
-		arg = arr[i].split("=");
-		cons.push([arg[0], arg[1]]);
+		if (arr[i] != "") {
+			arg = arr[i].split("=");
+			cons.push([arg[0], arg[1]]);
+		}
 	}
 
 	for (var i in cons) {
