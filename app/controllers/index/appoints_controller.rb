@@ -22,31 +22,7 @@ class Index::AppointsController < IndexController
       end
     end
   end
-
-  # PATCH/PUT /index/appoints/1
-  # PATCH/PUT /index/appoints/1.json
-  def update
-    respond_to do |format|
-      if @appoint.update(index_appoint_params)
-        format.html { redirect_to @appoint, notice: 'Appoint was successfully updated.' }
-        format.json { render :show, status: :ok, location: @appoint }
-      else
-        format.html { render :edit }
-        format.json { render json: @appoint.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /index/appoints/1
-  # DELETE /index/appoints/1.json
-  def destroy
-    @appoint.destroy
-    respond_to do |format|
-      format.html { redirect_to index_appoints_url, notice: 'Appoint was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_index_appoint

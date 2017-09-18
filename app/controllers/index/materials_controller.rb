@@ -11,6 +11,7 @@ class Index::MaterialsController < IndexController
     nonpaged_materials = Index::Material.sort(cons)
     @materials = nonpaged_materials.page(page).per(count).includes(:cate, :school)
     set_cdts
+    set_title "学习资料"
   end
 
   # GET /index/materials/1
@@ -19,6 +20,7 @@ class Index::MaterialsController < IndexController
     Index::MatHistory.add @user, @material, request.remote_ip
     @likes = Index::Material.sort({school: @material.school_id, cate: @material.cate_id}).where.not(id: @material.id).limit(5).includes(:cate)
     @user ||= Index::User.new
+    set_title @material.name
   end
 
   def download

@@ -10,6 +10,7 @@ class Index::UsersController < IndexController
 
   # GET /index/users/1/edit
   def edit
+    set_title "修改资料"
   end
 
   # POST /index/users

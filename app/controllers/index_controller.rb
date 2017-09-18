@@ -10,4 +10,7 @@ class IndexController < ApplicationController
       redirect_to login_path and return unless check_login
     end
 
+    def set_title title
+        @title = title
+    end
 end

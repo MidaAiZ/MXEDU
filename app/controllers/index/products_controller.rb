@@ -11,6 +11,7 @@ class Index::ProductsController < IndexController
     nonpaged_products = Index::Product.sort(cons)
     @products = nonpaged_products.page(page).per(count).includes(:company)
     set_cdts
+    set_title "校园产品"
   end
 
   # GET /index/products/1
@@ -23,6 +24,7 @@ class Index::ProductsController < IndexController
         @likes = Index::Product.sort({school: @product.school_id, cate: @product.cate_id}).where.not(id: @product.id).limit(5).includes(:cate)
         @user ||= Index::User.new
     end
+    set_title @product.name
   end
 
   private

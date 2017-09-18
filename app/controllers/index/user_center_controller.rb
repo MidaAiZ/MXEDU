@@ -2,6 +2,7 @@ class Index::UserCenterController < IndexController
 	before_action :require_login
 
 	def index
+		set_title "个人中心"
 	end
 
 	def orders
@@ -23,6 +24,7 @@ class Index::UserCenterController < IndexController
 
   	  nonpaged_histories = @user.histories
       @histories = nonpaged_histories.page(page).per(count).includes(:product)
+	  set_title "浏览记录"
 	end
 
 	def history
