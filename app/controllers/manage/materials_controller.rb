@@ -1,6 +1,6 @@
 class Manage::MaterialsController < ManageController
   before_action :require_login
-  before_action :set_material, only: [:show, :edit, :update, :destroy, :upload, :uploader]
+  before_action :set_material, only: [:show, :edit, :update, :destroy, :upload, :uploader, :delete_file]
   before_action :set_select_cache, only: [:index, :new, :edit]
 
   # GET /index/materials
@@ -92,6 +92,15 @@ class Manage::MaterialsController < ManageController
   # DELETE /index/materials/1.json
   def destroy
     @material.update is_deleted: true
+    respond_to do |format|
+      format.html { redirect_to materials_url, notice: 'Material was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_file
+    @file = @material.files.find_by_id params[:file_id]
+    @file.destroy
     respond_to do |format|
       format.html { redirect_to materials_url, notice: 'Material was successfully destroyed.' }
       format.json { head :no_content }

@@ -110,6 +110,7 @@ Rails.application.routes.draw do
     resources :materials do
         get 'upload' => 'materials#upload', as: :upload
         post 'upload' => 'materials#uploader', as: :uploader
+        delete '/files/:file_id' => 'materials#delete_file'
         collection do
             get 'download/:file_id/:filename' => 'materials#download'
         end

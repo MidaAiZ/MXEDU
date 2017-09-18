@@ -163,6 +163,28 @@ fieldset {
             font-size: 40px !important;
         }
     }
+
+	.f-del {
+		display: none;
+		cursor: pointer;
+		position: absolute;
+		font-size: 20px;
+		top: -5px;
+		right: -5px;
+		width: 28px;
+		height: 28px;
+		line-height: 15px;
+		z-index: 11;
+		color: white;
+		background: #fa2f2f;
+		border-radius: 50%;
+		padding: 5px;
+		.fa {
+			margin-top: -1px;
+			margin-left: 1px;
+		}
+	}
+
     &:hover {
         .dload {
             display: inline-block;
@@ -174,6 +196,9 @@ fieldset {
             // display: none;
             background-color: transparent;
         }
+		.f-del {
+			display: inline-block;
+		}
         img {
             opacity: 0.4;
         }

@@ -64,7 +64,7 @@
 								<div class="files">
 									<div class="row">
 										<% @material.files.each do |f| %>
-											<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+											<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 file tooltips" data-placement="top" data-toggle="tooltip"  data-original-title="上传日期: <%= f.created_at.strftime('%Y-%m-%d') %> 下载量: <%= f.dload_count %>">
 												<div class="file-pre">
 													<div class="details">
 		                                                <div class="top">
@@ -91,6 +91,9 @@
 		                                                <% else %>
 		                                                    <i class="fa fa-file-text ico f-type"></i>
 		                                                <% end %>
+                                                        <a class="f-del" data-file-id="<%= f.id %>" data-material-id="<%= @material.id %>">
+															<i class="fa fa-times"></i>
+														</a>
 														<a class="dload" data-src="<%= f.manage_dload_url %>">
 															<i class="fa fa-cloud-download ico"></i>
 														</a>

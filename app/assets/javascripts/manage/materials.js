@@ -17,12 +17,31 @@ $(function() {
 	})
 
 	$("#del").click(function() {
-		var f = confirm("确定要删除该产品吗?");
+		var f = confirm("确定要删除该资料吗?");
         if (f == false) {
             return;
         }
 
 		$("#del-material").trigger("submit")
+	})
+
+	$(".f-del").click(function() {
+		var f = confirm("确定要删除该文件吗?");
+        if (f == false) {
+            return;
+        }
+		var $this = $(this);
+		$.ajax({
+			url: "/manage/materials/" + $this.data("material-id") + "/files/" + $this.data("file-id"),
+			type: "delete",
+			dataType: "JSON",
+			success: function() {
+				$this.parentsUntil(".file").remove();
+			},
+			error: function() {
+				alert("删除失败!")
+			}
+		})
 	})
 
 	// 评星
