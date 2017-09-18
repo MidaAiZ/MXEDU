@@ -11,5 +11,6 @@ class Manage::UsersController < ManageController
 
 	def show
 		@user = Index::User.find params[:id]
+		@histories = @user.histories.limit(20)
 	end
 end

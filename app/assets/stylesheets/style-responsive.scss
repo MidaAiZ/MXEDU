@@ -346,6 +346,13 @@
     .no-m-b {
         margin-bottom: 0px;
     }
+
+    .timeline {
+        img {
+            max-width: 80px;
+            max-height: 80px;
+        }
+    }
 }
 
 @media screen and (max-width: 680px) {

@@ -31,7 +31,11 @@
                               <i class="fa fa-user"></i>个人中心
                             <% end %>
                         </li>
-                        <li><a href="#"><i class="fa fa-cog"></i>浏览记录</a></li>
+                        <li>
+                            <%= link_to ucenter_histories_path do %>
+                                <i class="fa fa-clock-o"></i>浏览记录
+                            <% end %>
+                        </li>
                         <li>
                             <%= link_to logout_path, method: :post do %>
                                 <i class="fa fa-sign-out"></i>退出
@@ -168,7 +172,11 @@
                                       <i class="fa fa-user"></i>个人中心
                                     <% end %>
                                 </li>
-                                <li><a href="#"><i class="fa fa-cog"></i>浏览记录</a></li>
+                                <li>
+                                    <%= link_to ucenter_histories_path do %>
+                                        <i class="fa fa-clock-o"></i>浏览记录
+                                    <% end %>
+                                </li>
                                 <li>
                                     <%= link_to logout_path, method: :post do %>
                                         <i class="fa fa-sign-out"></i>退出

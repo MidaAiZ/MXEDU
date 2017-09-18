@@ -25,5 +25,14 @@
 	&:hover .fa {
 		display: inline-block;
 	}
+}
 
+@media screen and (max-width: 768px) {
+	section .wrapper {
+		margin-top: 15px;
+	}
+	.histories {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }

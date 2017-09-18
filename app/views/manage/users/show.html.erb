@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 hidden">
+        <div class="col-md-8">
             <!-- <div class="row">
                 <div class="col-md-12">
                     <div class="panel">
@@ -153,85 +153,42 @@
             </div> -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel">
-                        <header class="panel-heading">
-                            浏览记录
-                            <span class="tools pull-right">
-                                <a class="fa fa-chevron-up toggle-show" href="javascript:;"></a>
-                                <a class="fa fa-times" href="javascript:;"></a>
-                             </span>
-                        </header>
-                        <div class="panel-body">
-                            <ul class="activity-list">
-                                <li>
-                                    <div class="avatar">
-                                        <img src="/assets/photos/user1.png" alt=""/>
+                    <div class="histories">
+                        <div>
+                            <h4 class="t-center">
+                                产品浏览记录
+                            </h4>
+                        </div>
+                        <div class="timeline">
+                            <article class="timeline-item alt">
+                                <div class="text-right">
+                                    <div class="time-show first n-m-t">
+                                        <a href="#" class="btn btn-primary"><%= Time.now.strftime('%Y-%m-%d') %></a>
                                     </div>
-                                    <div class="activity-desk">
-                                        <h5><a href="#">Jonathan Smith</a> <span>Uploaded 5 new photos</span></h5>
-                                        <p class="text-muted">7 minutes ago near Alaska, USA</p>
-                                        <div class="album">
-                                            <a href="#">
-                                                <img alt="" src="/assets/gallery/image1.jpg">
-                                            </a>
-                                            <a href="#">
-                                                <img alt="" src="/assets/gallery/image2.jpg">
-                                            </a>
-                                            <a href="#">
-                                                <img alt="" src="/assets/gallery/image3.jpg">
-                                            </a>
+                                </div>
+                            </article>
+                            <% @histories.each_with_index do |h, i| %>
+                                <article class="timeline-item <%= 'alt' if i % 2 == 0 %>">
+                                    <div class="timeline-desk">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <h1 class="red"><%= h.updated_at.strftime('%Y-%m-%d %H:%M') %></h1>
+                                                <span class="arrow-alt"></span>
+                                                    <%= link_to product_path(h.product) do %>
+                                                        <%= image_tag h.product.cover %>
+                                                    <% end %>
+                                                <span class="timeline-icon"></span>
+                                                <div class="album">
+                                                </div>
+                                                <div class="detail">
+                                                    <h4><%= link_to h.product.name, product_path(h.product) %></h4>
+                                                    <span class="no-wp"><%= h.product.intro %></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="avatar">
-                                        <img src="/assets/photos/user2.png" alt=""/>
-                                    </div>
-                                    <div class="activity-desk">
-                                        <h5><a href="#">John Doe</a> <span>Completed the Sight visit.</span></h5>
-                                        <p class="text-muted">2 minutes ago near Alaska, USA</p>
-                                        <div class="location-map">
-                                            <div id="map-canvas"></div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="avatar">
-                                        <img src="/assets/photos/user3.png" alt=""/>
-                                    </div>
-                                    <div class="activity-desk">
-
-                                        <h5><a href="#">Jonathan Smith</a> <span>attended a meeting with</span>
-                                            <a href="#">John Doe.</a></h5>
-                                        <p class="text-muted">2 days ago near Alaska, USA</p>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="avatar">
-                                        <img src="/assets/photos/user4.png" alt=""/>
-                                    </div>
-                                    <div class="activity-desk">
-
-                                        <h5><a href="#">Jonathan Smith</a> <span>completed the task “wireframe design” within the dead line</span></h5>
-                                        <p class="text-muted">4 days ago near Alaska, USA</p>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="avatar">
-                                        <img src="/assets/photos/user5.png" alt=""/>
-                                    </div>
-                                    <div class="activity-desk">
-
-                                        <h5><a href="#">Jonathan Smith</a> <span>was absent office due to sickness</span></h5>
-                                        <p class="text-muted">4 days ago near Alaska, USA</p>
-                                    </div>
-                                </li>
-
-
-                            </ul>
+                                </article>
+                            <% end %>
                         </div>
                     </div>
                 </div>

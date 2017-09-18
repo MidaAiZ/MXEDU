@@ -4875,7 +4875,11 @@ img.cover {
 }
 
 .n-p-t {
-    padding-top: 0;
+    padding-top: 0 !important;
+}
+
+.n-m-t {
+    margin-top: 0px !important;
 }
 
 li.flex {
@@ -4894,4 +4898,16 @@ li.flex {
 }
 .breadcrumb input {
     margin-top: -5px;
+}
+
+.timeline {
+    img {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .detail {
+        overflow: hidden;
+    }
 }

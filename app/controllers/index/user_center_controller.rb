@@ -2,7 +2,6 @@ class Index::UserCenterController < IndexController
 	before_action :require_login
 
 	def index
-
 	end
 
 	def orders

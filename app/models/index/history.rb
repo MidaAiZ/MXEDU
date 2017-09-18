@@ -1,4 +1,4 @@
-class Index::History < ApplicationRecord
+ class Index::History < ApplicationRecord
 	belongs_to :user,
 			   class_name: 'Index::User',
 			   foreign_key: :user_id,

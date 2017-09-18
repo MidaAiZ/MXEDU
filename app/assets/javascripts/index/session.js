@@ -31,7 +31,7 @@ $(function() {
 						}
 					}, 1000)
 				} else {
-					$code.removeAttr("disabled").text("获取验证码");
+					$code.removeClass("disabled").text("获取验证码");
 					alert("发送失败,请稍后尝试");
 				}
 			},

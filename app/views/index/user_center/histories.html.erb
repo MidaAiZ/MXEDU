@@ -1,0 +1,59 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/ucenter">个人中心</a>
+        </li>
+        <li class="active">产品浏览记录 </li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<div class="wrapper">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- <div class="panel">
+						<h4 class="t-center">
+							浏览记录
+						</h4>
+					</div> -->
+					<div class="histories">
+						<div class="timeline">
+							<article class="timeline-item alt">
+								<div class="text-right">
+									<div class="time-show first n-m-t">
+										<a href="#" class="btn btn-primary"><%= Time.now.strftime('%Y-%m-%d') %></a>
+									</div>
+								</div>
+							</article>
+							<% @histories.each_with_index do |h, i| %>
+								<article class="timeline-item <%= 'alt' if i % 2 == 0 %>">
+									<div class="timeline-desk">
+										<div class="panel">
+											<div class="panel-body">
+												<h1 class="red"><%= h.updated_at.strftime('%Y-%m-%d %H:%M') %></h1>
+												<span class="arrow-alt"></span>
+													<%= link_to product_path(h.product) do %>
+														<%= image_tag h.product.cover %>
+													<% end %>
+												<span class="timeline-icon"></span>
+												<div class="album">
+												</div>
+												<div class="detail">
+													<h4><%= link_to h.product.name, product_path(h.product) %></h4>
+													<span class="no-wp"><%= h.product.intro %></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</article>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
