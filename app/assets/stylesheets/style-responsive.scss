@@ -337,6 +337,7 @@
     .leave-cmnt {
         width: 100%;
         margin: 20px auto;
+        text-align: center;
     }
     .recom {
         display: block;
@@ -384,6 +385,16 @@
         }
     }
 }
+
+@media screen and (max-width: 350px) {
+    .breadcrumb input {
+        width: 90%;
+        float: right;
+        box-shadow: none;
+        max-width: 200px;
+    }
+}
+
 @media screen and (max-width: 300px) {
     .product-block {
         width: 90%;

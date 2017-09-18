@@ -4887,3 +4887,11 @@ li.flex {
     text-align: center;
     display: inline-block;
 }
+
+.breadcrumb li.pull-right:before {
+    content: "";
+    padding: 0px;
+}
+.breadcrumb input {
+    margin-top: -5px;
+}

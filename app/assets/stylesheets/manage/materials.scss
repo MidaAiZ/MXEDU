@@ -203,3 +203,24 @@ fieldset {
         }
     }
 }
+
+@media screen and (min-width: 768px) {
+	.breadcrumb li.pull-right {
+		margin-top: 5px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.breadcrumb li.pull-right {
+		margin-top: -2px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.page-heading {
+		.pull-right {
+			width: 50%;
+			white-space: nowrap;
+		}
+	}
+}
