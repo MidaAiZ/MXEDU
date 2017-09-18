@@ -74,7 +74,7 @@
                                                                 </strong>
                                                             </div>
                                                         </div>
-                                                        <% if /\A(image)/.match(f.f_type) %>
+                                                        <% if /\A(image)/.match(f.f_type) && (f.size || 0) < 100000 %>
                                                             <%= image_tag f.file %>
                                                         <% else %>
                                                             <i class="fa fa-file-text ico-mini f-type"></i>
