@@ -6,11 +6,11 @@ class Manage::Admin < ApplicationRecord
     # 使用插件建立用户密码验证体系
     has_secure_password
 
-    has_many :products,
+    has_many :products, -> { with_del },
              class_name: 'Index::Product',
              foreign_key: :admin_id
 
-    has_many :materials,
+    has_many :materials, -> { with_del },
              class_name: 'Index::materials',
              foreign_key: :admin_id
 
@@ -32,6 +32,7 @@ class Manage::Admin < ApplicationRecord
     # validates :password_digest, allow_blank: false
 
     scope :un_deleted, ->() { where(is_deleted: false) }
+    scope :with_del, -> { unscope(where: :is_deleted) }
 
     def super?
         self.role == 'super'

@@ -35,7 +35,8 @@ class Index::MaterialsController < IndexController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_material
-      @material = Index::Material.find(params[:id])
+      @material = Index::Material.with_del.find(params[:id])
+      redirect_to "/material_404" and return if @material.is_deleted
     end
 
     def set_cdts

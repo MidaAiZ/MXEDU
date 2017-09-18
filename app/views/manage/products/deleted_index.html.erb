@@ -2,15 +2,10 @@
 <div class="page-heading">
   <ul class="breadcrumb">
     <li>
-      <a href="">产品管理</a>
+      <a href="/manage/products">产品管理</a>
     </li>
     <li class="active">
-      所有记录
-    </li>
-    <li class="pull-right flex">
-        <form class="" id='proSearch' method="get">
-            <input type="text" class="form-control" name="name" placeholder="搜索产品" />
-        </form>
+      已删除产品
     </li>
   </ul>
 </div>
@@ -23,31 +18,6 @@
       <section class="panel">
         <div class="panel-body">
           <div class="adv-table editable-table ">
-            <div class="clearfix">
-              <div class="btn-group">
-                <%= link_to new_manage_product_path do %>
-                  <button class="btn btn-primary">
-                    创建产品
-                    <i class="fa fa-plus"></i>
-                  </button>
-                <% end %>
-              </div>
-              <div class="btn-group pull-right">
-                <button id='btn-show-block' class="btn btn-default active" ><i class="fa fa-th-large"></i></button>
-                <button id='btn-show-table' class="btn btn-default"><i class="fa fa-bars"></i></button>
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">工具
-                  <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right">
-                  <li>
-                    <a href="javascript:void(0)" id="print">打印</a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)" id="export">导出为Excel</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
             <div class="space15"></div>
             <div class="cdts-panel">
                 <header class="panel-heading c">
@@ -103,6 +73,10 @@
                                         <div class="item product" >
                                             <%= link_to manage_product_path(p) do %>
                                                 <span class="cate small"><%= "#{p.school.name} " if p.school %><%= p.cate.name if p.cate %></span>
+                                                <%= link_to manage_product_recover_path(p), method: :post, class: "recover" do %>
+                                                    <i class="fa fa-refresh"></i>
+                                                    <span>恢复</span>
+                                                <% end %>
                                                 <%=  image_tag p.cover %>
                                             <% end %>
                                             <div class="info">
@@ -127,51 +101,12 @@
                             </div>
                         </div>
                     </div>
-                    <!--startprint-->
-                    <div class="show-table">
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                          <thead>
-                            <tr>
-                              <th>名称</th>
-                              <th>分类</th>
-                              <th>价格</th>
-                              <th>发布日期</th>
-                              <th>发布者</th>
-                              <th>详情</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <!-- 此处动态生成 -->
-                            <% @products.each do |p| %>
-                              <% cache p.cache_key, expires_in: 10.minutes do %>
-                                <tr>
-                                    <td><%= p.name %></td>
-                                    <td><%= p.cate.name if p.cate %></td>
-                                    <td>
-                                        <% if p.price > p.dis_price %>
-                                            <small class='t-dis-price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                        <% end %>
-                                        <span><i class='fa fa-rmb'></i><%= p.dis_price %></span>
-                                    </td>
-                                    <td><%= p.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-                                    <td><%= p.admin.number %></td>
-                                    <td><%= link_to '查看', manage_product_path(p) %></td>
-                                </tr>
-                              <% end %>
-                            <% end %>
-                          </tbody>
-                        </table>
-                    </div>
-                    <!--endprint-->
                     <%= paginate @products %>
                 <% end %>
             </div>
           </div>
         </div>
       </section>
-      <div class="pull-right">
-          <%= link_to '已删除产品', deleted_manage_products_path %>
-      </div>
     </div>
   </div>
 </div>

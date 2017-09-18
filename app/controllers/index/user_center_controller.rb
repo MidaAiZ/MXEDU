@@ -22,7 +22,7 @@ class Index::UserCenterController < IndexController
       page = params[:page] || 1
 
   	  nonpaged_histories = @user.histories
-      @histories = nonpaged_histories.page(page).per(count)
+      @histories = nonpaged_histories.page(page).per(count).includes(:product)
 	end
 
 	def history

@@ -1,5 +1,5 @@
 class Manage::MaterialCate < ApplicationRecord
-	has_many :materials,
+	has_many :materials, -> { with_del },
 			 counter_cache: true,
 			 class_name: 'Index::Material',
 			 foreign_key: :cate_id

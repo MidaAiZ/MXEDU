@@ -1,5 +1,5 @@
 class Manage::ProductCate < ApplicationRecord
-	has_many :products,
+	has_many :products, -> { with_del },
 			 counter_cache: true,
 			 class_name: 'Index::Product',
 			 foreign_key: :cate_id

@@ -1,0 +1,68 @@
+<style>
+	.main-content {
+		background: none;
+	}
+	.form-signin {
+		margin-top: 10px;
+	}
+	#error_explanation {
+		color: red;
+	}
+</style>
+<div class="container">
+	<div class="text-center edit-heading">
+		<h2 class="" style='color: white'>编辑用户信息</h2>
+	</div>
+	<%= form_for(@user, url: manage_user_url(@user), html: { class: 'form-signin', id: 'register-form' }) do |f| %>
+
+	  <div>
+
+		  <div class="login-wrap">
+			  <% if @user.errors.any? %>
+			  <div id="error_explanation">
+				<h3>存在<%= @user.errors.count %>个错误</h3>
+
+				<ul>
+				<% @user.errors.full_messages.each do |message| %>
+				  <li><%= message %></li>
+				<% end %>
+				</ul>
+			  </div>
+			<% end %>
+				  <div class="form-group">
+					<label for="">姓名</label>
+		            <%= f.text_field :name, id: :user_name, autofocus: "",  placeholder: "请输入姓名", class: 'form-control' %>
+				  </div>
+
+		          <div class="radios">
+		              <label for="radio-01" class="label_radio col-lg-6 col-sm-6">
+		                  <input type="radio" value="男生" id="radio-01" name="index_user[sex]"> 男神
+		              </label>
+		              <label for="radio-02" class="label_radio col-lg-6 col-sm-6">
+		                  <input type="radio" value="女生" id="radio-02" name="index_user[sex]"> 女神
+		              </label>
+		          </div>
+				  <div class="form-group">
+					  <label for="">学校</label>
+					  <% cache @schools.cache_key, expires_in: 1.hours do %>
+						<%= f.select :school_id, @schools.all.map{|s| [s.name, s.id]}, {}, {class: "form-control", id: 'user_school'}  %>
+					  <% end %>
+				  </div>
+				  <div class="form-group">
+					  <label for="">专业</label>
+			          <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "请输入专业", class: 'form-control' %>
+				  </div>
+				  <div class="form-group">
+					  <label for="">年级</label>
+					  <%= f.select :grade, set_grades, {}, {class: "form-control", id: 'user_grade', placeholder: '年级'} %>
+				  </div>
+		          <button type="submit" class="btn btn-lg btn-login btn-block" id="edit-btn">
+		              <i class="fa fa-check"></i>
+		          </button>
+		  </div>
+	  </div>
+	<% end %>
+</div>
+<script>
+	$("body").addClass("edit-body");
+</script>

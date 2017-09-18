@@ -52,6 +52,9 @@
                                     <div class="desk"><%= @user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
                                 </li>
                             </ul>
+                            <%= link_to edit_manage_user_path(@user), style: 'float: right' do %>
+                              <span>修改</span><i class='fa fa-pencil'></i>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -174,14 +177,14 @@
                                             <div class="panel-body">
                                                 <h1 class="red"><%= h.updated_at.strftime('%Y-%m-%d %H:%M') %></h1>
                                                 <span class="arrow-alt"></span>
-                                                    <%= link_to product_path(h.product) do %>
+                                                    <%= link_to manage_product_path(h.product) do %>
                                                         <%= image_tag h.product.cover %>
                                                     <% end %>
                                                 <span class="timeline-icon"></span>
                                                 <div class="album">
                                                 </div>
                                                 <div class="detail">
-                                                    <h4><%= link_to h.product.name, product_path(h.product) %></h4>
+                                                    <h4><%= link_to h.product.name, manage_product_path(h.product) %></h4>
                                                     <span class="no-wp"><%= h.product.intro %></span>
                                                 </div>
                                             </div>

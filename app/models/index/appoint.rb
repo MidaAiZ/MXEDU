@@ -4,7 +4,7 @@ class Index::Appoint < ApplicationRecord
 			   foreign_key: :user_id,
 			   optional: true
 
-    belongs_to :product,
+    belongs_to :product, -> { with_del },
    		   class_name: 'Index::Product',
    		   foreign_key: :product_id
 

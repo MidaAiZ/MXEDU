@@ -3,7 +3,7 @@ class Index::Material < ApplicationRecord
 
 	store_accessor :info, :intro, :details, :need_login, :recommend
 
-	belongs_to :admin,
+	belongs_to :admin, -> { with_del },
 				class_name: 'Manage::Admin',
 				foreign_key: 'admin_id'
 
@@ -28,6 +28,8 @@ class Index::Material < ApplicationRecord
 	validates :cate, length: { minimum: 1, too_short: '类型不能为空' }
 
 	default_scope { where(is_deleted: false).order(readtimes: :DESC) }
+	scope :deleted, -> { unscope(where: :is_deleted).where(is_deleted: true) }
+	scope :with_del, -> { unscope(where: :is_deleted) }
 
 	# 复杂条件筛选
 	def self.sort(cons = {})

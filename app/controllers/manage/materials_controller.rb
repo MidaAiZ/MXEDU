@@ -1,7 +1,7 @@
 class Manage::MaterialsController < ManageController
   before_action :require_login
   before_action :set_material, only: [:show, :edit, :update, :destroy, :upload, :uploader, :delete_file]
-  before_action :set_select_cache, only: [:index, :new, :edit]
+  before_action :set_select_cache, only: [:index, :new, :edit, :deleted_index]
 
   # GET /index/materials
   # GET /index/materials.json
@@ -10,7 +10,7 @@ class Manage::MaterialsController < ManageController
     page = params[:page] || 1
     cons = params.slice(:name, :school, :cate, :tag, :grade)
     nonpaged_materials = Index::Material.sort(cons)
-    @materials = nonpaged_materials.page(page).per(count).includes(:school, :cate)
+    @materials = nonpaged_materials.page(page).per(count).includes(:school, :cate, :admin)
   end
 
   # GET /index/materials/1
@@ -107,10 +107,28 @@ class Manage::MaterialsController < ManageController
     end
   end
 
+  def deleted_index
+      count = params[:count] || 20
+      page = params[:page] || 1
+      cons = params.slice(:name, :school, :cate, :tag, :grade)
+      nonpaged_materials = Index::Material.sort(cons).deleted
+      @materials = nonpaged_materials.page(page).per(count).includes(:school, :cate, :admin)
+  end
+
+  def recover
+      @material = Index::Material.with_del.find(params[:material_id])
+      @material.update is_deleted: false
+      respond_to do |format|
+        format.html { redirect_to manage_material_url(@material) }
+        format.json { head :no_content }
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_material
-      @material = Index::Material.find(params[:id] || params[:material_id])
+      @material = Index::Material.with_del.find(params[:id] || params[:material_id])
+      redirect_to "/material_404" and return if @material.is_deleted
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

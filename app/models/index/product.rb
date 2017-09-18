@@ -26,7 +26,7 @@ class Index::Product < ApplicationRecord
 			 class_name: 'Index::Appoint',
 			 foreign_key: :product_id
 
-	belongs_to :admin,
+	belongs_to :admin, -> { with_del },
 				class_name: 'Manage::Admin',
 				foreign_key: :admin_id
 
@@ -42,6 +42,8 @@ class Index::Product < ApplicationRecord
 	validates :details, length: { minimum: 1, too_short: '详情不能为空', aximum: 10000, too_long: '详情最长为%{count}个字符' }
 
 	default_scope { where(is_deleted: false).order(readtimes: :DESC) }
+	scope :deleted, -> { unscope(where: :is_deleted).where(is_deleted: true) }
+	scope :with_del, -> { unscope(where: :is_deleted) }
 
 	# 复杂条件筛选
 	def self.sort(cons = {})

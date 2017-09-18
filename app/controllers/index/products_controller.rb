@@ -28,7 +28,8 @@ class Index::ProductsController < IndexController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_index_product
-      @product = Index::Product.find(params[:id])
+      @product = Index::Product.with_del.find(params[:id])
+      redirect_to "/product_404" and return if @product.is_deleted
     end
 
     def get_likes

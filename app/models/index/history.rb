@@ -3,7 +3,7 @@
 			   class_name: 'Index::User',
 			   foreign_key: :user_id,
 			   optional: true
-	belongs_to :product,
+	belongs_to :product, -> { with_del },
 			   class_name: 'Index::Product',
 			   foreign_key: :p_id
 

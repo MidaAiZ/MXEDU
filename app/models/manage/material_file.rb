@@ -1,7 +1,7 @@
 class Manage::MaterialFile < ApplicationRecord
 	mount_uploader :file, MaterialAttachUploader
 
-	belongs_to :material,
+	belongs_to :material, -> { with_del },
 			 class_name: 'Index::Material',
 			 foreign_key: :material_id
 

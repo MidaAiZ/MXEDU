@@ -3,7 +3,7 @@ class Index::MatHistory < ApplicationRecord
 			  class_name: 'Index::User',
 			  foreign_key: :user_id,
 			  optional: true
-   belongs_to :material,
+   belongs_to :material, -> { with_del },
 			  class_name: 'Index::Material',
 			  foreign_key: :material_id
 

@@ -4771,6 +4771,23 @@ img.cover {
         z-index: 10;
         padding: 1px 2px;
     }
+    .recover {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        border-radius: 3px;
+        font-size: 1em;
+        font-weight: lighter;
+        color: white;
+        background-color: #65CEA7;
+        z-index: 11;
+        padding: 3px;
+        text-decoration: none;
+        &:hover {
+            background-color: #65CEA7 - 20;
+        }
+    }
+
     &.product {
         margin-bottom: 20px;
         overflow: hidden;

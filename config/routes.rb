@@ -85,7 +85,12 @@ Rails.application.routes.draw do
     end
 
     # products
-    resources :products
+    resources :products do
+        post "/recover" => "products#recover", as: :recover
+        collection do
+            get "deleted" => "products#deleted_index", as: :deleted
+        end
+    end
 
     # products cate
     resources :product_cates
@@ -110,8 +115,10 @@ Rails.application.routes.draw do
     resources :materials do
         get 'upload' => 'materials#upload', as: :upload
         post 'upload' => 'materials#uploader', as: :uploader
+        post "/recover" => "materials#recover", as: :recover
         delete '/files/:file_id' => 'materials#delete_file'
         collection do
+            get "deleted" => "materials#deleted_index", as: :deleted
             get 'download/:file_id/:filename' => 'materials#download'
         end
     end
