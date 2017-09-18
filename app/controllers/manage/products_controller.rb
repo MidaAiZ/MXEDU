@@ -109,7 +109,7 @@ class Manage::ProductsController < ManageController
             {
                 schools: Manage::School.all,
                 cates: Manage::ProductCate.all,
-                companies: Manage::ProductCompany.limit(8)
+                companies: Manage::ProductCompany.all
             }
         end
         @schools = info[:schools]
