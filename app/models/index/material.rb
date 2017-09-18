@@ -1,7 +1,7 @@
 class Index::Material < ApplicationRecord
 	mount_uploader :cover, MaterialCoverUploader
 
-	store_accessor :info, :intro, :details, :d_times, :need_login, :recommend
+	store_accessor :info, :intro, :details, :need_login, :recommend
 
 	belongs_to :admin,
 				class_name: 'Manage::Admin',
@@ -45,10 +45,10 @@ class Index::Material < ApplicationRecord
 	end
 
 	def fake_readtimes
-		(self.readtimes || 0)+ (self.id % 11 + 3) * 35
+		(self.readtimes)+ (self.id % 11 + 3) * 35
 	end
 
 	def fake_d_times
-		(self.d_times || 0)+ (self.id % 11 + 3) * 17
+		(self.dload_count)+ (self.id % 11 + 3) * 21
 	end
 end

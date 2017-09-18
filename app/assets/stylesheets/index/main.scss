@@ -29,9 +29,27 @@
 	}
 	.item {
 		border-right: #ddd 0.5px solid;
-	}
-	.item:last-child {
-		border-right: 0;
+		&:nth-child(1) {
+			i {
+				color: #6ea2f3;
+			}
+		}
+		&:nth-child(2) {
+			i {
+				color: #31d9ac;
+			}
+		}
+		&:nth-child(3) {
+			i {
+				color: #fa8137;
+			}
+		}
+		&:nth-child(4) {
+			border-right: 0;
+			i {
+				color: #f84a4a;
+			}
+		}
 	}
 	.icon {
 		width: 40px;
@@ -47,18 +65,6 @@
 	}
 	.panel {
 		margin-bottom: 5px;
-	}
-	.yp {
-		color: #fc6695;
-	}
-	.lx {
-		color: #fa8137;
-	}
-	.ky {
-		color: #31d9ac;
-	}
-	.jk {
-		color: #6ea2f3;
 	}
 }
 

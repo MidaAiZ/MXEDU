@@ -29,7 +29,7 @@ class Index::MaterialsController < IndexController
       filename = @file.name;
       send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
       @file.update dload_count: @file.dload_count + 1
-      @file.material.update dload_count: @file.material.dload_count + 1
+      @file.material.update dload_count: (@file.material.dload_count + 1)
   end
 
   private
