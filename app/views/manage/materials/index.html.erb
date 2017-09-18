@@ -4,7 +4,7 @@
         <li>
             <a href="">资料管理</a>
         </li>
-        <li class="active">所有记录 </li>
+        <li class="active">全部 </li>
         <li class="pull-right flex">
             <form class="" id='matSearch' method="get">
                 <input type="text" class="form-control" name="name" placeholder="搜索资料" />
@@ -161,9 +161,9 @@
                 <!--endprint-->
                 <%= paginate @materials %>
             <% end %>
-        </div>
-        <div class="pull-right">
-            <%= link_to '已删除资料', deleted_manage_materials_path %>
+            <div class="pull-right">
+                <%= link_to '已删除资料', deleted_manage_materials_path %>
+            </div>
         </div>
     </div>
 </div>

@@ -58,9 +58,9 @@ $(function() {
         var $this = $(this);
         var value = $this.find("input").val();
         if (value)
-            window.location = '/manage//products?name=' + value + '&tag=' + value;
+            window.location = window.location.pathname + '?name=' + value + '&tag=' + value;
         else
-            window.location = '/manage/products';
+            window.location = window.location.pathnames;
         return false;
 	})
 

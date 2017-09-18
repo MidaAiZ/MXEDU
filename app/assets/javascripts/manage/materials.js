@@ -115,9 +115,9 @@ $(function() {
         var $this = $(this);
         var value = $this.find("input").val();
         if (value)
-            window.location = '/manage/materials?name=' + value + '&tag=' + value;
+            window.location = window.location.pathname + '?name=' + value + '&tag=' + value;
         else
-            window.location = '/manage/materials?school=NONE';
+            window.location = window.location.pathname;
         return false;
     });
 
