@@ -20,11 +20,11 @@ class ProductsCoverUploader < CarrierWave::Uploader::Base
     '/assets/default/product'
   end
 
-  process resize_to_fill: [360, 360]
+  process resize_to_fill: [360, 315]
 
   # Create different versions of your uploaded files:
   version :thumb do
-      process resize_to_fill: [200, 200]
+      process resize_to_fill: [240, 210]
   end
 
   def filename
