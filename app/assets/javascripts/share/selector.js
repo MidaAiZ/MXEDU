@@ -107,7 +107,7 @@ $(function() {
 			.parent().addClass("active");
 	}
 
-	if ($("#cdts").find("li.active").length != 0) {
+	if ($("#cdts").find("li.active").length != 0 && getQueryString("cdts") != 'false' ) {
 		$(".cdts-panel .tools .fa-chevron-down").trigger("click");
 	}
 })

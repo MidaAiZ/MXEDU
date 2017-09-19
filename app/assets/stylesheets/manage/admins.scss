@@ -25,5 +25,10 @@
 	&:hover .fa {
 		display: inline-block;
 	}
+}
 
+@media screen and (max-width: 768px) {
+	.wrapper.a-details {
+		padding-top: 15px;
+	}
 }
