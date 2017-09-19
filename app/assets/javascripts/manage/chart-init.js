@@ -70,31 +70,31 @@ $(function() {
     function build_v_chart(data) {
 
         var d1 = [
-            [1, data.u_7_count],
-            [2, data.u_6_count],
-            [3, data.u_5_count],
-            [4, data.u_4_count],
-            [5, data.u_3_count],
-            [6, data.u_2_count],
-            [7, data.u_1_count],
-            [8, data.u_0_count]
+            [1, data.p_7_count],
+            [2, data.p_6_count],
+            [3, data.p_5_count],
+            [4, data.p_4_count],
+            [5, data.p_3_count],
+            [6, data.p_2_count],
+            [7, data.p_1_count],
+            [8, data.p_0_count]
         ];
 
         var d2 = [
-            [1, data.v_7_count],
-            [2, data.v_6_count],
-            [3, data.v_5_count],
-            [4, data.v_4_count],
-            [5, data.v_3_count],
-            [6, data.v_2_count],
-            [7, data.v_1_count],
-            [8, data.v_0_count]
+            [1, data.m_7_count],
+            [2, data.m_6_count],
+            [3, data.m_5_count],
+            [4, data.m_4_count],
+            [5, data.m_3_count],
+            [6, data.m_2_count],
+            [7, data.m_1_count],
+            [8, data.m_0_count]
         ];
 
         var data = ([
             {
                 label: "产品点击量",
-                data: d2,
+                data: d1,
                 lines: {
                     show: true,
                     fill: true,
@@ -104,8 +104,8 @@ $(function() {
                 }
             },
             {
-                label: "访客数量",
-                data: d1,
+                label: "资料点击量",
+                data: d2,
                 lines: {
                     show: true,
                     fill: true,

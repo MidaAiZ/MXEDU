@@ -45,7 +45,7 @@ class AdminAvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :mini do
-    process :resize_to_fit => [32, 32]
+    process :resize_to_fit => [64, 64]
   end
 
   # Create different versions of your uploaded files:

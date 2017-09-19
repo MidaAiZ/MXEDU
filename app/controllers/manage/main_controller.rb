@@ -38,7 +38,6 @@ class Manage::MainController < ManageController
     end
 
     def viewers_count
-
         info = Rails.cache.fetch("#{cache_key}", expires_in: 8.hours) do
             set_v_info
         end
@@ -76,22 +75,22 @@ class Manage::MainController < ManageController
     def set_v_info
         {
           # 产品点击量
-          v_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天浏览量
-          v_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天浏览量
-          v_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天浏览量
-          v_4_count: Index::History.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).sum(:times), # 前四天浏览量
-          v_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天浏览量
-          v_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天浏览量
-          v_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天浏览量
+          p_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天浏览量
+          p_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天浏览量
+          p_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天浏览量
+          p_4_count: Index::History.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).sum(:times), # 前四天浏览量
+          p_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天浏览量
+          p_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天浏览量
+          p_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天浏览量
 
-          # 访客量
-          u_1_count: Index::History.where(updated_at: 1.day.ago.midnight..Time.now.midnight).count, # 昨天访客量
-          u_2_count: Index::History.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).count, # 前天访客量
-          u_3_count: Index::History.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).count, # 大前天访客量
-          u_4_count: Index::History.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).count, # 前四天访客量
-          u_6_count: Index::History.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).count, # 前六天访客量
-          u_5_count: Index::History.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).count, # 前五天访客量
-          u_7_count: Index::History.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).count, # 前七天访客量
+          # 资料点击量
+          m_1_count: Index::MatHistory.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天访客量
+          m_2_count: Index::MatHistory.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天访客量
+          m_3_count: Index::MatHistory.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天访客量
+          m_4_count: Index::MatHistory.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).sum(:times), # 前四天访客量
+          m_6_count: Index::MatHistory.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天访客量
+          m_5_count: Index::MatHistory.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天访客量
+          m_7_count: Index::MatHistory.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天访客量
 
           # 记录缓存时间
           time: Time.now
@@ -100,8 +99,8 @@ class Manage::MainController < ManageController
 
     def set_v_info_0
         {
-            v_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 今天浏览量
-            u_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count  # 今天访客量
+            p_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 今天浏览量
+            m_0_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).sum(:times)  # 今天访客量
         }
     end
 
