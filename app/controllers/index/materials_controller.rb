@@ -19,11 +19,14 @@ class Index::MaterialsController < IndexController
   def show
     Index::MatHistory.add @user, @material, request.remote_ip
     @likes = Index::Material.sort({school: @material.school_id, cate: @material.cate_id}).where.not(id: @material.id).limit(5).includes(:cate)
-    @user ||= Index::User.new
+    if !@user && @material.need_login
+      Cache.new[request.remote_ip + '_history'] = request.url
+    end
     set_title @material.name
   end
 
   def download
+    begin
       @file = Manage::MaterialFile.find params[:file_id]
       redirect_to login_path and return if (!@user && @file.material.need_login)
 
@@ -32,6 +35,8 @@ class Index::MaterialsController < IndexController
       send_file(filepath, filename: filename, content_type: @file.f_type, content_length: @file.size)
       @file.update dload_count: @file.dload_count + 1
       @file.material.update dload_count: (@file.material.dload_count + 1)
+    rescue
+    end
   end
 
   private

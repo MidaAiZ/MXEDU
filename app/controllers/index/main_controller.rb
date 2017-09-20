@@ -20,6 +20,5 @@ class Index::MainController < IndexController
 		@carousels = Rails.cache.fetch("#{cache_key}", expires_in: 2.minutes) do
 			Manage::Carousel.where(show: true).order(index: :desc)
 		end
-		set_title '首页'
 	end
 end

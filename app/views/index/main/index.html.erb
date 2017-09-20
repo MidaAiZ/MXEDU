@@ -58,7 +58,7 @@
                                 <% @products.keys.slice(0, 3).each_with_index do |key, i| %>
                                     <% c_id = @products[key][0] %>
                                     <div class="col-xs-6 col-md-2 item">
-                                        <%= link_to "#{products_url}?cate=#{c_id}" do %>
+                                        <%= link_to "#{products_url}?cate=#{c_id}&cdts=false" do %>
                                             <span class="icon">
                                                 <i class='fa <%= fa_arr[i] %>'></i>
                                             </span>
