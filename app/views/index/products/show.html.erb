@@ -170,5 +170,8 @@
             })
             $(".modal").unbind("click");
         })
+        $("#loginModal").find(".close").click(function() {
+            window.history.back();
+        });
     </script>
 <% end %>
