@@ -39,11 +39,12 @@ class Index::ProductsController < IndexController
     end
 
     def set_cdts
-        cons = Rails.cache.fetch("#{cache_key}_cd", expires_in: 10.minutes) do
+        s_id = @user.school_id if @user
+        cons = Rails.cache.fetch("#{cache_key}_#{s_id}_cd", expires_in: 10.minutes) do
           {
-            schools: Manage::School.limit(8),
-            cates: Manage::ProductCate.limit(10),
-            companies: Manage::ProductCompany.limit(8)
+            schools: s_id ? Manage::School.where(id: s_id).or(Manage::School.where.not(id: s_id)).limit(6) : Manage::School.limit(6),
+            cates: Manage::ProductCate.limit(6),
+            companies: Manage::ProductCompany.limit(6)
           }
         end
         @schools = cons[:schools]
