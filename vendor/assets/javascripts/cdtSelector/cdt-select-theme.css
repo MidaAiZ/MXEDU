@@ -532,7 +532,6 @@
     left: 50%;
     line-height: 36px;
     margin-left: -50px;
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#B200000, endColorstr=#B200000);
     transition-duration: 400ms;
     transform: translateY(0);
     opacdt: 1;
