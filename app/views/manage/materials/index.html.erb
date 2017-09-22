@@ -43,47 +43,7 @@
           </div>
         </div>
         <div class="space15"></div>
-        <div class="cdts-panel">
-            <header class="panel-heading c">
-                <small>条件筛选</small>
-                <span class="tools pull-right">
-                    <a class="fa fa-chevron-down" href="javascript:;"></a>
-                 </span>
-            </header>
-            <ul class='cdts' id="cdts" style="display: none;">
-                <li>
-                    <ul class="directory-list">
-                        <li class='con-item' id="school" data-name="school">院校</li>
-                        <% cache @schools.cache_key, expires_in: 10.minutes do %>
-                        <% @schools.each do |s| %>
-                        <li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
-                        <% end %>
-                        <li><a href="JavaScript: void(0)">不限</a></li>
-                        <% end %>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="directory-list">
-                        <li class='con-item' id='cate' data-name="cate">分类</li>
-                        <% cache @cates.cache_key, expires_in: 10.minutes do %>
-                        <% @cates.each do |c| %>
-                        <li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
-                        <% end %>
-                        <li><a href="JavaScript: void(0)">不限</a></li>
-                        <% end %>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="directory-list">
-                        <li class='con-item' id='grade' data-name="grade">年级</li>
-                        <% get_grades.each do |g| %>
-                            <li><a href="JavaScript: void(0)" data-value="<%= g %>"><%= g %></a></li>
-                        <% end %>
-                        <li><a href="javascript: void(0)">不限</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <%= render "cdts" %>
     </div>
     <div class="directory-info-row">
         <div id="pjax-replace">

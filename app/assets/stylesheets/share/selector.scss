@@ -1,9 +1,24 @@
+//=require "cdtSelector/cdt-select"
+
 .cdts-panel {
     .panel-heading.c {
         border-bottom: 0px;
     }
     .tools a {
         padding: 6px;
+    }
+    ul.option {
+        display: inline-block;
+        float: left;
+        width: auto;
+        padding-left: 0px;
+    }
+    li.opt-input {
+        float: right;
+    }
+    ul.directory-list {
+        // overflow-x: auto;
+        // display: inline-block;
     }
 }
 

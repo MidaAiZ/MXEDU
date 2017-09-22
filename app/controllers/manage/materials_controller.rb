@@ -139,8 +139,8 @@ class Manage::MaterialsController < ManageController
     def set_select_cache
         info = Rails.cache.fetch("#{cache_key}", expires_in: 1.minutes) do
             {
-                schools: Manage::School.all,
-                cates: Manage::MaterialCate.all
+                schools: Manage::School.limit(8),
+                cates: Manage::MaterialCate.limit(8)
             }
         end
         @schools = info[:schools]

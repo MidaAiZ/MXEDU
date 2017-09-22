@@ -15,33 +15,23 @@
 <%= render 'form', index_material: @material %>
 
 <script>
-    $("body").on("submit", "#material-form", function() {
-        return false
-    })
-    $("body").on("click", "#material-submit", function() {
-		var $form = $("#material-form");
-        var fd = new FormData($form[0]);
-        $(this).attr("disabled", true).val("提交中...");
-        $.ajax({
-            url: '/manage/materials/' + $form.data("id"),
-            data: fd,
-            type: 'patch',
-            contentType: false,
-            processData: false,
-            success: function(res) {
-                window.location = res
-            },
-            error: function(res) {
-                $("#error").html($(res.responseText).find("#error").html());
-                window.scrollTo(0, 1);
-            },
-            complete: function() {
-                $("#material-submit").removeAttr("disabled").val("保存资料信息");
-            }
-        })
-        return false;
-    })
     $(function() {
+        $("body").on("submit", "#material-form", function() {
+            return false
+        })
+        $("body").on("click", "#material-submit", function() {
+            doSubmit(function(res) {
+                window.location = res
+            }, '上传资料');
+            return false;
+        })
+        $("body").on("click", "#material-edit-submit", function() {
+            doSubmit(function(res) {
+                window.location = window.location.pathname.replace("/edit", "");
+            }, '保存修改');
+            return false;
+        })
+
         $("#material-form-title-2").click(function() {
             // $(this).addClass("current-step").siblings().removeClass("current-step");
             $("#material-submit").trigger("click");
@@ -51,5 +41,28 @@
 			$("#" + getQueryString("step")).trigger("click");
         }
 
+        $("#edit-ok-pane").show();
     })
+
+    function doSubmit(successBK, text) {
+        var $form = $("#material-form");
+        var fd = new FormData($form[0]);
+        $(this).attr("disabled", true).val("提交中...");
+        $.ajax({
+            url: '/manage/materials/' + $form.data("id"),
+            data: fd,
+            type: 'patch',
+            contentType: false,
+            processData: false,
+            success: successBK,
+            error: function(res) {
+                $("#error").html($(res.responseText).find("#error").html());
+                $("#material-submit").removeAttr("disabled").val(text);
+                $("#material-form-title-0").trigger("click");
+                window.scrollTo(0, 1);
+            },
+            complete: function() {
+            }
+        })
+    }
 </script>

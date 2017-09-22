@@ -8,4 +8,13 @@ class Manage::ProductCompany < ApplicationRecord
 	validates :cate, length: { maximum: 16, too_long: '类型描述最大长度为%{count}' }
 
 	default_scope { order(products_count: :DESC) }
+
+	# 复杂条件筛选
+	def self.sort(cons = {})
+		_self = self
+		_self = _self.where("manage_product_companies.name LIKE ?", "%#{cons[:name]}%").limit(10) if cons[:name]
+
+		_self ||= self.all
+	end
+
 end

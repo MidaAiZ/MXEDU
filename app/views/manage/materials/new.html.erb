@@ -32,10 +32,11 @@
             },
             error: function(res) {
                 $("#error").html($(res.responseText).find("#error").html());
+                $("#material-submit").removeAttr("disabled").val("保存产品信息");
+                $("#material-form-title-0").trigger("click");
                 window.scrollTo(0, 1);
             },
             complete: function() {
-                $("#material-submit").removeAttr("disabled").val("保存产品信息");
             }
         })
         return false;

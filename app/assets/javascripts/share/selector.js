@@ -1,4 +1,6 @@
 //= require share/pjax
+//= require cdtSelector/cdtSelect
+
 //  条件选择器
 
 $(function() {
@@ -11,57 +13,58 @@ $(function() {
 			$this.parent("li").removeClass("active");
 		} else {
 			$this.parent("li").addClass("active").siblings().removeClass("active");
+			$this.parent("li").parent().find(".cdt-info span").remove();
 		};
 		search = changeQuery(search);
 		doSearch(search);
 	})
-
-	function changeQuery(search) {
-		var cons = [];
-		var $conE = $("#cdts").find("li.con-item");
-		$conE.each(function(ele) {
-			var $this = $(this);
-			if ($this.siblings("li.active").length != 0) {
-				cons.push([$this.data("name"), $this.siblings("li.active").find("a").data("value")]);
-			} else {
-				cons.push([$this.data("name"), null]);
-			}
-		})
-		for(var i in cons) {
-			search = replaceQuery(search, cons[i][0], cons[i][1]);
-		}
-		return search.replace(/&$/, "").replace(/&{2,}/, "&");
-	}
-
-	function replaceQuery(search, name, value) {
-		var reg = new RegExp(name +"=([^&]*)");
-		var r = search.substr(1).match(reg);
-		if (r) {
-			if (!value) return search.replace(reg, "");
-			return search.replace(reg, name + "=" + value);
-		} else if (value) {
-			if (search.length == 1) {
-				search += (name + "=" + value);
-			} else {
-				search += ("&" + name + "=" + value);
-			}
-		}
-		return search;
-	}
-
-	function doSearch(search) {
-		var url = location.pathname + search;
-		$.pjax({
-			url: url,
-			type: "GET",
-			container: "#pjax-replace",
-			success: function(res) {
-				sucBK(res, url)
-			},
-			error: errBK
-		})
-	}
 })
+
+function changeQuery(search) {
+	var cons = [];
+	var $conE = $("#cdts").find("li.con-item");
+	$conE.each(function(ele) {
+		var $this = $(this);
+		if ($this.siblings("li.active").length != 0) {
+			cons.push([$this.data("name"), $this.siblings("li.active").find("a").data("value")]);
+		} else if ($this.parent().find(".cdt-info span").length == 0) {
+			cons.push([$this.data("name"), null]);
+		}
+	})
+	for(var i in cons) {
+		search = replaceQuery(search, cons[i][0], cons[i][1]);
+	}
+	return search.replace(/&$/, "").replace(/&{2,}/, "&");
+}
+
+function replaceQuery(search, name, value) {
+	var reg = new RegExp(name +"=([^&]*)");
+	var r = search.substr(1).match(reg);
+	if (r) {
+		if (!value) return search.replace(reg, "");
+		return search.replace(reg, name + "=" + value);
+	} else if (value) {
+		if (search.length == 1) {
+			search += (name + "=" + value);
+		} else {
+			search += ("&" + name + "=" + value);
+		}
+	}
+	return search;
+}
+
+function doSearch(search) {
+	var url = location.pathname + search;
+	$.pjax({
+		url: url,
+		type: "GET",
+		container: "#pjax-replace",
+		success: function(res) {
+			sucBK(res, url)
+		},
+		error: errBK
+	})
+}
 
 // 禁止分页默认事件
 $(function() {
@@ -86,8 +89,55 @@ function sucBK(res, url) {
 }
 
 function errBK(err) {
-	alert("加载失败!");
+	console.log(err);
 }
+
+// 自定义查询
+$(function() {
+	var InputSelect = $('.cdt-select').each(function() {
+		$(this).cdtSelect({
+			dataJson: [{id: 1, name: "1"}, {id: 2, name: "2"}, {id: 3, name: "3"}],
+			multiSelect: false,
+			search: true,
+			hotcdt: ['1', '3'],
+			onInit: function () {
+				console.log(this)
+			},
+			onForbid: function () {
+				console.log(this)
+			},
+			onTabsAfter: function (target) {
+				console.log(event)
+			},
+			onCallerAfter: function (target, values) {
+				var $option = target.parents("li").siblings(".con-item");
+				var search = location.search;
+				if (!search) search = "?";
+				search = replaceQuery(search, $option.data("name"), values.id);
+				$option.siblings(".active").removeClass("active");
+				doSearch(search);
+			},
+			onAjaxSearch: function(value, $ele) {
+				var result = [];
+				$.ajax({
+					url: $ele.parents("li").siblings(".con-item").data("search-url") + "?name=" + value,
+					type: "GET",
+					async: false,
+					success: function(data) {
+						result = data;
+					},
+					error: function(err) {
+
+					}
+				})
+				return result;
+			}
+		});
+	})
+	// 多选设置城市接口
+	// MulticdtSelect.setcdtVal('北京市, 天津市, 上海市, 广州市, 长沙市, 唐山市');
+})
+
 
 $(function() {
 	var search = window.location.search.substr(1);

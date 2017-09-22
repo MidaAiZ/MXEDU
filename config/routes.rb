@@ -46,6 +46,16 @@ Rails.application.routes.draw do
         get 'histories/:id' => 'user_center#histories'
     end
 
+    # 条件筛选
+    scope 'conditions', as: :cdts do
+        scope 'search', as: :search do
+            get 'companies' => 'conditions#search_company'
+            get 'material_cates' => 'conditions#search_material_cate'
+            get 'product_cates' => 'conditions#search_product_cate'
+            get 'schools' => 'conditions#search_school'
+        end
+    end
+
     # verify
     post 'verify_code' => 'verify#check_code'
     post 'send_msg' => 'verify#send_msg_code'

@@ -99,6 +99,7 @@
     .left-side .searchform,
     .left-side .logged-user {
         display: block;
+        margin-top: 15px;
     }
 
     .breadcrumb-wrapper {
@@ -169,7 +170,6 @@
     }
     .directory-list li {
         display: inline-block;
-        float: left;
         width: auto;
     }
 
@@ -211,7 +211,7 @@
 
     .directory-list li {
         display: inline-block;
-        float: left;
+        // float: left;
         width: auto;
     }
 

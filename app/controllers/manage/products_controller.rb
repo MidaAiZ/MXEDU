@@ -107,9 +107,9 @@ class Manage::ProductsController < ManageController
     def set_select_cache
         info = Rails.cache.fetch("#{cache_key}", expires_in: 1.minutes) do
             {
-                schools: Manage::School.all,
-                cates: Manage::ProductCate.all,
-                companies: Manage::ProductCompany.all
+                schools: Manage::School.limit(8),
+                cates: Manage::ProductCate.limit(8),
+                companies: Manage::ProductCompany.limit(8)
             }
         end
         @schools = info[:schools]

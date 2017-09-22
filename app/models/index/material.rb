@@ -23,7 +23,7 @@ class Index::Material < ApplicationRecord
 			  class_name: 'Manage::MaterialFile',
 			  foreign_key: :material_id
 
-	validates :name, length: { minimum: 1, too_short: '资料名不能为空', maximum: 64, too_long: '资料名最大长度为%{count}' }
+	validates :name, length: { minimum: 1, too_short: '资料名不能为空', maximum: 32, too_long: '资料名最大长度为%{count}' }
 	validates :tag, length: { maximum: 15, too_long: '标签最大长度为%{count}' }
 	validates :cate, length: { minimum: 1, too_short: '类型不能为空' }
 
