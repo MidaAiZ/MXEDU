@@ -55,8 +55,8 @@
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="panel">
                                         <div class="panel-body">
-                                            <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name %></span><br></h4>
-                                            <div class="media">
+                                            <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name if m.cate %></span><br></h4>
+                                            <div class="media n-m-t">
                                                 <%= link_to manage_material_path(m), class: 'pull-left' do %>
                                                     <%= image_tag m.cover.thumb, class: :cover %>
                                                 <% end %>

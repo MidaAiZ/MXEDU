@@ -1,7 +1,7 @@
 <!-- page heading start-->
 <div class="page-heading">
     <h3>
-        <%= @material.name %> <small><%= @material.cate.name %></small>
+        <%= @material.name %> <small><%= @material.cate.name if @material.cate %></small>
     </h3>
     <small class="small">适用: <%= @material.school.name if @material.school %>&nbsp<%= @material.grade %></small>
 </div>

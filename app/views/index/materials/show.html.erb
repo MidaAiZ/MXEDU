@@ -1,9 +1,9 @@
 <!-- page heading start-->
 <div class="page-heading">
     <h3>
-        <%= @material.name %> <small> - <%= @material.cate.name %></small>
+        <%= @material.name %> <small> - <%= @material.cate.name if @material.cate %></small>
     </h3>
-    <small class="small">适用: <%= @material.school.name if @material.school %>&nbsp<%= @material.grade %></small>
+    <small class="small"><p>适用: <%= @material.school.name if @material.school %>&nbsp<%= @material.grade %></p></small>
 </div>
 <!-- page heading end-->
 
@@ -120,7 +120,7 @@
                                     <div class="">
                                         <h5 class="media-heading p-info">
                                             <%= link_to l.name, material_path(l) %>
-                                            <small class='small'><%= l.cate.name if l.cate.name if l.cate %></small>
+                                            <small class='small'><%= l.cate.name if l.cate %></small>
                                         </h5>
                                         <p class='p-intro no-wp'>
                                             <%= l.intro %>

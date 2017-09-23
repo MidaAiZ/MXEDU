@@ -55,7 +55,7 @@ class Manage::ProductCompaniesController < ManageController
   # DELETE /manage/product_companies/1
   # DELETE /manage/product_companies/1.json
   def destroy
-    unless @product_company.products.any?
+    if @product_company.products.count == 0
       @product_company.destroy
       @code = 'Success'
     end

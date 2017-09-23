@@ -4,7 +4,7 @@
         <h3>
             <%= @product.name %> <small> - <%= @product.company.name if @product.company %></small>
         </h3>
-        <small class="small"><%= "面向: " + @product.school.name if @product.school %></small>
+        <small class="small"><p><%= "面向: " + @product.school.name if @product.school %></p></small>
     </div>
     <!-- page heading end-->
 

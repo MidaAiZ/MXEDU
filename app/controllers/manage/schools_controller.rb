@@ -55,8 +55,7 @@ class Manage::SchoolsController < ManageController
   # DELETE /manage/schools/1
   # DELETE /manage/schools/1.json
   def destroy
-    if @school.materials.any? || @school.products.any?
-    else
+    if (@school.materials.count == 0) && (@school.products.count == 0) && (@school.students.count == 0)
       @school.destroy
       @code = 'Success'
     end
