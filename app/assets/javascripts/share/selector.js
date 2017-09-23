@@ -4,7 +4,7 @@
 //  条件选择器
 
 $(function() {
-	$(".cdts").on("click", "li a", function(e) {
+	$(".cdts").on("click", "li a[data-role=opt]", function(e) {
 		e.preventDefault();
 		var search = location.search;
 		if (!search) search = "?";

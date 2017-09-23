@@ -12,9 +12,9 @@
 				<ul class="directory-list">
 					<li class='con-item' id="school" data-name="school" data-search-url="<%= cdts_search_schools_path %>">院校</li>
 					<% @schools.each do |s| %>
-						<li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
-						<li><a href="JavaScript: void(0)" data-value="NONE">不限</a></li>
+						<li><a href="JavaScript: void(0)" data-value="<%= s.id %>" data-role='opt'><%= s.name %></a></li>
 					<% end %>
+					<li><a href="JavaScript: void(0)" data-value="NONE" data-role='opt'>不限</a></li>
 					<li class='opt-input'><div class="cdt-select" data-placeholder="搜索院校" data-json="<%= @schools.to_json %>"></div></li>
 				</ul>
 			</div>
@@ -24,9 +24,9 @@
 				<ul class="directory-list">
 					<li class='con-item' id='cate' data-name="cate" data-search-url="<%= cdts_search_product_cates_path %>">分类</li>
 					<% @cates.each do |c| %>
-						<li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+						<li><a href="JavaScript: void(0)" data-value="<%= c.id %>" data-role='opt'><%= c.name %></a></li>
 					<% end %>
-					<li><a href="JavaScript: void(0)">不限</a></li>
+					<li><a href="JavaScript: void(0)" data-role='opt'>不限</a></li>
 					<li class='opt-input'><div class="cdt-select" data-placeholder="搜索分类" data-json="<%= @cates.to_json %>"></div></li>
 				</ul>
 			</div>
@@ -36,9 +36,9 @@
 				<ul class="directory-list">
 					<li class='con-item' id='cate' data-name="company" data-search-url="<%= cdts_search_companies_path %>">品牌</li>
 					<% @companies.each do |c| %>
-						<li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
+						<li><a href="JavaScript: void(0)" data-value="<%= c.id %>" data-role='opt'><%= c.name %></a></li>
 					<% end %>
-					<li><a href="JavaScript: void(0)">不限</a></li>
+					<li><a href="JavaScript: void(0)" data-role='opt'>不限</a></li>
 					<li class='opt-input'><div class="cdt-select" data-placeholder="搜索品牌" data-json="<%= @companies.to_json %>"></div></li>
 				</ul>
 			</div>
