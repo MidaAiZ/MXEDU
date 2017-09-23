@@ -34,17 +34,17 @@
                                 <div class="form-group">
                                     <label for="product_cate">产品分类</label>
                                     <%= f.hidden_field :cate_id, name: 'product[cate_id]', id: 'product_cate' %>
-                                    <div class="cdt-select" data-json="cates" data-search-url="<%= cdts_search_product_cates_url %>" data-default="<%= @product.cate.name if @product.cate %>"></div>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_product_cates_url %>" data-default="<%= @product.cate.name if @product.cate %>" data-json="<%= @cates.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_cate">针对院校</label>
                                     <%= f.hidden_field :school_id, name: 'product[school_id]', id: 'product_school' %>
-                                    <div class="cdt-select" data-json="schools" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @product.school.name if @product.school %>"></div>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @product.school.name if @product.school %>" data-json="<%= @schools.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_company">品牌</label>
-                                    <%= f.hidden_field :cate_id, name: 'product[company_id]', id: 'product_company' %>
-                                    <div class="cdt-select" data-json="companies" data-search-url="<%= cdts_search_companies_url %>" data-default="<%= @product.company.name if @product.company %>"></div>
+                                    <%= f.hidden_field :company_id, name: 'product[company_id]', id: 'product_company' %>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_companies_url %>" data-default="<%= @product.company.name if @product.company %>" data-json="<%= @companies.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">价格</label>
@@ -162,34 +162,20 @@
 <script src="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.js"></script>
 <link href="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.css" rel="stylesheet"> -->
 <script>
-    var selectData = {
-        "cates": <%= @cates.to_json.html_safe %>,
-        "schools": <%= @schools.to_json.html_safe %>,
-        "companies": <%= @companies.to_json.html_safe %>
-    }
-
     $(function() {
         $('.cdt-select').each(function() {
             var $this = $(this);
-            var datas = selectData[$this.data("json")];
+            var datas = $this.data("json");
             var hots = [];
             for (var i in datas) {
                 hots.push(datas[i].name);
             }
-            var InputSelect = $this.cdtSelect({
+
+            $this.cdtSelect({
                 dataJson: datas,
                 multiSelect: false,
                 search: true,
                 hotcdt: hots,
-                onInit: function () {
-                    console.log(this)
-                },
-                onForbid: function () {
-                    console.log(this)
-                },
-                onTabsAfter: function (target) {
-                    console.log(event)
-                },
                 onCallerAfter: function (target, values) {
                     $this.siblings("input").val($this.find(".cdt-info span").data("id"))
                 },
@@ -208,8 +194,7 @@
                     })
                     return result;
                 }
-            });
-            InputSelect.setcdtVal($this.data("default"));
+            }).setcdtVal($this.data("default").toString());
         })
     })
 

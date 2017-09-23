@@ -41,9 +41,9 @@ $(function() {
         var $this = $(this);
         var value = $this.find("input").val();
         if (value)
-            window.location = window.location.pathname + '?school=NONE&name=' + value + '&tag=' + value;
+            window.location = window.location.pathname + '?cdts=false&school=NONE&name=' + value + '&tag=' + value;
         else
-            window.location = window.location.pathname + '?school=NONE';
+            window.location = window.location.pathname + '?cdts=false&school=NONE';
         return false;
     });
 

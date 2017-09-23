@@ -145,14 +145,14 @@
 <!--body wrapper end-->
 <% if !@user && @material.need_login %>
     <script type="text/javascript">
-        setTimeout(function() {
+        // setTimeout(function() {
             $(".login-wrap").before("<span id='m-tip' class='t-center' style='color: red;'>\
                                         <i class='fa fa-exclamation-circle'></i>登录后即可下载该资料\
                                      </span>");
-            $(function() {
-                $("#loginModal").modal("show")
-            })
-        }, 2000)
+        //     $(function() {
+        //         $("#loginModal").modal("show")
+        //     })
+        // }, 2000)
         $("#loginModal").find(".close").click(function() {
             $("span#m-tip").remove();
         })

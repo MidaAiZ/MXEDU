@@ -11,13 +11,11 @@
 			<div class="options">
 				<ul class="directory-list">
 					<li class='con-item' id="school" data-name="school" data-search-url="<%= cdts_search_schools_path %>">院校</li>
-					<% cache @schools.cache_key, expires_in: 10.minutes do %>
-						<% @schools.each do |s| %>
-							<li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
-						<% end %>
-						<li><a href="JavaScript: void(0)" data-value="NONE">不限</a></li>
+					<% @schools.each do |s| %>
+						<li><a href="JavaScript: void(0)" data-value="<%= s.id %>"><%= s.name %></a></li>
 					<% end %>
-					<li class='opt-input'><div class="cdt-select"></div></li>
+					<li><a href="JavaScript: void(0)" data-value="NONE">不限</a></li>
+					<li class='opt-input'><div class="cdt-select" data-placeholder="搜索院校" data-json="<%= @schools.to_json %>"></div></li>
 				</ul>
 			</div>
 		</li>
@@ -25,13 +23,11 @@
 			<div class="options">
 				<ul class="directory-list">
 					<li class='con-item' id='cate' data-name="cate" data-search-url="<%= cdts_search_material_cates_path %>">分类</li>
-					<% cache @cates.cache_key, expires_in: 10.minutes do %>
-						<% @cates.each do |c| %>
-							<li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
-						<% end %>
-						<li><a href="JavaScript: void(0)">不限</a></li>
-						<li class='opt-input'><div class="cdt-select"></div></li>
+					<% @cates.each do |c| %>
+						<li><a href="JavaScript: void(0)" data-value="<%= c.id %>"><%= c.name %></a></li>
 					<% end %>
+					<li><a href="JavaScript: void(0)">不限</a></li>
+					<li class='opt-input'><div class="cdt-select" data-placeholder="搜索分类" data-json="<%= @cates.to_json %>"></div></li>
 				</ul>
 			</div>
 		</li>

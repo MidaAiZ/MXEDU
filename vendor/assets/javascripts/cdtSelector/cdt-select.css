@@ -297,8 +297,8 @@
 }
 
 .cdt-select .cdt-cont {
-    padding-top: 20px;
-    padding-left: 20px;
+    padding-top: 10px;
+    padding-left: 0;
     font-size: 0;
     position: relative
 }
@@ -321,7 +321,7 @@
 
 .cdt-select .cdt-cont dd {
     font-size: 14px;
-    width: 421px;
+    width: 100%;
     margin-top: -10px;
     margin-left: -10px;
     padding-bottom: 20px

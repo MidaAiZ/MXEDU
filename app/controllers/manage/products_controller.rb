@@ -105,11 +105,17 @@ class Manage::ProductsController < ManageController
     end
 
     def set_select_cache
-        info = Rails.cache.fetch("#{cache_key}", expires_in: 1.minutes) do
+        if @product
+          s_id =  @product.school_id if @product.school_id
+          c_id =  @product.cate_id if @product.cate_id
+          cp_id =  @product.company_id if @product.company_id
+        end
+
+        info = Rails.cache.fetch("#{cache_key}_#{s_id}_#{c_id}_#{cp_id}", expires_in: 1.minutes) do
             {
-                schools: Manage::School.limit(8),
-                cates: Manage::ProductCate.limit(8),
-                companies: Manage::ProductCompany.limit(8)
+                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(7) : Manage::School.limit(8),
+                cates: c_id ? Manage::ProductCate.where(id: c_id) + (Manage::ProductCate.where.not(id: c_id)).limit(7) : Manage::ProductCate.limit(8),
+                companies: cp_id ? Manage::ProductCompany.where(id: cp_id) + (Manage::ProductCompany.where.not(id: cp_id)).limit(7) : Manage::ProductCompany.limit(8),
             }
         end
         @schools = info[:schools]

@@ -137,10 +137,14 @@ class Manage::MaterialsController < ManageController
     end
 
     def set_select_cache
-        info = Rails.cache.fetch("#{cache_key}", expires_in: 1.minutes) do
+        if @material
+          s_id =  @material.school_id if @material.school_id
+          c_id =  @material.cate_id if @material.cate_id
+        end
+        info = Rails.cache.fetch("#{cache_key}_#{s_id}_#{c_id}", expires_in: 1.minutes) do
             {
-                schools: Manage::School.limit(8),
-                cates: Manage::MaterialCate.limit(8)
+                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(7) : Manage::School.limit(8),
+                cates: c_id ? Manage::MaterialCate.where(id: c_id) + (Manage::MaterialCate.where.not(id: c_id)).limit(7) : Manage::MaterialCate.limit(8)
             }
         end
         @schools = info[:schools]

@@ -39,12 +39,12 @@
                                         <div class="form-group">
                                             <label for="material_cate">资料分类</label>
                                             <%= f.hidden_field :cate_id, class: "form-control", name: 'material[cate_id]', id: 'material_cate' %>
-                                            <div class="cdt-select" data-json="cates" data-search-url="<%= cdts_search_material_cates_url %>" data-default="<%= @material.cate.name if @material.cate %>"></div>
+                                            <div class="cdt-select" data-search-url="<%= cdts_search_material_cates_url %>" data-default="<%= @material.cate.name if @material.cate %>" data-json="<%= @cates.to_json %>"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="material_school">院校</label>
                                             <%= f.hidden_field :school_id, name: 'material[school_id]', id: 'material_school' %>
-                                            <div class="cdt-select" data-json="schools" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @material.school.name if @material.school %>"></div>
+                                            <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @material.school.name if @material.school %>" data-json="<%= @schools.to_json %>"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="material_tag">年级</label>
@@ -164,33 +164,19 @@
 <%= javascript_include_tag 'jquery.validate.min' %>
 
 <script>
-    var selectData = {
-        "cates": <%= @cates.to_json.html_safe %>,
-        "schools": <%= @schools.to_json.html_safe %>
-    }
-
     $(function() {
         $('.cdt-select').each(function() {
             var $this = $(this);
-            var datas = selectData[$this.data("json")];
+            var datas = $this.data("json");
             var hots = [];
             for (var i in datas) {
                 hots.push(datas[i].name);
             }
-            var InputSelect = $this.cdtSelect({
+            $this.cdtSelect({
                 dataJson: datas,
                 multiSelect: false,
                 search: true,
                 hotcdt: hots,
-                onInit: function () {
-                    console.log(this)
-                },
-                onForbid: function () {
-                    console.log(this)
-                },
-                onTabsAfter: function (target) {
-                    console.log(event)
-                },
                 onCallerAfter: function (target, values) {
                     $this.siblings("input").val($this.find(".cdt-info span").data("id"))
                 },
@@ -209,11 +195,9 @@
                     })
                     return result;
                 }
-            });
-            InputSelect.setcdtVal($this.data("default"));
+            }).setcdtVal($this.data("default").toString());
         })
     })
-
 </script>
 
 <script>

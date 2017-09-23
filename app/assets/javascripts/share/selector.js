@@ -94,17 +94,23 @@ function errBK(err) {
 
 // 自定义查询
 $(function() {
-	var InputSelect = $('.cdt-select').each(function() {
+	$('.cdt-select').each(function() {
+		var json = $(this).data("json");
+		var hots = [];
+		for (var i in json) {
+			hots.push(json[i].name)
+		}
 		$(this).cdtSelect({
-			dataJson: [{id: 1, name: "1"}, {id: 2, name: "2"}, {id: 3, name: "3"}],
+			dataJson: json,
 			multiSelect: false,
 			search: true,
-			hotcdt: ['1', '3'],
+			searchPlaceholder: $(this).data("placeholder"),
+			hotcdt: hots,
 			onInit: function () {
-				console.log(this)
+				// console.log(this)
 			},
 			onForbid: function () {
-				console.log(this)
+				// console.log(this)
 			},
 			onTabsAfter: function (target) {
 				console.log(event)
@@ -134,8 +140,6 @@ $(function() {
 			}
 		});
 	})
-	// 多选设置城市接口
-	// MulticdtSelect.setcdtVal('北京市, 天津市, 上海市, 广州市, 长沙市, 唐山市');
 })
 
 

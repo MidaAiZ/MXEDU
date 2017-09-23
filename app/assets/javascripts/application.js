@@ -264,8 +264,8 @@ $("#navSearch").on("submit", function(e) {
     var $this = $(this);
     var value = $this.find("input").val();
     if (value)
-        window.location = '/materials?school=NONE&name=' + value + '&tag=' + value;
+        window.location = '/materials?cdts=false&school=NONE&name=' + value + '&tag=' + value;
     else
-        window.location = '/materials?school=NONE';
+        window.location = '/materials?cdts=false&school=NONE';
     return false;
 })
