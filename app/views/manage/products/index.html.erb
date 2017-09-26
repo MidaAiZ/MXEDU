@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="space15"></div>
-            <%= render "cdts" %>
+            <%= render "cdts" unless params[:pjax] == 'true' %>
             <div id="pjax-replace">
                 <% cache @products.cache_key, expires_in: 2.minutes do %>
                     <div class="show-block">
@@ -127,9 +127,11 @@
           </div>
         </div>
       </section>
-      <div class="pull-right">
-          <%= link_to '已删除产品', deleted_manage_products_path %>
-      </div>
+      <% if @admin.super? %>
+          <div class="pull-right">
+              <%= link_to '已删除产品', deleted_manage_products_path %>
+          </div>
+      <% end %>
     </div>
   </div>
 </div>

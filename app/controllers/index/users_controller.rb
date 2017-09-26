@@ -1,15 +1,16 @@
 class Index::UsersController < IndexController
   before_action :require_login, only: [:show, :edit]
-  before_action :set_select_cache, only: [:index, :new, :edit]
   layout false, only: :new
 
   # GET /index/users/new
   def new
     @user = Index::User.new
+    @schools = Manage::School.limit(8)
   end
 
   # GET /index/users/1/edit
   def edit
+    @schools = Manage::School.where(id: @user.school_id) + Manage::School.where.not(id: @user.school_id).limit(7)
     set_title "修改资料"
   end
 
@@ -96,9 +97,4 @@ class Index::UsersController < IndexController
     def update_user_params
       params.require(:index_user).permit(:password, :email, :name, :sex, :school_id, :major, :grade)
     end
-
-    def set_select_cache
-        @schools = Manage::School.all
-    end
-
 end

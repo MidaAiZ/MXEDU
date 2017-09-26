@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-sm-12">
             <section class="panel">
-                <%= render "cdts" %>
+                <%= render "cdts" unless params[:pjax] == 'true' %>
 
                 <div class="panel-body">
                     <div id="pjax-replace">

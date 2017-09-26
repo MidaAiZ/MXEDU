@@ -17,7 +17,7 @@
 <!--body wrapper start-->
 <div class="wrapper n-p-t">
     <div class="directory-info-row">
-        <%= render 'cdts' %>
+        <%= render 'cdts' unless params[:pjax] == 'true' %>
         <div class="row" id="pjax-replace">
             <% cache @materials.cache_key, expires_in: 10.minutes do %>
                 <% @materials.each do |m| %>
@@ -25,7 +25,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="panel">
                                 <div class="panel-body">
-                                    <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name if m.cate %></span><br></h4>
+                                    <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name if m.cat %></span><br></h4>
                                     <div class="media">
                                         <%= link_to material_path(m), class: 'pull-left' do %>
                                             <%= image_tag m.cover.thumb, class: :cover %>

@@ -2,6 +2,7 @@ class Manage::ProductsController < ManageController
   before_action :require_login
   before_action :set_index_product, only: [:show, :edit, :update, :destroy]
   before_action :set_select_cache, only: [:index, :new, :edit, :deleted_index]
+  before_action :check_super, only: [:deleted_index, :recover]
 
   # GET /index/products
   # GET /index/products.json
@@ -105,6 +106,8 @@ class Manage::ProductsController < ManageController
     end
 
     def set_select_cache
+        return false if params[:pjax] == 'true'
+
         if @product
           s_id =  @product.school_id if @product.school_id
           c_id =  @product.cate_id if @product.cate_id

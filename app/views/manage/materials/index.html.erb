@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="space15"></div>
-        <%= render "cdts" %>
+        <%= render "cdts" unless params[:pjax] == 'true' %>
     </div>
     <div class="directory-info-row">
         <div id="pjax-replace">
@@ -121,9 +121,11 @@
                 <!--endprint-->
                 <%= paginate @materials %>
             <% end %>
-            <div class="pull-right">
-                <%= link_to '已删除资料', deleted_manage_materials_path %>
-            </div>
+            <% if @admin.super? %>
+                <div class="pull-right">
+                    <%= link_to '已删除资料', deleted_manage_materials_path %>
+                </div>
+            <% end %>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@ class Manage::MaterialsController < ManageController
   before_action :require_login
   before_action :set_material, only: [:show, :edit, :update, :destroy, :upload, :uploader, :delete_file]
   before_action :set_select_cache, only: [:index, :new, :edit, :deleted_index]
+  before_action :check_super, only: [:deleted_index, :recover]
 
   # GET /index/materials
   # GET /index/materials.json
@@ -137,6 +138,7 @@ class Manage::MaterialsController < ManageController
     end
 
     def set_select_cache
+        return false if params[:pjax] == 'true'
         if @material
           s_id =  @material.school_id if @material.school_id
           c_id =  @material.cate_id if @material.cate_id

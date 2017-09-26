@@ -41,7 +41,8 @@
           </div>
           <small>学校</small>
           <% cache @schools.cache_key, expires_in: 1.hours do %>
-            <%= f.select :school_id, @schools.all.map{|s| [s.name, s.id]}, {}, {class: "form-control", id: 'user_school', style: "margin-bottom: 15px;"}  %>
+            <%= f.hidden_field :school_id, id: 'user_school' %>
+            <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @user.school.name if @user.school %>" data-json="<%= @schools.to_json %>"></div>
           <% end %>
           <small>专业</small>
           <%= f.text_field :major, id: :user_major, autofocus: "",  placeholder: "就读专业", class: 'form-control' %>
@@ -60,5 +61,43 @@
       </div>
 
   </div>
-
 <% end %>
+
+<%= stylesheet_link_tag 'cdtSelector/cdt-select-theme' %>
+<%= javascript_include_tag 'cdtSelector/cdtSelect' %>
+<script>
+    $(function() {
+        $('.cdt-select').each(function() {
+            var $this = $(this);
+            var datas = $this.data("json");
+            var hots = [];
+            for (var i in datas) {
+                hots.push(datas[i].name);
+            }
+            $this.cdtSelect({
+                dataJson: datas,
+                multiSelect: false,
+                search: true,
+                hotcdt: hots,
+                onCallerAfter: function (target, values) {
+                    $this.siblings("input").val($this.find(".cdt-info span").data("id"))
+                },
+                onAjaxSearch: function(value, target) {
+                    var result = [];
+                    $.ajax({
+                        url: $this.data("search-url") + "?name=" + value,
+                        type: "GET",
+                        async: false,
+                        success: function(data) {
+                            result = data;
+                        },
+                        error: function(err) {
+
+                        }
+                    })
+                    return result;
+                }
+            }).setcdtVal($this.data("default").toString());
+        })
+    })
+</script>

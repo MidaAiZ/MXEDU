@@ -10,8 +10,8 @@ class Index::MaterialsController < IndexController
     cons = set_rec_cons params.slice(:name, :school, :cate, :tag, :grade)
     nonpaged_materials = Index::Material.sort(cons)
     @materials = nonpaged_materials.page(page).per(count).includes(:cate, :school)
+    set_title((params[:cate] && (@cate = Manage::MaterialCate.find_by_id params[:cate])) ? @cate.name : "学习资料")
     set_cdts
-    set_title "学习资料"
   end
 
   # GET /index/materials/1
@@ -47,6 +47,7 @@ class Index::MaterialsController < IndexController
     end
 
     def set_cdts
+        return false if params[:pjax] == 'true'
         s_id = @user.school_id if @user
         cons = Rails.cache.fetch("#{cache_key}_#{s_id}_cd", expires_in: 10.minutes) do
           {

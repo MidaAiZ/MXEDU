@@ -17,7 +17,7 @@ class ManageController < ApplicationController
         unless @admin.super?
          respond_to do |fomat|
              fomat.json { render json: { count: :NoPermission} }
-             fomat.html { redirect_to :manage_root_path, notice: :NoPermission }
+             fomat.html { redirect_to manage_root_path, notice: :NoPermission }
          end
          return
         end

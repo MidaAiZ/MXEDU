@@ -10,8 +10,8 @@ class Index::ProductsController < IndexController
     cons = set_rec_cons params.slice(:name, :school, :company, :cate, :tag)
     nonpaged_products = Index::Product.sort(cons)
     @products = nonpaged_products.page(page).per(count).includes(:company)
+    set_title((params[:cate] && (@cate = Manage::ProductCate.find_by_id params[:cate])) ? @cate.name : "校园产品")
     set_cdts
-    set_title "校园产品"
   end
 
   # GET /index/products/1
@@ -39,6 +39,7 @@ class Index::ProductsController < IndexController
     end
 
     def set_cdts
+        return false if params[:pjax] == 'true'
         s_id = @user.school_id if @user
         cons = Rails.cache.fetch("#{cache_key}_#{s_id}_cd", expires_in: 10.minutes) do
           {
