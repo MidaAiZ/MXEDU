@@ -11,24 +11,28 @@ class Index::User < ApplicationRecord
     belongs_to :school,
                 counter_cache: true,
                 class_name: 'Manage::School',
-                foreign_key: 'school_id',
+                foreign_key: :school_id,
                 optional: true
+
+    has_many :posts,
+            class_name: 'Index::Post',
+            foreign_key: :user_id
 
     has_many :histories,
             class_name: 'Index::History',
-            foreign_key: 'user_id'
+            foreign_key: :user_id
 
     has_many :mat_histories,
             class_name: 'Index::MatHistory',
-            foreign_key: 'user_id'
+            foreign_key: :user_id
 
     has_many :appoints,
             class_name: 'Index::Appoint',
-            foreign_key: 'user_id'
+            foreign_key: :user_id
 
     has_many :orders,
             class_name: 'Index::Order',
-            foreign_key: 'user_id'
+            foreign_key: :user_id
 
       validates :number, presence: true, uniqueness: { message: '该帐号已被注册' },
                          length: { minimum: 2, maximum: 16 },

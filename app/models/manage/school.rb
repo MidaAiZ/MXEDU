@@ -14,6 +14,10 @@ class Manage::School < ApplicationRecord
 			 class_name: 'Index::Product',
 	 		 foreign_key: :school_id
 
+	has_many :posts,
+             class_name: 'Index::Post',
+             foreign_key: :school_id
+
 	 validates :city, length: { minimum: 1, too_short: '城市不能为空', maximum: 16, too_long: '城市名最大长度为%{count}' }
 	 validates :name, uniqueness: { message: "该学校已经存在" }, length: { minimum: 1, too_short: '学校名不能为空', maximum: 64, too_long: '学校名最大长度为%{count}' }
 

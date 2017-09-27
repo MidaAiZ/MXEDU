@@ -32,6 +32,13 @@ Rails.application.routes.draw do
         end
     end
 
+    # 帖子
+    resources :posts do
+        collection do
+            
+        end
+    end
+
     #user center
     scope 'ucenter', as: :ucenter do
         # profile

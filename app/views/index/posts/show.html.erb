@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @post.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>Readtimes:</strong>
+  <%= @post.readtimes %>
+</p>
+
+<p>
+  <strong>Comments count:</strong>
+  <%= @post.comments_count %>
+</p>
+
+<p>
+  <strong>Thumbs count:</strong>
+  <%= @post.thumbs_count %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

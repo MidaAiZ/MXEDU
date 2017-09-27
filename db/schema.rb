@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917181602) do
+ActiveRecord::Schema.define(version: 20170927031211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,25 @@ ActiveRecord::Schema.define(version: 20170917181602) do
     t.datetime "updated_at", null: false
     t.index ["products_type", "products_id"], name: "index_index_orders_on_products_type_and_products_id"
     t.index ["user_id"], name: "index_index_orders_on_user_id"
+  end
+
+  create_table "index_posts", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.integer "readtimes"
+    t.integer "comments_count"
+    t.integer "thumbs_count"
+    t.jsonb "info"
+    t.bigint "user_id"
+    t.bigint "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "state", default: 1
+    t.bigint "cate_id"
+    t.index ["cate_id"], name: "index_posts_on_cate_id"
+    t.index ["name"], name: "index_posts_on_name"
+    t.index ["school_id"], name: "index_posts_on_manage_school_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "index_products", force: :cascade do |t|
@@ -179,6 +198,13 @@ ActiveRecord::Schema.define(version: 20170917181602) do
     t.integer "dload_count", default: 0
     t.index ["material_id"], name: "index_manage_material_files_on_material_id"
     t.index ["name"], name: "index_manage_material_files_on_name"
+  end
+
+  create_table "manage_post_cates", force: :cascade do |t|
+    t.string "name"
+    t.integer "posts_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "manage_product_cates", force: :cascade do |t|
