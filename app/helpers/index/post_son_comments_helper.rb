@@ -1,0 +1,2 @@
+module Index::PostSonCommentsHelper
+end

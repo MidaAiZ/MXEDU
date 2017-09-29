@@ -34,6 +34,22 @@ class Index::User < ApplicationRecord
             class_name: 'Index::Order',
             foreign_key: :user_id
 
+    has_many :images,
+            class_name: 'Index::Image',
+            foreign_key: :user_id
+
+    has_many :thumbs,
+             class_name: 'Index::Thumb',
+             foreign_key: :user_id
+
+    has_many :post_comments,
+             class_name: 'Index::PostComment',
+             foreign_key: :user_id
+
+    has_many :post_son_comments,
+             class_name: 'Index::PostSonComment',
+             foreign_key: :user_id
+
       validates :number, presence: true, uniqueness: { message: '该帐号已被注册' },
                          length: { minimum: 2, maximum: 16 },
                          format: { with: Validate::VALID_ACCOUNT_REGEX },

@@ -34,9 +34,25 @@ Rails.application.routes.draw do
 
     # 帖子
     resources :posts do
+        resources :post_comments
         collection do
-            
+            post '/:id/thumb' => 'posts#thumb_up', as: :thumb
+            delete '/:id/thumb' => 'posts#thumb_cancel'
         end
+    end
+
+    # 帖子评论
+    resources :post_comments do
+        resources :post_son_comments
+        collection do
+            post '/:id/thumb' => 'post_comments#thumb_up', as: :thumb
+            delete '/:id/thumb' => 'post_comments#thumb_cancel'
+        end
+    end
+
+    # 图片
+    resources :images do
+
     end
 
     #user center

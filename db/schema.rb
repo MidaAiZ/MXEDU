@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927031211) do
+ActiveRecord::Schema.define(version: 20170929155513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20170927031211) do
     t.index ["p_id"], name: "index_index_histories_on_p_id"
     t.index ["remote_ip"], name: "index_histories_on_remote_ip"
     t.index ["user_id"], name: "index_index_histories_on_user_id"
+  end
+
+  create_table "index_images", force: :cascade do |t|
+    t.string "link"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_images_on_user_id"
+    t.index ["user_id"], name: "index_index_images_on_user_id"
   end
 
   create_table "index_mat_histories", force: :cascade do |t|
@@ -87,6 +94,30 @@ ActiveRecord::Schema.define(version: 20170927031211) do
     t.index ["user_id"], name: "index_index_orders_on_user_id"
   end
 
+  create_table "index_post_comments", force: :cascade do |t|
+    t.string "content"
+    t.integer "thumbs_count"
+    t.integer "comments_count"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "post_id"
+    t.jsonb "images"
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
+  end
+
+  create_table "index_post_son_comments", force: :cascade do |t|
+    t.string "content"
+    t.integer "thumbs_count"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "post_cmt_id"
+    t.index ["post_cmt_id"], name: "index_post_son_cmts_on_cmt_id"
+    t.index ["user_id"], name: "index_post_son_comments_on_user_id"
+  end
+
   create_table "index_posts", force: :cascade do |t|
     t.string "name"
     t.string "content"
@@ -100,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170927031211) do
     t.datetime "updated_at", null: false
     t.integer "state", default: 1
     t.bigint "cate_id"
+    t.jsonb "images"
     t.index ["cate_id"], name: "index_posts_on_cate_id"
     t.index ["name"], name: "index_posts_on_name"
     t.index ["school_id"], name: "index_posts_on_manage_school_id"
@@ -129,6 +161,18 @@ ActiveRecord::Schema.define(version: 20170927031211) do
     t.index ["info"], name: "index_index_products_on_info", using: :gin
     t.index ["name", "tag"], name: "index_products_on_name_tag"
     t.index ["school_id"], name: "index_products_on_school_id"
+  end
+
+  create_table "index_thumbs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "remote_ip"
+    t.index ["remote_ip"], name: "index_thumbs_on_remote_ip"
+    t.index ["resource_id", "resource_type"], name: "index_thumbs_on_rsc_id_type"
+    t.index ["user_id"], name: "index_thumbs_on_user_id"
   end
 
   create_table "index_users", force: :cascade do |t|

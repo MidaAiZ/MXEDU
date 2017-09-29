@@ -1,0 +1,95 @@
+<!--body wrapper start-->
+<div class="wrapper">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			<div class="panel">
+				<%= form_tag post_post_comments_path(@post), id: :comment_form, "data-comment-id" => @post.id do %>
+					<%= text_area_tag "comment[content]", @comment.content, id: "comment-content", class: "form-control input-lg p-text-area", rows: "5", placeholder: "ex: 你是好人" %>
+                    <%= hidden_field_tag "comment[images]", '',  id: :comment_images, "data-value" => @comment.images.to_json %>
+                <% end %>
+				<div class="imgs-up-pane" id="img-pane">
+                    <div class="parentFileBox">
+        				<ul class="fileBoxUl">
+                            <li class="upload-btn">
+                                <div id="img-upload"></div>
+            				</li>
+        				</ul>
+        			</div>
+				</div>
+                <!-- <%= form_tag images_path, id: :image_form do %>
+                    <%= file_field_tag "image[link]", id: "img_input", accept: "image/*", multiple: true  %>
+                <% end %> -->
+				<footer class="panel-footer">
+					<input value='发表' type="button" class="btn btn-post pull-right" id="comment_submit" disabled="true">
+					<ul class="nav nav-pills p-option">
+						<!-- <li>
+							<a href="#"><i class="fa fa-user"></i></a>
+						</li> -->
+						<li>
+							<a href="#"><i class="fa fa-camera"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa  fa-location-arrow"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-meh-o"></i></a>
+						</li>
+					</ul>
+				</footer>
+                <!-- <%= form_tag images_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @post.id do %> -->
+                <!-- <% end %> -->
+			</div>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="/assets/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/assets/diyUpload/js/diyUpload.js"></script>
+<script type="text/javascript">
+
+    /*
+    * 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+    * 其他参数同WebUploader
+    */
+
+    $('#img-upload').diyUpload({
+    	url:'/images',
+    	success:function( data ) {
+    		console.info( data );
+    	},
+    	error:function( err ) {
+    		console.info( err );
+    	},
+    	buttonText: '+',
+        uploadButton: $('#comment_submit'),
+    	chunked:true,
+    	// 分片大小
+    	chunkSize:512 * 1024,
+    	//最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
+    	fileNumLimit:50,
+    	fileSizeLimit:500000 * 1024,
+    	fileSingleSizeLimit:50000 * 1024,
+    	accept: {
+            extensions:"gif,jpg,jpeg,bmp,png",
+            mimeTypes:"image/*"
+        },
+        success: function(res) {
+            var $imgInput = $("#comment_images");
+            var val = $imgInput.data("value");
+            if (!val || typeof(val) != "object") val = {};
+            val[res.id] = {
+                url: res.url,
+                thumb: res.thumb
+            }
+            $imgInput.data("value", val);
+        },
+        error: function(error) {
+
+        },
+        complete: function() {
+            submitPost();
+            console.log($("#comment_images").data("value"))
+        }
+    });
+</script>

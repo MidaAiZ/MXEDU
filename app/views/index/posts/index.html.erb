@@ -1,35 +1,215 @@
-<p id="notice"><%= notice %></p>
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="#">校园BBS</a>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
 
-<h1>Index Posts</h1>
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-0 col-xs-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <input type="text" placeholder="搜索帖子" class="form-control blog-search">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% @posts.each do |post| %>
+                <div class="panel post-pane">
+                    <div class="panel-body n-p-b">
+                        <div class="p-u-info">
+                            <% if post.user_id == @user.id %>
+                                <div class="opt-menu pull-right">
+                                    <span class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class='fa fa-angle-down'></i>
+                                    </span>
+                                    <ul class="dropdown-menu pull-right">
+                                      <li>
+                                        <%= link_to '修改', edit_post_path(post) %>
+                                      </li>
+                                      <li>
+                                          <%= link_to '删除', post_path(post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                      </li>
+                                    </ul>
+                                </div>
+                            <% end %>
+                            <div class="ico">
+                                <%= image_tag post.user.avatar.mini %>
+                            </div>
+                            <div class="u-intro">
+                                <span class='u-name'><%= post.user.name %></span>
+                                <span class='p-time'><%= post.created_at.strftime("%H:%M") %></span>
+                            </div>
+                        </div>
+                        <%= link_to post_path(post), class: "auto-row p-content" do %>
+                            <span class="">
+                                <%= post.content %>
+                            </span>
+                        <% end %>
+                        <% if post.images && post.images.class.name == "Hash" %>
+                            <div class="blog-imgs">
+                                <% $images = post.images %>
+                                <% $images.keys.slice(0..8).each_with_index do |c, i| %>
+                                    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 img-pane">
+                                        <div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <div class="p-footer">
+                            <div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
+                            <div class="thumbs"><i class="fa fa-comments-o" role='comment'></i>
+                                <span>
+                                    <%= post.comments_count %>
+                                </span>
+                            </div>
+                            <div class="coments">
+                                <i class="fa <%= post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
+                                <span><%= post.thumbs_count %></span>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="more">Continue Reading</a> -->
+                    </div>
+                </div>
+            <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Content</th>
-      <th>Readtimes</th>
-      <th>Comments count</th>
-      <th>Thumbs count</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                <!-- <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="blog-img-sm">
+                                    <img src="/assets/blog/blog-sm-img.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <h2 class="">
+                                </h2>
+                                <p class=" auth-row">
+                                    By <a href="#">Anthony Jones</a>   |   27 December 2014   | <a href="#">5 Comments</a>
+                                </p>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.name %></td>
-        <td><%= post.content %></td>
-        <td><%= post.readtimes %></td>
-        <td><%= post.comments_count %></td>
-        <td><%= post.thumbs_count %></td>
-        <td><%= link_to 'Show', post_path(post) %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', posts_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                                <p>Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci.
+                                </p>
+                                <a href="#" class="more">Continue Reading</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
-<br>
+            <div class="text-center">
+                <%= paginate @posts %>
+                <!--
+                <ul class="pagination blog-pagination">
+                    <li><a href="#">PREV</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">NEXT</a></li>
+                </ul> -->
 
-<%= link_to 'New Index Post', new_post_path %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- <div class="panel">
+                <div class="panel-body">
+                    <input type="text" placeholder="搜索帖子" class="form-control blog-search">
+                </div>
+            </div> -->
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="blog-post">
+                        <h3>Latest Blog Post</h3>
+                        <div class="media">
+                            <a href="javascript:;" class="pull-left">
+                                <img alt="" src="/assets/blog/blog-thumb-1.jpg" class=" ">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a href="javascript:;" class="pull-left">
+                                <img alt="" src="/assets/blog/blog-thumb-2.jpg" class=" ">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a href="javascript:;" class="pull-left">
+                                <img alt="" src="/assets/blog/blog-thumb-3.jpg" class=" ">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
+                                <p>
+                                    Donec id elit non mi porta gravida at eget metus amet int
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="blog-post">
+                        <h3>recent comments</h3>
+                        <ul>
+                            <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="blog-post">
+                        <h3>category</h3>
+                        <ul>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> Animals</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> Landscape</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> Portait</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> Wild Life</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> Video</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="blog-post">
+                        <h3>blog archive</h3>
+                        <ul>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> May 2013</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> April 2013</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> March 2013</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> February 2013</a></li>
+                            <li><a href="javascript:;"><i class="  fa fa-angle-right"></i> January 2013</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--body wrapper end-->

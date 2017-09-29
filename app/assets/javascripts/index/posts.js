@@ -1,2 +1,93 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+//= require ../share/posts
+$(function() {
+	$("#post_form").on("submit", function(e) {
+		e.preventDefault()
+		return false;
+	});
+	$("#post_submit").on("click", function() {
+		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").length > 0) {
+			return false;
+		}
+		submitPost();
+	})
+
+	if ($("#post-content").val()) $("#post_submit").removeAttr("disabled");
+	$("#post-content").on("input", function() {
+		if ($(this).val()) $("#post_submit").removeAttr("disabled");
+		if (!$(this).val()) $("#post_submit").attr("disabled", true);
+	})
+
+	$("#img-pane").on("click", ".diyDel", function() {
+		var $imgInput = $("#post_images");
+		var val = $imgInput.data("value");
+		if (!val || typeof(val) != "object") val = {};
+		delete(val[$(this).data("img-id")])
+		$imgInput.data("value", val);
+		console.log(val);
+		$(this).parents("li").remove();
+	})
+})
+
+function submitPost(url) {
+	var $form = $("#post_form");
+	var url = "/posts";
+	if ($form.data("post-id")) url += ("/" + $form.data("post-id"));
+	var type = $form.data("post-id") ? "PATCH" : "POST"
+	// var fd = new FormData($form[0]);
+	$.ajax({
+		url: url,
+		type: type,
+		dataType: "JSON",
+		data: {
+			"post[content]": $form.find("#post-content").val(),
+			"post[images]": $form.find("#post_images").data("value")
+		},
+		// contentType: false,
+		// processData: false,
+		success: function(data) {
+			window.location = "/posts/" + data.id
+		},
+		error: function(error) {
+
+		}
+	})
+}
+
+// $("#img_input").on("change",function(){
+// 	var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+// 	if (objUrl) {
+// 		$("#img-pane").append("\
+// 			<img src=" + objUrl + " style='width: 200px;'>\
+// 		")
+// 		var $imgForm = $("#image_form");
+// 		console.log($(this)[0].files)
+// 		var fd = new FormData($imgForm[0])
+// 		$.ajax({
+// 			url: $imgForm.attr("action"),
+// 			type: "POST",
+// 			dataType: "JSON",
+// 			data: fd,
+// 			contentType: false,
+// 			processData: false,
+// 			success: function(data) {
+// 				console.log(data);
+// 			},
+// 			error: function(error) {
+// 				console.log(error);
+// 			}
+// 		})
+// 	}
+// });
+
+//建立一个可存取到file的url
+// function getObjectURL(file) {
+// 	var url = null ;
+// 	if (window.createObjectURL!=undefined) { // basic
+// 	url = window.createObjectURL(file) ;
+// 	} else if (window.URL!=undefined) { // mozilla(firefox)
+// 	url = window.URL.createObjectURL(file) ;
+// 	} else if (window.webkitURL!=undefined) { // webkit or chrome
+// 	url = window.webkitURL.createObjectURL(file) ;
+// 	}
+// 	return url ;
+// }

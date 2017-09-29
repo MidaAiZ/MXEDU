@@ -1,42 +1,108 @@
-<%= form_for(@post, url: :posts) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<!--body wrapper start-->
+<div class="wrapper">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			<div class="panel">
+				<%= form_tag posts_path, id: :post_form, "data-post-id" => @post.id do %>
+					<%= text_area_tag "post[content]", @post.content, id: "post-content", class: "form-control input-lg p-text-area", rows: "5", placeholder: "分享一下男朋友..." %>
+                    <%= hidden_field_tag "post[images]", '',  id: :post_images, "data-value" => @post.images.to_json %>
+                <% end %>
+				<div class="imgs-up-pane" id="img-pane">
+                    <div class="parentFileBox">
+        				<ul class="fileBoxUl">
+                            <% if @post.images && @post.images.class.name == "Hash" %>
+                                <% $images = @post.images %>
+                                <% $images.keys.each do |c| %>
+                                    <li>
+                                        <div class="viewThumb">
+                                            <img src="<%= $images[c]['thumb'] %>" alt="">
+                                        </div>
+                                        <div class="diyDel" data-img-id="<%= c %>">
+                                            <i class="fa fa-times-circle"></i>
+                                        </div>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                            <li class="upload-btn">
+                                <div id="img-upload"></div>
+            				</li>
+        				</ul>
+        			</div>
+				</div>
+                <!-- <%= form_tag images_path, id: :image_form do %>
+                    <%= file_field_tag "image[link]", id: "img_input", accept: "image/*", multiple: true  %>
+                <% end %> -->
+				<footer class="panel-footer">
+					<input value='发表' type="button" class="btn btn-post pull-right" id="post_submit" disabled="true">
+					<ul class="nav nav-pills p-option">
+						<!-- <li>
+							<a href="#"><i class="fa fa-user"></i></a>
+						</li> -->
+						<li>
+							<a href="#"><i class="fa fa-camera"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa  fa-location-arrow"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-meh-o"></i></a>
+						</li>
+					</ul>
+				</footer>
+                <!-- <%= form_tag images_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @post.id do %> -->
+                <!-- <% end %> -->
+			</div>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="/assets/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/assets/diyUpload/js/diyUpload.js"></script>
+<script type="text/javascript">
 
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    /*
+    * 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+    * 其他参数同WebUploader
+    */
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :post_name %>
-  </div>
+    $('#img-upload').diyUpload({
+    	url:'/images',
+    	success:function( data ) {
+    		console.info( data );
+    	},
+    	error:function( err ) {
+    		console.info( err );
+    	},
+    	buttonText: '+',
+        uploadButton: $('#post_submit'),
+    	chunked:true,
+    	// 分片大小
+    	chunkSize:512 * 1024,
+    	//最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
+    	fileNumLimit:50,
+    	fileSizeLimit:500000 * 1024,
+    	fileSingleSizeLimit:50000 * 1024,
+    	accept: {
+            extensions:"gif,jpg,jpeg,bmp,png",
+            mimeTypes:"image/*"
+        },
+        success: function(res) {
+            var $imgInput = $("#post_images");
+            var val = $imgInput.data("value");
+            if (!val || typeof(val) != "object") val = {};
+            val[res.id] = {
+                url: res.url,
+                thumb: res.thumb
+            }
+            $imgInput.data("value", val);
+        },
+        error: function(error) {
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content, id: :post_content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :readtimes %>
-    <%= form.number_field :readtimes, id: :post_readtimes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :comments_count %>
-    <%= form.number_field :comments_count, id: :post_comments_count %>
-  </div>
-
-  <div class="field">
-    <%= form.label :thumbs_count %>
-    <%= form.number_field :thumbs_count, id: :post_thumbs_count %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+        },
+        complete: function() {
+            submitPost();
+            console.log($("#post_images").data("value"))
+        }
+    });
+</script>

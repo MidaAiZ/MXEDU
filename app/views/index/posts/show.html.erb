@@ -1,29 +1,120 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @post.name %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
-  <strong>Readtimes:</strong>
-  <%= @post.readtimes %>
-</p>
-
-<p>
-  <strong>Comments count:</strong>
-  <%= @post.comments_count %>
-</p>
-
-<p>
-  <strong>Thumbs count:</strong>
-  <%= @post.thumbs_count %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li class='t-center'>
+            <a href="/posts" class='pull-left'><<</a>
+            <span class="">
+                帖子正文
+            </span>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="p-u-info">
+                        <% if @post.user_id == @user.id %>
+                            <div class="opt-menu pull-right">
+                                <span class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class='fa fa-angle-down'></i>
+                                </span>
+                                <ul class="dropdown-menu pull-right">
+                                  <li>
+                                    <%= link_to '修改', edit_post_path(@post) %>
+                                  </li>
+                                  <li>
+                                      <%= link_to '删除', post_path(@post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                  </li>
+                                </ul>
+                            </div>
+                        <% end %>
+                        <div class="ico">
+                            <%= image_tag @post.user.avatar.mini %>
+                        </div>
+                        <div class="u-intro">
+                            <span class='u-name'><%= @post.user.name %></span>
+                            <span class='p-time'><%= @post.created_at.strftime("%H:%M") %></span>
+                        </div>
+                    </div>
+                    <span class="auto-row p-content">
+                        <%= @post.content %>
+                    </span>
+                    <% if @post.images && @post.images.class.name == "Hash" %>
+                        <div class="blog-imgs">
+                            <% $images = @post.images %>
+                            <% $images.keys.each_with_index do |c, i| %>
+                                <div class="img-view">
+                                    <%= image_tag $images[c]['thumb'], "data-url" => $images[c]['url'] %>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="p-footer info <%= 'm-b-40' unless @comments.any? %>">
+                <div class="readtimes">浏览 <span><%= @post.readtimes || 0 %></span></div>
+                <div class="thumbs">赞 <span><%= @post.thumbs_count || 0 %></span></div>
+                <div class="coments">评论 <span><%= @post.comments_count || 0%></span></div>
+            </div>
+            <div class="p-footer fix-btm">
+                <div class="coments"><i class="fa <%= @post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
+                <div class="thumbs"><%= link_to  new_post_post_comment_path(@post) do %>
+                    <i class="fa fa-comments-o" role='comment'>评论</i>
+                    <% end %>
+                </div>
+            </div>
+            <% if @comments.any? %>
+                <div class="p-comments n-p-b">
+                    <% @comments.each do |c| %>
+                        <div class="cmt">
+                            <div class="p-u-info">
+                                <% if c.user_id == @user.id %>
+                                    <div class="opt-menu pull-right">
+                                        <span class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class='fa fa-angle-down'></i>
+                                        </span>
+                                        <ul class="dropdown-menu pull-right">
+                                          <li>
+                                              <%= link_to '删除', post_comment_path(c), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                          </li>
+                                        </ul>
+                                    </div>
+                                <% end %>
+                                <div class="ico">
+                                    <%= image_tag c.user.avatar.mini %>
+                                </div>
+                                <div class="u-intro">
+                                    <span class='u-name'><%= c.user.name %></span>
+                                </div>
+                            </div>
+                            <div>
+                            <span class="content"><%= c.content %></span>
+                                <% if c.images && c.images.class.name == "Hash" %>
+                                    <div class="blog-imgs col-xs-12 col-lg-6">
+                                        <% $images = c.images %>
+                                        <% $images.keys.each_with_index do |key, i| %>
+                                            <div class="img-view">
+                                                <%= image_tag $images[key]['thumb'], "data-url" => $images[key]['url'] %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                            </div>
+                            <div class="cmt-info">
+                                <span class='c-time'><%= @post.created_at.strftime("%m-%d %H:%M") %></span>
+                                <span class="c-cmt">
+                                    <i class="fa <%= c.has_thumb?(c.user.id, '') ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_post_comments_path(c) %>" role='thumb'></i>
+                                    <span><%= c.thumbs_count %></span>
+                                </span>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

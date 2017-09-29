@@ -3591,7 +3591,7 @@ ul.p-social-link li a:hover, ul.p-social-link li.active a {
 .p-text-area, .p-text-area:focus {
     border: medium none;
     box-shadow: none;
-    color: #C3C3C3;
+    color: #666;
     font-size: 16px;
     font-weight: 300;
 }
@@ -4170,12 +4170,22 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 .blog .auth-row {
     color: #c8c8c8;
     font-weight: 300;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     font-size: 14px;
 }
 
 .auth-row a {
     color: #C8C8C8;
+}
+
+.blog .blog-imgs {
+    display: inline-block;
+    width: 100%;
+}
+
+.blog .img-pane {
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .blog .blog-img-wide img{
@@ -4184,9 +4194,26 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
     padding-bottom: 25px;
 }
 
+.blog-img-sm {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    margin: 4px 0 0;
+    padding-bottom: 100%; /* 关键就在这里 */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    cursor: pointer;
+}
+
 .blog-img-sm img {
     width: 100%;
+    height: 100%;
     padding-bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .blog p {
@@ -4895,8 +4922,16 @@ img.cover {
     padding-top: 0 !important;
 }
 
+.n-p-b {
+    padding-bottom: 0px !important;
+}
+
 .n-m-t {
     margin-top: 0px !important;
+}
+
+.n-m-b {
+    margin-bottom: 0px !important;
 }
 
 li.flex {
@@ -4934,4 +4969,69 @@ li.flex {
     margin-right: -5px;
     font-size: 30px;
     color: red;
+}
+
+.auto-row {
+    &.p-content {
+        color: #636363;
+        padding: 5px 2px;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.p-u-info {
+    margin-bottom: 5px;
+    .ico {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+        display: inline-block;
+        float: left;
+        img {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-top: 2px;
+        }
+    }
+    .u-intro {
+        display: inline-block;
+        .u-name {
+            font-size: 15px;
+            display: block;
+        }
+        .p-time {
+            font-size: 12px;
+        }
+    }
+}
+.p-footer {
+    display: block;
+    margin-top: 5px;
+    background: white;
+    border-top: 1px #eee solid;
+    > div {
+        display: inline-block;
+        width: (1 / 3) * 100%;
+        float: left;
+        text-align: center;
+        padding: 10px 3px;
+        color: #999;
+        i.fa {
+            padding-right: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    }
+    // > div:nth-child(1),
+    // > div:nth-child(2) {
+    //     border-right: 0.5px solid #f8f8f8;
+    // }
+}
+
+.fa-thumbs-up.active {
+    color: #ff7800;
 }

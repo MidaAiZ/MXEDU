@@ -1,0 +1,2 @@
+module Index::PostCommentsHelper
+end

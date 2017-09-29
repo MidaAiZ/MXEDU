@@ -1,11 +1,12 @@
 class Index::PostsController < IndexController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_login, except: [:new, :create, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :thumb_up, :thumb_cancel]
 
   # GET /index/posts
   # GET /index/posts.json
   def index
-	count = params[:count] || 20
+	count = params[:count] || 15
 	page = params[:page] || 1
 	cons = set_rec_cons params.slice(:name, :school, :cate)
 	nonpaged_posts = Index::Post.sort(cons)
@@ -17,6 +18,11 @@ class Index::PostsController < IndexController
   # GET /index/posts/1
   # GET /index/posts/1.json
   def show
+    count = params[:count] || 10
+    page = params[:page] || 1
+    nonpaged_comments = @post.comments
+    @comments = nonpaged_comments.page(page).per(count).includes(:user)
+    @post.update readtimes: ((@post.readtimes || 0) + 1)
 	set_title @post.name
   end
 
@@ -37,11 +43,12 @@ class Index::PostsController < IndexController
     @post = Index::Post.new(post_params)
 	@post.user = @user
 	@post.school = @user.school
+	@post.images = params[:post][:images]
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.html { redirect_to post_url @post }
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -53,13 +60,14 @@ class Index::PostsController < IndexController
   # PATCH/PUT /index/posts/1.json
   def update
 	unless @post.is_forbidden? # 被后台拉黑的帖子禁止更新
+      @post.images = params[:post][:images]
 	  code = 'Success' if @post.update(post_params)
 	end
 	code ||= 'Fail'
     respond_to do |format|
       if code == 'Success'
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.html { redirect_to post_url @post }
+        format.json { render :show, status: :created }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -67,10 +75,29 @@ class Index::PostsController < IndexController
     end
   end
 
+  def thumb_up
+    code = (@user ? Index::Thumb.thumb_up(@user, @post) : Index::Thumb.thumb_up(request.remote_ip, @post, 'ip'))
+
+    respond_to do |format|
+      format.html { render json: { }, status: code ? 200 : 422 }
+      format.json { head :no_content, status: code ? 200 : 422  }
+    end
+  end
+
+  def thumb_cancel
+    @thumb = @post.has_thumb? @user.id, request.remote_ip
+    code = @thumb.cancel if @thumb
+    respond_to do |format|
+      format.html { render json: { code: code }, status: code ? 200 : 422 }
+      format.json { head :no_content, status: code ? 200 : 422 }
+    end
+  end
+
   # DELETE /index/posts/1
   # DELETE /index/posts/1.json
   def destroy
-    @post.destroy
+    @post = @user.posts.find(params[:id])
+    @post.del!
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
@@ -85,7 +112,7 @@ class Index::PostsController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:index_post).permit(:name, :content, :readtimes, :comments_count, :thumbs_count)
+      params.require(:post).permit(:name, :content, :images)
     end
 
 	def set_cdts

@@ -1,0 +1,2 @@
+module Index::ThumbsHelper
+end
