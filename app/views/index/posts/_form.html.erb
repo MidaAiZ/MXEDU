@@ -4,7 +4,10 @@
 		<div class="col-md-8 col-md-offset-2 col-xs-12">
 			<div class="panel">
 				<%= form_tag posts_path, id: :post_form, "data-post-id" => @post.id do %>
-					<%= text_area_tag "post[content]", @post.content, id: "post-content", class: "form-control input-lg p-text-area", rows: "5", placeholder: "分享一下男朋友..." %>
+					<%#= text_area_tag "post[content]", @post.content, id: "post-content", class: "form-control input-lg p-text-area", rows: "5", contenteditable: "true", placeholder: "分享一下男朋友..." %>
+					<div id="post-content" class="form-control input-lg p-text-area" rows="5" contenteditable="true" role="emoji-input">
+						<%= (@post.content || "").html_safe %>
+					</div>
                     <%= hidden_field_tag "post[images]", '',  id: :post_images, "data-value" => @post.images.to_json %>
                 <% end %>
 				<div class="imgs-up-pane" id="img-pane">
@@ -39,13 +42,13 @@
 							<a href="#"><i class="fa fa-user"></i></a>
 						</li> -->
 						<li>
-							<a href="#"><i class="fa fa-camera"></i></a>
+							<a href="javascript: void(0)" id="open-img-btn"><i class="fa fa-camera"></i></a>
 						</li>
+						<!-- <li>
+							<a href="javascript: void(0)"><i class="fa  fa-location-arrow"></i></a>
+						</li> -->
 						<li>
-							<a href="#"><i class="fa  fa-location-arrow"></i></a>
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-meh-o"></i></a>
+							<a href="javascript: void(0)" id="emoji-btn"><i class="fa fa-meh-o"></i></a>
 						</li>
 					</ul>
 				</footer>
@@ -57,8 +60,11 @@
 </div>
 <link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/webuploader.css">
 <link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/diyUpload.css">
+<%= stylesheet_link_tag "share/emoji" %>
+
 <script type="text/javascript" src="/assets/diyUpload/js/webuploader.html5only.min.js"></script>
 <script type="text/javascript" src="/assets/diyUpload/js/diyUpload.js"></script>
+<%= javascript_include_tag "share/emoji" %>
 <script type="text/javascript">
 
     /*

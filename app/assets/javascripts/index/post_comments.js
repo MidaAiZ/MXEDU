@@ -11,10 +11,10 @@ $(function() {
 		submitPost();
 	})
 
-	if ($("#comment-content").val()) $("#comment_submit").removeAttr("disabled");
+	if ($("#comment-content").html()) $("#comment_submit").removeAttr("disabled");
 	$("#comment-content").on("input", function() {
-		if ($(this).val()) $("#comment_submit").removeAttr("disabled");
-		if (!$(this).val()) $("#comment_submit").attr("disabled", true);
+		if ($(this).html()) $("#comment_submit").removeAttr("disabled");
+		if (!$(this).html()) $("#comment_submit").attr("disabled", true);
 	})
 
 	$("#img-pane").on("click", ".diyDel", function() {
@@ -25,6 +25,10 @@ $(function() {
 		$imgInput.data("value", val);
 		console.log(val);
 		$(this).parents("li").remove();
+	})
+
+	$("#open-img-btn").on("click", function() {
+		$("#img-upload").find("input[type=file]").trigger("click");
 	})
 })
 
@@ -37,7 +41,7 @@ function submitPost(url) {
 		type: "POST",
 		dataType: "JSON",
 		data: {
-			"comment[content]": $form.find("#comment-content").val(),
+			"comment[content]": $form.find("#comment-content").html(),
 			"comment[images]": $form.find("#comment_images").data("value")
 		},
 		// contentType: false,

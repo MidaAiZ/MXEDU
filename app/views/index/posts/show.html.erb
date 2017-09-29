@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <span class="auto-row p-content">
-                        <%= @post.content %>
+                        <%= (@post.content || "").html_safe %>
                     </span>
                     <% if @post.images && @post.images.class.name == "Hash" %>
                         <div class="blog-imgs">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div>
-                            <span class="content"><%= c.content %></span>
+                            <span class="content"><%= (c.content || "").html_safe %></span>
                                 <% if c.images && c.images.class.name == "Hash" %>
                                     <div class="blog-imgs col-xs-12 col-lg-6">
                                         <% $images = c.images %>

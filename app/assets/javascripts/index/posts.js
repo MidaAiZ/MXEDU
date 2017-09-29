@@ -1,9 +1,11 @@
 //= require ../share/posts
+
 $(function() {
 	$("#post_form").on("submit", function(e) {
 		e.preventDefault()
 		return false;
 	});
+
 	$("#post_submit").on("click", function() {
 		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").length > 0) {
 			return false;
@@ -11,10 +13,10 @@ $(function() {
 		submitPost();
 	})
 
-	if ($("#post-content").val()) $("#post_submit").removeAttr("disabled");
+	if ($("#post-content").html()) $("#post_submit").removeAttr("disabled");
 	$("#post-content").on("input", function() {
-		if ($(this).val()) $("#post_submit").removeAttr("disabled");
-		if (!$(this).val()) $("#post_submit").attr("disabled", true);
+		if ($(this).html()) $("#post_submit").removeAttr("disabled");
+		if (!$(this).html()) $("#post_submit").attr("disabled", true);
 	})
 
 	$("#img-pane").on("click", ".diyDel", function() {
@@ -25,6 +27,10 @@ $(function() {
 		$imgInput.data("value", val);
 		console.log(val);
 		$(this).parents("li").remove();
+	})
+
+	$("#open-img-btn").on("click", function() {
+		$("#img-upload").find("input[type=file]").trigger("click");
 	})
 })
 
@@ -39,7 +45,7 @@ function submitPost(url) {
 		type: type,
 		dataType: "JSON",
 		data: {
-			"post[content]": $form.find("#post-content").val(),
+			"post[content]": $form.find("#post-content").html(),
 			"post[images]": $form.find("#post_images").data("value")
 		},
 		// contentType: false,

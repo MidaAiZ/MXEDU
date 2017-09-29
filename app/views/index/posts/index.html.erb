@@ -53,7 +53,7 @@
                         </div>
                         <%= link_to post_path(post), class: "auto-row p-content" do %>
                             <span class="">
-                                <%= post.content %>
+                                <%= (post.content || "").html_safe %>
                             </span>
                         <% end %>
                         <% if post.images && post.images.class.name == "Hash" %>
