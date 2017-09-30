@@ -57,11 +57,14 @@
                             </span>
                         <% end %>
                         <% if post.images && post.images.class.name == "Hash" %>
-                            <div class="blog-imgs">
+                            <div class="blog-imgs img-gallery">
                                 <% $images = post.images %>
                                 <% $images.keys.slice(0..8).each_with_index do |c, i| %>
                                     <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 img-pane">
                                         <div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
+                                            <a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+                                                <img src="" alt="" style=:display: none;>
+                                            </a>
                                         </div>
                                     </div>
                                 <% end %>

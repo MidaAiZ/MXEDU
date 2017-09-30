@@ -12,13 +12,15 @@
                 <% end %>
 				<div class="imgs-up-pane" id="img-pane">
                     <div class="parentFileBox">
-        				<ul class="fileBoxUl">
+        				<ul class="fileBoxUl img-gallery">
                             <% if @post.images && @post.images.class.name == "Hash" %>
                                 <% $images = @post.images %>
-                                <% $images.keys.each do |c| %>
+                                <% $images.keys.each_with_index do |c, i| %>
                                     <li>
-                                        <div class="viewThumb">
-                                            <img src="<%= $images[c]['thumb'] %>" alt="">
+                                        <div class="viewThumb t-center">
+											<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+    	                                        <img src="<%= $images[c]['thumb'] %>" alt="">
+											</a>
                                         </div>
                                         <div class="diyDel" data-img-id="<%= c %>">
                                             <i class="fa fa-times-circle"></i>
@@ -93,6 +95,15 @@
             extensions:"gif,jpg,jpeg,bmp,png",
             mimeTypes:"image/*"
         },
+		onFileChange: function($fileBox) {
+			var index = ($fileBox.index() + 1);
+			var size = $fileBox.siblings().not('.upload-btn').length + 1;
+			$fileBox.siblings().andSelf().not(".upload-btn").each(function(i, e) {
+				var $this = $(this);
+				$(this).find("a[data-caption]").attr("data-caption", (i + 1) + '/' + size)
+			})
+			baguetteBox.run('.img-gallery');
+		},
         success: function(res) {
             var $imgInput = $("#post_images");
             var val = $imgInput.data("value");

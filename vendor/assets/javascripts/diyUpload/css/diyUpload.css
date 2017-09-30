@@ -42,7 +42,7 @@
 	height:100%;
 	overflow:hidden;
 }
-.parentFileBox>.fileBoxUl>li>.viewThumb>img {
+.parentFileBox>.fileBoxUl>li>.viewThumb img {
 	width:100%;
 	min-height:100%;
 }
@@ -137,7 +137,12 @@
 	background-color:#0CC;
 	color:#F30;
 }
-.parentFileBox>.fileBoxUl>li:hover {
+
+.parentFileBox>.fileBoxUl>li:not(.upload-btn):hover {
+	opacity: 0.9;
+}
+
+.parentFileBox>.fileBoxUl>li.upload-btn:hover {
 	/*-moz-box-shadow: 3px 3px 4px #FF0;
 	-webkit-box-shadow: 3px 3px 4px #FF0;
 	box-shadow: 3px 3px 4px #FF0;*/

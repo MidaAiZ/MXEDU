@@ -44,11 +44,13 @@
                         <%= (@post.content || "").html_safe %>
                     </span>
                     <% if @post.images && @post.images.class.name == "Hash" %>
-                        <div class="blog-imgs">
+                        <div class="blog-imgs img-gallery">
                             <% $images = @post.images %>
                             <% $images.keys.each_with_index do |c, i| %>
                                 <div class="img-view">
-                                    <%= image_tag $images[c]['thumb'], "data-url" => $images[c]['url'] %>
+                                    <a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+                                      <%= image_tag $images[c]['thumb'], "data-url" => $images[c]['url'] %>
+                                  </a>
                                 </div>
                             <% end %>
                         </div>
@@ -94,11 +96,13 @@
                             <div>
                             <span class="content"><%= (c.content || "").html_safe %></span>
                                 <% if c.images && c.images.class.name == "Hash" %>
-                                    <div class="blog-imgs col-xs-12 col-lg-6">
+                                    <div class="blog-imgs col-xs-12 col-lg-6 img-gallery">
                                         <% $images = c.images %>
                                         <% $images.keys.each_with_index do |key, i| %>
                                             <div class="img-view">
-                                                <%= image_tag $images[key]['thumb'], "data-url" => $images[key]['url'] %>
+                                                <a href="<%= $images[key]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+                                                    <%= image_tag $images[key]['thumb'], "data-url" => $images[key]['url'] %>
+                                                </a>
                                             </div>
                                         <% end %>
                                     </div>

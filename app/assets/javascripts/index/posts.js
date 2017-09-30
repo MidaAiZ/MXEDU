@@ -1,4 +1,5 @@
 //= require ../share/posts
+//= require ../share/lightbox
 
 $(function() {
 	$("#post_form").on("submit", function(e) {

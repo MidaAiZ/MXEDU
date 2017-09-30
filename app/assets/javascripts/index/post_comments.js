@@ -1,3 +1,5 @@
+//= require ../share/lightbox
+
 $(function() {
 	$("#comment_form").on("submit", function(e) {
 		e.preventDefault()

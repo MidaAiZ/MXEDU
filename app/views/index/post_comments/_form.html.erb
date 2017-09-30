@@ -12,9 +12,10 @@
                 <% end %>
 				<div class="imgs-up-pane" id="img-pane">
                     <div class="parentFileBox">
-        				<ul class="fileBoxUl">
+        				<ul class="fileBoxUl img-gallery">
                             <li class="upload-btn">
-                                <div id="img-upload"></div>
+                                <div id="img-upload">
+                                </div>
             				</li>
         				</ul>
         			</div>
@@ -81,6 +82,15 @@
             extensions:"gif,jpg,jpeg,bmp,png",
             mimeTypes:"image/*"
         },
+		onFileChange: function($fileBox) {
+			var index = ($fileBox.index() + 1);
+			var size = $fileBox.siblings().not('.upload-btn').length + 1;
+			$fileBox.siblings().andSelf().not(".upload-btn").each(function(i, e) {
+				var $this = $(this);
+				$(this).find("a[data-caption]").attr("data-caption", (i + 1) + '/' + size)
+			})
+			baguetteBox.run('.img-gallery');
+		},
         success: function(res) {
             var $imgInput = $("#comment_images");
             var val = $imgInput.data("value");

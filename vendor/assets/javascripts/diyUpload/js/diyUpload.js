@@ -313,10 +313,25 @@
 		//生成预览缩略图;
 		webUploader.makeThumb( file, function( error, dataSrc ) {
 			if ( !error ) {
-				$fileBox.find('.viewThumb').append('<img src="'+dataSrc+'" >');
+				$fileBox.find('.viewThumb').append('<a href="'+ getObjectURL(file.origin) +'" data-caption=""><img src="'+ dataSrc +'" ></a>');
+                if (opt.onFileChange) {
+                    opt.onFileChange($fileBox, file);
+                }
 			}
 		});
 	}
+
+    function getObjectURL(file) {
+    	var url = null ;
+    	if (window.createObjectURL!=undefined) { // basic
+    	url = window.createObjectURL(file) ;
+    	} else if (window.URL!=undefined) { // mozilla(firefox)
+    	url = window.URL.createObjectURL(file) ;
+    	} else if (window.webkitURL!=undefined) { // webkit or chrome
+    	url = window.webkitURL.createObjectURL(file) ;
+    	}
+    	return url ;
+    }
 
 	//获取文件类型;
 	function getFileTypeClassName ( type ) {

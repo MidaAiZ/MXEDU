@@ -8,7 +8,7 @@ $(function() {
 		e.stopPropagation();
 		$("#emoji-btn").trigger("click");
 	})
-	
+
 	$("#emoji-btn").on("click", function() {
 		$("[role=emoji-input]").emoji({
 			showTab: false,
