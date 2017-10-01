@@ -94,6 +94,28 @@
 	z-index: 100000;
 }
 
+.new-btn-pane {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	background-color: #3989cd;
+	box-shadow: 1px 1px 10px #ddd;
+	cursor: pointer;
+	.new {
+		font-size: 50px;
+		text-decoration: none;
+		text-align: center;
+		color: white;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		display: inline-block;
+	}
+	&:hover {
+		box-shadow: 1px 1px 15px 5px #ddd;
+	}
+}
+
 @media screen and (max-width: 768px) {
 	.fix-btm {
 		position: fixed;
@@ -121,6 +143,10 @@
 			float: right;
 			min-width: 100px;
 		}
+	}
+	.new-btn-pane {
+		right: 50px;
+		bottom: 50px;
 	}
 }
 

@@ -9,9 +9,11 @@ Author: ThemeBucket
 
 html {
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
+    min-height: 100%;
     background: #eff0f4;
     font-family: 'Open Sans', sans-serif;
     color: #7a7676;
