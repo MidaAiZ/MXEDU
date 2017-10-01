@@ -1,5 +1,5 @@
 $(function() {
-	$("[role=thumb]").on("click", function() {
+	$("body").on("click", "[role=thumb]", function() {
 		if ($(this).hasClass("active")) {
 			thumbCancel($(this));
 		} else {
@@ -7,7 +7,7 @@ $(function() {
 		}
 	})
 
-	$("[role=comment]").on("click", function() {
+	$("body").on("click", "[role=comment]", function() {
 	})
 })
 

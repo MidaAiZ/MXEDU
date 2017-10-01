@@ -31,6 +31,7 @@ function changeQuery(search) {
 			cons.push([$this.data("name"), null]);
 		}
 	})
+	cons.push(["page", 0]) // 定位到第一页
 	for(var i in cons) {
 		search = replaceQuery(search, cons[i][0], cons[i][1]);
 	}
@@ -86,6 +87,13 @@ $(function() {
 function sucBK(res, url) {
 	$("body").find("#pjax-replace").replaceWith($(res).find("#pjax-replace"));
 	$('.tooltips').tooltip();
+	// TODO 以下代码适配上拉加载插件，耦合性较高
+	if ($.myDropload) {
+		$.dropLoadPage = 2;
+		$.dropLoadUrl = location.pathname + location.search;
+		$.myDropload.unlock();
+		$.myDropload.resetload();
+	}
 }
 
 function errBK(err) {

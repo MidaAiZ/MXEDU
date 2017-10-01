@@ -12,6 +12,7 @@ class Index::MaterialsController < IndexController
     @materials = nonpaged_materials.page(page).per(count).includes(:cate, :school)
     set_title((params[:cate] && (@cate = Manage::MaterialCate.find_by_id params[:cate])) ? @cate.name : "学习资料")
     set_cdts
+    render(:_lists, layout: false) and return if params["dl"]
   end
 
   # GET /index/materials/1

@@ -11,13 +11,12 @@ class Index::PostCommentsController < IndexController
   # GET /index/post_comments
   # GET /index/post_comments.json
   def index
-    @nonpaged_comments = @post.comments
-    @comments = @nonpaged_comments.page(params[:page]).per(15)
+    count = params[:count] || 10
+    page = params[:page] || 1
 
-    respond_to do |format|
-      format.json { render :index }
-      format.html { render :index, formats: [:json] }
-    end
+    @nonpaged_comments = @post.comments
+    @comments = @nonpaged_comments.page(page).per(count)
+    render "/index/posts/_cmt_lists", layout: false
   end
 
   # GET /index/post_comments/1

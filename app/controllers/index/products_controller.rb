@@ -12,6 +12,7 @@ class Index::ProductsController < IndexController
     @products = nonpaged_products.page(page).per(count).includes(:company)
     set_title((params[:cate] && (@cate = Manage::ProductCate.find_by_id params[:cate])) ? @cate.name : "校园产品")
     set_cdts
+    render(:_lists, layout: false) and return if params["dl"]
   end
 
   # GET /index/products/1

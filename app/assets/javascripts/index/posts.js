@@ -26,7 +26,6 @@ $(function() {
 		if (!val || typeof(val) != "object") val = {};
 		delete(val[$(this).data("img-id")])
 		$imgInput.data("value", val);
-		console.log(val);
 		$(this).parents("li").remove();
 	})
 

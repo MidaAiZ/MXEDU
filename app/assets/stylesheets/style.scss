@@ -8,12 +8,10 @@ Author: ThemeBucket
 @import '/assets/css/font-awesome.min.css';
 
 html {
-    height: 100%;
     overflow-x: hidden;
 }
 
 body {
-    height: 100%;
     background: #eff0f4;
     font-family: 'Open Sans', sans-serif;
     color: #7a7676;
@@ -5020,11 +5018,14 @@ li.flex {
         float: left;
         text-align: center;
         padding: 10px 3px;
-        color: #999;
         i.fa {
             padding-right: 5px;
             font-size: 1.2em;
             cursor: pointer;
+        }
+        &, a {
+          color: #999;
+          text-decoration: none;
         }
     }
     // > div:nth-child(1),

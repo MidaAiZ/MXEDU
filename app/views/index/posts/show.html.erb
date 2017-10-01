@@ -69,56 +69,24 @@
                     <% end %>
                 </div>
             </div>
-            <% if @comments.any? %>
-                <div class="p-comments n-p-b">
-                    <% @comments.each do |c| %>
-                        <div class="cmt">
-                            <div class="p-u-info">
-                                <% if c.user_id == @user.id %>
-                                    <div class="opt-menu pull-right">
-                                        <span class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class='fa fa-angle-down'></i>
-                                        </span>
-                                        <ul class="dropdown-menu pull-right">
-                                          <li>
-                                              <%= link_to '删除', post_comment_path(c), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
-                                          </li>
-                                        </ul>
-                                    </div>
-                                <% end %>
-                                <div class="ico">
-                                    <%= image_tag c.user.avatar.mini %>
-                                </div>
-                                <div class="u-intro">
-                                    <span class='u-name'><%= c.user.name %></span>
-                                </div>
-                            </div>
-                            <div>
-                            <span class="content"><%= (c.content || "").html_safe %></span>
-                                <% if c.images && c.images.class.name == "Hash" %>
-                                    <div class="blog-imgs col-xs-12 col-lg-6 img-gallery">
-                                        <% $images = c.images %>
-                                        <% $images.keys.each_with_index do |key, i| %>
-                                            <div class="img-view">
-                                                <a href="<%= $images[key]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
-                                                    <%= image_tag $images[key]['thumb'], "data-url" => $images[key]['url'] %>
-                                                </a>
-                                            </div>
-                                        <% end %>
-                                    </div>
-                                <% end %>
-                            </div>
-                            <div class="cmt-info">
-                                <span class='c-time'><%= @post.created_at.strftime("%m-%d %H:%M") %></span>
-                                <span class="c-cmt">
-                                    <i class="fa <%= c.has_thumb?(c.user.id, '') ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_post_comments_path(c) %>" role='thumb'></i>
-                                    <span><%= c.thumbs_count %></span>
-                                </span>
-                            </div>
-                        </div>
-                    <% end %>
-                </div>
-            <% end %>
+            <div id="comments" class="dropload" data-url="<%= post_post_comments_path(@post) %>">
+                <% if @comments.any? %>
+                    <div class="p-comments n-p-b" id="lists">
+                        <% cache @comments.cache_key, expires_in: 10.minutes do %>
+                            <%= render "cmt_lists" %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
+<style>
+    @media screen and (max-width: 768px) {
+    	.dropload-refresh, .dropload-update, .dropload-load, .dropload-noData {
+    		opacity: 0;
+    	}
+    }
+</style>
+<%= stylesheet_link_tag "share/dropload" %>
+<%= javascript_include_tag "share/dropload" %>

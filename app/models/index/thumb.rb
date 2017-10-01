@@ -27,10 +27,13 @@ class Index::Thumb < ApplicationRecord
 	def cancel
 	  begin
 		ApplicationRecord.transaction do # 出错将回滚
-		  resource.update! thumbs_count: (resource.thumbs_count - 1)
+		  t_c = resource.thumbs_count - 1
+		  t_c = 0 if t_c < 0 # 防止极端情况下因数据库不同步导致点赞数<0
+		  resource.update! thumbs_count: t_c
 		  self.destroy!
 	    end
-	  rescue
+	  rescue => e
+		puts e
 		return false
 	  end
 	end

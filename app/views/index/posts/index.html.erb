@@ -24,69 +24,13 @@
                     </div>
                 </div>
             </div>
-            <% @posts.each do |post| %>
-                <div class="panel post-pane">
-                    <div class="panel-body n-p-b">
-                        <div class="p-u-info">
-                            <% if post.user_id == @user.id %>
-                                <div class="opt-menu pull-right">
-                                    <span class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class='fa fa-angle-down'></i>
-                                    </span>
-                                    <ul class="dropdown-menu pull-right">
-                                      <li>
-                                        <%= link_to '修改', edit_post_path(post) %>
-                                      </li>
-                                      <li>
-                                          <%= link_to '删除', post_path(post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
-                                      </li>
-                                    </ul>
-                                </div>
-                            <% end %>
-                            <div class="ico">
-                                <%= image_tag post.user.avatar.mini %>
-                            </div>
-                            <div class="u-intro">
-                                <span class='u-name'><%= post.user.name %></span>
-                                <span class='p-time'><%= post.created_at.strftime("%H:%M") %></span>
-                            </div>
-                        </div>
-                        <%= link_to post_path(post), class: "auto-row p-content" do %>
-                            <span class="">
-                                <%= (post.content || "").html_safe %>
-                            </span>
-                        <% end %>
-                        <% if post.images && post.images.class.name == "Hash" %>
-                            <div class="blog-imgs img-gallery">
-                                <% $images = post.images %>
-                                <% $images.keys.slice(0..8).each_with_index do |c, i| %>
-                                    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 img-pane">
-                                        <div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
-                                            <a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
-                                                <img src="" alt="" style=:display: none;>
-                                            </a>
-                                        </div>
-                                    </div>
-                                <% end %>
-                            </div>
-                        <% end %>
-                        <div class="p-footer">
-                            <div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
-                            <div class="thumbs"><i class="fa fa-comments-o" role='comment'></i>
-                                <span>
-                                    <%= post.comments_count %>
-                                </span>
-                            </div>
-                            <div class="coments">
-                                <i class="fa <%= post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
-                                <span><%= post.thumbs_count %></span>
-                            </div>
-                        </div>
-                        <!-- <a href="#" class="more">Continue Reading</a> -->
-                    </div>
+            <div class="dropload" data-url="<%= posts_url %>">
+                <div id="lists">
+                    <% cache @posts.cache_key, expires_in: 10.minutes do %>
+                        <%= render "lists" %>
+                    <% end %>
                 </div>
-            <% end %>
-
+            </div>
                 <!-- <div class="panel">
                     <div class="panel-body">
                         <div class="row">
@@ -111,7 +55,7 @@
                 </div> -->
 
             <div class="text-center">
-                <%= paginate @posts %>
+                <%#= paginate @posts %>
                 <!--
                 <ul class="pagination blog-pagination">
                     <li><a href="#">PREV</a></li>
@@ -131,7 +75,7 @@
                     <input type="text" placeholder="搜索帖子" class="form-control blog-search">
                 </div>
             </div> -->
-            <div class="panel">
+            <!-- <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">
                         <h3>Latest Blog Post</h3>
@@ -211,8 +155,10 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
 <!--body wrapper end-->
+<%= stylesheet_link_tag "share/dropload" %>
+<%= javascript_include_tag "share/dropload" %>

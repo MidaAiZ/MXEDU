@@ -21,51 +21,22 @@
 <!--body wrapper start-->
 <div class="wrapper">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 dropload" data-url="<%= products_url %>" data-count=20>
             <section class="panel">
                 <%= render "cdts" unless params[:pjax] == 'true' %>
-
                 <div class="panel-body">
                     <div id="pjax-replace">
                         <div class="show-block">
                             <div id="gallery" class="media-gal">
-                                <div class="product-row">
+                                <div class="product-row" id="lists">
                                     <% cache @products.cache_key, expires_in: 10.minutes do %>
-                                        <% @products.each do |p| %>
-                                            <% cache p.cache_key, expires_in: 20.minutes do %>
-                                                <div class='product-block'>
-                                                    <div class="item product" >
-                                                        <%= link_to product_path(p) do %>
-                                                            <%=  image_tag p.cover %>
-                                                        <% end %>
-                                                        <div class="info">
-                                                            <p class='p-info'>
-                                                                <%  if p.company %>
-                                                                    <span class='company'><%= p.company.name %></span>
-                                                                <% end %>
-                                                                <span class='name'><%= p.name %></span>
-                                                            </p>
-                                                            <p class='p-intro'>
-                                                                <% if p.price > p.dis_price %>
-                                                                    <small class='price'><i class='fa fa-rmb'></i><%= p.price %></small>
-                                                                <% end %>
-                                                                <span class='dis-price'><small class='fa fa-rmb'></small><%= p.dis_price %></span>
-                                                                <span class="readtimes"><%= p.fake_readtimes %>人浏览</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <% end %>
-                                        <% end %>
-                                        <% if @products.empty? %>
-                                            <center><h4>暂无相关产品</h4></center>
-                                        <% end %>
+                                        <%= render "lists" %>
                                     <% end %>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <%= paginate @products %>
+                            <%#= paginate @products %>
                         </div>
                     </div>
                 </div>
@@ -74,5 +45,7 @@
     </div>
 </div>
 
+<%= stylesheet_link_tag "share/dropload" %>
+<%= javascript_include_tag "share/dropload" %>
 <%= stylesheet_link_tag 'share/selector' %>
 <%= javascript_include_tag 'share/selector' %>

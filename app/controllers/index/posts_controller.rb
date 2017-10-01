@@ -6,13 +6,14 @@ class Index::PostsController < IndexController
   # GET /index/posts
   # GET /index/posts.json
   def index
-	count = params[:count] || 15
+	count = params[:count] || 10
 	page = params[:page] || 1
 	cons = set_rec_cons params.slice(:name, :school, :cate)
 	nonpaged_posts = Index::Post.sort(cons)
 	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
 	set_cdts
+    render(:_lists, layout: false) and return if params["dl"]
   end
 
   # GET /index/posts/1
