@@ -7,6 +7,13 @@
     -webkit-transform:translateZ(0);
     transform:translateZ(0);
 }
+
+.dropload-up {
+    margin-bottom: 10px;
+    height: 25px !important;
+}
+
+
 .dropload-down{
     /*height: 50px;*/
 }

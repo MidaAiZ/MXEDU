@@ -12,6 +12,29 @@ $(function () {
             domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
             domNoData: '<div class="dropload-noData">暂无更多</div>'
         },
+        loadUpFn: function(me) {
+            $.dropLoadPage = 1;
+            $.ajax({
+                type: 'GET',
+                url: setDropUrl(),
+                dataType: 'html',
+                success: function(data){
+                    setTimeout(function(){
+                        $('#lists').html(data);
+                        // 每次数据加载完，必须重置
+                        me.resetload();
+                        me.unlock();
+                        me.noData(false);
+                        me.loading = false;
+                        $(".dropload-up").remove();
+                    },100);
+                },
+                error: function(xhr, type){
+                    // 即使加载出错，也得重置
+                    setTimeout(me.resetload(), 1000);
+                }
+            });
+        },
         loadDownFn: function (me) {
             console.log("load");
             $.ajax({
@@ -44,9 +67,12 @@ $(function () {
 
     function setDropUrl() {
         if (!$.dropLoadUrl) {
-            $.dropLoadUrl = $(".dropload").data("url") + "?dl=true&page=" + $.dropLoadPage + "&count=" + $.dropLoadCount
-            console.log($.dropLoadUrl);
-            return  $.dropLoadUrl;
+            var url = $(".dropload").data("url");
+            if (url.split("?")[1] && url.split("?")[1] != "") {
+                $.dropLoadUrl = url + "&dl=true"
+            } else {
+                $.dropLoadUrl = url + "?dl=true"
+            }
         }
 
         urls = $.dropLoadUrl.split("?");

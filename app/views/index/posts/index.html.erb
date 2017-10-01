@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="dropload" data-url="<%= posts_url %>">
+            <div class="dropload" data-url="<%= request.fullpath %>">
                 <div id="lists">
                     <% cache @posts.cache_key, expires_in: 10.minutes do %>
                         <%= render "lists" %>

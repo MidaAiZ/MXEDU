@@ -63,7 +63,8 @@ function doSearch(search) {
 		success: function(res) {
 			sucBK(res, url)
 		},
-		error: errBK
+		error: errBK,
+		complete: completeBK
 	})
 }
 
@@ -87,11 +88,15 @@ $(function() {
 function sucBK(res, url) {
 	$("body").find("#pjax-replace").replaceWith($(res).find("#pjax-replace"));
 	$('.tooltips').tooltip();
+}
+
+function completeBK() {
 	// TODO 以下代码适配上拉加载插件，耦合性较高
 	if ($.myDropload) {
 		$.dropLoadPage = 2;
 		$.dropLoadUrl = location.pathname + location.search;
 		$.myDropload.unlock();
+		$.myDropload.noData(false);
 		$.myDropload.resetload();
 	}
 }

@@ -21,7 +21,7 @@
 <!--body wrapper start-->
 <div class="wrapper">
     <div class="row">
-        <div class="col-sm-12 dropload" data-url="<%= products_url %>" data-count=20>
+        <div class="col-sm-12 dropload" data-url="<%= request.fullpath %>" data-count=20>
             <section class="panel">
                 <%= render "cdts" unless params[:pjax] == 'true' %>
                 <div class="panel-body">

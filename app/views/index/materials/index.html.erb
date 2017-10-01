@@ -15,14 +15,16 @@
 <!-- page heading end-->
 
 <!--body wrapper start-->
-<div class="wrapper n-p-t dropload" data-count=20 data-url="<%= materials_url %>">
+<div class="wrapper n-p-t">
     <div class="directory-info-row">
         <%= render 'cdts' unless params[:pjax] == 'true' %>
-        <div class="row" id="pjax-replace">
-            <div id="lists">
-                <% cache @materials.cache_key, expires_in: 10.minutes do %>
-                    <%= render "lists" %>
-                <% end %>
+        <div class="dropload"  data-count=20 data-url="<%= request.fullpath %>">
+            <div class="row" id="pjax-replace">
+                <div id="lists">
+                    <% cache @materials.cache_key, expires_in: 10.minutes do %>
+                        <%= render "lists" %>
+                    <% end %>
+                </div>
             </div>
         </div>
         <%#= paginate @materials %>
