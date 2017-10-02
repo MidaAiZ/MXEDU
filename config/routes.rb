@@ -38,6 +38,8 @@ Rails.application.routes.draw do
         collection do
             post '/:id/thumb' => 'posts#thumb_up', as: :thumb
             delete '/:id/thumb' => 'posts#thumb_cancel'
+            get 'search' => 'posts#search', as: :search
+            get 'hots' => 'posts#hots'
         end
     end
 

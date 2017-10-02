@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929155513) do
+ActiveRecord::Schema.define(version: 20171002051325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,9 +132,11 @@ ActiveRecord::Schema.define(version: 20170929155513) do
     t.integer "state", default: 1
     t.bigint "cate_id"
     t.jsonb "images"
+    t.string "tag"
     t.index ["cate_id"], name: "index_posts_on_cate_id"
     t.index ["name"], name: "index_posts_on_name"
     t.index ["school_id"], name: "index_posts_on_manage_school_id"
+    t.index ["tag"], name: "index_posts_on_tag"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

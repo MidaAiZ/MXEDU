@@ -8,12 +8,28 @@ class Index::PostsController < IndexController
   def index
 	count = params[:count] || 10
 	page = params[:page] || 1
-	cons = set_rec_cons params.slice(:name, :school, :cate)
+	cons = set_rec_cons params.slice(:content, :school, :cate, :tag)
 	nonpaged_posts = Index::Post.sort(cons)
 	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
 	set_cdts
     render(:_lists, layout: false) and return if params["dl"]
+  end
+
+  def search
+    # count = params[:count] || 10
+ #  	page = params[:page] || 1
+ #  	cons = set_rec_cons params.slice(:name, :school, :cate, :tag)
+ #  	nonpaged_posts = Index::Post.sort(cons)
+ #  	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
+ #  	set_title(params[:name] ? "搜索-#{params[:name]}" : "搜索帖子")
+ #  	set_cdts
+    # render(:_lists, layout: false) and return if params["dl"]
+  end
+
+  def hots #热门
+    cons = set_rec_cons
+  	@posts = Index::Post.sort(cons).limit(20)
   end
 
   # GET /index/posts/1
@@ -129,7 +145,7 @@ class Index::PostsController < IndexController
         @cates = cons[:cates]
     end
 
-    def set_rec_cons cons
+    def set_rec_cons cons = {}
         cons[:school] = @user.school_id if @user && cons[:school].nil? # 院校资料推荐
         cons
     end

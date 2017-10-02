@@ -5,7 +5,7 @@
             <a href="/">首页</a>
         </li>
         <li>
-            <a href="#">校园BBS</a>
+            <a href="/posts">校园BBS</a>
         </li>
     </ul>
 </div>
@@ -16,14 +16,21 @@
     <div class="row blog">
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-0 col-xs-12">
+                <!-- <div class="col-md-0 col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
-                            <input type="text" placeholder="搜索帖子" class="form-control blog-search">
+                            <input type="text" placeholder="搜索帖子" class="form-control blog-search disabled" onclick="location = '/posts/search'">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+
+            <% if params[:search] %>
+                <div style="padding-left: 15px; padding-bottom: 15px;">
+                    搜索"<%= params[:name] || params[:tag] %>"：
+                </div>
+            <% end %>
+
             <div class="dropload" data-url="<%= request.fullpath %>">
                 <div id="lists">
                     <% cache @posts.cache_key, expires_in: 10.minutes do %>
@@ -161,8 +168,11 @@
 </div>
 
 <div class="new-btn-pane">
+    <%= link_to search_posts_path, class: "search" do %>
+        <i class="fa fa-search"></i>
+    <% end %>
     <%= link_to new_post_path, class: "new" do %>
-        +
+        <i class="fa">+</i>
     <% end %>
 </div>
 

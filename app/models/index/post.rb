@@ -41,10 +41,13 @@ class Index::Post < ApplicationRecord
 	def self.sort(cons = {})
 		_self = self
 		_self = _self.where(cate_id: cons[:cate]) if cons[:cate]
-		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
-		if cons[:name]
-			_self = _self.where("index_posts.name LIKE ?", "%#{cons[:name]}%")
+		if cons[:content] && cons[:tag]
+			_self = _self.where("index_posts.content LIKE ? OR index_posts.tag LIKE ?", "%#{cons[:content]}%", "%#{cons[:tag]}%")
+		else
+			_self = _self.where("index_posts.name LIKE ?", "%#{cons[:content]}%" ) if cons[:content]
+			_self = _self.where("index_posts.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
 		end
+		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
 
 		_self ||= self.all
 	end

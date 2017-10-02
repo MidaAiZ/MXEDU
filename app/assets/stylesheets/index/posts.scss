@@ -98,11 +98,13 @@
 	position: fixed;
 	right: 30px;
 	bottom: 30px;
-	background-color: #3989cd;
-	box-shadow: 1px 1px 10px #ddd;
+	background-color: white;
+	// box-shadow: 1px 1px 10px #ddd;
 	cursor: pointer;
-	.new {
-		font-size: 50px;
+
+	.new, .search {
+		float: right;
+		font-size: 30px;
 		text-decoration: none;
 		text-align: center;
 		color: white;
@@ -110,10 +112,22 @@
 		height: 50px;
 		line-height: 50px;
 		display: inline-block;
+		&:hover {
+			box-shadow: 1px 1px 15px 3px rgba(0, 0, 0, 0.2);
+		}
 	}
-	&:hover {
-		box-shadow: 1px 1px 15px 5px #ddd;
+
+	.new {
+		font-size: 50px;
+		margin-right: 0.5px;
+		background: #3989cd;
 	}
+
+	.search {
+		// border-right: 1px solid #eee;
+		background: #e56161;
+	}
+
 }
 
 @media screen and (max-width: 768px) {
