@@ -158,6 +158,25 @@ Rails.application.routes.draw do
         end
     end
 
+    # posts
+    resources :posts do
+        resources :post_comments
+        collection do
+            get 'search' => 'posts#search', as: :search
+            get 'deleted' => 'posts#index_deleted', as: :deleted
+            get 'forbidden' => 'posts#index_forbidden', as: :forbidden
+        end
+    end
+
+    # post_comments
+    resources :post_comments do
+        resources :post_son_comments
+        collection do
+            delete '/:id/thumb' => 'post_comments#thumb_cancel'
+        end
+    end
+
+
     # schools
     resources :schools
 

@@ -89,6 +89,29 @@
               </ul>
             </li>
 
+            <li class="menu-list <%= check_cur_ctrl ['manage/posts', 'manage/post_comments'] %>">
+              <a href="">
+                <i class="fa fa-comments"></i>
+                <span>BBS论坛</span>
+              </a>
+              <ul class="sub-menu-list">
+                <li>
+                  <a href="/manage/posts">全部帖子</a>
+                </li>
+                <li>
+                  <a href="#">分类管理</a>
+                </li>
+                <% if @admin.super? %>
+                    <li>
+                      <%= link_to '用户删除贴', deleted_manage_posts_path %>
+                    </li>
+                    <li>
+                      <%= link_to '后台删除贴', forbidden_manage_posts_path %>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
+
             <li class="menu-list <%= check_cur_ctrl 'manage/appoints' %>">
               <a href="">
                 <i class="fa fa-coffee"></i>

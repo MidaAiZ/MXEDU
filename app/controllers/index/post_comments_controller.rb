@@ -63,11 +63,15 @@ class Index::PostCommentsController < IndexController
   # DELETE /index/post_comments/1
   # DELETE /index/post_comments/1.json
   def destroy
-    @comment = @user.post_comments.find(params[:id])
-    @comment._destroy
+    @comment = Index::PostComment.find(params[:id])
+    # 允许删除的条件：　作者或评论者
+    if (@comment.user_id = @user.id) || (@comment.post.user_id = @user.id)
+        code = @comment._destroy
+    end
+
     respond_to do |format|
-      format.html { redirect_to post_path(@comment.post_id), notice: 'Post comment was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to post_path(@comment.post_id) }
+      format.json { head :no_content, status: code ? 200 : 422 }
     end
   end
 

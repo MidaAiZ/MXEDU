@@ -1,0 +1,93 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/manage/posts">校园BBS</a>
+        </li>
+        <li>
+            <a href="#">搜索</a>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel">
+                        <div class="panel-body">
+							<%= form_tag manage_posts_url, id: "search_post_form" do  %>
+	                            <input type="text" id="search_input" placeholder="<%= @placeholder %>" class="form-control blog-search" data-search-type="<%= @type %>">
+							<% end %>
+                        </div>
+                    </div>
+					<p class="t-center">热门搜索</p>
+					<div class="panel">
+						<div class="flow_tag">
+							<div class="flowshow animated">
+								<div id="flow_tag_widget" class="flow-widget" role="label-container">
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="new-btn-pane">
+    <%= link_to new_post_path, class: "new" do %>
+        +
+    <% end %>
+</div>
+
+<%= stylesheet_link_tag "share/flowtag" %>
+<%= javascript_include_tag "share/flowtag" %>
+
+<script>
+// 设置浮动标签
+$(function() {
+	$.ajax({
+		url: "/posts/hots",
+		type: "get",
+		dataType: "json",
+		success: function(data) {
+			var floatPane = $("#flow_tag_widget");
+			for(var i in data) {
+				var label = $('\
+					<a class="item btn btn-primary" title="精品课程" href="javascript:void(0)">' + data[i].name + '</a>\
+				')
+				floatPane.append(label);
+			}
+			setupTag();
+		}
+	})
+
+	$("#flow_tag_widget").on("click", "a.item", function() {
+		location = "/manage/posts?search=true&content=" + $(this).text() + "&tag=" + $(this).text();
+	})
+})
+
+$(function() {
+	$("#search_post_form").submit(function(e) {
+		e.preventDefault();
+		var val = $("#search_input").val();
+        var type = $("#search_input").data("search-type");
+		if (!val) return false;
+        if (type) {
+            if (type == 'deleted') {
+                location = "/manage/posts/deleted?search=true&content=" + val + "&tag=" + val;
+            } else {
+                location = "/manage/posts/forbidden?search=true&content=" + val + "&tag=" + val;
+            }
+        } else {
+            location = "/manage/posts?search=true&content=" + val + "&tag=" + val;
+        }
+		return false;
+	})
+})
+</script>

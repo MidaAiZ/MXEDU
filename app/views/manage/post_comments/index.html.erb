@@ -1,0 +1,27 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li class='t-center'>
+            <a href="javascript: void(0)" class='pull-left' role='back'><<返回</a>
+            <span class="">
+                全部评论
+            </span>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="p-comments n-p-b" id="lists">
+                    <%= render "/manage/posts/cmt_lists" %>
+                </div>
+            </div>
+            <div class="text-center">
+                <%= paginate @comments %>
+            </div>
+        </div>
+    </div>
+</div>

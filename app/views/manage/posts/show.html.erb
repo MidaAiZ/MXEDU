@@ -2,7 +2,7 @@
 <div class="page-heading">
     <ul class="breadcrumb">
         <li class='t-center'>
-            <a href="javascript:void(0)" class='pull-left' role='back'><<返回</a>
+            <a href="javascript: void(0)" class='pull-left' role='back'><<返回</a>
             <span class="">
                 帖子正文
             </span>
@@ -17,20 +17,23 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="p-u-info">
-                        <% if @post.user_id == @user.id %>
-                            <div class="opt-menu pull-right">
-                                <span class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class='fa fa-angle-down'></i>
-                                </span>
-                                <ul class="dropdown-menu pull-right">
-                                  <li>
-                                    <%= link_to '修改', edit_post_path(@post) %>
-                                  </li>
-                                  <li>
-                                      <%= link_to '删除', post_path(@post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
-                                  </li>
-                                </ul>
-                            </div>
+                        <% if @admin.super? %>
+                            <% if @post.is_published? %>
+                                <div class="opt-menu pull-right">
+                                    <span class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class='fa fa-angle-down'></i>
+                                    </span>
+                                    <ul class="dropdown-menu pull-right">
+                                      <li>
+                                          <%= link_to '删除', manage_post_path(@post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                      </li>
+                                    </ul>
+                                </div>
+                            <% else %>
+                                <div class="pull-right">
+                                    <small>删除时间：<%= @post.updated_at.strftime("%Y-%m-%d %H:%M") %></small>
+                                </div>
+                            <% end %>
                         <% end %>
                         <div class="ico">
                             <%= image_tag @post.user.avatar.mini %>
@@ -62,14 +65,13 @@
                 <div class="thumbs">赞 <span><%= @post.thumbs_count || 0 %></span></div>
                 <div class="coments">评论 <span><%= @post.comments_count || 0%></span></div>
             </div>
-            <div class="p-footer fix-btm">
-                <div class="coments"><i class="fa <%= @post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
-                <div class="thumbs"><%= link_to  new_post_post_comment_path(@post) do %>
-                    <i class="fa fa-comments-o" role='comment'>评论</i>
-                    <% end %>
-                </div>
+            <div>
+                <small class="pull-right">
+                    <%= link_to "全部评论>>", manage_post_post_comments_path(@post) %>
+                </small>
             </div>
-            <div id="comments" class="dropload" data-url="<%= post_post_comments_path(@post) %>">
+            <br>
+            <div id="comments" class="dropload" data-url="<%= manage_post_post_comments_path(@post) %>">
                 <% if @comments.any? %>
                     <div class="p-comments n-p-b" id="lists">
                         <% cache @comments.cache_key, expires_in: 10.minutes do %>
@@ -81,12 +83,5 @@
         </div>
     </div>
 </div>
-<style>
-    @media screen and (max-width: 768px) {
-    	.dropload-refresh, .dropload-update, .dropload-load, .dropload-noData {
-    		opacity: 0;
-    	}
-    }
-</style>
 <%= stylesheet_link_tag "share/dropload" %>
 <%= javascript_include_tag "share/dropload" %>

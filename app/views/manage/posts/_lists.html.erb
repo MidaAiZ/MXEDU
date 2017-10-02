@@ -1,23 +1,26 @@
 <% @posts.each do |post| %>
     <% cache post.cache_key, expires_in: 10.minutes do %>
-		<div class="panel post-pane" role="remove">
+		<div class="panel post-pane" role='remove'>
 			<div class="panel-body n-p-b">
 				<div class="p-u-info">
-					<% if post.user_id == @user.id %>
-						<div class="opt-menu pull-right">
-							<span class="dropdown-toggle" data-toggle="dropdown">
-								<i class='fa fa-angle-down'></i>
-							</span>
-							<ul class="dropdown-menu pull-right">
-							  <li>
-                                  <a href="javascript:void(0)" data-href="<%= edit_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除吗">删除</a>
-							  </li>
-							  <li>
-								  <%= link_to '删除', post_path(post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
-							  </li>
-							</ul>
-						</div>
-					<% end %>
+                    <% if @admin.super? %>
+                        <% if post.is_published? %>
+                            <div class="opt-menu pull-right">
+                                <span class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class='fa fa-angle-down'></i>
+                                </span>
+                                <ul class="dropdown-menu pull-right">
+                                  <li>
+                                      <%= link_to '删除', manage_post_path(post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                  </li>
+                                </ul>
+                            </div>
+                        <% else %>
+                            <div class="pull-right">
+                                <small>删除时间：<%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></small>
+                            </div>
+                        <% end %>
+                    <% end %>
 					<div class="ico">
 						<%= image_tag post.user.avatar.mini %>
 					</div>
@@ -26,7 +29,7 @@
 						<span class='p-time'><%= post.created_at.strftime("%H:%M") %></span>
 					</div>
 				</div>
-				<%= link_to post_path(post), class: "auto-row p-content" do %>
+				<%= link_to manage_post_path(post), class: "auto-row p-content" do %>
 					<span class="">
 						<%= (post.content || "").html_safe %>
 					</span>
@@ -48,7 +51,7 @@
 				<div class="p-footer">
 					<div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
 					<div class="coments">
-                        <%= link_to "#{post_path(post)}?#comments" do %>
+                        <%= link_to "#{manage_post_path(post)}?#comments" do %>
                             <i class="fa fa-comments-o" role='comment'></i>
     						<span>
     							<%= post.comments_count %>
@@ -56,7 +59,7 @@
                         <% end %>
 					</div>
 					<div class="thumbs">
-						<i class="fa <%= post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
+						<i class="fa fa-thumbs-o-up" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
 						<span><%= post.thumbs_count %></span>
 					</div>
 				</div>

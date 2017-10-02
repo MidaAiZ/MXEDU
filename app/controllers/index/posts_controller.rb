@@ -17,14 +17,7 @@ class Index::PostsController < IndexController
   end
 
   def search
-    # count = params[:count] || 10
- #  	page = params[:page] || 1
- #  	cons = set_rec_cons params.slice(:name, :school, :cate, :tag)
- #  	nonpaged_posts = Index::Post.sort(cons)
- #  	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
- #  	set_title(params[:name] ? "搜索-#{params[:name]}" : "搜索帖子")
- #  	set_cdts
-    # render(:_lists, layout: false) and return if params["dl"]
+
   end
 
   def hots #热门
@@ -105,7 +98,7 @@ class Index::PostsController < IndexController
     @thumb = @post.has_thumb? @user.id, request.remote_ip
     code = @thumb.cancel if @thumb
     respond_to do |format|
-      format.html { render json: { code: code }, status: code ? 200 : 422 }
+      format.html { render json: { code: code } }
       format.json { head :no_content, status: code ? 200 : 422 }
     end
   end

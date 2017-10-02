@@ -1,0 +1,58 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/manage/posts">论坛管理</a>
+        </li>
+        <li>
+            <% if @type %>
+                <a href=""><%=  @type == :deleted ? '用户删除帖' : '后台删除贴' %></a>
+            <% else %>
+                <a href="">全部帖子</a>
+            <% end %>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+        <div class="col-md-8">
+            <div class="row">
+                <!-- <div class="col-md-0 col-xs-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <input type="text" placeholder="搜索帖子" class="form-control blog-search disabled" onclick="location = '/posts/search'">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <% if params[:search] %>
+                <div style="padding-left: 15px; padding-bottom: 15px;">
+                    搜索"<%= params[:name] || params[:tag] %>"：
+                </div>
+            <% end %>
+
+            <div class="dropload" data-url="<%= request.fullpath %>">
+                <div id="lists">
+                    <% cache @posts.cache_key, expires_in: 10.minutes do %>
+                        <%= render "lists" %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="text-center">
+                <%= paginate @posts %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="new-btn-pane">
+    <%= link_to "#{search_manage_posts_path}?type=#{@type}", class: "search" do %>
+        <i class="fa fa-search"></i>
+    <% end %>
+</div>
+
+<!--body wrapper end-->

@@ -35,6 +35,7 @@ class Index::Post < ApplicationRecord
 	scope :forbidden, -> { rewhere(state: 3) }
 	scope :with_del, -> { (rewhere(state: [1, 2])) }
 	scope :with_forbid, -> { (rewhere(state: [1, 2, 3])) }
+	scope :with_all, -> { unscope(where: :state) }
 	default_scope -> { published.order(updated_at: :DESC) }
 
 	# 复杂条件筛选
@@ -50,6 +51,10 @@ class Index::Post < ApplicationRecord
 		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
 
 		_self ||= self.all
+	end
+
+	def is_published?
+		self.state == 1
 	end
 
 	def is_deleted?

@@ -203,6 +203,28 @@
 })(jQuery);
 
 $(function() {
+    $("[role=back]").on("click", function() {
+        history.back();
+    })
+
+    $("body").on("click", "[role=delete-confirm]", function() {
+        var $this = $(this);
+        if(!confirm($this.data("info"))) return false;
+        $.ajax({
+            url: $this.data("href"),
+            type: $this.data("method"),
+            dataType: "json",
+            success: function(data) {
+                $this.parents("[role=remove]").remove();
+            },
+            error: function() {
+                alert("删除失败！");
+            }
+        })
+    })
+})
+
+$(function() {
     $("#print").click(function() {
        bdhtml=window.document.body.innerHTML;
        sprnstr="<!--startprint-->";
