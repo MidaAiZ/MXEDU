@@ -36,7 +36,7 @@
                             <%= image_tag @post.user.avatar.mini %>
                         </div>
                         <div class="u-intro">
-                            <span class='u-name'><%= @post.user.name %></span>
+                            <span class='u-name'><%= @post.user.nickname || "#{@post.user.name.slice(0, 1)}同学" %></span>
                             <span class='p-time'><%= @post.created_at.strftime("%H:%M") %></span>
                         </div>
                     </div>

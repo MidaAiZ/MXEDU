@@ -62,6 +62,8 @@ Rails.application.routes.draw do
         # profile
         get '' => 'user_center#index'
 
+        get 'posts' => 'user_center#posts'
+
         # orders
         get 'orders' => 'user_center#orders'
         get 'orders/:id' => 'user_center#order'
@@ -69,6 +71,12 @@ Rails.application.routes.draw do
         #histories
         get 'histories' => 'user_center#histories'
         get 'histories/:id' => 'user_center#histories'
+    end
+
+    # visit other user's profile
+    scope 'visit_users', as: :v_ucenter do
+        get ':id' => 'visit_user#index'
+        get ":id/posts" => 'visit_user#posts', as: :posts
     end
 
     # 条件筛选
@@ -114,6 +122,7 @@ Rails.application.routes.draw do
 
     # users
     resources :users do
+        get 'posts' => 'users#posts', as: :posts
         get 'appoints' => 'appoints#index', as: :appoints
         get 'histories' => 'histories#index', as: :histories
         get 'mat_histories' => 'mat_histories#index', as: :mat_histories

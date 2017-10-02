@@ -1,0 +1,80 @@
+<!-- page heading start-->
+        <!--<div class="page-heading">-->
+            <!--Page Tittle goes here-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="profile-pic text-center img-gallery">
+                                        <a href="<%= @other_user.avatar %>" data-caption="头像大图">
+                                            <%= image_tag @other_user.avatar.thumb, alt: '用户头像' %>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <ul class="p-info">
+                                        <li>
+                                            <div class="title">昵称</div>
+                                            <div class="desk"><%= @other_user.nickname %></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">性别</div>
+                                            <div class="desk"><%= @other_user.sex %></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">学校</div>
+                                            <div class="desk"><%= @other_user.school.name if @other_user.school %></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">专业</div>
+                                            <div class="desk"><%= @other_user.major %></div>
+                                        </li>
+                                        <li>
+                                            <div class="title">年级</div>
+                                            <div class="desk"><%= @other_user.grade %></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-12">
+                    <div class="panel">
+                            <header class="panel-heading">
+                                <%= @other_user.nickname || "#{@other_user}.name.slice(0,1)同学" %>的帖子
+                                <span class="tools pull-right">
+                                    <!-- <a class="fa fa-chevron-down" href="javascript:;"></a> -->
+                                    <!-- <a class="fa fa-times" href="javascript:;"></a> -->
+                                 </span>
+                            </header>
+                            <div class="panel-body">
+                                <ul class="activity-list blog">
+                                    <%= render 'post_lists', user: @other_user  %>
+                                </ul>
+                                <div class="more">
+                                    <%= link_to "查看更多>>", ucenter_posts_path, class: "t-center" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <%= stylesheet_link_tag "share/lightbox" %>
+        <%= javascript_include_tag "share/lightbox" %>
+        <%= javascript_include_tag "share/posts" %>

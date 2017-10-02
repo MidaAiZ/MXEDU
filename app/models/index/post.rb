@@ -27,7 +27,7 @@ class Index::Post < ApplicationRecord
 			 dependent: :destroy
 
 	validates :name, length: { maximum: 32, too_long: '帖子名最大长度为%{count}' }
-	validates :content, length: { maximum: 10000, too_long: '帖子内容最大长度为%{count}' }
+	validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 10000, too_long: '帖子内容最大长度为%{count}' }
 	validates :state, inclusion: [0, 1, 2, 3] # 状态码,1代码正常, 2代表用户删除, 3代表后台删除, 保留0用于后期扩展
 
 	scope :published, -> { rewhere(state: 1) }

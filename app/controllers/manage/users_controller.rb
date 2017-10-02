@@ -11,8 +11,8 @@ class Manage::UsersController < ManageController
 	end
 
 	def show
-		@user = Index::User.find params[:id]
 		@histories = @user.histories.limit(20).includes(:product)
+		@posts = @user.posts.limit(8)
 	end
 
     def edit
@@ -30,6 +30,15 @@ class Manage::UsersController < ManageController
 		  format.json { render json: @user.errors, status: :unprocessable_entity }
 		end
 	  end
+	end
+
+	def posts
+		@user = Index::User.find(params[:user_id])
+		count = params[:count] || 10
+		page = params[:page] || 1
+		nonpaged_posts = @user.posts
+		@posts = nonpaged_posts.page(page).per(count)
+	    render(:_post_lists, layout: false) and return if params["dl"]
 	end
 
 	private

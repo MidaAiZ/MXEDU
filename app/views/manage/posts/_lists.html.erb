@@ -11,7 +11,7 @@
                                 </span>
                                 <ul class="dropdown-menu pull-right">
                                   <li>
-                                      <%= link_to '删除', manage_post_path(post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
+                                      <a href="javascript:void(0)" data-href="<%= manage_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除吗">删除</a>
                                   </li>
                                 </ul>
                             </div>

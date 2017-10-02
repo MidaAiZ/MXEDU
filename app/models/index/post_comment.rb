@@ -16,8 +16,9 @@ class Index::PostComment < ApplicationRecord
 			  foreign_key: :post_cmt_id,
 			  dependent: :destroy
 
-	default_scope -> { order(thumbs_count: :DESC).order(created_at: :DESC) }
+    validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 5000, too_long: '评论内容最大长度为%{count}' }
 
+	default_scope -> { order(thumbs_count: :DESC).order(created_at: :DESC) }
 
 	def _save user, post
 		self.user = user

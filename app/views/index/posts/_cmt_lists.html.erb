@@ -15,10 +15,12 @@
 				</div>
 			<% end %>
 			<div class="ico">
-				<%= image_tag c.user.avatar.mini %>
+				<%= link_to v_ucenter_posts_path(c.user_id) do %>
+					<%= image_tag c.user.avatar.mini %>
+				<% end %>
 			</div>
 			<div class="u-intro">
-				<span class='u-name'><%= c.user.name %></span>
+				<span class='u-name'><%= c.user.nickname || "#{c.user.name.slice(0, 1)}同学" %></span>
 			</div>
 		</div>
 		<div>

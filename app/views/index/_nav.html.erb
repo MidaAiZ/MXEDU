@@ -20,7 +20,7 @@
                     <div class="media logged-user">
                         <%= image_tag @user.avatar.mini, class: "u-ico-mini u-avatar" %>
                         <div class='nav-u-info'>
-                            <h5><a href="ucenter"><%= (@user.name || '').first + '同学' %></a></h5>
+                            <h5><a href="ucenter"><%= @user.nickname || "#{@user.name.slice(0, 1)}同学" %></a></h5>
                         </div>
                     </div>
 
@@ -163,7 +163,7 @@
                         <% if session[:user_id] %>
                             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <%= image_tag @user.avatar.mini, class: "u-avatar" %>
-                                <%= (@user.name || '').first + '同学' %>
+                                <%= @user.nickname || "#{@user.name.slice(0, 1)}同学" %>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-usermenu pull-right">

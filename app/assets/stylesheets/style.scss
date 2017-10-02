@@ -3676,12 +3676,15 @@ ul.activity-list {
     padding: 0;
 }
 
-ul.activity-list li {
+ul.activity-list > li {
     display: inline-block;
     width: 100%;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+    margin-top: 20px;
     border-bottom: 1px solid #eff0f4;
+}
+
+ul.activity-list > li:first-child {
+    margin-top: 0px;
 }
 
 ul.activity-list .avatar img {
@@ -4218,7 +4221,6 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 }
 
 .blog p {
-    padding-bottom: 15px;
     font-size: 14px;
 }
 

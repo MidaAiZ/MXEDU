@@ -8,13 +8,15 @@ $(function() {
 	});
 
 	$("#post_submit").on("click", function() {
+		$("#post_submit").attr("disabled", true).val("请稍候...")
+
 		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").length > 0) {
 			return false;
 		}
 		submitPost();
 	})
 
-	if ($("#post-content").html()) $("#post_submit").removeAttr("disabled");
+	if ($("#post-content").html() && $("#post-content").html().trim() != "") $("#post_submit").removeAttr("disabled");
 	$("#post-content").on("input", function() {
 		if ($(this).html()) $("#post_submit").removeAttr("disabled");
 		if (!$(this).html()) $("#post_submit").attr("disabled", true);
@@ -54,7 +56,7 @@ function submitPost(url) {
 			window.location = "/posts/" + data.id
 		},
 		error: function(error) {
-
+			$("#post_submit").removeAttr("disabled").val("发表")
 		}
 	})
 }

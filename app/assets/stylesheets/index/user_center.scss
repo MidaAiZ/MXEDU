@@ -27,6 +27,33 @@
 	}
 }
 
+.opt-menu {
+    position: relative;
+    cursor: pointer;
+	.dropdown-menu {
+		position: absolute;
+		li {
+			padding-top: 0px;
+			padding-bottom: 0px;
+			margin-bottom: 0px;
+			border-bottom: 0;
+			&:last-child {
+				margin-bottom: 0px;
+			}
+		}
+	}
+}
+
+.activity-list {
+	.text a {
+		color: #777777;
+		text-decoration: none;
+	}
+	.p-footer {
+		border-top: 0;
+	}
+}
+
 @media screen and (max-width: 768px) {
 	section .wrapper {
 		margin-top: 15px;

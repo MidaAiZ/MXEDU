@@ -7,13 +7,15 @@ $(function() {
 	});
 
 	$("#comment_submit").on("click", function() {
+		$("#comment_submit").attr("disabled", true).val("请稍候...")
+
 		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").length > 0) {
 			return false;
 		}
 		submitPost();
 	})
 
-	if ($("#comment-content").html()) $("#comment_submit").removeAttr("disabled");
+	if ($("#comment-content").html() && $("#comment-content").html().trim() != "") $("#comment_submit").removeAttr("disabled");
 	$("#comment-content").on("input", function() {
 		if ($(this).html()) $("#comment_submit").removeAttr("disabled");
 		if (!$(this).html()) $("#comment_submit").attr("disabled", true);
@@ -52,7 +54,7 @@ function submitPost(url) {
 			window.location = "/posts/" + data.post_id
 		},
 		error: function(error) {
-
+			$("#post_submit").removeAttr("disabled").val("发表评论")
 		}
 	})
 }

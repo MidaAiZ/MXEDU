@@ -55,8 +55,10 @@ class Index::User < ApplicationRecord
                          format: { with: Validate::VALID_ACCOUNT_REGEX },
                          allow_blank: false
       validates :name,
-                   length: { minimum: 2, too_short: "名字长度应大于%{count}个字符",
-                             maximum: 32, too_long: '名字最长允许%{count}个字符' }
+                   length: { minimum: 2, too_short: "姓名长度应大于%{count}个字符",
+                             maximum: 16, too_long: '姓名最长允许%{count}个字符' }
+      validates :nickname,  uniqueness: { message: '该昵称已被占用' },
+                  length: { maximum: 16, too_long: '昵称最长允许%{count}个字符' }
       validates :password, presence: true, length: { minimum: 6, maximum: 20 },
                            format: { with: Validate::VALID_PASSWORD_REGEX },
                            allow_blank: false, on: [:create   ]
