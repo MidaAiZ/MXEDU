@@ -52,7 +52,7 @@ class Index::PostCommentsController < IndexController
 
   def thumb_cancel
     @comment = Index::PostComment.find(params[:id])
-    @thumb = @comment.has_thumb? @user.id, request.remote_ip
+    @thumb = @comment.has_thumb? @user, request.remote_ip
     code = @thumb.cancel if @thumb
     respond_to do |format|
       format.html { render json: { code: code }, status: code ? 200 : 422 }

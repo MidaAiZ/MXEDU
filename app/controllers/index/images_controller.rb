@@ -22,8 +22,8 @@ class Index::ImagesController < IndexController
         format.html { render :show, formats: [:json] }
         # :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}
       else
-        format.json { render nothing: true }
-        format.html { render nothing: true }
+        format.json { render json: {}, status: 422  }
+        format.html { render json: {}, status: 422 }
       end
     end
   end

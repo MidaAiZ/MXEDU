@@ -97,7 +97,7 @@ class Index::PostsController < IndexController
   end
 
   def thumb_cancel
-    @thumb = @post.has_thumb? @user.id, request.remote_ip
+    @thumb = @post.has_thumb? @user, request.remote_ip
     code = @thumb.cancel if @thumb
     respond_to do |format|
       format.html { render json: { code: code } }

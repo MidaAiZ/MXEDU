@@ -17,7 +17,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="p-u-info">
-                        <% if @post.user_id == @user.id %>
+                        <% if @user && (@post.user_id == @user.id) %>
                             <div class="opt-menu pull-right">
                                 <span class="dropdown-toggle" data-toggle="dropdown">
                                     <i class='fa fa-angle-down'></i>
@@ -63,7 +63,7 @@
                 <div class="coments">评论 <span><%= @post.comments_count || 0%></span></div>
             </div>
             <div class="p-footer fix-btm">
-                <div class="coments"><i class="fa <%= @post.has_thumb?(@user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
+                <div class="coments"><i class="fa <%= @post.has_thumb?(@user, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
                 <div class="thumbs"><%= link_to  new_post_post_comment_path(@post) do %>
                     <i class="fa fa-comments-o" role='comment'>评论</i>
                     <% end %>

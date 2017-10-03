@@ -42,7 +42,7 @@ class Index::PostComment < ApplicationRecord
 		end
 	end
 
-	def has_thumb? uid, ip
-		uid ? self.thumbs.find_by_user_id(uid) : self.thumbs.find_by_remote_ip(ip)
+	def has_thumb? u, ip
+		u && id ? self.thumbs.find_by_user_id(u.id) : self.thumbs.find_by_remote_ip(ip)
 	end
 end

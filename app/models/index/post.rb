@@ -79,7 +79,7 @@ class Index::Post < ApplicationRecord
 		self.update! state: 3
 	end
 
-	def has_thumb? uid, ip
-		uid ? self.thumbs.find_by_user_id(uid) : self.thumbs.find_by_remote_ip(ip)
+	def has_thumb? u, ip
+		u && u.id ? self.thumbs.find_by_user_id(u.id) : self.thumbs.find_by_remote_ip(ip)
 	end
 end

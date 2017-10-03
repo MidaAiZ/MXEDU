@@ -2,7 +2,7 @@
 	<div class="cmt" role="remove">
 		<div class="p-u-info">
 			<!--  允许删除的条件：　作者或评论者 -->
-			<% if c.user_id == @user.id || @post.user_id = @user.id %>
+			<% if @user && (c.user_id == @user.id || @post.user_id = @user.id) %>
 				<div class="opt-menu pull-right">
 					<span class="dropdown-toggle" data-toggle="dropdown">
 						<i class='fa fa-angle-down'></i>
@@ -41,7 +41,7 @@
 		<div class="cmt-info">
 			<span class='c-time'><%= format_time @post.created_at %></span>
 			<span class="c-cmt">
-				<i class="fa <%= c.has_thumb?(c.user.id, '') ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_post_comments_path(c) %>" role='thumb'></i>
+				<i class="fa <%= c.has_thumb?(c.user, '') ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_post_comments_path(c) %>" role='thumb'></i>
 				<span><%= c.thumbs_count %></span>
 			</span>
 		</div>

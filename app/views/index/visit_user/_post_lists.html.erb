@@ -39,7 +39,7 @@
 					<% end %>
 				</div>
 				<div class="thumbs">
-					<i class="fa <%= post.has_thumb?(user.id, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
+					<i class="fa <%= post.has_thumb?(user, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(post) %>" role='thumb'></i>
 					<span><%= post.thumbs_count %></span>
 				</div>
 			</div>
