@@ -12,7 +12,7 @@ class Index::VisitUserController < IndexController
 		page = params[:page] || 1
 		nonpaged_posts = @visited_user.posts
 		@posts = nonpaged_posts.page(page).per(count)
-		set_title("#{@visited_user}的帖子")
+		set_title("#{@visited_user.nickname}的帖子")
 	    render(:_post_lists, layout: false) and return if params["dl"]
 	end
 

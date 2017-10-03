@@ -36,7 +36,8 @@ class Index::Post < ApplicationRecord
 	scope :with_del, -> { (rewhere(state: [1, 2])) }
 	scope :with_forbid, -> { (rewhere(state: [1, 2, 3])) }
 	scope :with_all, -> { unscope(where: :state) }
-	default_scope -> { published.order(updated_at: :DESC) }
+	scope :hot, -> { reorder(updated_at: :DESC) }
+	default_scope -> { published.order(id: :DESC) }
 
 	# 复杂条件筛选
 	def self.sort(cons = {})
@@ -63,6 +64,11 @@ class Index::Post < ApplicationRecord
 
 	def is_forbidden?
 		self.state == 3
+	end
+
+	def publish!
+		self.record_timestamps = false
+		self.update! state: 1
 	end
 
 	def del!

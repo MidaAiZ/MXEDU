@@ -31,7 +31,15 @@
                                 </div>
                             <% else %>
                                 <div class="pull-right">
-                                    <small>删除时间：<%= @post.updated_at.strftime("%Y-%m-%d %H:%M") %></small>
+                                    <small>删除时间：<%= format_time @post.updated_at %></small>
+                                    <% if @post.is_forbidden? %>
+                                    <p>
+                                        <%= link_to manage_post_recover_path(@post), method: :post, class: "recover pull-right", data: { confirm: "确定要恢复该贴？恢复后用户可以查看该贴内容" } do %>
+                                        <i class="fa fa-refresh"></i>
+                                        <span>恢复</span>
+                                        <% end %>
+                                    </p>
+                                    <% end %>
                                 </div>
                             <% end %>
                         <% end %>
@@ -40,7 +48,7 @@
                         </div>
                         <div class="u-intro">
                             <span class='u-name'><%= @post.user.name %></span>
-                            <span class='p-time'><%= @post.created_at.strftime("%H:%M") %></span>
+                            <span class='p-time'><%= format_time @post.created_at %></span>
                         </div>
                     </div>
                     <span class="auto-row p-content">

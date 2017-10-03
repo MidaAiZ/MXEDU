@@ -24,7 +24,7 @@
 							<article class="timeline-item alt">
 								<div class="text-right">
 									<div class="time-show first n-m-t">
-										<a href="#" class="btn btn-primary"><%= Time.now.strftime('%Y-%m-%d') %></a>
+										<a href="#" class="btn btn-primary"><%= format_time Time.now %></a>
 									</div>
 								</div>
 							</article>
@@ -33,7 +33,7 @@
 									<div class="timeline-desk">
 										<div class="panel">
 											<div class="panel-body">
-												<h1 class="red"><%= h.updated_at.strftime('%Y-%m-%d %H:%M') %></h1>
+												<h1 class="red"><%= format_time h.updated_at %></h1>
 												<span class="arrow-alt"></span>
 													<%= link_to product_path(h.product) do %>
 														<%= image_tag h.product.cover %>

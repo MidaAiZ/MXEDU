@@ -2,7 +2,7 @@
 <div class="page-heading">
     <ul class="breadcrumb">
         <li>
-            <a href="/ucenter"><%= @visited_user.nickname || "#{@visited_user.name.slice(0,1)}同学" %>的主页</a>
+            <a href="<%= v_ucenter_path(@visited_user) %>"><%= @visited_user.nickname || "#{@visited_user.name.slice(0,1)}同学" %>的主页</a>
         </li>
         <li>
             <span><%= @visited_user.nickname || "#{@visited_user.name.slice(0,1)}同学" %>的帖子</span>

@@ -6,7 +6,7 @@
 		</div>
 		<div class="activity-desk">
 			<span><%= user.nickname %></span>
-			<p class="text-muted"><%= post.created_at.strftime("%y-%m-%d %H:%M") %></p>
+			<p class="text-muted"><%= format_time post.created_at %></p>
 			<div class="text">
 				<%= link_to post_path(post) do %>
 					<%= post.content.html_safe %>

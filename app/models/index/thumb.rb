@@ -8,6 +8,7 @@ class Index::Thumb < ApplicationRecord
 
 	def self.thumb_up u, rsc, type = 'user'
 		rsc.thumbs_count = (rsc.thumbs_count || 0) + 1
+
 		t = if type == 'user'
 			  rsc.thumbs.find_by_user_id(u)
 		    else

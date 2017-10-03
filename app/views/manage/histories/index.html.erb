@@ -80,7 +80,7 @@
                               <td>无</td>
                           <% end %>
     					  <td><%= link_to h.product_name, manage_product_url(h.p_id) %></td>
-    					  <td><%= h.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+    					  <td><%= format_time h.updated_at %></td>
     					  <td><%= h.times %></td>
     					</tr>
                       <% end %>

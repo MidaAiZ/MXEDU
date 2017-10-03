@@ -52,7 +52,7 @@
                         <div class="files">
                             <div class="row">
                                 <% @material.files.each do |f| %>
-                                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 tooltips" data-placement="top" data-toggle="tooltip" data-original-title="上传日期: <%= f.created_at.strftime('%Y-%m-%d') %> 下载量: <%= f.dload_count %>">
+                                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 tooltips" data-placement="top" data-toggle="tooltip" data-original-title="上传日期: <%= format_time f.created_at %> 下载量: <%= f.dload_count %>">
                                         <div class="file-pre mini">
                                             <div class="details">
                                                 <div class="top">
@@ -62,7 +62,7 @@
                                                     <br>
                                                     <!-- <div>
                                                         <span>上传日期:</span>
-                                                        <p class="no-wp"><%= f.created_at.strftime("%Y-%m-%d") %></p>
+                                                        <p class="no-wp"><%= format_time f.created_at %></p>
                                                     </div> -->
                                                     <div>
                                                         <strong class='size'>
@@ -103,9 +103,9 @@
         </div>
         <div class="pull-left">
             <p>
-                <span>发布时间: <i><%= @material.created_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <span>发布时间: <i><%= format_time @material.created_at %></i></span>
                 <br>
-                <span>更新时间: <i><%= @material.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <span>更新时间: <i><%= format_time @material.updated_at %></i></span>
                 <br>
                 <span>发布者: <%= @material.admin.number if @material.admin %></span>
             </p>
@@ -124,9 +124,7 @@
                     <%= link_to '上传资料', manage_material_upload_url(@material) + "?step=false" %>
                 </li>
                 <li>
-                    <a href='JavaScript:void(0)' id='del'>删除</a>
-                    <%= form_tag manage_material_path(@material), method: :delete, id: 'del-material' do %>
-                    <%end %>
+                    <%= link_to '删除', manage_material_path(@material), method: :delete, data: { confirm: "确定要删除资料 '#{@material.name}'?" } %>
                 </li>
             </ul>
         </div>

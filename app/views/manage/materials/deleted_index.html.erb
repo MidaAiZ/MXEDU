@@ -70,9 +70,9 @@
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="panel">
                                         <div class="panel-body">
-											<%= link_to manage_material_recover_path(m), method: :post, class: "recover pull-right" do %>
-											<i class="fa fa-refresh"></i>
-											<span>恢复</span>
+											<%= link_to manage_material_recover_path(m), method: :post, class: "recover pull-right", data: { confirm: "确定要重新展示资料 '#{m.name}'?" } do %>
+    											<i class="fa fa-refresh"></i>
+    											<span>恢复</span>
 											<% end %>
                                             <h4><%= m.name %><span class="text-muted small"> <%= m.cate.name %></span><br></h4>
                                             <div class="media">

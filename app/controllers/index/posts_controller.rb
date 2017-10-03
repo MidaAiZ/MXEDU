@@ -9,7 +9,7 @@ class Index::PostsController < IndexController
 	count = params[:count] || 10
 	page = params[:page] || 1
 	cons = set_rec_cons params.slice(:content, :school, :cate, :tag)
-	nonpaged_posts = Index::Post.sort(cons)
+	nonpaged_posts = Index::Post.sort(cons).hot
 	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
 	set_cdts
@@ -32,6 +32,7 @@ class Index::PostsController < IndexController
     page = params[:page] || 1
     nonpaged_comments = @post.comments
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
+    @post.record_timestamps = false
     @post.update readtimes: ((@post.readtimes || 0) + 1)
 	set_title @post.name
   end
@@ -71,6 +72,7 @@ class Index::PostsController < IndexController
   def update
 	unless @post.is_forbidden? # 被后台拉黑的帖子禁止更新
       @post.images = params[:post][:images]
+      @post.record_timestamps = false # 不更新时间戳
 	  code = 'Success' if @post.update(post_params)
 	end
 	code ||= 'Fail'

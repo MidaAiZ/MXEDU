@@ -58,9 +58,9 @@
         </div>
         <div class="pull-left">
             <p>
-                <span>发布时间: <i><%= @product.created_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <span>发布时间: <i><%= format_time @product.created_at %></i></span>
                 <br>
-                <span>更新时间: <i><%= @product.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></i></span>
+                <span>更新时间: <i><%= format_time @product.updated_at %></i></span>
                 <br>
                 <span>发布者: <%= @product.admin.number if @product.admin %></span>
             </p>
@@ -76,9 +76,7 @@
                     <%= link_to '修改信息', edit_manage_product_url(@product) %>
                 </li>
                 <li>
-                    <a href='JavaScript:void(0)' id='del'>删除</a>
-                    <%= form_tag manage_product_path(@product), method: :delete, id: 'del-product' do %>
-                    <%end %>
+                  <%= link_to "删除", manage_product_path(@product), method: :delete, data: { confirm: "确定要删除产品 '#{@product.name}'？" } %>
                 </li>
             </ul>
         </div>

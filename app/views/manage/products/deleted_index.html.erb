@@ -78,7 +78,7 @@
                                         <div class="item product" >
                                             <%= link_to manage_product_path(p) do %>
                                                 <span class="cate small"><%= "#{p.school.name} " if p.school %><%= p.cate.name if p.cate %></span>
-                                                <%= link_to manage_product_recover_path(p), method: :post, class: "recover" do %>
+                                                <%= link_to manage_product_recover_path(p), method: :post, class: "recover", data: { confirm: "确定要重新展示产品 '#{p.name}'?" } do %>
                                                     <i class="fa fa-refresh"></i>
                                                     <span>恢复</span>
                                                 <% end %>

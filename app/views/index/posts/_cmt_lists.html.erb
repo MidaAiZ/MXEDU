@@ -39,7 +39,7 @@
 			<% end %>
 		</div>
 		<div class="cmt-info">
-			<span class='c-time'><%= @post.created_at.strftime("%m-%d %H:%M") %></span>
+			<span class='c-time'><%= format_time @post.created_at %></span>
 			<span class="c-cmt">
 				<i class="fa <%= c.has_thumb?(c.user.id, '') ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_post_comments_path(c) %>" role='thumb'></i>
 				<span><%= c.thumbs_count %></span>

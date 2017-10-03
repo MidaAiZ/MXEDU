@@ -18,7 +18,8 @@ class Index::PostComment < ApplicationRecord
 
     validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 5000, too_long: '评论内容最大长度为%{count}' }
 
-	default_scope -> { order(thumbs_count: :DESC).order(created_at: :DESC) }
+	scope :hot, -> { order(thumbs_count: :DESC) }
+	default_scope -> { hot.order(updated_at: :DESC) }
 
 	def _save user, post
 		self.user = user

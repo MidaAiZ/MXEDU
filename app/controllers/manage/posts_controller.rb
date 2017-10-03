@@ -1,6 +1,6 @@
 class Manage::PostsController < ManageController
   before_action :require_login
-  before_action :check_super, only: [:destroy]
+  before_action :check_super, only: [:destroy, :recover]
   before_action :set_post, only: [:show, :destroy]
 
   # GET /index/posts
@@ -9,7 +9,7 @@ class Manage::PostsController < ManageController
 	count = params[:count] || 10
 	page = params[:page] || 1
 	cons = params.slice(:content, :school, :cate, :tag)
-	nonpaged_posts = Index::Post.sort(cons)
+	nonpaged_posts = Index::Post.sort(cons).hot
 	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
 	set_cdts
     render(:_lists, layout: false) and return if params["dl"]
@@ -51,7 +51,6 @@ class Manage::PostsController < ManageController
     page = params[:page] || 1
     nonpaged_comments = @post.comments
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
-    @post.update readtimes: ((@post.readtimes || 0) + 1)
   end
 
   # DELETE /index/posts/1
@@ -66,6 +65,16 @@ class Manage::PostsController < ManageController
       format.html { redirect_to "#{manage_posts_url}?page=#{params[:page]}" }
       format.json { head :no_content, status: code ? 200 : 422 }
     end
+  end
+
+  def recover
+    @post = Index::Post.forbidden.find(params[:post_id])
+  	code = @post.publish!
+
+      respond_to do |format|
+        format.html { redirect_to manage_post_url(@post) }
+        format.json { head :no_content, status: code ? 200 : 422 }
+      end
   end
 
   private

@@ -11,22 +11,24 @@
                                 </span>
                                 <ul class="dropdown-menu pull-right">
                                   <li>
-                                      <a href="javascript:void(0)" data-href="<%= manage_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除吗">删除</a>
+                                      <a href="javascript:void(0)" data-href="<%= manage_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除该贴？删除后用户将无法查看">删除</a>
                                   </li>
                                 </ul>
                             </div>
                         <% else %>
                             <div class="pull-right">
-                                <small>删除时间：<%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></small>
+                                <small>删除时间：<%= format_time post.updated_at %></small>
                             </div>
                         <% end %>
                     <% end %>
 					<div class="ico">
-						<%= image_tag post.user.avatar.mini %>
+                        <%= link_to manage_user_path(post.user) do %>
+    						<%= image_tag post.user.avatar.mini %>
+                        <% end %>
 					</div>
 					<div class="u-intro">
 						<span class='u-name'><%= post.user.name %></span>
-						<span class='p-time'><%= post.created_at.strftime("%H:%M") %></span>
+						<span class='p-time'><%= format_time post.created_at %></span>
 					</div>
 				</div>
 				<%= link_to manage_post_path(post), class: "auto-row p-content" do %>

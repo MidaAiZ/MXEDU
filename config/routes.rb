@@ -170,6 +170,7 @@ Rails.application.routes.draw do
     # posts
     resources :posts do
         resources :post_comments
+        post 'recover' => 'posts#recover', as: :recover
         collection do
             get 'search' => 'posts#search', as: :search
             get 'deleted' => 'posts#index_deleted', as: :deleted

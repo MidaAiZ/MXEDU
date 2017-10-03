@@ -109,7 +109,7 @@
                                 <td><%= m.cate.name if m.cate %></td>
                                 <td><%= m.school.name if m.school %></td>
                                 <td><%= m.grade %></td>
-                                <td><%= m.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                                <td><%= format_time m.created_at %></td>
                                 <td><%= m.admin.number %></td>
                                 <td><%= link_to '查看', manage_material_path(m) %></td>
                             </tr>
