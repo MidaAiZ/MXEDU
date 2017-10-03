@@ -10,12 +10,12 @@
 
 .dropload-up {
     margin-bottom: 10px;
-    height: 25px !important;
+    height: 25px;
 }
 
 
 .dropload-down{
-    /*height: 50px;*/
+    /*height: 25px;*/
 }
 .dropload-refresh,.dropload-update,.dropload-load,.dropload-noData{
     /*height: 50px;
@@ -33,6 +33,10 @@
     vertical-align: middle;
     -webkit-animation: rotate 0.75s linear infinite;
     animation: rotate 0.75s linear infinite;
+}
+
+.dropload-up .dropload-load {
+    margin-top: -6px;
 }
 @-webkit-keyframes rotate {
     0% {

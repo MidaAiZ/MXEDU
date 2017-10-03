@@ -56,7 +56,7 @@ function submitPost(url) {
 		// contentType: false,
 		// processData: false,
 		success: function(data) {
-			window.location = "/posts/" + data.post_id
+			window.location = "/posts/" + data.post_id + "?back=-3"
 		},
 		error: function(error) {
 			$("#post_submit").removeAttr("disabled").val("发表评论")

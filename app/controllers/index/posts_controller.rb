@@ -58,7 +58,7 @@ class Index::PostsController < IndexController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url @post }
+        format.html { redirect_to post_url(@post) }
         format.json { render :show, status: :created }
       else
         format.html { render :new }

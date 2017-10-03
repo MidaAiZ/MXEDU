@@ -204,7 +204,9 @@
 
 $(function() {
     $("[role=back]").on("click", function() {
-        history.back();
+        backState = getQueryString("back");
+        if (!backState) backState = -1;
+        history.go(backState);
     })
 
     $("body").on("click", "[role=delete-confirm]", function() {

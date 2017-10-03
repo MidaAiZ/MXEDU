@@ -60,7 +60,7 @@ function submitPost(url) {
 		// contentType: false,
 		// processData: false,
 		success: function(data) {
-			window.location = "/posts/" + data.id
+			window.location = "/posts/" + data.id +"?back=-2"
 		},
 		error: function(error) {
 			$("#post_submit").removeAttr("disabled").val("发表")

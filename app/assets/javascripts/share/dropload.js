@@ -22,12 +22,12 @@ $(function () {
                     setTimeout(function(){
                         $('#lists').html(data);
                         // 每次数据加载完，必须重置
-                        me.resetload();
                         me.unlock();
                         me.noData(false);
                         me.loading = false;
-                        $(".dropload-up").remove();
-                    },100);
+                        me.resetload();
+                        $(".dropload-up").css("height", "0");
+                    },500);
                 },
                 error: function(xhr, type){
                     // 即使加载出错，也得重置
