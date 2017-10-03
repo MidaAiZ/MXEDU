@@ -26,7 +26,6 @@ $(function () {
                         me.noData(false);
                         me.loading = false;
                         me.resetload();
-                        $(".dropload-up").css("height", "0");
                     },500);
                 },
                 error: function(xhr, type){
