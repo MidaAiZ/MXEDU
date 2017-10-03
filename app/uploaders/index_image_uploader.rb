@@ -1,4 +1,3 @@
-# encoding: utf-8
 class IndexImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or ImageScience support:
   # include CarrierWave::RMagick
@@ -40,21 +39,6 @@ class IndexImageUploader < CarrierWave::Uploader::Base
   def filename
     if original_filename
       Digest::SHA2.hexdigest(original_filename)[0..12] + Time.now.to_i.to_s + ".#{original_filename.split('.')[-1]}"
-    end
-  end
-
-  private
-
-  def check_resize(limit_width, limit_height)
-    img_width = width
-    img_height = height
-    if img_width > limit_width || img_height > limit_height
-      begin
-        img_width *= 0.9
-        img_height *= 0.9
-      end until img_width < limit_width && img_height < limit_height
-
-      resize_to_fit(img_width, img_height)
     end
   end
 end

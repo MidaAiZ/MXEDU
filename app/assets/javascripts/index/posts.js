@@ -10,7 +10,7 @@ $(function() {
 	$("#post_submit").on("click", function() {
 		$("#post_submit").attr("disabled", true).val("请稍候...")
 
-		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").length > 0) {
+		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").not("[error]").length > 0) {
 			return false;
 		}
 		submitPost();
@@ -29,6 +29,7 @@ $(function() {
 		delete(val[$(this).data("img-id")])
 		$imgInput.data("value", val);
 		$(this).parents("li").remove();
+		console.log(val);
 	})
 
 	$("#open-img-btn").on("click", function() {
@@ -38,6 +39,12 @@ $(function() {
 
 function submitPost(url) {
 	var $form = $("#post_form");
+	if ($("#img-pane .fileBoxUl").find("[error]").length > 0) {
+		alert("请移除上传失败的图片");
+		$("#post_submit").removeAttr("disabled").val("重新发表");
+		 return false;
+	}
+
 	var url = "/posts";
 	if ($form.data("post-id")) url += ("/" + $form.data("post-id"));
 	var type = $form.data("post-id") ? "PATCH" : "POST"

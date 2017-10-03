@@ -91,7 +91,7 @@
 			})
 			baguetteBox.run('.img-gallery');
 		},
-        success: function(res) {
+        success: function(res, $fileBox) {
             var $imgInput = $("#comment_images");
             var val = $imgInput.data("value");
             if (!val || typeof(val) != "object") val = {};
@@ -100,9 +100,10 @@
                 thumb: res.thumb
             }
             $imgInput.data("value", val);
+			$fileBox.removeAttr("error").find(".diyCancel").off("click").attr("data-img-id", res.id).removeClass("diyCancel").addClass("diyDel");
         },
-        error: function(error) {
-
+        error: function(error, $fileBox) {
+			$fileBox.attr("error", true);
         },
         complete: function() {
             submitPost();

@@ -98,7 +98,7 @@
 					$fileBox.children('.diySuccess').show();
 				});
 				if ( successCallBack ) {
-					successCallBack( response );
+					successCallBack( response, $fileBox );
 				}
 			});
 
@@ -109,7 +109,7 @@
 				showDiyProgress( 0, $diyBar , '上传失败!' );
 				var err = '上传失败! 文件:'+file.name+' 错误码:'+reason;
 				if ( errorCallBack ) {
-					errorCallBack( err );
+					errorCallBack( err, $fileBox );
 				}
 			});
 

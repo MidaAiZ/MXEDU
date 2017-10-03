@@ -62,13 +62,13 @@
  {
 	font-size: 20px;
 	color: rgba(255, 0, 0, 0.8);
+	z-index: 99;
 	/*background:url(../images/x_alt.png) no-repeat;*/
 }
 
 .parentFileBox>.fileBoxUl>li>.diySuccess {
 	/*background:url(../images/check_alt.png) no-repeat;*/
 	color: rgba(10, 210, 130, 0.8);
-	cursor:default;
 	display:none;
 }
 .parentFileBox>.fileBoxUl>li>.diyFileName {
