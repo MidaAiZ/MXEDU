@@ -171,6 +171,9 @@ Rails.application.routes.draw do
     resources :posts do
         resources :post_comments
         post 'recover' => 'posts#recover', as: :recover
+        post 'top' => 'posts#on_top', as: :on_top
+        delete 'top' => 'posts#off_top', as: :off_top
+
         collection do
             get 'search' => 'posts#search', as: :search
             get 'deleted' => 'posts#index_deleted', as: :deleted

@@ -14,7 +14,7 @@ class Index::User < ApplicationRecord
                 foreign_key: :school_id,
                 optional: true
 
-    has_many :posts,
+    has_many :posts, -> { state_ok },
             class_name: 'Index::Post',
             foreign_key: :user_id
 

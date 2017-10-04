@@ -1,6 +1,6 @@
 <% @posts.each do |post| %>
     <% cache post.cache_key, expires_in: 10.minutes do %>
-		<div class="panel post-pane" role="remove">
+		<div class="panel post-pane" role="remove" data-id="<%= post.id %>">
 			<div class="panel-body n-p-b">
 				<div class="p-u-info">
 					<% if @user && (post.user_id == @user.id) %>
@@ -18,6 +18,11 @@
 							</ul>
 						</div>
 					<% end %>
+                    <% if post.is_top? %>
+                        <div class="pull-right top-pane">
+                            <label class="label label-success p-top">置顶</label>
+                        </div>
+                    <% end %>
 					<div class="ico">
                         <%= link_to v_ucenter_posts_path(post.user_id) do %>
                             <%= image_tag post.user.avatar.mini %>

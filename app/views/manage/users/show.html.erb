@@ -13,8 +13,10 @@
                 <div class="col-md-12">
                     <div class="panel">
                         <div class="panel-body">
-                            <div class="profile-pic text-center">
-                                <%= image_tag @user.avatar.thumb %>
+                            <div class="profile-pic text-center img-gallery">
+                                <a href="<%= @user.avatar %>" data-caption="头像大图">
+                                    <%= image_tag @user.avatar.thumb %>
+                                </a>
                             </div>
                         </div>
                     </div>

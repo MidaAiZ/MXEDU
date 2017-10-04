@@ -31,11 +31,9 @@
                 </div>
             <% end %>
 
-            <div class="dropload" data-url="<%= request.fullpath %>">
+            <div class="dropload" data-url="<%= request.fullpath %>" data-page="2">
                 <div id="lists">
-                    <% cache @posts.cache_key, expires_in: 10.minutes do %>
-                        <%= render "lists" %>
-                    <% end %>
+                    <%= render "lists" %>
                 </div>
             </div>
                 <!-- <div class="panel">

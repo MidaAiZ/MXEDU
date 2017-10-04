@@ -18,18 +18,25 @@
                 <div class="panel-body">
                     <div class="p-u-info">
                         <% if @admin.super? %>
-                            <% if @post.is_published? %>
+                            <% if @post.state_ok? %>
                                 <div class="opt-menu pull-right">
                                     <span class="dropdown-toggle" data-toggle="dropdown">
                                         <i class='fa fa-angle-down'></i>
                                     </span>
                                     <ul class="dropdown-menu pull-right">
-                                      <li>
-                                          <%= link_to '删除', manage_post_path(@post), method: :DELETE, data: { confirm: "确定要删除吗?" } %>
-                                      </li>
+                                        <li>
+                                            <% if @post.is_top? %>
+                                              <%= link_to "取消置顶", manage_post_off_top_path(@post), method: :delete, data: { confirm: "确定要取消置顶吗" } %>
+                                            <% else %>
+                                              <%= link_to "置顶", manage_post_on_top_path(@post), method: :post, data: { confirm: "确定要置顶该贴吗" } %>
+                                            <% end %>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)" data-href="<%= manage_post_path(@post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除该贴？删除后用户将无法查看">删除</a>
+                                        </li>
                                     </ul>
                                 </div>
-                            <% else %>
+                            <% elsif @post.state_bad? %>
                                 <div class="pull-right">
                                     <small>删除时间：<%= format_time @post.updated_at %></small>
                                     <% if @post.is_forbidden? %>
@@ -42,6 +49,11 @@
                                     <% end %>
                                 </div>
                             <% end %>
+                        <% end %>
+                        <% if @post.is_top? %>
+                            <div class="pull-right">
+                                <label class="label label-success p-top">置顶</label>
+                            </div>
                         <% end %>
                         <div class="ico">
                             <%= image_tag @post.user.avatar.mini %>

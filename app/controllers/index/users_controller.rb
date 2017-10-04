@@ -8,6 +8,10 @@ class Index::UsersController < IndexController
     @schools = Manage::School.limit(8)
   end
 
+  def show
+    redirect_to v_ucenter_path(params[:id])
+  end
+
   # GET /index/users/1/edit
   def edit
     @schools = Manage::School.where(id: @user.school_id) + Manage::School.where.not(id: @user.school_id).limit(7)

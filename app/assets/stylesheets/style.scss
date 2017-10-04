@@ -4977,7 +4977,8 @@ li.flex {
 .auto-row {
     &.p-content {
         color: #636363;
-        padding: 5px 2px;
+        display: block;
+        padding: 0px 2px;
         &:hover {
             text-decoration: none;
         }
@@ -5040,4 +5041,20 @@ li.flex {
 
 .fa-thumbs-up.active {
     color: #ff7800;
+}
+
+.opt-menu {
+	cursor: pointer;
+	margin: -7px -5px;
+	margin-left: 15px;
+	position: relative;
+
+	.fa-angle-down {
+		font-size: 18px;
+	}
+}
+
+.p-top {
+    position: relative;
+    top: -2px;
 }

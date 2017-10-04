@@ -49,12 +49,15 @@ $(function () {
                     }
 
                     setTimeout(function(){
-                        $('#lists').append(data);
+                        var $lists = $("#lists");
+                        // 去重
+                        var new_list = uniq($lists, $(data));
+                        $('#lists').append(new_list);
+                        console.log(new_list);
+
                         // 每次数据加载完，必须重置
                         me.resetload();
-                    },100);
-
-                    $.dropLoadPage++;
+                    },1);
                 },
                 error: function(xhr, type){
                     // 即使加载出错，也得重置
@@ -84,11 +87,14 @@ $(function () {
     	}
         url = path + "?" + search.replace(/&$/, "").replace(/&{2,}/, "&");
         console.log(url);
+        $.dropLoadPage++;
     	return url;
     }
 
     function setPage() {
-        $.dropLoadPage = 2;
+        var pageStart = $(".dropload").data("page");
+        if (!pageStart) pageStart = 2;
+        $.dropLoadPage = pageStart;
     }
 
     function setCount() {
@@ -100,6 +106,12 @@ $(function () {
     function myDropLoadInit() {
         setCount();
         setPage()
+    }
+
+    function uniq($fa, $list) {
+        return $list.map(function() {
+            if ($fa.find("[data-id="+ $(this).data("id") +"]").length == 0) return this;
+        })
     }
 
     function replaceQuery(search, name, value) {

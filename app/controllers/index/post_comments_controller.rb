@@ -77,7 +77,7 @@ class Index::PostCommentsController < IndexController
 
   private
     def set_post
-        @post = Index::Post.find(params[:post_id])
+        @post = Index::Post.state_ok.find(params[:post_id])
     end
 
     def set_post_comment

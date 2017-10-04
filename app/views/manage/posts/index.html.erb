@@ -35,10 +35,15 @@
                 </div>
             <% end %>
 
-            <div class="dropload" data-url="<%= request.fullpath %>">
+            <div>
                 <div id="lists">
+                    <% if @top_posts %>
+                        <% cache @top_posts.cache_key, expires_in: 10.minutes do %>
+                            <%= render "lists", posts: @top_posts %>
+                        <% end %>
+                    <% end %>
                     <% cache @posts.cache_key, expires_in: 10.minutes do %>
-                        <%= render "lists" %>
+                        <%= render "lists", posts: @posts %>
                     <% end %>
                 </div>
             </div>
