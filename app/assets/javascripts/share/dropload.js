@@ -53,7 +53,6 @@ $(function () {
                         // 去重
                         var new_list = uniq($lists, $(data));
                         $('#lists').append(new_list);
-                        console.log(new_list);
 
                         // 每次数据加载完，必须重置
                         me.resetload();

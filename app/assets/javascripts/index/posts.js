@@ -9,6 +9,7 @@ $(function() {
 
 	$("#post_submit").on("click", function() {
 		$("#post_submit").attr("disabled", true).val("请稍候...")
+		showLoading("发表中...");
 
 		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").not("[error]").length > 0) {
 			return false;
@@ -40,6 +41,7 @@ $(function() {
 function submitPost(url) {
 	var $form = $("#post_form");
 	if ($("#img-pane .fileBoxUl").find("[error]").length > 0) {
+		hideLoading();
 		alert("请移除上传失败的图片");
 		$("#post_submit").removeAttr("disabled").val("重新发表");
 		 return false;
@@ -63,7 +65,8 @@ function submitPost(url) {
 			window.location = "/posts/" + data.id +"?back=-2"
 		},
 		error: function(error) {
-			$("#post_submit").removeAttr("disabled").val("发表")
+			hideLoading();
+			$("#post_submit").removeAttr("disabled").val("重新发表")
 		}
 	})
 }

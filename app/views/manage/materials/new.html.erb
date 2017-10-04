@@ -19,6 +19,7 @@
     })
     $("body").on("click", "#material-submit", function(e) {
         e.preventDefault();
+		showLoading("提交中...");
         var fd = new FormData($("#material-form")[0]);
         $(this).attr("disabled", true).val("提交中...");
         $.ajax({
@@ -34,6 +35,7 @@
                 $("#error").html($(res.responseText).find("#error").html());
                 $("#material-submit").removeAttr("disabled").val("保存产品信息");
                 $("#material-form-title-0").trigger("click");
+				hideLoading();
                 window.scrollTo(0, 1);
             },
             complete: function() {

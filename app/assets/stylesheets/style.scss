@@ -2,6 +2,7 @@
 Template Name: AdminEx Dashboard
 Author: ThemeBucket
 -------------------------------------------*/
+//= require share/loading
 
 @import 'bootstrap-reset';
 @import 'jquery-ui-1.10.3.css';
@@ -4901,6 +4902,12 @@ img.cover {
   }
 }
 
+.form-signin {
+    .close {
+        margin-top: -20px !important;
+    }
+}
+
 .form-group {
     display: inline-block;
     width: 100%;
@@ -4968,7 +4975,7 @@ li.flex {
 }
 
 .modal .close {
-    margin-top: -20px;
+    margin-top: -10px;
     margin-right: -5px;
     font-size: 30px;
     color: red;

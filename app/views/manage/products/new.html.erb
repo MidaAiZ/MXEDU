@@ -17,7 +17,9 @@
     $("body").on("submit", "#product-form", function() {
         return false
     })
-    $("body").on("click", "#product-submit", function() {
+    $("body").on("click", "#product-submit", function(e) {
+        e.preventDefault();
+        showLoading("提交中...");
         var fd = new FormData($("#product-form")[0]);
         $(this).attr("disabled", true).val("提交中...");
         $.ajax({
@@ -31,10 +33,11 @@
             },
             error: function(res) {
                 $("#error").html($(res.responseText).find("#error").html());
+                $("#product-submit").removeAttr("disabled").val("保存产品信息");
+                hideLoading();
                 window.scrollTo(0, 1);
             },
             complete: function() {
-                $("#product-submit").removeAttr("disabled").val("保存产品信息");
             }
         })
         return false;

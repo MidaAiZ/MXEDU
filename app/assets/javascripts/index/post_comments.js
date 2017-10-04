@@ -8,6 +8,7 @@ $(function() {
 
 	$("#comment_submit").on("click", function() {
 		$("#comment_submit").attr("disabled", true).val("请稍候...")
+		showLoading("发表中...");
 
 		if ($("#img-pane .fileBoxUl").find("li.diyUploadHover").not("[error]").length > 0) {
 			return false;
@@ -41,6 +42,7 @@ function submitPost(url) {
 	var url = $form.attr("action");
 	// var fd = new FormData($form[0]);
 	if ($("#img-pane .fileBoxUl").find("[error]").length > 0) {
+		hideLoading();
 		alert("请移除上传失败的图片");
 		$("#comment_submit").removeAttr("disabled").val("重新发表");
 		 return false;
@@ -59,6 +61,7 @@ function submitPost(url) {
 			window.location = "/posts/" + data.post_id + "?back=-3"
 		},
 		error: function(error) {
+			hideLoading();
 			$("#post_submit").removeAttr("disabled").val("发表评论")
 		}
 	})

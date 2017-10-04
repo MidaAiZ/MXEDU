@@ -101,12 +101,17 @@
             }
             $imgInput.data("value", val);
 			$fileBox.removeAttr("error").find(".diyCancel").off("click").attr("data-img-id", res.id).removeClass("diyCancel").addClass("diyDel");
+			$.canSubmit = true
         },
         error: function(error, $fileBox) {
 			$fileBox.attr("error", true);
+			$.canSubmit = true
         },
         complete: function() {
-            submitPost();
+			if ($.canSubmit) {
+				submitPost();
+			}
+			$.canSubmit = false; // 防止重复提交
             console.log($("#comment_images").data("value"))
         }
     });

@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require bootstrap
 //= require nicescroll
+//= require share/loading
 
 (function() {
     "use strict";

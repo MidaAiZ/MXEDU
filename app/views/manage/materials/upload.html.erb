@@ -141,6 +141,7 @@
 		}
 
 		$("a#ok").click(function() {
+            showLoading("提交中...");
 			window.location = '/manage/materials/' + $("#my-awesome-dropzone").data("id");
 		})
 

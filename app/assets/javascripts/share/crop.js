@@ -86,6 +86,8 @@ function uploadCrop(ajaxUrl, successCb, method) {
     // 上传后端进行压缩处理
     var croppedImage = imageFile.cropper("getCroppedCanvas");
     try {
+        showLoading("上传中...");
+        $("#subcrop").attr("disabled", true);
         var fd = new FormData($("#cropForm")[0]);
         $.ajax({
             url: ajaxUrl,
@@ -100,6 +102,10 @@ function uploadCrop(ajaxUrl, successCb, method) {
             },
             error: function() {
                 alert("上传失败，请刷新页面后重试！)");
+            },
+            complete: function() {
+                $("#subcrop").removeAttr("disabled");
+                hideLoading()
             }
         });
     } catch (e) {

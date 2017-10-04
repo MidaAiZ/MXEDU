@@ -12,7 +12,7 @@ class Index::PostsController < IndexController
     nonpaged_posts = Index::Post.sort(cons).published.hot
     @posts = nonpaged_posts.page(page).per(count).includes(:cate)
     if page.to_i == 1
-        @posts = Index::Post.sort(cons).top.hot.limit(5) + @posts
+        @posts = Index::Post.top.hot + @posts
     end
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
 	set_cdts
@@ -57,6 +57,7 @@ class Index::PostsController < IndexController
     @post = Index::Post.new(post_params)
 	@post.user = @user
 	@post.school = @user.school
+    @post.state = @post.publish_state
 	@post.images = params[:post][:images]
 
     respond_to do |format|

@@ -169,10 +169,24 @@
     <%= link_to search_posts_path, class: "search" do %>
         <i class="fa fa-search"></i>
     <% end %>
-    <%= link_to new_post_path, class: "new" do %>
-        <i class="fa">+</i>
+    <% if session[:user_id] %>
+        <%= link_to new_post_path, class: "new" do %>
+            <i class="fa">+</i>
+        <% end %>
+    <% else %>
+        <%= link_to login_path, class: "new", "data-toggle" => "modal", "data-target" => "#loginModal" do %>
+            <i class="fa">+</i>
+        <% end %>
     <% end %>
 </div>
+
+<% unless session[:user_id] %>
+    <script>
+        $(function() {
+            showTip("登录后即可获得本校内容推荐");
+        })
+    </script>
+<% end %>
 
 <!--body wrapper end-->
 <%= stylesheet_link_tag "share/dropload" %>
