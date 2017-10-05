@@ -21,6 +21,12 @@ $(function () {
                 success: function(data){
                     setTimeout(function(){
                         $('#lists').html(data);
+                        if ($.dataUpdatedCBs) {
+                            for (var i in $.dataUpdatedCBs) {
+                                $.dataUpdatedCBs[i](data);
+                            }
+                        }
+
                         // 每次数据加载完，必须重置
                         me.unlock();
                         me.noData(false);
@@ -46,17 +52,23 @@ $(function () {
                         me.lock();
                         // 无数据
                         me.noData();
-                    }
-
-                    setTimeout(function(){
+                    } else {
                         var $lists = $("#lists");
                         // 去重
                         var new_list = uniq($lists, $(data));
                         $('#lists').append(new_list);
 
-                        // 每次数据加载完，必须重置
-                        me.resetload();
-                    },1);
+                        // 加载成功后的回调函数
+                        if ($.dataUpdatedCBs) {
+                            for (var i in $.dataUpdatedCBs) {
+                                $.dataUpdatedCBs[i](data);
+                            }
+                        }
+                    }
+
+                    // 每次数据加载完，必须重置
+                    me.resetload();
+
                 },
                 error: function(xhr, type){
                     // 即使加载出错，也得重置

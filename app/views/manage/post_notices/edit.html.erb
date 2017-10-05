@@ -1,0 +1,46 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <h3>
+        修改公告
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <%= link_to '公告信息', manage_post_notice_path(@post_notice) %>
+        </li>
+        <li class="active"> 编辑 </li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<%= render 'form', index_post_notice: @post_notice %>
+
+<script>
+    $("body").on("submit", "#post_notice-form", function() {
+        return false
+    })
+    $("body").on("click", "#post_notice-submit", function() {
+        showLoading("提交中...");
+		var $form = $("#post_notice-form");
+        var fd = new FormData($form[0]);
+        $(this).attr("disabled", true).val("提交中...");
+        $.ajax({
+            url: '/manage/post_notices/' + $form.data("id"),
+            data: fd,
+            type: 'patch',
+            contentType: false,
+            processData: false,
+            success: function(res) {
+                window.location = res
+            },
+            error: function(res) {
+                $("#error").html($(res.responseText).find("#error").html());
+                $("#post_notice-submit").removeAttr("disabled").val("保存公告信息");
+                hideLoading();
+                window.scrollTo(0, 1);
+            },
+            complete: function() {
+            }
+        })
+        return false;
+    })
+</script>

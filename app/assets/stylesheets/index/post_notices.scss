@@ -1,0 +1,15 @@
+.n-title {
+	text-align: center;
+	font-weight: 400;
+	font-size: 28px;
+	margin-bottom: 10px;
+	word-wrap: break-word;
+	line-height: 1.1em;
+	.cate {
+		font-size: 12px;
+		color: #7a7676;
+		.label {
+			padding-bottom: 1px;
+		}
+	}
+}

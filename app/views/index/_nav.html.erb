@@ -67,7 +67,7 @@
                 <li class="<%= 'active' if params[:controller] == 'index/main' %>"><a href="/"><i class="fa fa-home"></i> <span>首页</span></a></li>
                 <li class="<%= 'active' if params[:controller] == 'index/materials' %>"><a href="/materials"><i class="fa fa-files-o"></i> <span>学习资料</span></a></li>
                 <li class="<%= 'active' if params[:controller] == 'index/products' %>"><a href="/products"><i class="fa fa-laptop"></i> <span>校园产品</span></a></li>
-                <li class="<%= 'active' if ['index/posts', 'index/post_comments'].include? params[:controller] %>"><a href="/posts"><i class="fa fa-comments"></i> <span>校园BBS</span></a></li>
+                <li class="<%= 'active' if ['index/posts', 'index/post_comments', 'index/post_notices'].include? params[:controller] %>"><a href="/posts"><i class="fa fa-comments"></i> <span>校园BBS</span></a></li>
             </ul>
             <!--sidebar nav end-->
 

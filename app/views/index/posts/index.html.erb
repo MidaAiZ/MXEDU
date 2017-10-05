@@ -32,6 +32,20 @@
             <% end %>
 
             <div class="dropload" data-url="<%= request.fullpath %>" data-page="2">
+                <div class="notices">
+                    <% if @notices %>
+                        <div class="p-notice-pane">
+                            <% @notices.each do |n| %>
+                                <span class="no-wp p-notice"><label class="label <%= get_notice_label n.cate %>"><%= n.cate %></label>
+                                    <span class="n-title">
+                                        <%= link_to n.title || "无标题", post_notice_path(n) %>
+                                    </span>
+                                    <span class="pull-right n-time"><%= format_time n.updated_at %></span>
+                                </span>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
                 <div id="lists">
                     <%= render "lists" %>
                 </div>

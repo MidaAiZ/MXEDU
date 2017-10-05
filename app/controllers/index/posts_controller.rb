@@ -13,9 +13,10 @@ class Index::PostsController < IndexController
     @posts = nonpaged_posts.page(page).per(count).includes(:cate)
     if page.to_i == 1
         @posts = Index::Post.top.hot + @posts
+        get_notices unless params["dl"] # 公告
     end
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
-	set_cdts
+	# set_cdts
     render(:_lists, layout: false) and return if params["dl"]
   end
 
@@ -147,5 +148,11 @@ class Index::PostsController < IndexController
     def set_rec_cons cons = {}
         cons[:school] = @user.school_id if @user && cons[:school].nil? # 院校资料推荐
         cons
+    end
+
+    def get_notices
+        # @notices = Rails.cache.fetch("#{cache_key}_notice", expires_in: 10.minutes) do
+        @notices  =  Manage::PostNotice.limit(3)
+        # end
     end
 end

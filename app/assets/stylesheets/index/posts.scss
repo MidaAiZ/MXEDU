@@ -27,6 +27,28 @@
 	}
 }
 
+.p-notice-pane {
+	background: white;
+	margin-bottom: 8px;
+	.p-notice {
+		display: block;
+		padding: 5px;
+		border-bottom: 1px solid #f6f6f6;
+	}
+	.n-title {
+		padding-left: 5px;
+		word-wrap: break-word;
+		line-height: 1.1em;
+		a {
+			color: #7c7c7c;
+		}
+	}
+	.n-time {
+		color: #a8a8a8;
+		font-size: 12px;
+	}
+}
+
 .dropload-down {
 	margin-top: 10px;
 }

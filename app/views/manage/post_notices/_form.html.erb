@@ -1,0 +1,73 @@
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <%= form_for(@post_notice, url: manage_post_notices_path, html: { id: 'post_notice-form', 'data-id' => @post_notice.id }) do |f| %>
+                <div id="error">
+                <% if index_post_notice.errors.any? %>
+                  <div id="error_explanation">
+                    <h4>存在<%= index_post_notice.errors.count %>个错误信息</h4>
+
+                    <ul>
+                    <% index_post_notice.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                </div>
+                <section class='panel'>
+                    <header class="panel-heading">
+                        基本信息
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-up toggle-show" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-8">
+                                <div class="form-group">
+                                    <label for="post_notice_name">标题</label>
+                                    <input type="text" id='post_notice_title' name='post_notice[title]' class="form-control" placeholder="输入公告标题" value="<%= @post_notice.title %>">
+                                </div>
+                            </div>
+							<div class="col-xs-12 col-md-8">
+                                <div class="form-group">
+                                    <label for="post_notice_name">类型</label>
+									<%= f.select :cate, Manage::PostNotice.cates.map{|i| [i, i] }, {}, {class: "form-control", name: "post_notice[cate]"}  %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        公告详情
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-up toggle-show" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea id='froala-editor' class='hidden'><%= @post_notice.content %></textarea>
+                                <input type="hidden" name='post_notice[content]' id='editor-content' value="<%= @post_notice.content %>">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="actions">
+                  <%= f.submit '保存公告信息', id: 'post_notice-submit', class: 'btn btn-primary btn-wide' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<%= stylesheet_link_tag 'share/froala_editor' %>
+<%= javascript_include_tag 'share/froala_editor' %>
+
+<!--
+<script src="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.js"></script>
+<link href="//cdn.rawgit.com/indrimuska/jquery-editable-select/2.2.4/dist/jquery-editable-select.min.css" rel="stylesheet"> -->

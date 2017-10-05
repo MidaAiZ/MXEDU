@@ -18,9 +18,11 @@
                                 <% $images.keys.each_with_index do |c, i| %>
                                     <li>
                                         <div class="viewThumb t-center">
-											<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
-    	                                        <img src="<%= $images[c]['thumb'] %>" alt="">
-											</a>
+											<div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
+												<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+													<img src="" alt="" style=:display: none;>
+												</a>
+											</div>
                                         </div>
                                         <div class="diyDel" data-img-id="<%= c %>">
                                             <i class="fa fa-times-circle"></i>

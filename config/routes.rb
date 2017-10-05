@@ -43,6 +43,10 @@ Rails.application.routes.draw do
         end
     end
 
+    # post notice
+    resources :post_notices do
+    end
+
     # 帖子评论
     resources :post_comments do
         resources :post_son_comments
@@ -189,6 +193,13 @@ Rails.application.routes.draw do
         end
     end
 
+    # post notice
+    resources :post_notices do
+        post "/recover" => "post_notices#recover", as: :recover
+        collection do
+            get "deleted" => "post_notices#deleted_index", as: :deleted
+        end
+    end
 
     # schools
     resources :schools

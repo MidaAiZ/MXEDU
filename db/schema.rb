@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002101622) do
+ActiveRecord::Schema.define(version: 20171005040235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,21 @@ ActiveRecord::Schema.define(version: 20171002101622) do
     t.integer "posts_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "manage_post_notices", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "cate"
+    t.bigint "school_id"
+    t.bigint "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "readtimes", default: 0
+    t.boolean "is_deleted", default: false
+    t.index ["admin_id"], name: "index_manage_post_notices_on_admin_id"
+    t.index ["school_id"], name: "index_manage_post_notices_on_school_id"
+    t.index ["school_id"], name: "manage_post_notices_on_school_id"
   end
 
   create_table "manage_product_cates", force: :cascade do |t|

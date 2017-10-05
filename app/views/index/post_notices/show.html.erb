@@ -1,0 +1,46 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="javascript:void(0)" class='pull-left' role='back'><<返回</a>
+        </li>
+    </ul>
+</div>
+
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row blog">
+
+    <div class="col-md-8 col-xs-12 col-md-offset-2">
+        <div class="blog">
+            <div class="single-blog">
+                <div class="panel">
+                    <div class="panel-body">
+                        <span class="t-center n-title">
+                            <span>
+                                <%= @notice.title %>
+                            </span>
+                            <small class="cate">
+                                <label class="label <%= get_notice_label @notice.cate %>"><%= @notice.cate %></label>
+                            </small>
+                        </span>
+                        <div class="fr-view">
+                            <%= (@notice.content || '').html_safe %>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <span class='p-l'>浏览：<%= @notice.readtimes %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+<!--body wrapper end-->
+<%= stylesheet_link_tag "froala_style.min" %>

@@ -1,0 +1,71 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/manage/post_notices">公告管理</a>
+    </li>
+    <li class="active">
+      已删除
+    </li>
+    <li class="pull-right flex">
+        <form class="" id='proSearch' method="get">
+            <input type="text" class="form-control narrow" name="name" placeholder="搜索公告" />
+        </form>
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+      <section class="panel">
+        <div class="panel-body">
+          <div class="adv-table editable-table ">
+            <div class="space15"></div>
+
+            <div id="pjax-replace">
+                <% cache @post_notices.cache_key, expires_in: 2.minutes do %>
+                    <div class="show-block">
+                        <div id="gallery" class="media-gal">
+                            <div class="post_notice-row">
+                                <% @post_notices.each do |p| %>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel purple">
+                                            <div class="panel-body">
+                                                <span class="no-wp">
+                                                    <strong>
+                                                        <%= link_to p.title, manage_post_notice_path(p), class: "" %>
+                                                    </strong>
+                                                    <%= link_to manage_post_notice_path(p) do %>
+                                                        <span class="cate small"><%= "#{p.school.name} " if p.school %></span>
+                                                    <% end %>
+                                                    <label class="label <%= get_notice_label p.cate %>"><%= p.cate %></label>
+                                                    <div class="pull-right">
+                                                        <span><%= format_time p.updated_at %></span>
+                                                        <%= link_to manage_post_notice_recover_path(p), method: :post, class: "recover", data: { confirm: "确定要重新展示公告 '#{p.title}'?" } do %>
+                                                            <i class="fa fa-refresh"></i>
+                                                            <span>恢复</span>
+                                                        <% end %>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <%= paginate @post_notices %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--body wrapper end-->

@@ -87,7 +87,11 @@ $(function() {
 
 function sucBK(res, url) {
 	$("body").find("#pjax-replace").replaceWith($(res).find("#pjax-replace"));
-	$('.tooltips').tooltip();
+	if ($.dataUpdatedCBs) {
+		for (var i in $.dataUpdatedCBs) {
+			$.dataUpdatedCBs[i](res);
+		}
+	}
 }
 
 function completeBK() {
@@ -178,3 +182,9 @@ $(function() {
 		$(".cdts-panel .tools .fa-chevron-down").trigger("click");
 	}
 })
+
+// 数据加载成功后的回调
+if (!$.dataUpdatedCBs) $.dataUpdatedCBs = {};
+$.dataUpdatedCBs.tooltipInit = function() {
+	$('.tooltips').tooltip();
+}
