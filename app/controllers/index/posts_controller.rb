@@ -44,11 +44,13 @@ class Index::PostsController < IndexController
   # GET /index/posts/new
   def new
     @post = Index::Post.new
+    # get_cates
 	set_title "发布帖子"
   end
 
   # GET /index/posts/1/edit
   def edit
+    # get_cates
 	set_title "修改 #{@post.name}"
   end
 
@@ -151,8 +153,14 @@ class Index::PostsController < IndexController
     end
 
     def get_notices
-        # @notices = Rails.cache.fetch("#{cache_key}_notice", expires_in: 10.minutes) do
-        @notices  =  Manage::PostNotice.limit(3)
-        # end
+        @notices = Rails.cache.fetch("#{cache_key}_notice", expires_in: 10.minutes) do
+          Manage::PostNotice.limit(3)
+        end
+    end
+
+    def get_cates
+        @cates = Rails.cache.fetch("#{cache_key}_cate", expires_in: 10.minutes) do
+          Manage::PostCate.limit(8)
+        end
     end
 end

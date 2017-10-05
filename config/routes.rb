@@ -90,6 +90,7 @@ Rails.application.routes.draw do
             get 'material_cates' => 'conditions#search_material_cate'
             get 'product_cates' => 'conditions#search_product_cate'
             get 'schools' => 'conditions#search_school'
+            get 'post_cates' => 'conditions#search_post_cate'
         end
     end
 

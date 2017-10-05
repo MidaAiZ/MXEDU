@@ -22,4 +22,10 @@ class Index::ConditionsController < ApplicationController
         @cates = Manage::MaterialCate.sort(cons)
 		render :material_cates
 	end
+
+	def search_post_cate
+		cons = params.slice(:name)
+        @cates = Manage::PostCate.sort(cons)
+		render :post_cates
+	end
 end

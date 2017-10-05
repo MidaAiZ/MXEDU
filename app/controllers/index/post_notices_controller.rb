@@ -3,7 +3,7 @@ class Index::PostNoticesController < IndexController
 	before_action :set_notice
 
 	def show
-
+		@notice.read!
 	end
 
 	private
