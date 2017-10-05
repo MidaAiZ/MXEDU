@@ -11,7 +11,7 @@ class Index::PostsController < IndexController
     cons = set_rec_cons params.slice(:content, :school, :cate, :tag)
     nonpaged_posts = Index::Post.sort(cons).published.hot
     @posts = nonpaged_posts.page(page).per(count).includes(:user, :cate)
-    if page.to_i == 1
+    if page.to_i == 1 && !params[:search]
         @posts = Index::Post.top.hot + @posts
         get_notices unless params["dl"] # 公告
     end
