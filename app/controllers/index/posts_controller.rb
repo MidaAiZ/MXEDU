@@ -10,7 +10,7 @@ class Index::PostsController < IndexController
 	page = params[:page] || 1
     cons = set_rec_cons params.slice(:content, :school, :cate, :tag)
     nonpaged_posts = Index::Post.sort(cons).published.hot
-    @posts = nonpaged_posts.page(page).per(count).includes(:cate)
+    @posts = nonpaged_posts.page(page).per(count).includes(:user, :cate)
     if page.to_i == 1
         @posts = Index::Post.top.hot + @posts
         get_notices unless params["dl"] # 公告
@@ -129,7 +129,7 @@ class Index::PostsController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :content, :images)
+      params.require(:post).permit(:name, :content, :images, :tag, :cate_id)
     end
 
 	def set_cdts

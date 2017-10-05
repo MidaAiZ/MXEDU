@@ -1,5 +1,4 @@
 //= require tags-input/tagsinput.min
-//= require share/tagsinput-init
 
 $(function() {
 	$("#btn-show-table").click(function() {

@@ -11,7 +11,7 @@ class Index::UserCenterController < IndexController
 		count = params[:count] || 10
 		page = params[:page] || 1
 		nonpaged_posts = @user.posts
-		@posts = nonpaged_posts.page(page).per(count)
+		@posts = nonpaged_posts.page(page).per(count).includes(:cate, :user)
 		set_title("我的帖子")
 	    render(:_post_lists, layout: false) and return if params["dl"]
 	end

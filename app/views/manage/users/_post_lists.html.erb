@@ -12,6 +12,8 @@
 			</ul>
 		</div>
 
+		<span class="pull-right school-info"><%= post.school.name if post.school %></span>
+
 		<div class="avatar">
 			<%= image_tag user.avatar.mini %>
 		</div>
@@ -20,6 +22,7 @@
 			<p class="text-muted"><%= format_time post.created_at %></p>
 			<div class="text">
 				<%= link_to manage_post_path(post) do %>
+					<%= format_cate post.cate if post.cate %>
 					<%= post.content.html_safe %>
 				<% end %>
 			</div>

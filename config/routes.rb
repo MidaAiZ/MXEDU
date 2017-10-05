@@ -185,6 +185,9 @@ Rails.application.routes.draw do
         end
     end
 
+    # posts cate
+    resources :post_cates
+
     # post_comments
     resources :post_comments do
         resources :post_son_comments

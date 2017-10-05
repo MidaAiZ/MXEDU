@@ -56,8 +56,12 @@
                                 <label class="label label-success p-top">置顶</label>
                             </div>
                         <% end %>
+                        <span class="pull-right school-info"><%= post.school.name if post.school %></span>
+
                         <div class="ico">
-                            <%= image_tag @post.user.avatar.mini %>
+                            <%= link_to manage_user_path(@post.user) do %>
+                                <%= image_tag @post.user.avatar.mini %>
+                            <% end %>
                         </div>
                         <div class="u-intro">
                             <span class='u-name'><%= @post.user.name %></span>
@@ -65,6 +69,7 @@
                         </div>
                     </div>
                     <span class="auto-row p-content">
+                        <%= format_cate post.cate if @post.cate %>
                         <%= (@post.content || "").html_safe %>
                     </span>
                     <% if @post.images && @post.images.class.name == "Hash" %>

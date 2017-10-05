@@ -9,33 +9,41 @@
 						<%= (@post.content || "").html_safe %>
 					</div>
                     <%= hidden_field_tag "post[images]", '',  id: :post_images, "data-value" => @post.images.to_json %>
-                <% end %>
-				<div class="imgs-up-pane" id="img-pane">
-                    <div class="parentFileBox">
-        				<ul class="fileBoxUl img-gallery">
-                            <% if @post.images && @post.images.class.name == "Hash" %>
-                                <% $images = @post.images %>
-                                <% $images.keys.each_with_index do |c, i| %>
-                                    <li>
-                                        <div class="viewThumb t-center">
-											<div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
-												<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
-													<img src="" alt="" style=:display: none;>
-												</a>
-											</div>
-                                        </div>
-                                        <div class="diyDel" data-img-id="<%= c %>">
-                                            <i class="fa fa-times-circle"></i>
-                                        </div>
-                                    </li>
-                                <% end %>
-                            <% end %>
-                            <li class="upload-btn">
-                                <div id="img-upload"></div>
-            				</li>
-        				</ul>
-        			</div>
-				</div>
+					<div class="imgs-up-pane" id="img-pane">
+	                    <div class="parentFileBox">
+	        				<ul class="fileBoxUl img-gallery">
+	                            <% if @post.images && @post.images.class.name == "Hash" %>
+	                                <% $images = @post.images %>
+	                                <% $images.keys.each_with_index do |c, i| %>
+	                                    <li>
+	                                        <div class="viewThumb t-center">
+												<div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
+													<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+														<img src="" alt="" style=:display: none;>
+													</a>
+												</div>
+	                                        </div>
+	                                        <div class="diyDel" data-img-id="<%= c %>">
+	                                            <i class="fa fa-times-circle"></i>
+	                                        </div>
+	                                    </li>
+	                                <% end %>
+	                            <% end %>
+	                            <li class="upload-btn">
+	                                <div id="img-upload"></div>
+	            				</li>
+	        				</ul>
+	        			</div>
+					</div>
+
+					<div class="form-group" id='tags-pane' style="display: none;">
+						<div class="col-md-12">
+							<input id="tags_input" type="text" class="tags form-control" name="post[tag]" value="<%= @post.tag %>" placeholder="添加标签"/>
+						</div>
+					</div>
+
+				<% end %>
+
                 <!-- <%= form_tag images_path, id: :image_form do %>
                     <%= file_field_tag "image[link]", id: "img_input", accept: "image/*", multiple: true  %>
                 <% end %> -->
@@ -48,12 +56,15 @@
 						<li>
 							<a href="javascript: void(0)" id="open-img-btn"><i class="fa fa-camera"></i></a>
 						</li>
-						<!-- <li>
-							<a href="javascript: void(0)"><i class="fa  fa-location-arrow"></i></a>
-						</li> -->
 						<li>
 							<a href="javascript: void(0)" id="emoji-btn"><i class="fa fa-meh-o"></i></a>
 						</li>
+						<li>
+							<a href="javascript: void(0)" id="tags-btn"><i class="fa fa-tags"></i></a>
+						</li>
+						<!-- <li>
+							<a href="javascript: void(0)"><i class="fa fa-location-arrow"></i></a>
+						</li> -->
 					</ul>
 				</footer>
                 <!-- <%= form_tag images_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @post.id do %> -->
@@ -68,7 +79,9 @@
 
 <script type="text/javascript" src="/assets/diyUpload/js/webuploader.html5only.min.js"></script>
 <script type="text/javascript" src="/assets/diyUpload/js/diyUpload.js"></script>
+<%= javascript_include_tag "tags-input/tagsinput.min" %>
 <%= javascript_include_tag "share/emoji" %>
+
 <script type="text/javascript">
 
     /*
@@ -130,4 +143,11 @@
             console.log($("#post_images").data("value"))
         }
     });
+
+	$(function() {
+		$("#tags-btn").on("click", function() {
+			$("#tags-pane").show();
+		})
+		$('#tags_input').tagsInput({width:'auto'});
+	})
 </script>

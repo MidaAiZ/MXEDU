@@ -37,7 +37,7 @@ class Manage::UsersController < ManageController
 		count = params[:count] || 10
 		page = params[:page] || 1
 		nonpaged_posts = @user.posts
-		@posts = nonpaged_posts.page(page).per(count)
+		@posts = nonpaged_posts.page(page).per(count).includes(:cate, :school)
 	    render(:_post_lists, layout: false) and return if params["dl"]
 	end
 
@@ -52,6 +52,6 @@ class Manage::UsersController < ManageController
 	end
 
 	def set_select_cache
-		@schools = Manage::School.all
+		@schools = Manage::School.where(id: @user.school_id) + Manage::School.where.not(id: @user.school_id).limit(7)
 	end
 end

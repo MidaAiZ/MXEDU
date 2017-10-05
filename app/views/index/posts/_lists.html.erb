@@ -35,6 +35,7 @@
 				</div>
 				<%= link_to post_path(post), class: "auto-row p-content" do %>
 					<span class="">
+                        <%= format_cate post.cate if post.cate %>
 						<%= (post.content || "").html_safe %>
 					</span>
 				<% end %>
@@ -52,6 +53,10 @@
 						<% end %>
 					</div>
 				<% end %>
+                <div class="tags-pane post-tag">
+                    <%= post.tag %>
+                </div>
+
 				<div class="p-footer">
 					<div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
 					<div class="coments">

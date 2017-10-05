@@ -14,6 +14,7 @@
 //= require bootstrap
 //= require nicescroll
 //= require share/loading
+//= require share/tagsinput-init
 
 (function() {
     "use strict";

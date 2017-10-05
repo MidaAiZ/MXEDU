@@ -33,7 +33,9 @@
                             </div>
                         <% end %>
                         <div class="ico">
-                            <%= image_tag @post.user.avatar.mini %>
+                            <%= link_to v_ucenter_posts_path(@post.user_id) do %>
+                                <%= image_tag @post.user.avatar.mini %>
+                            <% end %>
                         </div>
                         <div class="u-intro">
                             <span class='u-name'><%= @post.user.nickname || "#{@post.user.name.slice(0, 1)}同学" %></span>
@@ -41,6 +43,7 @@
                         </div>
                     </div>
                     <span class="auto-row p-content">
+                        <%= format_cate @post.cate if @post.cate %>
                         <%= (@post.content || "").html_safe %>
                     </span>
                     <% if @post.images && @post.images.class.name == "Hash" %>
@@ -55,8 +58,12 @@
                             <% end %>
                         </div>
                     <% end %>
+                    <div class="tags-pane post-tag">
+                        <%= @post.tag %>
+                    </div>
                 </div>
             </div>
+
             <div class="p-footer info <%= 'm-b-40' unless @comments.any? %>">
                 <div class="readtimes">浏览 <span><%= @post.readtimes || 0 %></span></div>
                 <div class="thumbs">赞 <span><%= @post.thumbs_count || 0 %></span></div>

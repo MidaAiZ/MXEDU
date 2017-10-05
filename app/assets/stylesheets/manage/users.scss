@@ -12,6 +12,18 @@ table {
 	}
 }
 
+.form-signin .cdt-select {
+	.cdt-input input{
+		margin-bottom: 5px;
+	}
+}
+
+.school-info {
+	font-size: 8px;
+	color: #c0c0c0;
+	margin-top: -5px;
+}
+
 @media screen and (max-width: 768px) {
 	section .wrapper {
 		margin-top: 15px;

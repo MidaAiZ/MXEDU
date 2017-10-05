@@ -34,8 +34,8 @@ class Index::Post < ApplicationRecord
 	scope :published, -> { rewhere(state: self.publish_state) }
 	scope :deleted, -> { rewhere(state: self.del_state) }
 	scope :forbidden, -> { rewhere(state: self.forbid_state) }
-	scope :with_del, -> { (rewhere.not(state: self.forbid_state)) }
-	scope :with_forbid, -> { (unscope(where: :state)) }
+	scope :with_del, -> { unscope(where: :state).where.not(state: self.forbid_state) }
+	scope :with_forbid, -> { unscope(where: :state) }
 	scope :with_all, -> { unscope(where: :state) }
 	scope :hot, -> { reorder(updated_at: :DESC) } # 热门排序
 	scope :top, -> { rewhere(state: self.top_state) } #置顶贴

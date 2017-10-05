@@ -1,4 +1,3 @@
-//= require share/tagsinput-init
 
 function filesize(size) {
   var string;

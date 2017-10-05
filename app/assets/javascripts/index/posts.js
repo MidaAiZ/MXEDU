@@ -57,7 +57,8 @@ function submitPost(url) {
 		dataType: "JSON",
 		data: {
 			"post[content]": $form.find("#post-content").html(),
-			"post[images]": $form.find("#post_images").data("value")
+			"post[images]": $form.find("#post_images").data("value"),
+			"post[tag]": $form.find("#tags_input").val()
 		},
 		// contentType: false,
 		// processData: false,

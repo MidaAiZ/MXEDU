@@ -10,10 +10,10 @@ class Manage::PostsController < ManageController
 	page = params[:page] || 1
 	cons = params.slice(:content, :school, :cate, :tag)
     if page.to_i == 1
-        @top_posts = Index::Post.top.includes(:school, :cate)
+        @top_posts = Index::Post.top.includes(:user, :school, :cate)
     end
 	nonpaged_posts = Index::Post.sort(cons).published
-	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
+	@posts = nonpaged_posts.page(page).per(count).includes(:user, :school, :cate)
 	set_cdts
     render(:_lists, layout: false) and return if params["dl"]
   end
@@ -23,7 +23,7 @@ class Manage::PostsController < ManageController
   	page = params[:page] || 1
   	cons = params.slice(:content, :school, :cate, :tag)
   	nonpaged_posts = Index::Post.sort(cons).deleted
-  	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
+  	@posts = nonpaged_posts.page(page).per(count).includes(:user, :school, :cate)
   	set_cdts
 	@type = :deleted
 	render :index
@@ -34,7 +34,7 @@ class Manage::PostsController < ManageController
   	page = params[:page] || 1
   	cons = params.slice(:content, :school, :cate, :tag)
   	nonpaged_posts = Index::Post.sort(cons).forbidden
-  	@posts = nonpaged_posts.page(page).per(count).includes(:school, :cate)
+  	@posts = nonpaged_posts.page(page).per(count).includes(:user, :school, :cate)
   	set_cdts
 	@type = :forbidden
 	render :index

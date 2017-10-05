@@ -65,7 +65,7 @@ class Manage::ProductCatesController < ManageController
         format.json { head :no_content }
       else
         format.html { redirect_to product_cates_url, notice: '删除失败,该分类已经绑定相关资料', status: 422 }
-        format.json { render json: { error: '删除失败,该分类已经绑定相关资料' }, status: 422 }
+        format.json { render json: { error: '删除失败,该分类已经绑定相关产品产品' }, status: 422 }
       end
     end
   end

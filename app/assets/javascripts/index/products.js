@@ -1,4 +1,3 @@
-//= require share/tagsinput-init
 
 $(function() {
 	// var type = getQueryString('type');

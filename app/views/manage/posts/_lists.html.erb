@@ -34,6 +34,7 @@
                             <label class="label label-success p-top">置顶</label>
                         </div>
                     <% end %>
+                    <span class="pull-right school-info"><%= post.school.name if post.school %></span>
 
 					<div class="ico">
                         <%= link_to manage_user_path(post.user) do %>
@@ -47,6 +48,7 @@
 				</div>
 				<%= link_to manage_post_path(post), class: "auto-row p-content" do %>
 					<span class="">
+                        <%= format_cate post.cate if post.cate %>
 						<%= (post.content || "").html_safe %>
 					</span>
 				<% end %>
@@ -64,6 +66,9 @@
 						<% end %>
 					</div>
 				<% end %>
+                <div class="tags-pane post-tag">
+                    <%= post.tag %>
+                </div>
 				<div class="p-footer">
 					<div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
 					<div class="coments">

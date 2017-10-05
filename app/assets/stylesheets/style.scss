@@ -7,6 +7,7 @@ Author: ThemeBucket
 @import 'bootstrap-reset';
 @import 'jquery-ui-1.10.3.css';
 @import '/assets/css/font-awesome.min.css';
+@import "tags-input/tagsinput";
 
 html {
     overflow-x: hidden;
@@ -2657,7 +2658,7 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 
 
 .widget-container .step {
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 50px;
 }
@@ -2685,7 +2686,6 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 
 .step input, .step textarea, .step select, .widget-content label.checkbox, .widget-content label.radio {
     margin-left: 0 !important;
-    padding-left: 0;
 }
 
 .widget-content label.checkbox input, .widget-content label.radio input {
@@ -5063,10 +5063,24 @@ li.flex {
 
 .p-top {
     position: relative;
-    top: -2px;
+    top: -4px;
 }
 
 .label {
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+.tags-pane.post-tag {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: -3px;
+    .tag {
+        // float: right;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        border: 0;
+        margin-left: 3px;
+        margin-bottom: 0px;
+    }
 }
