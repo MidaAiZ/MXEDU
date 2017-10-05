@@ -26,7 +26,7 @@ class Index::PostsController < IndexController
 
   def hots #热门
     cons = set_rec_cons
-  	@posts = Index::Post.state_ok.sort(cons).limit(20)
+  	@posts = Index::Post.sort(cons).state_ok.limit(20)
   end
 
   # GET /index/posts/1
