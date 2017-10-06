@@ -52,6 +52,23 @@
 	.p-footer {
 		border-top: 0;
 	}
+	.album.gray-box {
+		background-color: #f6f6f6;
+		word-wrap: break-word;
+		border-radius: 2px;
+		padding: 5px;
+		margin-top: 5px;
+		a {
+			color: #7a7676;
+		}
+	}
+	.avatar.mini img{
+		width: 40px;
+		height: 40px;
+	}
+	.activity-desk.narrow {
+		margin-left: 55px;
+	}
 }
 
 @media screen and (max-width: 768px) {

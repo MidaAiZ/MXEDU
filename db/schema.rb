@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005040235) do
+ActiveRecord::Schema.define(version: 20171006082116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,19 @@ ActiveRecord::Schema.define(version: 20171005040235) do
     t.jsonb "images"
     t.index ["post_id"], name: "index_post_comments_on_post_id"
     t.index ["user_id"], name: "index_post_comments_on_user_id"
+  end
+
+  create_table "index_post_msgs", force: :cascade do |t|
+    t.string "msg"
+    t.integer "state", default: 0
+    t.bigint "receiver_id"
+    t.bigint "sender_id"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "uniq_key"
+    t.datetime "created_at"
+    t.index ["receiver_id"], name: "index_post_msgs_on_receiver_id"
+    t.index ["resource_id", "resource_type"], name: "index_post_msgs_on_rsc_id_type"
   end
 
   create_table "index_post_son_comments", force: :cascade do |t|

@@ -22,9 +22,9 @@
 			</li>
 			<% if session[:user_id] %>
 				<li>
-					<%= link_to "", role: :msg do %>
+					<%= link_to "#{ucenter_post_msgs_path}?navBottom=true", role: :msg do %>
 						<i class='fa fa-comments'></i>
-						<span>消息</span>
+						<span>消息<span id='msg-count'></span></span>
 					<% end %>
 				</li>
 				<li>
@@ -54,5 +54,21 @@
 	$(function() {
 		var activeItem = $(".nav-item").data("active");
 		$(".nav-item").find("[role=" + activeItem + "]").addClass("active");
+	})
+
+	// 加载未读消息数量
+	$(function() {
+		$.ajax({
+			url: "post_msgs/unread/counts",
+			type: "get",
+			success: function(res) {
+				if (res.count > 0) {
+					$("#msg-count").html('<span class="badge">'+ res.count +'</span>')
+				}
+				console.log(res.count)
+			},
+			error: function() {
+			}
+		})
 	})
 </script>

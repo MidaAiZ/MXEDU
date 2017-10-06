@@ -1,0 +1,38 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li class='t-center'>
+            <span>我的消息</span>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<!-- page heading end-->
+
+<!--body wrapper start -->
+<div class="wrapper n-m-t">
+
+    <div class="row">
+        <div class="col-md-8 col-xs-12 col-md-offset-2">
+			<div class="dropload" data-url="<%= ucenter_post_msgs_path %>">
+	            <div class="panel">
+	                <div class="panel-body" >
+						<ul class="activity-list blog" id="lists">
+							<%= render 'post_msg_lists', user: @user %>
+						</ul>
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% if params[:navBottom] %>
+    <%= render '/index/posts/bt_nav', active: :msg %>
+<% end %>
+
+<%= stylesheet_link_tag "share/lightbox" %>
+<%= javascript_include_tag "share/lightbox" %>
+<%= stylesheet_link_tag "share/dropload" %>
+<%= javascript_include_tag "share/dropload" %>

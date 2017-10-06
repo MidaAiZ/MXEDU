@@ -13,6 +13,7 @@
 			padding-left: 0;
 			margin: 0;
 			li {
+				position: relative;
 				list-style: none;
 				display: inline-block;
 				width: 20%;
@@ -56,6 +57,14 @@
 					}
 				}
 			}
+		}
+
+
+		.badge {
+		    position: absolute;
+		    right: 5px;
+		    top: 5px;
+			background: #ff4747;
 		}
 	}
 	.nav-space {

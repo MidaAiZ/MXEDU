@@ -16,6 +16,10 @@ class Index::PostComment < ApplicationRecord
 			  foreign_key: :post_cmt_id,
 			  dependent: :destroy
 
+    has_many :msgs, as: :resource,
+			 class_name: 'Index::PostMsg'
+
+
     validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 5000, too_long: '评论内容最大长度为%{count}' }
 
 	scope :hot, -> { order(thumbs_count: :DESC) }
@@ -28,6 +32,7 @@ class Index::PostComment < ApplicationRecord
 			ApplicationRecord.transaction do # 出错将回滚
 				self.save!
 				post.update! comments_count: ((post.comments_count || 0) + 1)
+				Index::PostMsg._create user, post, self.content, id
 			end
 		rescue
 			return false
@@ -39,6 +44,7 @@ class Index::PostComment < ApplicationRecord
 		ApplicationRecord.transaction do # 出错将回滚
 			self.destroy!
 			self.post.update! comments_count: (post.comments_count - 1)
+			Index::PostMsg._delete user, post, id
 		end
 	end
 

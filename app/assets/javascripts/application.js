@@ -213,7 +213,9 @@ $(function() {
 
     $("body").on("click", "[role=delete-confirm]", function() {
         var $this = $(this);
-        if(!confirm($this.data("info"))) return false;
+        if ($this.data("info")) {
+            if(!confirm($this.data("info"))) return false;
+        }
         $.ajax({
             url: $this.data("href"),
             type: $this.data("method"),

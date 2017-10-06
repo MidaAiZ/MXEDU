@@ -68,6 +68,10 @@ Rails.application.routes.draw do
 
         get 'posts' => 'user_center#posts'
 
+        get 'post_msgs' => 'user_center#post_msgs'
+        get 'post_msgs/unread/counts' => 'user_center#unread_post_msgs_count'
+        delete 'post_msgs/:id' => 'user_center#delete_post_msg', as: :delete_post_msg
+
         # orders
         get 'orders' => 'user_center#orders'
         get 'orders/:id' => 'user_center#order'
