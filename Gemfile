@@ -73,6 +73,12 @@ gem "wysiwyg-rails"
 #日期选择插件
 gem 'bootstrap-datepicker-rails'
 
+# 缓存以及定时器依赖
+gem "redis"
+gem "redis-rails"
+gem 'redis-namespace'
+gem 'redis-rack-cache'
+
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano-rails'
