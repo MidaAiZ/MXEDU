@@ -50,6 +50,11 @@
             </div>
             <div class="space15"></div>
             <%= render "cdts" unless params[:pjax] == 'true' %>
+            <% if params[:search] %>
+                <div style="padding-left: 15px; padding-top: 15px;">
+                    搜索"<%= params[:name] || params[:tag] %>"：
+                </div>
+            <% end %>
             <div id="pjax-replace">
                 <% cache @products.cache_key, expires_in: 2.minutes do %>
                     <div class="show-block">

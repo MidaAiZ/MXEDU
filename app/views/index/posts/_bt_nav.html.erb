@@ -1,0 +1,58 @@
+<%= stylesheet_link_tag "share/bt-nav" %>
+<div class="nav-space"></div>
+<div class="nav bt-nav">
+		<ul class="nav-item" data-active="<%= active %>">
+			<li>
+				<%= link_to posts_path, role: :home do %>
+					<i class='fa fa-home'></i>
+					<span>首页</span>
+				<% end %>
+			</li>
+			<li>
+				<%= link_to search_posts_path, role: :search do %>
+					<i class='fa fa-search'></i>
+					<span>搜索</span>
+				<% end %>
+			</li>
+
+			<li class='new'>
+				<%= link_to new_post_path do %>
+					<i class='fa'>+</i>
+				<% end %>
+			</li>
+			<% if session[:user_id] %>
+				<li>
+					<%= link_to "", role: :msg do %>
+						<i class='fa fa-comments'></i>
+						<span>消息</span>
+					<% end %>
+				</li>
+				<li>
+					<%= link_to "#{ucenter_posts_path}?navBottom=true", role: :mine do %>
+						<i class='fa fa-user'></i>
+						<span>我的</span>
+					<% end %>
+				</li>
+			<% else %>
+				<li>
+					<%= link_to login_path, class: "new", "data-toggle" => "modal", "data-target" => "#loginModal" do %>
+						<i class='fa fa-comments'></i>
+						<span>消息</span>
+					<% end %>
+				</li>
+				<li>
+					<%= link_to login_path, class: "new", "data-toggle" => "modal", "data-target" => "#loginModal" do %>
+						<i class='fa fa-user'></i>
+						<span>我的</span>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var activeItem = $(".nav-item").data("active");
+		$(".nav-item").find("[role=" + activeItem + "]").addClass("active");
+	})
+</script>

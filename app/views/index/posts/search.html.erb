@@ -1,11 +1,8 @@
 <!-- page heading start-->
 <div class="page-heading">
     <ul class="breadcrumb">
-        <li>
-            <a href="/posts">校园BBS</a>
-        </li>
-        <li>
-            <a href="#">搜索</a>
+        <li class='t-center'>
+            <a href="javascript:void(0)" class='pull-left' role='back'><<返回</a>
         </li>
     </ul>
 </div>
@@ -39,11 +36,13 @@
     </div>
 </div>
 
-<div class="new-btn-pane">
+<%= render 'bt_nav', active: :search %>
+
+<!-- <div class="new-btn-pane">
     <%= link_to new_post_path, class: "new" do %>
         +
     <% end %>
-</div>
+</div> -->
 
 <%= stylesheet_link_tag "share/flowtag" %>
 <%= javascript_include_tag "share/flowtag" %>

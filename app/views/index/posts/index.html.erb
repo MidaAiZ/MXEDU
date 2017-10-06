@@ -1,5 +1,5 @@
 <!-- page heading start-->
-<div class="page-heading">
+<div class="page-heading pc-only">
     <ul class="breadcrumb">
         <li>
             <a href="/">首页</a>
@@ -12,7 +12,7 @@
 <!-- page heading end-->
 
 <!--body wrapper start-->
-<div class="wrapper">
+<div class="wrapper phone-mtop10">
     <div class="row blog">
         <div class="col-md-8">
             <div class="row">
@@ -26,6 +26,7 @@
             </div>
 
             <% if params[:search] %>
+                <span class='pull-left' role='back' style="margin-right: 10px; margin-left: 10px;"><<返回</span>
                 <div style="padding-left: 15px; padding-bottom: 15px;">
                     搜索"<%= params[:name] || params[:tag] %>"：
                 </div>
@@ -179,7 +180,9 @@
     </div>
 </div>
 
-<div class="new-btn-pane">
+<%= render 'bt_nav', active: :home %>
+
+<!-- <div class="new-btn-pane">
     <%= link_to search_posts_path, class: "search" do %>
         <i class="fa fa-search"></i>
     <% end %>
@@ -192,7 +195,7 @@
             <i class="fa">+</i>
         <% end %>
     <% end %>
-</div>
+</div> -->
 
 <% unless session[:user_id] %>
     <script>

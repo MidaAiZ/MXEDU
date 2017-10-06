@@ -31,6 +31,10 @@
 	</div>
 </div>
 
+<% if params[:navBottom] %>
+    <%= render '/index/posts/bt_nav', active: :mine %>
+<% end %>
+
 <%= stylesheet_link_tag "share/lightbox" %>
 <%= javascript_include_tag "share/lightbox" %>
 <%= stylesheet_link_tag "share/dropload" %>

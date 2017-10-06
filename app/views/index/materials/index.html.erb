@@ -18,6 +18,12 @@
 <div class="wrapper n-p-t">
     <div class="directory-info-row">
         <%= render 'cdts' unless params[:pjax] == 'true' %>
+        <% if params[:search] %>
+            <div style="padding-left: 15px;">
+                搜索"<%= params[:name] || params[:tag] %>"：
+            </div>
+        <% end %>
+
         <div class="dropload"  data-count=20 data-url="<%= request.fullpath %>">
             <div class="row" id="pjax-replace">
                 <div id="lists">

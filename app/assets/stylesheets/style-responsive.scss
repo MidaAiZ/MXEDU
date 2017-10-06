@@ -6,12 +6,28 @@
     .page-heading {
         padding-bottom: 0px;
     }
+
+    .phone-only {
+        display: none;
+    }
+
+    .pc-only {
+        display: inline-block;
+    }
 }
 
 @media screen and (max-width: 768px) {
 
     body {
         position: relative;
+    }
+
+    .phone-only {
+        display: inline-block;
+    }
+
+    .pc-only {
+        display: none;
     }
 
     .left-side {
@@ -88,6 +104,9 @@
     }
     .col-md-0 {
         display: inline-block;
+    }
+    .phone-mtop10 {
+        margin-top: 10px;
     }
 }
 

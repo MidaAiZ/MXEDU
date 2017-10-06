@@ -24,6 +24,11 @@
         <div class="col-sm-12 dropload" data-url="<%= request.fullpath %>" data-count=20>
             <section class="panel">
                 <%= render "cdts" unless params[:pjax] == 'true' %>
+                <% if params[:search] %>
+                    <div style="padding-left: 15px;">
+                        搜索"<%= params[:name] || params[:tag] %>"：
+                    </div>
+                <% end %>
                 <div class="panel-body">
                     <div id="pjax-replace">
                         <div class="show-block">

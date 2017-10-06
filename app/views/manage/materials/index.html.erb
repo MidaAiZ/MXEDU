@@ -46,6 +46,11 @@
         <%= render "cdts" unless params[:pjax] == 'true' %>
     </div>
     <div class="directory-info-row">
+        <% if params[:search] %>
+            <div style="padding-left: 15px; padding-bottom: 15px">
+                搜索"<%= params[:name] || params[:tag] %>"：
+            </div>
+        <% end %>
         <div id="pjax-replace">
             <% cache @materials.cache_key, expires_in: 2.minutes do %>
                 <div class="show-block">

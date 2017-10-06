@@ -40,9 +40,9 @@ $(function() {
         var $this = $(this);
         var value = $this.find("input").val();
         if (value)
-            window.location = window.location.pathname + '?cdts=false&school=NONE&name=' + value + '&tag=' + value;
+            window.location = window.location.pathname + '?search=true&cdts=false&school=NONE&name=' + value + '&tag=' + value;
         else
-            window.location = window.location.pathname + '?cdts=false&school=NONE';
+            alert("请输入搜索关键词!");
         return false;
     });
 
