@@ -1,5 +1,5 @@
 $(function() {
-	$(".dropload").on("click", "[role=thumb]", function() {
+	$("body").on("click", "[role=thumb]", function() {
 		if ($(this).hasClass("active")) {
 			thumbCancel($(this));
 		} else {

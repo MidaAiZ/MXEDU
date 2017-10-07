@@ -58,6 +58,14 @@ h1, h2, h3, h4, h5 {
     padding-top: 10px;
 }
 
+.cmt-m-b {
+    margin-bottom: 14px;
+}
+
+.m-btm-40 {
+	margin-bottom: 40px;
+}
+
 hr {
     border-color: #ddd;
 }
@@ -5044,7 +5052,7 @@ li.flex {
         padding: 10px 3px;
         i.fa {
             padding-right: 5px;
-            font-size: 1.2em;
+            font-size: 1.25em;
             cursor: pointer;
         }
         &, a {

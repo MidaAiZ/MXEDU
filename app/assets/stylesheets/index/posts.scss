@@ -111,12 +111,15 @@
 	}
 }
 
-.m-b-40 {
-	margin-bottom: 40px;
-}
-
 .fix-btm {
 	z-index: 100000;
+	svg {
+		width: 1.2em;
+		height: 1.2em;
+		margin-top: 3px;
+		position: relative;
+		top: 2px;
+	}
 }
 
 .new-btn-pane {
@@ -169,12 +172,17 @@ form div.tagsinput {
 		width: 100%;
 		&.p-footer > div {
 			float: right;
+			margin-bottom: -3px;
+		}
+		.share a {
+			position: relative;
+			top: -4px;
 		}
 	}
 }
 
 @media screen and (min-width: 769px) {
-	.fix-btm {
+	.p-footer.fix-btm {
 		position: fixed;
 		left: 32%;
 		bottom: 8%;
@@ -182,10 +190,22 @@ form div.tagsinput {
 		width: auto;
 		border: 0;
 		box-shadow: 1px 1px 10px #f4f4f4;
+		border: 1px solid #575fde;
 		border-radius: 5px;
+
 		&.p-footer > div {
 			float: right;
 			min-width: 100px;
+			margin-bottom: -3px;
+		}
+
+		a {
+			color: #6e6e6e;
+		}
+
+		.share a {
+			position: relative;
+			top: -4px;
 		}
 	}
 	.new-btn-pane {

@@ -27,6 +27,7 @@
 <script type="text/javascript">
 	//全局变量，动态的文章ID
 	var ShareURL = "";
+
 	//绑定所有分享按钮所在A标签的鼠标移入事件，从而获取动态ID
 	$(function () {
 		$(".bdsharebuttonbox a").mouseover(function () {
@@ -53,22 +54,33 @@
 			onBeforeClick: SetShareUrl,
             bdText : $(".p-content").text().trim(),
 			bdDesc : '帖子分享--' + document.title,
-			bdUrl : location.href + "?share=true",
-			bdPic : location.host + $(".img-gallery").find("img").attr("src")
+			bdUrl : getShareUrl(),
+            bdSnsKey: {},
+			bdMini: 2,
+            bdMiniList: false,
+            bdPic : getShareImg(),
+            bdStyle: 0,
+            bdSize: 24
 		},
          "share": {
-        },
-        image : [
-            //此处放置图片分享设置
-            {
-                viewType: "list",
-                viewPos: "top",
-                viewColor: "black",
-                viewSize: "16",
-                viewList: ['qzone','tsina','weixin', 'sqq','tqq','renren']
-            }
-		]
+        }
 	};
+
+    function getShareImg() {
+        var img_path = $(".img-gallery").find("img").eq(0).attr("src");
+        var shareImg = null;
+        if (img_path) shareImg = location.host + img_path;
+        console.log(shareImg)
+        return shareImg;
+    }
+
+    function getShareUrl() {
+        var search = location.search;
+        if (search) var url = location.href + "&share=true"
+        else var url = location.href + "?share=true"
+        console.log(url)
+        return url;
+    }
 	//插件的JS加载部分 // MDZZ 有广告
 	// with (document) 0[(getElementsByTagName('head')[0] || body)
 	// 	.appendChild(createElement('script'))

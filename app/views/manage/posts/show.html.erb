@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="p-footer info <%= 'm-b-40' unless @comments.any? %>">
+            <div class="p-footer info <%= 'cmt-m-b' unless @comments.any? %>">
                 <div class="readtimes">浏览 <span><%= @post.readtimes || 0 %></span></div>
                 <div class="thumbs">赞 <span><%= @post.thumbs_count || 0 %></span></div>
                 <div class="coments">评论 <span><%= @post.comments_count || 0%></span></div>
