@@ -119,11 +119,8 @@
         }
         .activity-desk {
             margin-left: 55px;
-            .text, .album {
+            > div, > a {
                 margin-left: -55px;
-            }
-            .text {
-                //  padding-top: 10px;
             }
         }
     }

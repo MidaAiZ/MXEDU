@@ -145,7 +145,7 @@
 			//按钮容器;
 			pick:{
 				id:objId,
-				label:"点击选择图片"
+				label:'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"><metadata>添加图片</metadata><g><path d="M990,518.1H554.4V990h-72.6V518.1H10v-72.6h471.9V10h72.6v435.6H990V518.1z" style="fill:#DDD"></path></g></svg>'
 			},
             uploadButton: null,
 			//类型限制;
@@ -180,7 +180,7 @@
 			// chunkSize:512 * 1024,
 			//最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
 			fileNumLimit:50,
-			fileSizeLimit:500000 * 1024,
+			fileSizeLimit:5000000 * 1024,
 			fileSingleSizeLimit:50000 * 1024,
 		};
 	}

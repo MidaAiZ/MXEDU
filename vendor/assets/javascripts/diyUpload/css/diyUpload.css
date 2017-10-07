@@ -197,6 +197,15 @@
 	.parentFileBox>.fileBoxUl>li.upload-btn * {
 		padding-bottom: 98%;
 	}
+	.webuploader-pick {
+		padding: 30px;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	.webuploader-pick {
+		padding: 50px;
+	}
 }
 
 @media screen and (max-width: 1199px) {
@@ -222,5 +231,11 @@
 	}
 	.parentFileBox>.fileBoxUl>li.upload-btn * {
 		padding-bottom: 97%;
+	}
+}
+
+@media screen and (max-width: 338px) {
+	.webuploader-pick {
+		padding: 15px;
 	}
 }

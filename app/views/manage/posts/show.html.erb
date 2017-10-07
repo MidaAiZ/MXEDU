@@ -56,7 +56,7 @@
                                 <label class="label label-success p-top">置顶</label>
                             </div>
                         <% end %>
-                        <span class="pull-right school-info"><%= post.school.name if post.school %></span>
+                        <span class="pull-right school-info"><%= @post.school.name if @post.school %></span>
 
                         <div class="ico">
                             <%= link_to manage_user_path(@post.user) do %>
@@ -84,6 +84,9 @@
                             <% end %>
                         </div>
                     <% end %>
+                    <div class="tags-pane post-tag">
+                        <%= @post.tag %>
+                    </div>
                 </div>
             </div>
             <div class="p-footer info <%= 'm-b-40' unless @comments.any? %>">
