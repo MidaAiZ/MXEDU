@@ -18,7 +18,7 @@ $(function() {
 
 	if ($("#comment-content").html() && $("#comment-content").html().trim() != "") $("#comment_submit").removeAttr("disabled");
 	$("#comment-content").on("input", function() {
-		if ($(this).html()) $("#comment_submit").removeAttr("disabled");
+		if ($(this).html() && $(this).text().trim().length) $("#comment_submit").removeAttr("disabled");
 		if (!$(this).html()) $("#comment_submit").attr("disabled", true);
 	})
 
@@ -52,7 +52,7 @@ function submitPost(url) {
 		type: "POST",
 		dataType: "JSON",
 		data: {
-			"comment[content]": $form.find("#comment-content").html(),
+			"comment[content]": $form.find("#comment-content").html().trim(),
 			"comment[images]": $form.find("#comment_images").data("value")
 		},
 		// contentType: false,

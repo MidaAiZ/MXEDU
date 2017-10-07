@@ -17,12 +17,13 @@ function thumbUp($ele) {
 		type: "POST",
 		dataType: "JSON",
 		success: function() {
-			var val = $ele.siblings("span").text();
-			if (!val || val == '') val = 0;
-			$ele.siblings("span").text(parseInt(val) + 1)
-			$ele.removeClass("fa-thumbs-o-up").addClass("active fa-thumbs-up");
+		},
+		error: function() {
+			showTip(null, 1000, "<i class='fa fa-exclamation text-notice'>操作失败</i>")
+			subThumb($ele);
 		}
 	})
+	addThumb($ele);
 }
 
 function thumbCancel($ele) {
@@ -32,11 +33,29 @@ function thumbCancel($ele) {
 		type: "delete",
 		dataType: "JSON",
 		success: function() {
-			var val = $ele.siblings("span").text();
-			$ele.siblings("span").text(parseInt(val) - 1)
-			$ele.removeClass("fa-thumbs-up active").addClass("fa-thumbs-o-up");
+		},
+		error: function() {
+			showTip("", 1000, "<i class='fa fa-exclamation text-notice'>操作失败</i>")
+			addThumb($ele);
 		}
 	})
+	subThumb($ele);
+}
+
+
+function addThumb($ele) {
+	var val = $ele.siblings("span").text();
+	if (!val || val == '') val = 0;
+	$ele.siblings("span").text(parseInt(val) + 1)
+	$ele.removeClass("fa-thumbs-o-up").addClass("active fa-thumbs-up");
+}
+
+function subThumb($ele) {
+	var val = $ele.siblings("span").text();
+	val = parseInt(val) - 1;
+	if (val < 0) val = 0;
+	$ele.siblings("span").text(val)
+	$ele.removeClass("fa-thumbs-up active").addClass("fa-thumbs-o-up");
 }
 
 function commentPost() {

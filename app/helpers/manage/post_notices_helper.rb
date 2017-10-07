@@ -2,13 +2,13 @@ module Manage::PostNoticesHelper
 	def get_notice_label type
 		case type
 		when '通知'
-			'label-success'
+			'text-success'
 		when '公告'
-			'label-info'
+			'text-info'
 		when '规章'
-			'label-danger'
+			'text-notice'
 		else
-			'label-primary'
+			'text-primary'
 		end
 	end
 end

@@ -116,9 +116,13 @@
 		      	}).appendTo(_this.div_loading);
 
 		     	//描述
-	        	_this.loading_discription = $('<p class="loading-discription txt-textOneRow"></p>').css({
-	        		color:opt.discColor,
-	        	}).html(opt.discription).appendTo(_this.div_loading);
+				if (opt.discription) {
+					_this.loading_discription = $('<p class="loading-discription txt-textOneRow"></p>').css({
+						color:opt.discColor,
+					}).html(opt.discription).appendTo(_this.div_loading);
+				} else {
+					_this.loading_title.css("margin-bottom", "0");
+				}
 
 	        	if(opt.type == 'origin'){
 	        		_this.loadingOrigin = $('<div class="div-loadingOrigin"><span></span></div><div class="div-loadingOrigin"><span></span></div><div class="div_loadingOrigin"><span></span></div><div class="div_loadingOrigin"><span></span></div><div class="div_loadingOrigin"><span></span></div>').appendTo(_this.loading);

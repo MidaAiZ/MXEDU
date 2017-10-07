@@ -55,7 +55,7 @@
 
 <%= render 'bt_nav', active: :home %>
 
-<!-- <div class="new-btn-pane">
+<div class="new-btn-pane pc-only">
     <%= link_to search_posts_path, class: "search" do %>
         <i class="fa fa-search"></i>
     <% end %>
@@ -68,7 +68,7 @@
             <i class="fa">+</i>
         <% end %>
     <% end %>
-</div> -->
+</div>
 
 <% unless session[:user_id] %>
     <script>
@@ -82,4 +82,3 @@
 <%= stylesheet_link_tag "share/dropload" %>
 <%= javascript_include_tag "share/dropload" %>
 <%= javascript_include_tag "share/autoDot" %>
-<!-- <%= javascript_include_tag "dotdotdot/jquery.dotdotdot.min" %> -->

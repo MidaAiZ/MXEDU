@@ -1,5 +1,6 @@
 //= require ../share/posts
 //= require ../share/lightbox
+//= require ../share/tagsinput-init
 
 $(function() {
 	$("#post_form").on("submit", function(e) {
@@ -19,7 +20,7 @@ $(function() {
 
 	if ($("#post-content").html() && $("#post-content").html().trim() != "") $("#post_submit").removeAttr("disabled");
 	$("#post-content").on("input", function() {
-		if ($(this).html()) $("#post_submit").removeAttr("disabled");
+		if ($(this).html() && $(this).text().trim().length) $("#post_submit").removeAttr("disabled");
 		if (!$(this).html()) $("#post_submit").attr("disabled", true);
 	})
 
@@ -56,7 +57,7 @@ function submitPost(url) {
 		type: type,
 		dataType: "JSON",
 		data: {
-			"post[content]": $form.find("#post-content").html(),
+			"post[content]": $form.find("#post-content").html().trim(),
 			"post[images]": $form.find("#post_images").data("value"),
 			"post[tag]": $form.find("#tags_input").val()
 		},

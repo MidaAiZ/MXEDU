@@ -23,7 +23,7 @@ function showLoading(title, info, width) {
 
 function showTip(tip, interval, title) {
 	if (!title) title = "<i class='fa fa-lightbulb-o'>提示</i>";
-	if (!tip) tip = "hahaha";
+	// if (!tip) tip = "";
 	if (!interval) interval = 3000;
 	$('body').loading({
 		loadingWidth:240,
