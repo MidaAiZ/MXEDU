@@ -7,10 +7,6 @@ $(function() {
 		}
 	})
 
-	$("#lists").on("click mouseover", "[role=comment]", function(e) {
-		e.stopPropagation();
-	})
-
 	// 设置浏览量， 移动端同样支持，点击触发
 	$(".dropload").on("mouseover", ".post-pane", function() {
 		var $this = $(this);

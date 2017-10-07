@@ -36,7 +36,7 @@ class Index::PostsController < IndexController
     page = params[:page] || 1
     nonpaged_comments = @post.comments
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
-    @post.read!
+    @post.read! if params[:share]
 	set_title @post.name
   end
 

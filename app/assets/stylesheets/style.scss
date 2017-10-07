@@ -50,6 +50,10 @@ h1, h2, h3, h4, h5 {
     margin-top: 10px;
 }
 
+.mtop15 {
+    margin-top: 15px;
+}
+
 .ptop10 {
     padding-top: 10px;
 }
@@ -4992,6 +4996,7 @@ li.flex {
         color: #636363;
         display: block;
         padding: 0px 2px;
+        font-size: 16px;
         &:hover {
             text-decoration: none;
         }

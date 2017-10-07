@@ -70,10 +70,13 @@
                 <div class="coments">评论 <span><%= @post.comments_count || 0%></span></div>
             </div>
             <div class="p-footer fix-btm">
-                <div class="coments"><i class="fa <%= @post.has_thumb?(@user, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
-                <div class="thumbs"><%= link_to  new_post_post_comment_path(@post) do %>
+                <div class="thumbs"><i class="fa <%= @post.has_thumb?(@user, request.remote_ip) ? 'fa-thumbs-up active' : 'fa-thumbs-o-up' %>" data-action="<%= thumb_posts_path(@post) %>" role='thumb'>赞</i></div>
+                <div class="comments"><%= link_to  new_post_post_comment_path(@post) do %>
                     <i class="fa fa-comments-o" role='comment'>评论</i>
                     <% end %>
+                </div>
+                <div class="share"><i class='fa fa-share'></i>
+                    <a href="javascript: void(0)" data-toggle='modal' data-target='#shareModal'>分享</a>
                 </div>
             </div>
             <div id="comments" class="dropload" data-url="<%= post_post_comments_path(@post) %>">
@@ -97,3 +100,6 @@
 </style>
 <%= stylesheet_link_tag "share/dropload" %>
 <%= javascript_include_tag "share/dropload" %>
+
+<!-- 分享 -->
+<%= render "share" %>
