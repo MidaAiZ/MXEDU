@@ -1,6 +1,6 @@
 <% user ||= @visited_user %>
 <% @posts.each do |post| %>
-	<li>
+	<li class="post-pane" data-id="<%= post.id %>">
 		<div class="avatar">
 			<%= image_tag user.avatar.mini %>
 		</div>

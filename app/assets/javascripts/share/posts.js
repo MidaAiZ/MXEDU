@@ -1,5 +1,5 @@
 $(function() {
-	$("body").on("click", "[role=thumb]", function() {
+	$(".dropload").on("click", "[role=thumb]", function() {
 		if ($(this).hasClass("active")) {
 			thumbCancel($(this));
 		} else {
@@ -7,8 +7,22 @@ $(function() {
 		}
 	})
 
-	$("body").on("click", "[role=comment]", function() {
+	$("#lists").on("click mouseover", "[role=comment]", function(e) {
+		e.stopPropagation();
 	})
+
+	// 设置浏览量， 移动端同样支持，点击触发
+	$(".dropload").on("mouseover", ".post-pane", function() {
+		var $this = $(this);
+		if ($this.data("read")) return false;
+		$this.data("read", true)
+		$.ajax({
+			url: "/posts/" + $this.data("id") + "/read",
+			type: "POST",
+			success: function() {
+			}
+		})
+	});
 })
 
 function thumbUp($ele) {

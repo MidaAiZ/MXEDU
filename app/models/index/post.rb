@@ -81,6 +81,11 @@ class Index::Post < ApplicationRecord
 		self.update! state: publish_state
 	end
 
+	def read!
+		self.record_timestamps = false
+		self.update! readtimes: ((self.readtimes || 0) + 1)
+	end
+
 	def state_ok?
 		self.state.in? [publish_state, top_state]
 	end

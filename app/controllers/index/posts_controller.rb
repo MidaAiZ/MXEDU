@@ -1,7 +1,7 @@
 class Index::PostsController < IndexController
   before_action :check_login, except: [:new, :create, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :thumb_up, :thumb_cancel]
+  before_action :set_post, only: [:show, :edit, :update, :thumb_up, :thumb_cancel, :read]
 
   # GET /index/posts
   # GET /index/posts.json
@@ -36,8 +36,7 @@ class Index::PostsController < IndexController
     page = params[:page] || 1
     nonpaged_comments = @post.comments
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
-    @post.record_timestamps = false
-    @post.update readtimes: ((@post.readtimes || 0) + 1)
+    @post.read!
 	set_title @post.name
   end
 
@@ -121,6 +120,11 @@ class Index::PostsController < IndexController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def read
+    @post.read!
+    render json: { readtimes: @post.readtimes }
   end
 
   private

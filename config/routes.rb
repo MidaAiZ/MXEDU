@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         resources :post_comments
         collection do
             post '/:id/thumb' => 'posts#thumb_up', as: :thumb
+            post '/:id/read' => 'posts#read', as: :read
             delete '/:id/thumb' => 'posts#thumb_cancel'
             get 'search' => 'posts#search', as: :search
             get 'hots' => 'posts#hots'
