@@ -12,7 +12,6 @@ function lightboxInit() {
 if (!$.dataUpdatedCBs) $.dataUpdatedCBs = {};
 $.dataUpdatedCBs.lightboxInit = lightboxInit;
 
-
 $(function() {
     lightboxInit();
 })

@@ -32,7 +32,7 @@
 </div>
 
 <% if params[:navBottom] %>
-    <%= render '/index/posts/bt_nav', active: :mine %>
+    <%= render '/index/posts/bt_nav', active: :m %>
 <% end %>
 
 <%= stylesheet_link_tag "share/lightbox" %>
@@ -40,3 +40,4 @@
 <%= stylesheet_link_tag "share/dropload" %>
 <%= javascript_include_tag "share/dropload" %>
 <%= javascript_include_tag "share/posts" %>
+<%= javascript_include_tag "share/autoDot" %>

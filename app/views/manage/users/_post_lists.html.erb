@@ -20,10 +20,12 @@
 		<div class="activity-desk">
 			<span><%= user.nickname %></span>
 			<p class="text-muted"><%= format_time post.created_at %></p>
-			<div class="text">
+			<div class="text dot">
 				<%= link_to manage_post_path(post) do %>
-					<%= format_cate post.cate if post.cate %>
-					<%= post.content.html_safe %>
+					<span class="dot-collapse">
+						<%= format_cate post.cate if post.cate %>
+						<%= post.content.html_safe %>
+					</span>
 				<% end %>
 			</div>
 			<div class="album">

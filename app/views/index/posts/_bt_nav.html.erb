@@ -59,7 +59,7 @@
 	// 加载未读消息数量
 	$(function() {
 		$.ajax({
-			url: "post_msgs/unread/counts",
+			url: "/ucenter/post_msgs/unread/counts",
 			type: "get",
 			success: function(res) {
 				if (res.count > 0) {

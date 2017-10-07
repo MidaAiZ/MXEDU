@@ -33,8 +33,8 @@
 						<span class='p-time'><%= format_time post.created_at %></span>
 					</div>
 				</div>
-				<%= link_to post_path(post), class: "auto-row p-content" do %>
-					<span class="">
+				<%= link_to post_path(post), class: "auto-row p-content dot" do %>
+					<span class="dot-collapse">
                         <%= format_cate post.cate if post.cate %>
 						<%= (post.content || "").html_safe %>
 					</span>
@@ -60,7 +60,9 @@
                 <% end %>
 
 				<div class="p-footer">
-					<div class="readtimes"><i class="fa fa-eye"></i><span><%= post.readtimes %></span></div>
+					<div class="readtimes">
+                        <!-- <i class="fa fa-eye"></i><span><%= post.readtimes %></span> -->
+                    </div>
 					<div class="coments">
                         <%= link_to "#{post_path(post)}?#comments" do %>
                             <i class="fa fa-comments-o" role='comment'></i>

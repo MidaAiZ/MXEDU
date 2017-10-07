@@ -1,176 +1,177 @@
 <!-- page heading start-->
-        <!--<div class="page-heading">-->
-            <!--Page Tittle goes here-->
-        <!--</div>-->
-        <!-- page heading end-->
+<!--<div class="page-heading">-->
+    <!--Page Tittle goes here-->
+<!--</div>-->
+<!-- page heading end-->
 
-        <!--body wrapper start-->
-        <div class="wrapper">
+<!--body wrapper start-->
+<div class="wrapper">
 
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
             <div class="row">
-                <div class="col-md-4 col-xs-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="profile-pic text-center">
-                                        <a href="javascript:void(0);" id="cropfile">
-                                            <i class='fa fa-edit'></i>
-                                            <%= image_tag @user.avatar.thumb, alt: '用户头像', id: 'userAvatar', "data-id": @user.id %>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <ul class="p-info">
-                                        <li>
-                                            <div class="title">姓名</div>
-                                            <div class="desk"><%= @user.name %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">昵称</div>
-                                            <div class="desk"><%= @user.nickname %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">电话</div>
-                                            <div class="desk"><%= @user.phone %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">性别</div>
-                                            <div class="desk"><%= @user.sex %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">学校</div>
-                                            <div class="desk"><%= @user.school.name if @user.school %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">专业</div>
-                                            <div class="desk"><%= @user.major %></div>
-                                        </li>
-                                        <li>
-                                            <div class="title">年级</div>
-                                            <div class="desk"><%= @user.grade %></div>
-                                        </li>
-                                    </ul>
-									<%= link_to edit_user_url(@user), style: 'float: right' do %>
-									  <span>修改</span><i class='fa fa-pencil'></i>
-									<% end %>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states">
-                                    <div class="summary pull-left">
-                                        <h4>Total <span>Sales</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>$ 5,600</h3>
-                                    </div>
-                                    <div id="expense" class="chart-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states green-box">
-                                    <div class="summary pull-left">
-                                        <h4>Product <span>refund</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>160</h3>
-                                    </div>
-                                    <div id="pro-refund" class="chart-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-body p-states">
-                                    <div class="summary pull-left">
-                                        <h4>Total <span>Earning</span></h4>
-                                        <span>Monthly Summary</span>
-                                        <h3>$ 51,2600</h3>
-                                    </div>
-                                    <div id="expense2" class="chart-bar"></div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-12">
                     <div class="panel">
-                            <header class="panel-heading">
-                                我的帖子
-                                <span class="tools pull-right">
-                                    <!-- <a class="fa fa-chevron-down" href="javascript:;"></a> -->
-                                    <!-- <a class="fa fa-times" href="javascript:;"></a> -->
-                                 </span>
-                            </header>
-                            <div class="panel-body">
-                                <ul class="activity-list blog">
-                                    <%= render 'post_lists', user: @user %>
-                                </ul>
-                                <div class="more">
-                                    <%= link_to "查看更多>>", ucenter_posts_path, class: "t-center" %>
-                                </div>
+                        <div class="panel-body">
+                            <div class="profile-pic text-center">
+                                <a href="javascript:void(0);" id="cropfile">
+                                    <i class='fa fa-edit'></i>
+                                    <%= image_tag @user.avatar.thumb, alt: '用户头像', id: 'userAvatar', "data-id": @user.id %>
+                                </a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="p-info">
+                                <li>
+                                    <div class="title">姓名</div>
+                                    <div class="desk"><%= @user.name %></div>
+                                </li>
+                                <li>
+                                    <div class="title">昵称</div>
+                                    <div class="desk"><%= @user.nickname %></div>
+                                </li>
+                                <li>
+                                    <div class="title">电话</div>
+                                    <div class="desk"><%= @user.phone %></div>
+                                </li>
+                                <li>
+                                    <div class="title">性别</div>
+                                    <div class="desk"><%= @user.sex %></div>
+                                </li>
+                                <li>
+                                    <div class="title">学校</div>
+                                    <div class="desk"><%= @user.school.name if @user.school %></div>
+                                </li>
+                                <li>
+                                    <div class="title">专业</div>
+                                    <div class="desk"><%= @user.major %></div>
+                                </li>
+                                <li>
+                                    <div class="title">年级</div>
+                                    <div class="desk"><%= @user.grade %></div>
+                                </li>
+                            </ul>
+							<%= link_to edit_user_url(@user), style: 'float: right' do %>
+							  <span>修改</span><i class='fa fa-pencil'></i>
+							<% end %>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body p-states">
+                            <div class="summary pull-left">
+                                <h4>Total <span>Sales</span></h4>
+                                <span>Monthly Summary</span>
+                                <h3>$ 5,600</h3>
+                            </div>
+                            <div id="expense" class="chart-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body p-states green-box">
+                            <div class="summary pull-left">
+                                <h4>Product <span>refund</span></h4>
+                                <span>Monthly Summary</span>
+                                <h3>160</h3>
+                            </div>
+                            <div id="pro-refund" class="chart-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body p-states">
+                            <div class="summary pull-left">
+                                <h4>Total <span>Earning</span></h4>
+                                <span>Monthly Summary</span>
+                                <h3>$ 51,2600</h3>
+                            </div>
+                            <div id="expense2" class="chart-bar"></div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div class="panel">
+                    <header class="panel-heading">
+                        我的帖子
+                        <span class="tools pull-right">
+                            <!-- <a class="fa fa-chevron-down" href="javascript:;"></a> -->
+                            <!-- <a class="fa fa-times" href="javascript:;"></a> -->
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <ul class="activity-list blog">
+                            <%= render 'post_lists', user: @user %>
+                        </ul>
+                        <div class="more">
+                            <%= link_to "查看更多>>", ucenter_posts_path, class: "t-center" %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--body wrapper end-->
+    </div>
+</div>
+<!--body wrapper end-->
 
-        <%= stylesheet_link_tag "share/lightbox" %>
-        <%= javascript_include_tag "share/lightbox" %>
-        <%= javascript_include_tag "share/posts" %>
+<%= stylesheet_link_tag "share/lightbox" %>
+<%= javascript_include_tag "share/lightbox" %>
+<%= javascript_include_tag "share/posts" %>
 
 
-        <!-- 修改头像 -->
-        <div class="modal fade" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-          <div class="modal-dialog cropper">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <p class="modal-title" id="Label">修改头像</p>
-              </div>
-              <div class="editarea">
-                <div class="croparea">
-                  <span class="file-beauty btn btn-primary">
-                    <span class="glyphicon glyphicon-arrow-up">上传图片</span>
-                    <%= form_tag "", id: "cropForm" do %>
-                      <input type="file" name="avatar" class="cropable" id="inputFile" />
-                      <input id="posi_x" type="hidden" value="0" name="x"/>
-                      <input id="posi_y" type="hidden" value="0" name="y"/>
-                      <input id="img_width" type="hidden" value="200" name="width"/>
-                      <input id="img_height" type="hidden" value="200" name="height"/>
-                      <input id="img_rotate" type="hidden" value="0" name="rotate"/>
-                    <% end %>
-                  </span>
-                  <p id="alertType"></p>
-                  <div class="showpics">
-                    <%= image_tag @user.avatar, id: 'imagefile'  %>
-                  </div>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary" id="lrotate">
-                      <span class="glyphicon glyphicon-share-alt rotatey"></span>
-                    </button>
-                    <button type="button" class="btn btn-primary" id="rrotate">
-                      <span class="glyphicon glyphicon-share-alt"></span>
-                    </button>
-                  </div>
-                  <button type="button" class="btn btn-primary" id="reset">
-                    <span class="glyphicon glyphicon-repeat"></span>
-                  </button>
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" data-loading-text="更新中..." id="subcrop">确定</button>
-              </div>
-            </div>
+<!-- 修改头像 -->
+<div class="modal fade" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog cropper">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p class="modal-title" id="Label">修改头像</p>
+      </div>
+      <div class="editarea">
+        <div class="croparea">
+          <span class="file-beauty btn btn-primary">
+            <span class="glyphicon glyphicon-arrow-up">上传图片</span>
+            <%= form_tag "", id: "cropForm" do %>
+              <input type="file" name="avatar" class="cropable" id="inputFile" />
+              <input id="posi_x" type="hidden" value="0" name="x"/>
+              <input id="posi_y" type="hidden" value="0" name="y"/>
+              <input id="img_width" type="hidden" value="200" name="width"/>
+              <input id="img_height" type="hidden" value="200" name="height"/>
+              <input id="img_rotate" type="hidden" value="0" name="rotate"/>
+            <% end %>
+          </span>
+          <p id="alertType"></p>
+          <div class="showpics">
+            <%= image_tag @user.avatar, id: 'imagefile'  %>
           </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="lrotate">
+              <span class="glyphicon glyphicon-share-alt rotatey"></span>
+            </button>
+            <button type="button" class="btn btn-primary" id="rrotate">
+              <span class="glyphicon glyphicon-share-alt"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary" id="reset">
+            <span class="glyphicon glyphicon-repeat"></span>
+          </button>
+
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" data-loading-text="更新中..." id="subcrop">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_include_tag "share/autoDot" %>

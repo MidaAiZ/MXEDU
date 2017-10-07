@@ -77,7 +77,7 @@ class Index::User < ApplicationRecord
       validates :sex, length: { maximum: 2, too_long: '性别最长允许%{count}个字符' },
                     inclusion: %w( 男 女 男生 女生 ), allow_blank: true
 
-      default_scope { order('index_users.created_at DESC') }
+      default_scope { order(id: :DESC) }
       scope :new_user, ->() { limit(3) }
 
 end
