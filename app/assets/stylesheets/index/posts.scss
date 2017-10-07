@@ -111,7 +111,7 @@
 	}
 }
 
-.fix-btm {
+.p-footer.fix-btm {
 	z-index: 100000;
 	svg {
 		width: 1.2em;
@@ -119,6 +119,10 @@
 		margin-top: 3px;
 		position: relative;
 		top: 2px;
+	}
+
+	a {
+		color: #6e6e6e;
 	}
 }
 
@@ -190,17 +194,13 @@ form div.tagsinput {
 		width: auto;
 		border: 0;
 		box-shadow: 1px 1px 10px #f4f4f4;
-		border: 1px solid #575fde;
+		border: 1px solid #8c92ff;
 		border-radius: 5px;
 
 		&.p-footer > div {
 			float: right;
 			min-width: 100px;
 			margin-bottom: -3px;
-		}
-
-		a {
-			color: #6e6e6e;
 		}
 
 		.share a {
