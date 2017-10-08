@@ -4209,6 +4209,28 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 .blog .img-pane {
     padding-left: 2px;
     padding-right: 2px;
+    text-align: center;
+    * {
+        border: none;
+        outline: none;
+    }
+    .img-more {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        padding-top: 43%;
+        padding-bottom: 0;
+        font-size: 1.5em;
+        color: white;
+        background: rgba(0, 0, 0, .6);
+        z-index: 10;
+        &:hover {
+            font-size: 1.8em;
+            background: rgba(0, 0, 0, .4);
+        }
+    }
 }
 
 .blog .blog-img-wide img{
@@ -5090,6 +5112,10 @@ li.flex {
 	.fa-angle-down {
 		font-size: 18px;
 	}
+}
+
+.top-pane {
+	margin-left: 8px;
 }
 
 .p-top {

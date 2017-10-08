@@ -19,6 +19,10 @@ $(function() {
 			}
 		})
 	});
+
+	$(".dropload").on("click", ".img-more", function() {
+		location = $(this).data("url");
+	})
 })
 
 function thumbUp($ele) {
