@@ -58,7 +58,7 @@ $(function() {
 			var floatPane = $("#flow_tag_widget");
 			for(var i in data) {
 				var label = $('\
-					<a class="item btn btn-primary" title="精品课程" href="javascript:void(0)">' + data[i].name + '</a>\
+					<a class="item btn btn-primary" title="热门帖子" href="javascript:void(0)">' + data[i].tile + '</a>\
 				')
 				floatPane.append(label);
 			}
@@ -67,7 +67,7 @@ $(function() {
 	})
 
 	$("#flow_tag_widget").on("click", "a.item", function() {
-		location = "/posts?search=true&content=" + $(this).text() + "&tag=" + $(this).text();
+		location = "/posts?search=true&keyword=" + $(this).text();
 	})
 })
 
@@ -76,7 +76,7 @@ $(function() {
 		e.preventDefault();
 		var val = $("#search_input").val();
 		if (!val) return false;
-		location = "/posts?search=true&content=" + val + "&tag=" + val;
+		location = "/posts?search=true&keyword=" + val;
 		return false;
 	})
 })

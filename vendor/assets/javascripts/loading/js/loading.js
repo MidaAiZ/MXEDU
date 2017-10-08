@@ -120,7 +120,7 @@
 					_this.loading_discription = $('<p class="loading-discription txt-textOneRow"></p>').css({
 						color:opt.discColor,
 					}).html(opt.discription).appendTo(_this.div_loading);
-				} else {
+				} else if (opt.type == 'tip') {
 					_this.loading_title.css("margin-bottom", "0");
 				}
 

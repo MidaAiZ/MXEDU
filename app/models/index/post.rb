@@ -30,7 +30,7 @@ class Index::Post < ApplicationRecord
 	has_many :msgs, as: :resource,
 			  class_name: 'Index::PostMsg'
 
-	validates :name, length: { maximum: 32, too_long: '帖子名最大长度为%{count}' }
+	validates :title, length: { maximum: 32, too_long: '标题最大长度为%{count}' }
 	validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 100000, too_long: '帖子内容最大长度为%{count}' }
 	validates :state, inclusion: [0, 1, 2, 3, 4] # 状态码,1代码正常, 2代表用户删除, 3代表后台删除, 4代表置顶, 保留0用于后期扩展
 
@@ -49,12 +49,8 @@ class Index::Post < ApplicationRecord
 	def self.sort(cons = {})
 		_self = self
 		_self = _self.where(cate_id: cons[:cate]) if cons[:cate]
-		if cons[:content] && cons[:tag]
-			_self = _self.where("index_posts.content LIKE ? OR index_posts.tag LIKE ?", "%#{cons[:content]}%", "%#{cons[:tag]}%")
-		else
-			_self = _self.where("index_posts.name LIKE ?", "%#{cons[:content]}%" ) if cons[:content]
-			_self = _self.where("index_posts.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
-		end
+		_self = _self.where("index_posts.content LIKE :key OR index_posts.title LIKE :key", key: "%#{cons[:content]}%")
+		_self = _self.where("index_posts.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
 		_self = _self.where(school_id: cons[:school]) if cons[:school] && cons[:school] != 'NONE'
 
 		_self ||= self.all

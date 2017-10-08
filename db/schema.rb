@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006082116) do
+ActiveRecord::Schema.define(version: 20171008033109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20171006082116) do
   end
 
   create_table "index_posts", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.string "content"
     t.integer "readtimes"
     t.integer "comments_count"
@@ -147,9 +147,9 @@ ActiveRecord::Schema.define(version: 20171006082116) do
     t.jsonb "images"
     t.string "tag"
     t.index ["cate_id"], name: "index_posts_on_cate_id"
-    t.index ["name"], name: "index_posts_on_name"
     t.index ["school_id"], name: "index_posts_on_manage_school_id"
     t.index ["tag"], name: "index_posts_on_tag"
+    t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

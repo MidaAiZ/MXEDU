@@ -21,6 +21,11 @@
 		<div class="activity-desk">
 			<span><%= user.nickname %></span>
 			<p class="text-muted"><%= format_time post.created_at %></p>
+			<%= link_to post_path(post), class: "p-title" do %>
+				<span class="">
+					<%= post.title %>
+				</span>
+			<% end %>
 			<div class="text dot">
 				<%= link_to post_path(post) do %>
 					<span class="dot-collapse">

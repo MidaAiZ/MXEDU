@@ -17,7 +17,7 @@
 		<div class="album gray-box">
 			<%= @user.nickname %>:
 			<%= link_to post_path(m.resource.id) do %>
-				<%= m.resource.content.html_safe %>
+				<%= m.resource.title || m.resource.content.html_safe %>
 			<% end %>
 		</div>
 		<div class="p-footer">

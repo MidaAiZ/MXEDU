@@ -58,8 +58,9 @@ function submitPost(url) {
 		dataType: "JSON",
 		data: {
 			"post[content]": $form.find("#post-content").html().trim(),
-			"post[images]": $form.find("#post_images").data("value"),
-			"post[tag]": $form.find("#tags_input").val()
+			"post[images]": getImages(),
+			"post[tag]": getTags(),
+			"post[title]": getTitle()
 		},
 		// contentType: false,
 		// processData: false,
@@ -68,9 +69,31 @@ function submitPost(url) {
 		},
 		error: function(error) {
 			hideLoading();
+			alert("系统繁忙，发表失败");
 			$("#post_submit").removeAttr("disabled").val("重新发表")
 		}
 	})
+}
+
+function getImages() {
+	var $imgs = $("#post_images");
+	if ($imgs.data("value") && typeof($imgs.data("value")) == 'object') {
+		return $imgs.data("value")
+	}
+}
+
+function getTitle() {
+	var $title = $("#post_title");
+	if ($title.val() && $title.val.length) {
+		return $title.val();
+	}
+}
+
+function getTags() {
+	var $tag = $("#tags_input");
+	if ($tag.val() && $tag.val.length) {
+		return $tag.val();
+	}
 }
 
 // $("#img_input").on("change",function(){

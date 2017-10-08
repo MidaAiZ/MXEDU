@@ -27,6 +27,15 @@
 	}
 }
 
+.p-title {
+	border: none;
+	width: 100%;
+	padding: 10px;
+	outline: none;
+	font-size: 1.2em;
+	color: #5a5a5a;
+}
+
 .p-notice-pane {
 	background: white;
 	margin-bottom: 10px;
@@ -113,13 +122,6 @@
 
 .p-footer.fix-btm {
 	z-index: 100000;
-	svg {
-		width: 1.2em;
-		height: 1.2em;
-		margin-top: 3px;
-		position: relative;
-		top: 2px;
-	}
 
 	a {
 		color: #6e6e6e;
@@ -178,10 +180,6 @@ form div.tagsinput {
 			float: right;
 			margin-bottom: -3px;
 		}
-		.share a {
-			position: relative;
-			top: -4px;
-		}
 	}
 }
 
@@ -203,10 +201,6 @@ form div.tagsinput {
 			margin-bottom: -3px;
 		}
 
-		.share a {
-			position: relative;
-			top: -4px;
-		}
 	}
 	.new-btn-pane {
 		right: 50px;

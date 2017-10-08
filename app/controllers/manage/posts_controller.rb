@@ -8,7 +8,7 @@ class Manage::PostsController < ManageController
   def index
 	count = params[:count] || 10
 	page = params[:page] || 1
-	cons = params.slice(:content, :school, :cate, :tag)
+	cons = params.slice(:keyword, :school, :cate, :tag)
     if page.to_i == 1
         @top_posts = Index::Post.top.includes(:user, :school, :cate)
     end
@@ -21,7 +21,7 @@ class Manage::PostsController < ManageController
   def index_deleted
 	count = params[:count] || 10
   	page = params[:page] || 1
-  	cons = params.slice(:content, :school, :cate, :tag)
+  	cons = params.slice(:keyword, :school, :cate, :tag)
   	nonpaged_posts = Index::Post.sort(cons).deleted
   	@posts = nonpaged_posts.page(page).per(count).includes(:user, :school, :cate)
   	set_cdts
@@ -32,7 +32,7 @@ class Manage::PostsController < ManageController
   def index_forbidden
 	count = params[:count] || 10
   	page = params[:page] || 1
-  	cons = params.slice(:content, :school, :cate, :tag)
+  	cons = params.slice(:keyword, :school, :cate, :tag)
   	nonpaged_posts = Index::Post.sort(cons).forbidden
   	@posts = nonpaged_posts.page(page).per(count).includes(:user, :school, :cate)
   	set_cdts
@@ -106,7 +106,7 @@ class Manage::PostsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :content, :images)
+      params.require(:post).permit(:title, :content, :images, :tag)
     end
 
 	def set_cdts

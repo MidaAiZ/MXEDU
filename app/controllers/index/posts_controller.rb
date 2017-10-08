@@ -8,7 +8,7 @@ class Index::PostsController < IndexController
   def index
 	count = params[:count] || 10
 	page = params[:page] || 1
-    cons = set_rec_cons params.slice(:content, :school, :cate, :tag)
+    cons = set_rec_cons params.slice(:keyword, :school, :cate, :tag)
     nonpaged_posts = Index::Post.sort(cons).published.hot
     @posts = nonpaged_posts.page(page).per(count).includes(:user, :cate)
     if page.to_i == 1 && !params[:search]
@@ -37,7 +37,7 @@ class Index::PostsController < IndexController
     nonpaged_comments = @post.comments
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
     @post.read! if params[:share]
-	set_title @post.name
+	set_title @post.title
   end
 
   # GET /index/posts/new
@@ -50,7 +50,7 @@ class Index::PostsController < IndexController
   # GET /index/posts/1/edit
   def edit
     # get_cates
-	set_title "修改 #{@post.name}"
+	set_title "修改 #{@post.title}"
   end
 
   # POST /index/posts
@@ -76,10 +76,14 @@ class Index::PostsController < IndexController
   # PATCH/PUT /index/posts/1
   # PATCH/PUT /index/posts/1.json
   def update
+    prms = post_params
+
 	unless @post.is_forbidden? # 被后台拉黑的帖子禁止更新
       @post.images = params[:post][:images]
+      @post.title = prms[:title]
+      @post.tag = prms[:tag]
       @post.record_timestamps = false # 不更新时间戳
-	  code = 'Success' if @post.update(post_params)
+	  code = 'Success' if @post.update(prms)
 	end
 	code ||= 'Fail'
     respond_to do |format|
@@ -135,7 +139,7 @@ class Index::PostsController < IndexController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :content, :images, :tag, :cate_id)
+      params.require(:post).permit(:title, :content, :images, :tag, :cate_id)
     end
 
 	def set_cdts

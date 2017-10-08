@@ -68,6 +68,11 @@
                             <span class='p-time'><%= format_time @post.created_at %></span>
                         </div>
                     </div>
+                    <%= link_to manage_post_path(@post), class: "p-title" do %>
+                        <span class="">
+                            <%= @post.title %>
+                        </span>
+                    <% end %>
                     <span class="auto-row p-content">
                         <%= format_cate post.cate if @post.cate %>
                         <%= (@post.content || "").html_safe %>

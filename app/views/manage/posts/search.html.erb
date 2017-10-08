@@ -68,7 +68,7 @@ $(function() {
 	})
 
 	$("#flow_tag_widget").on("click", "a.item", function() {
-		location = "/manage/posts?search=true&content=" + $(this).text() + "&tag=" + $(this).text();
+		location = "/manage/posts?search=true&keyword=" + $(this).text();
 	})
 })
 
@@ -80,12 +80,12 @@ $(function() {
 		if (!val) return false;
         if (type) {
             if (type == 'deleted') {
-                location = "/manage/posts/deleted?search=true&content=" + val + "&tag=" + val;
+                location = "/manage/posts/deleted?search=true&keyword=" + val;
             } else {
-                location = "/manage/posts/forbidden?search=true&content=" + val + "&tag=" + val;
+                location = "/manage/posts/forbidden?search=true&keyword=" + val;
             }
         } else {
-            location = "/manage/posts?search=true&content=" + val + "&tag=" + val;
+            location = "/manage/posts?search=true&keyword=" + val;
         }
 		return false;
 	})
