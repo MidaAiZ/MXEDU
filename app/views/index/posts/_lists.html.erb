@@ -39,10 +39,10 @@
                     </span>
                 <% end %>
 				<%= link_to post_path(post), class: "auto-row p-content dot" do %>
-					<span class="dot-collapse">
+					<div class="dot-collapse">
                         <%= format_cate post.cate if post.cate %>
 						<%= (post.content || "").html_safe %>
-					</span>
+					</div>
 				<% end %>
 				<% if post.images && post.images.class.name == "Hash" %>
 					<div class="blog-imgs img-gallery">

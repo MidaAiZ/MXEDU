@@ -28,10 +28,10 @@
 			<% end %>
 			<div class="text dot">
 				<%= link_to post_path(post) do %>
-					<span class="dot-collapse">
+					<div class="dot-collapse">
 						<%= format_cate post.cate if post.cate %>
 						<%= post.content.html_safe %>
-					</span>
+					</div>
 				<% end %>
 			</div>
 			<div class="album">
