@@ -297,3 +297,10 @@ $("#navSearch").on("submit", function(e) {
         window.location = '/materials?search=true&cdts=false&school=NONE';
     return false;
 })
+
+// 设置编码
+$(function() {
+    $.ajaxSetup({
+    	contentType: "application/x-www-form-urlencoded; charset=utf-8"
+    });
+})

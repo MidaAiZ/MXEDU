@@ -3726,14 +3726,10 @@ ul.activity-list .activity-desk h5 a {
 .activity-desk .album a {
     float: left;
     margin-right: 10px;
-    width: 170px;
-    height: 110px;
+    width: 100%;
+    height: auto;
     overflow: hidden;
     margin-bottom: 10px;
-}
-
-.activity-desk .album a img {
-    width: 100%;
 }
 
 #map-canvas {
@@ -4239,12 +4235,15 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
     padding-bottom: 25px;
 }
 
+.img-pane {
+    margin: 4px 0 0;
+}
+
 .blog-img-sm {
     position: relative;
     width: 100%;
     height: 0;
     overflow: hidden;
-    margin: 4px 0 0;
     padding-bottom: 100%; /* 关键就在这里 */
     background-position: center !important;
     background-repeat: no-repeat !important;

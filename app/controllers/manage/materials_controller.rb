@@ -145,8 +145,8 @@ class Manage::MaterialsController < ManageController
         end
         info = Rails.cache.fetch("#{cache_key}_#{s_id}_#{c_id}", expires_in: 1.minutes) do
             {
-                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(7) : Manage::School.limit(8),
-                cates: c_id ? Manage::MaterialCate.where(id: c_id) + (Manage::MaterialCate.where.not(id: c_id)).limit(7) : Manage::MaterialCate.limit(8)
+                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(17) : Manage::School.limit(18),
+                cates: c_id ? Manage::MaterialCate.where(id: c_id) + (Manage::MaterialCate.where.not(id: c_id)).limit(17) : Manage::MaterialCate.limit(18)
             }
         end
         @schools = info[:schools]

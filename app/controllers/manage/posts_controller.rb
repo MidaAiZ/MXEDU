@@ -9,7 +9,7 @@ class Manage::PostsController < ManageController
 	count = params[:count] || 10
 	page = params[:page] || 1
 	cons = params.slice(:keyword, :school, :cate, :tag)
-    if page.to_i == 1
+    if page.to_i == 1 && !params[:search]
         @top_posts = Index::Post.top.includes(:user, :school, :cate)
     end
 	nonpaged_posts = Index::Post.sort(cons).published

@@ -15,7 +15,7 @@
 }
 .parentFileBox>.fileBoxUl>li {
 	float:left;
-	border-radius:5px;
+	/*border-radius:5px;*/
 	margin-left:0.5%;
 	margin-right:0.5%;
 	position:relative;
@@ -131,7 +131,7 @@
 	color:#FFF;
 	font-size:12px;
 	text-decoration:none;
-	border-radius:3px;
+	/*border-radius:3px;*/
 }
 .parentFileBox>.diyButton>a:hover {
 	background-color:#0CC;

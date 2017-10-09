@@ -116,9 +116,9 @@ class Manage::ProductsController < ManageController
 
         info = Rails.cache.fetch("#{cache_key}_#{s_id}_#{c_id}_#{cp_id}", expires_in: 1.minutes) do
             {
-                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(7) : Manage::School.limit(8),
-                cates: c_id ? Manage::ProductCate.where(id: c_id) + (Manage::ProductCate.where.not(id: c_id)).limit(7) : Manage::ProductCate.limit(8),
-                companies: cp_id ? Manage::ProductCompany.where(id: cp_id) + (Manage::ProductCompany.where.not(id: cp_id)).limit(7) : Manage::ProductCompany.limit(8),
+                schools: s_id ? Manage::School.where(id: s_id) + (Manage::School.where.not(id: s_id)).limit(17) : Manage::School.limit(18),
+                cates: c_id ? Manage::ProductCate.where(id: c_id) + (Manage::ProductCate.where.not(id: c_id)).limit(17) : Manage::ProductCate.limit(18),
+                companies: cp_id ? Manage::ProductCompany.where(id: cp_id) + (Manage::ProductCompany.where.not(id: cp_id)).limit(17) : Manage::ProductCompany.limit(18),
             }
         end
         @schools = info[:schools]

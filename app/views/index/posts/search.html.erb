@@ -61,8 +61,8 @@ $(function() {
 				var label = $('\
 					<a class="item btn btn-primary" title="热门帖子" href="javascript:void(0)">' + data[i].title + '</a>\
 				')
-                label.find("br").remove();
-				floatPane.append(label);
+                label.find("br").remove().end().find("img").remove();
+                if (label.text().length) floatPane.append(label);
 			}
 			setupTag();
 		}
