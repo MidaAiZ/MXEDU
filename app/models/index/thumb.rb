@@ -22,7 +22,7 @@ class Index::Thumb < ApplicationRecord
 			_self.resource = rsc
 			_self.save!
 			rsc.save!
-			if (u)
+			if (type == 'user')
 				Index::PostMsg._create u, rsc, '赞了我', _self.id
 			end
 		end
