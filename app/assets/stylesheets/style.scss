@@ -955,7 +955,8 @@ h5.left-nav-title {
     color: #999999;
 }
 
-.page-heading .breadcrumb li.active {
+.page-heading .breadcrumb li.active,
+.page-heading .breadcrumb li.active a {
     color: #65CEA7;
 }
 
@@ -4199,6 +4200,7 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
     display: inline-block;
     width: 100%;
     float: left;
+    margin-top: 5px;
     padding-bottom: 5px;
 }
 
