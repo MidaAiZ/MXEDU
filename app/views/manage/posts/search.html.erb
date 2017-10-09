@@ -57,12 +57,14 @@ $(function() {
 		dataType: "json",
 		success: function(data) {
 			var floatPane = $("#flow_tag_widget");
-			for(var i in data) {
-				var label = $('\
-					<a class="item btn btn-primary" title="精品课程" href="javascript:void(0)">' + data[i].name + '</a>\
-				')
-				floatPane.append(label);
-			}
+            for(var i in data) {
+                if (data[i].title.trim() == "") continue;
+                var label = $('\
+                    <a class="item btn btn-primary" title="热门帖子" href="javascript:void(0)">' + data[i].title + '</a>\
+                ')
+                label.find("br").remove();
+                floatPane.append(label);
+            }
 			setupTag();
 		}
 	})
