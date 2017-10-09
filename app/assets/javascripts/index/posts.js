@@ -77,8 +77,14 @@ function submitPost(url) {
 
 function getImages() {
 	var $imgs = $("#post_images");
-	if ($imgs.data("value") && typeof($imgs.data("value")) == 'object') {
-		return $imgs.data("value")
+	var imgsObj = $imgs.data("value");
+	if (imgsObj && typeof(imgsObj) == 'object') {
+		for (var i in imgsObj) {
+			if (!i.trim().length) {
+				delete imgsObj[i]
+			}
+		}
+		return imgsObj
 	}
 }
 

@@ -53,7 +53,7 @@ function submitPost(url) {
 		dataType: "JSON",
 		data: {
 			"comment[content]": $form.find("#comment-content").html().trim(),
-			"comment[images]": $form.find("#comment_images").data("value")
+			"comment[images]": getImages()
 		},
 		// contentType: false,
 		// processData: false,
@@ -65,4 +65,17 @@ function submitPost(url) {
 			$("#post_submit").removeAttr("disabled").val("发表评论")
 		}
 	})
+}
+
+function getImages() {
+	var $imgs = $("#comment_images");
+	var imgsObj = $imgs.data("value");
+	if (imgsObj && typeof(imgsObj) == 'object') {
+		for (var i in imgsObj) {
+			if (!i.trim().length) {
+				delete imgsObj[i]
+			}
+		}
+		return imgsObj
+	}
 }
