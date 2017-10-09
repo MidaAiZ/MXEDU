@@ -8,7 +8,7 @@ $(function() {
 	})
 
 	// 设置浏览量， 移动端同样支持，点击触发
-	$(".dropload").on("mouseover", ".post-pane", function() {
+	$(".dropload").on("mouseover touchstart", ".post-pane", function() {
 		var $this = $(this);
 		if ($this.data("read")) return false;
 		$this.data("read", true)
