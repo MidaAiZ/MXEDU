@@ -36,7 +36,7 @@
 						<% when 2, 4 %>
 							<% $keys.each_with_index do |c, i| %>
 								<div class="col-xs-6 col-sm-4 col-md-3 img-pane">
-									<div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)">
+									<div class="blog-img-sm mul" style="background: url(<%= $images[c]['thumb'] %>)">
 										<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
 											<img src="" alt="" style="opacity: 0";>
 										</a>
@@ -46,7 +46,7 @@
 						<% else %>
 							<% $keys.slice(0..7).each_with_index do |c, i| %>
 								<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 img-pane">
-									<div class="blog-img-sm" style="background: url(<%= $images[c]['thumb'] %>)">
+									<div class="blog-img-sm mul" style="background: url(<%= $images[c]['thumb'] %>)">
 										<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
 											<img src="" alt="" style="opacity: 0";>
 										</a>
@@ -55,7 +55,7 @@
 							<% end %>
 							<% if $keys.length > 8 %>
 							<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 img-pane">
-								<div class="blog-img-sm" style="background: url(<%= $images[$keys[8]]['thumb'] %>)" data-url="<%=$images[$keys[8]]['url'] %>">
+								<div class="blog-img-sm mul" style="background: url(<%= $images[$keys[8]]['thumb'] %>)" data-url="<%=$images[$keys[8]]['url'] %>">
 									<span class="img-more" data-url="<%= post_path(post) %>"><%= $images.length - 9 %>+</span>
 									<a href="<%= $images[$keys[8]]['url'] %>" data-caption="9/<%= $images.length %>">
 										<img src="" alt="" style="opacity: 0";>
