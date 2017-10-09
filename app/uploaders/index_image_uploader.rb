@@ -24,10 +24,14 @@ class IndexImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process resize_to_fit: [600, 1200]
+  process resize_to_fit: [1000, 2000]
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [250, 500]
+    process resize_to_fit: [300, 600]
+  end
+
+  version :mini do
+    process resize_to_fit: [150, 300]  
   end
   #
   # version :content do
