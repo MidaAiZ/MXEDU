@@ -70,7 +70,7 @@ $(function() {
 	})
 
 	$("#flow_tag_widget").on("click", "a.item", function() {
-		location = "/manage/posts?search=true&keyword=" + $(this).text();
+		location = "/manage/posts?search=true&keyword=" + encodeURI($(this).text());
 	})
 })
 
@@ -82,12 +82,12 @@ $(function() {
 		if (!val) return false;
         if (type) {
             if (type == 'deleted') {
-                location = "/manage/posts/deleted?search=true&keyword=" + val;
+                location = "/manage/posts/deleted?search=true&keyword=" + encodeURI(val);
             } else {
-                location = "/manage/posts/forbidden?search=true&keyword=" + val;
+                location = "/manage/posts/forbidden?search=true&keyword=" + encodeURI(val);
             }
         } else {
-            location = "/manage/posts?search=true&keyword=" + val;
+            location = "/manage/posts?search=true&keyword=" + encodeURI(val);
         }
 		return false;
 	})

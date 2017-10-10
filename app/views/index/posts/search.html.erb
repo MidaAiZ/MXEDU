@@ -69,7 +69,7 @@ $(function() {
 	})
 
 	$("#flow_tag_widget").on("click", "a.item", function() {
-		location = "/posts?search=true&keyword=" + $(this).text();
+		location = "/posts?search=true&keyword=" + encodeURI($(this).text());
 	})
 })
 
@@ -78,7 +78,7 @@ $(function() {
 		e.preventDefault();
 		var val = $("#search_input").val();
 		if (!val) return false;
-		location = "/posts?search=true&keyword=" + val;
+		location = "/posts?search=true&keyword=" + encodeURI(val);
 		return false;
 	})
 })

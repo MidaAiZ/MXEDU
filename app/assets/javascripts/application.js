@@ -292,7 +292,7 @@ $("#navSearch").on("submit", function(e) {
     var $this = $(this);
     var value = $this.find("input").val();
     if (value)
-        window.location = '/materials?search=true&cdts=false&school=NONE&name=' + value + '&tag=' + value;
+        window.location = encodeURI('/materials?search=true&cdts=false&school=NONE&name=' + value + '&tag=' + value);
     else
         window.location = '/materials?search=true&cdts=false&school=NONE';
     return false;

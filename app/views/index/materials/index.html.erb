@@ -5,7 +5,7 @@
             <a href="/">首页</a>
         </li>
         <li class="active">
-            <a href="/materials">学习资料</a> 
+            <a href="/materials">学习资料</a>
         </li>
         <li class="pull-right flex">
             <form class="" id='matSearch' method="get">
@@ -21,7 +21,7 @@
     <div class="directory-info-row">
         <%= render 'cdts' unless params[:pjax] == 'true' %>
         <% if params[:search] %>
-            <div style="padding-left: 15px;">
+            <div style="padding-left: 15px; margin-bottom: 10px;">
                 搜索"<%= params[:name] || params[:tag] %>"：
             </div>
         <% end %>

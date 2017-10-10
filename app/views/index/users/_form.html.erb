@@ -85,7 +85,7 @@
                 onAjaxSearch: function(value, target) {
                     var result = [];
                     $.ajax({
-                        url: $this.data("search-url") + "?name=" + encodeURL(value),
+                        url: $this.data("search-url") + "?name=" + encodeURI(value),
                         type: "GET",
                         async: false,
                         success: function(data) {
