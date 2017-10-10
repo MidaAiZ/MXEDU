@@ -143,7 +143,7 @@ $(function() {
 			onAjaxSearch: function(value, $ele) {
 				var result = [];
 				$.ajax({
-					url: $ele.parents("li").siblings(".con-item").data("search-url") + "?name=" + value,
+					url: $ele.parents("li").siblings(".con-item").data("search-url") + "?name=" + encodeURI(value),
 					type: "GET",
 					async: false,
 					success: function(data) {

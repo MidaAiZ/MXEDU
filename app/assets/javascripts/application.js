@@ -301,6 +301,8 @@ $("#navSearch").on("submit", function(e) {
 // 设置编码
 $(function() {
     $.ajaxSetup({
-    	contentType: "application/x-www-form-urlencoded; charset=utf-8"
+    	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        // beforeSend: function(xhr) {
+        // }
     });
 })

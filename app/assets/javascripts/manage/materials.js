@@ -114,7 +114,7 @@ $(function() {
         var $this = $(this);
         var value = $this.find("input").val();
         if (value)
-            window.location = window.location.pathname + '?search=true&name=' + value + '&tag=' + value;
+            window.location = window.location.pathname + encodeURI('?search=true&name=' + value + '&tag=' + value);
         else
 			alert("请输入搜索关键词!");
         return false;
