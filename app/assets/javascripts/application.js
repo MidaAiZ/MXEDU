@@ -206,6 +206,10 @@
 
 $(function() {
     $("[role=back]").on("click", function() {
+        if (history.length <= 1) { // 沒有历史记录的情况
+            window.location = $(this).data("back-url");
+            return;
+        }
         backState = getQueryString("back");
         if (!backState) backState = -1;
         history.go(backState);
