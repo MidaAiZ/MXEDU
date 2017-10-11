@@ -9,6 +9,12 @@
 		background-size: cover !important;
 		background-position: center !important;
 	}
+	.carousel-indicators {
+		opacity: 0.4;
+	 	& .active {
+			background: red;
+		}
+	}
 }
 
 .menu {
