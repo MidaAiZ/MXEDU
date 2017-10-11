@@ -45,20 +45,28 @@
                 <div class="panel">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-xs-6 col-md-2 col-md-offset-2 item">
-                                <%= link_to materials_url do %>
+                            <div class="col-xs-4 col-md-2 item">
+                                <%= link_to materials_path do %>
                                     <span class="icon">
                                         <i class='fa fa-book'></i>
                                     </span>
                                     <span>学习资料</span>
                                 <% end %>
                             </div>
+                            <div class="col-xs-4 col-md-2 item">
+                                <%= link_to posts_path do %>
+                                    <span class="icon">
+                                        <i class='fa fa-comments-o'></i>
+                                    </span>
+                                    <span>校园论坛</span>
+                                <% end %>
+                            </div>
                             <% cache "index_main_cate", expires_in: 10.minutes do %>
-                                <% fa_arr = ['fa-globe', 'fa-cloud', 'fa-rocket'] %>
-                                <% @products.keys.slice(0, 3).each_with_index do |key, i| %>
+                                <% fa_arr = ['fa-globe', 'fa-cloud', 'fa-rocket', 'fa-laptop'] %>
+                                <% @products.keys.slice(0, 4).each_with_index do |key, i| %>
                                     <% c_id = @products[key][0] %>
-                                    <div class="col-xs-6 col-md-2 item">
-                                        <%= link_to "#{products_url}?cate=#{c_id}&cdts=false" do %>
+                                    <div class="col-xs-4 col-md-2 item">
+                                        <%= link_to "#{products_path}?cate=#{c_id}&cdts=false" do %>
                                             <span class="icon">
                                                 <i class='fa <%= fa_arr[i] %>'></i>
                                             </span>
@@ -127,7 +135,7 @@
                             <header class="panel-heading">
                                 <% c_id = @products[key][0] %>
 
-                                <%= link_to key, "#{products_url}?cate=#{c_id}&cdts=false" %>
+                                <%= link_to key, "#{products_path}?cate=#{c_id}&cdts=false" %>
                             </header>
                             <div class="panel-body">
                                 <div class="show-block">
@@ -160,7 +168,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%= link_to '更多>>', "#{products_url}?cate=#{c_id}&cdts=false", class: 'pull-right'  %>
+                                <%= link_to '更多>>', "#{products_path}?cate=#{c_id}&cdts=false", class: 'pull-right'  %>
                             </div>
                         </section>
                      <% end %>

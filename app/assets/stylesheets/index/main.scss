@@ -27,7 +27,7 @@
 		}
 	}
 	.item {
-		border-right: #ddd 0.5px solid;
+		border-right: #f2f2f2 0.5px solid;
 		&:nth-child(1) {
 			i {
 				color: #6ea2f3;
@@ -35,18 +35,28 @@
 		}
 		&:nth-child(2) {
 			i {
-				color: #31d9ac;
+				color: #f84a4a;
 			}
 		}
 		&:nth-child(3) {
 			i {
-				color: #fa8137;
+				color: #31d9ac;
 			}
 		}
 		&:nth-child(4) {
+			i {
+				color: #fa8137;
+			}
+		}
+		&:nth-child(5) {
+			i {
+				color: #5bc0de;
+			}
+		}
+		&:nth-child(6) {
 			border-right: 0;
 			i {
-				color: #f84a4a;
+				color: #a062ff;
 			}
 		}
 	}
@@ -99,9 +109,7 @@ section {
 		margin-top: 5px;
 		.item {
 			padding-bottom: 10px;
-			&:nth-child(2) {
-				border-right: 0;
-			}
+			border-right: 0;
 		}
 	}
 	img.cover {
