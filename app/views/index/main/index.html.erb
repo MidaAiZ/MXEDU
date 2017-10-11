@@ -62,7 +62,7 @@
                                 <% end %>
                             </div>
                             <% cache "index_main_cate", expires_in: 10.minutes do %>
-                                <% fa_arr = ['fa-globe', 'fa-cloud', 'fa-rocket', 'fa-laptop'] %>
+                                <% fa_arr = ['fa-globe', 'fa-cloud', 'fa-rocket', 'fa-magnet'] %>
                                 <% @products.keys.slice(0, 4).each_with_index do |key, i| %>
                                     <% c_id = @products[key][0] %>
                                     <div class="col-xs-4 col-md-2 item">
