@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "froala_style.min" %>
+
 <!-- page heading start-->
 <div class="page-heading">
     <h3>
@@ -140,7 +142,14 @@
     </div>
 </div>
 
-<%= stylesheet_link_tag "froala_style.min" %>
+<div class="share-btn-pane">
+    <div class="share new">
+        <a class='' href='javascript: void(0)' data-toggle='modal' data-target='#shareModal'>
+            <i class="glyphicon glyphicon-send"></i>
+            <!-- <span>分享</span> -->
+        </a>
+    </div>
+</div>
 
 <!--body wrapper end-->
 <% if !@user && @material.need_login %>
@@ -162,3 +171,5 @@
         })
     </script>
 <% end %>
+
+<%= render "/index/share" %>

@@ -42,7 +42,7 @@ color: #fff; }
 .bdsharebuttonbox .bds_sqq { background: url(/assets/social-share/images/gbRes_3.png) no-repeat center center/60px 60px; }
 .bdsharebuttonbox .bds_renren { background: url(/assets/social-share/images/gbRes_1.png) no-repeat center center/60px 60px; }
 .bd_weixin_popup .bd_weixin_popup_foot { position: relative; top: -12px; }
-
+.share-link { border-top: 1px solid #f6f6f6; display: inline-block; padding: 15px 4% 0;background-color: white; width: 100%;}
 @media only screen and (max-width: 500px) {
 .gb_resA img { width: 45px; margin-top: 5px; }
 }

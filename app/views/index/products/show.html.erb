@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "froala_style.min" %>
+
 <% if @user || !@product.need_login %>
 <!-- page heading start-->
     <div class="page-heading">
@@ -157,9 +159,16 @@
         </div>
     </div>
 
-    <%= stylesheet_link_tag "froala_style.min" %>
-
+    <div class="share-btn-pane">
+        <div class="share new">
+            <a class='' href='javascript: void(0)' data-toggle='modal' data-target='#shareModal'>
+                <i class="glyphicon glyphicon-send"></i>
+                <!-- <span>分享</span> -->
+            </a>
+        </div>
+    </div>
     <!--body wrapper end-->
+    <%= render "/index/share" %>
 <% else %>
     <script type="text/javascript">
         alert("该产品包含专属优惠,需要登录后才可以查看哦~");

@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag "social-share/css/style" %>
 <%= javascript_include_tag "social-share/js/share" %>
+<%= javascript_include_tag "share/copy" %>
 
 <div aria-hidden="true" aria-labelledby="shareModalLabel" role="dialog" tabindex="-1" id="shareModal" class="modal fade">
     <div class="modal-dialog" style="margin-top: 50px;">
@@ -10,12 +11,20 @@
             		<div class="bdsharebuttonbox">
             			<ul class="gb_resItms">
                             <li> <a title="分享到QQ好友" href="#" class="bds_sqq" data-cmd="sqq" ></a>QQ好友 </li>
-            				<li> <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone" ></a>QQ空间 </li>
                             <li> <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin" ></a>微信好友 </li>
-                            <li> <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina" ></a>新浪微博 </li>
+            				<li> <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone" ></a>QQ空间 </li>
+                            <!-- <li> <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina" ></a>新浪微博 </li>
             				<li> <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq" ></a>腾讯微博 </li>
-            				<li> <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren" ></a>人人网 </li>
+            				<li> <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren" ></a>人人网 </li> -->
             			</ul>
+                        <div class="share-link">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id='copy-input'>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-wide btn-primary js-textareacopybtn" data-copy="#copy-input">复制链接</button>
+                            </div>
+                        </div>
             		</div>
             	</div>
             	<div class="clear"></div>
@@ -53,7 +62,7 @@
 		"common": {
 			onBeforeClick: SetShareUrl,
             bdText : $(".p-content").text().trim(),
-			bdDesc : '帖子分享--' + document.title,
+			bdDesc : document.title,
 			bdUrl : getShareUrl(),
             bdSnsKey: {},
 			bdMini: 2,
@@ -68,9 +77,9 @@
 
     function getShareImg() {
         var img_path = $(".img-gallery").find("img").eq(0).attr("src");
+        if (!img_path) img_path = $(".wrapper").find("img").eq(0).attr("src");
         var shareImg = null;
         if (img_path) shareImg = location.host + img_path;
-        console.log(shareImg)
         return shareImg;
     }
 
@@ -78,7 +87,6 @@
         var search = location.search;
         if (search) var url = location.href + "&share=true"
         else var url = location.href + "?share=true"
-        console.log(url)
         return url;
     }
 	//插件的JS加载部分 // MDZZ 有广告
@@ -86,4 +94,25 @@
 	// 	.appendChild(createElement('script'))
 	// 	.src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
 	// 	+ ~(-new Date() / 36e5)];
+</script>
+
+<script type="text/javascript">
+
+    $(function() {
+        $("#copy-input").val(getShareUrl());
+    })
+    /**
+     * 复制粘贴功能
+     * 参数一：表示复制功能按钮btn 可为id,可为class
+     * 参数二：表示回调
+     * yb
+     */
+    copy.coptText(".js-textareacopybtn", function(flag) {
+
+        /**
+         * flag 为true的时候，表示赋值成功，false表示赋值失败，自行处理
+         */
+        return flag ? showTip("链接已复制", 1500) : alert("复制失败，请长按链接选中复制")
+    });
+
 </script>

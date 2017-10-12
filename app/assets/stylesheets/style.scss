@@ -5191,3 +5191,38 @@ li.flex {
 .text-primary {
     color: #6b6b6b;
 }
+
+.share-btn-pane {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	background-color: white;
+	// box-shadow: 1px 1px 10px #ddd;
+	cursor: pointer;
+    z-index: 100;
+
+    .share {
+		float: right;
+		text-decoration: none;
+		text-align: center;
+		color: white;
+		width: 45px;
+		height: 45px;
+		display: inline-block;
+		&:hover {
+			box-shadow: 1px 1px 15px 3px rgba(0, 0, 0, 0.2);
+		}
+	}
+
+    i {
+        color: white;
+        font-size: 30px;
+		line-height: 45px;
+        color: #3989cd;
+    }
+
+    span {
+        color: white;
+        margin-top: -10px;
+    }
+}
