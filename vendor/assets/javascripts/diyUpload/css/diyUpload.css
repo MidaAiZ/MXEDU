@@ -62,7 +62,7 @@
  {
 	font-size: 20px;
 	color: rgba(255, 0, 0, 0.8);
-	z-index: 99;
+	z-index: 10;
 	/*background:url(../images/x_alt.png) no-repeat;*/
 }
 
