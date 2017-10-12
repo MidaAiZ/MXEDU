@@ -18,6 +18,11 @@
     .dot {
         max-height: 21px * 8 + 8;
     }
+
+    .share-btn-pane {
+    	right: 100px;
+    	bottom: 100px;
+    }
 }
 
 @media screen and (max-width: 768px) {
