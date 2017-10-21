@@ -78,14 +78,15 @@
         var img_path = $(".img-gallery").find("img").eq(0).attr("src");
         if (!img_path) img_path = $(".wrapper").find("img").eq(0).attr("src");
         var shareImg = null;
-        if (img_path) shareImg = location.host + img_path;
+        if (img_path) shareImg = location.origin + img_path;
         return shareImg;
     }
 
     function getShareUrl() {
         var search = location.search;
-        if (search) var url = location.href + "&share=true"
-        else var url = location.href + "?share=true"
+        var baseUrl = location.origin + location.pathname;
+        if (search) var url = baseUrl + "&share=true"
+        else var url = baseUrl + "?share=true"
         return url;
     }
 	//插件的JS加载部分 // MDZZ 有广告
