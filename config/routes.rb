@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         post 'update/avatar' => 'users#update_avatar'
       end
     end
+    post 'check_phone_uniq' => 'users#check_phone_uniq'
 
     # 产品
     resources :products

@@ -26,42 +26,68 @@
                 var $phone = $("#phone"),
                     $code = $("#code");
                 $code.on("click", function() {
-                    if($phone.val().length != 11) {
+                    var reg = /^1[3|4|5|7|8][0-9]{9}$/; //手机号验证规则
+
+                    if(!reg.test($phone.val())) {
                         alert("请填写正确的手机号");
                         return false;
                     }
                     $code.addClass("disabled").text("发送中...");
-                    $.ajax({
-                        url: "/send_msg",
-                        type: "post",
-                        data: {
-                            "phone": $phone.val(),
-                            "handle": "register"
-                        },
-                        dataType: "json",
-                        success: function(res) {
-                            if (res.code == 'Success') {
-                                $code.attr("disabled", "true");
-                                var time = 60;
-                                $code.text(time + 'S');
-                                var i = setInterval(function() {
-                                    $code.text(--time + 'S');
-                                    if (time == 0) {
-                                        $code.removeAttr("disabled");
-                                        $code.text("重新发送");
-                                        clearInterval(i);
-                                    }
-                                }, 1000)
-                            } else {
+                    check_phone_uniq();
+
+                    function check_phone_uniq() {
+                        $.ajax({
+                            url: "/check_phone_uniq",
+                            type: "post",
+                            data: {
+                                "phone": $phone.val()
+                            },
+                            success: function(res) {
+                                if (res.uniq) {
+                                    send_msg();
+                                } else {
+                                    $code.removeClass("disabled").text("获取验证码");
+                                    alert("该手机号已被注册！");
+                                }
+                            },
+                            error: function() {
+                                $code.removeClass("disabled").text("获取验证码");
+                                alert("请求出错")
+                            }
+                        })
+                    }
+
+                    function send_msg() {
+                        $.ajax({
+                            url: "/send_msg",
+                            type: "post",
+                            data: {
+                                "phone": $phone.val(),
+                                "handle": "register"
+                            },
+                            dataType: "json",
+                            success: function(res) {
+                                if (res.code == 'Success') {
+                                    var time = 60;
+                                    $code.text(time + 'S');
+                                    var i = setInterval(function() {
+                                        $code.text(--time + 'S');
+                                        if (time == 0) {
+                                            $code.removeClass("disabled").text("重新发送");
+                                            clearInterval(i);
+                                        }
+                                    }, 1000)
+                                } else {
+                                    $code.removeClass("disabled").text("获取验证码");
+                                    alert("发送失败,请稍后尝试");
+                                }
+                            },
+                            error: function() {
                                 $code.removeClass("disabled").text("获取验证码");
                                 alert("发送失败,请稍后尝试");
                             }
-                        },
-                        error: function() {
-                            $code.removeClass("disabled").text("获取验证码");
-                            alert("发送失败,请稍后尝试");
-                        }
-                    })
+                        })
+                    }
                 })
             });
 
@@ -95,7 +121,7 @@
                                 if ($("#user_name").val().length > 1) {
                                     $("#next").removeAttr("disabled");
                                 } else {
-                                    alert("请输入正确的姓名");
+                                    alert("请输入你的姓名");
                                 }
                             } else {
                                 $this.css("color", "red");

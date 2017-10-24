@@ -90,6 +90,14 @@ class Index::UsersController < IndexController
     end
   end
 
+  def check_phone_uniq
+    uniq = true
+    if Index::User.find_by_phone params[:phone]
+      uniq = false
+    end
+    render json: { uniq: uniq }
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.

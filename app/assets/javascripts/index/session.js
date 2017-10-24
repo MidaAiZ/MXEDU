@@ -4,7 +4,8 @@ $(function() {
 	var $phone = $("#phone"),
 		$code = $("#code");
 	$code.on("click", function() {
-		if($phone.val().length != 11) {
+		var reg = /^1[3|4|5|7|8][0-9]{9}$/; //手机号验证规则
+		if(!reg.test($phone.val())) {
 			alert("请填写正确的手机号");
 			return false;
 		}
