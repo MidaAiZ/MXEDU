@@ -7,6 +7,7 @@ class Index::Thumb < ApplicationRecord
 	belongs_to :resource, polymorphic: true
 
 	def self.thumb_up u, rsc, type = 'user'
+		rsc.record_timestamps = false
 		rsc.thumbs_count = (rsc.thumbs_count || 0) + 1
 
 		t = if type == 'user'
@@ -31,6 +32,7 @@ class Index::Thumb < ApplicationRecord
 
 	def cancel
 	  begin
+		resource.record_timestamps = false
 		ApplicationRecord.transaction do # 出错将回滚
 		  t_c = resource.thumbs_count - 1
 		  t_c = 0 if t_c < 0 # 防止极端情况下因数据库不同步导致点赞数<0
