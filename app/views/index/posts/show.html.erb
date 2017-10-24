@@ -39,7 +39,7 @@
                         </div>
                         <div class="u-intro">
                             <span class='u-name'><%= @post.user.nickname || "#{@post.user.name.slice(0, 1)}同学" %></span>
-                            <span class='p-time'><%= format_time @post.created_at %></span>
+                            <span class='p-time'><%= format_time @post.updated_at %></span>
                         </div>
                     </div>
                     <span class="auto-row p-title">
