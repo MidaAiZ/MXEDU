@@ -151,6 +151,10 @@
     </div>
 </div>
 
+<div class="mask_show" id="dload-tip">
+    <img src="/assets/dload-tip.png" class="">
+</div>
+
 <!--body wrapper end-->
 <% if !@user && @material.need_login %>
     <script type="text/javascript">
@@ -171,5 +175,42 @@
         })
     </script>
 <% end %>
+
+
+
+<script>
+    $(function() {
+        if(needLoadTip()) {
+            var btn = $('.dload');
+            var tip = $('#dload-tip');
+            btn.click(function(e) {
+                e.preventDefault();
+                tip.show(300);
+                return false;
+            });
+            tip.click(function() {
+                tip.hide(300);
+            })
+        }
+    });
+
+    function needLoadTip() {
+        var tip = false;
+        var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            //在微信中打开
+            tip = true;
+        }
+        if (ua.match(/WeiBo/i) == "weibo") {
+            //在新浪微博客户端打开
+            tip = true;
+        }
+        if (ua.match(/QQ/i) == "qq") {
+            //在QQ空间打开
+            tip = true;
+        }
+        return tip;
+    }
+</script>
 
 <%= render "/index/share" %>

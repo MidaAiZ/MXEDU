@@ -15,7 +15,7 @@ class Index::PostCommentsController < IndexController
     page = params[:page] || 1
 
     @nonpaged_comments = @post.comments
-    @comments = @nonpaged_comments.page(page).per(count)
+    @comments = @nonpaged_comments.page(page).per(count).includes(:user)
     render "/index/posts/_cmt_lists", layout: false
   end
 
@@ -65,7 +65,7 @@ class Index::PostCommentsController < IndexController
   def destroy
     @comment = Index::PostComment.find(params[:id])
     # 允许删除的条件：　作者或评论者
-    if (@comment.user_id = @user.id) || (@comment.post.user_id = @user.id)
+    if @comment.can_del? @user
         code = @comment._destroy
     end
 

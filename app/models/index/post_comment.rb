@@ -49,6 +49,10 @@ class Index::PostComment < ApplicationRecord
 	end
 
 	def has_thumb? u, ip
-		u && id ? self.thumbs.find_by_user_id(u.id) : self.thumbs.find_by_remote_ip(ip)
+		u && u.id ? self.thumbs.find_by_user_id(u.id) : self.thumbs.find_by_remote_ip(ip)
+	end
+
+	def can_del? u
+	    self.user_id == u.id || self.post.user_id == u.id
 	end
 end

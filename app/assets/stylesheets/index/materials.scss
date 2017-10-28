@@ -186,6 +186,22 @@
     }
 }
 
+.mask_show {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    overflow: hidden;
+    display: none;
+    img {
+        margin-top: 100px;
+    }
+}
+
 @media screen and (min-width: 1500px) {
     .file-pre {
         width: 200px;
