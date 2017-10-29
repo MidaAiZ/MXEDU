@@ -16,8 +16,10 @@
 		</div>
 		<div class="album gray-box">
 			<%= @user.nickname %>:
-			<%= link_to post_path(m.resource.id) do %>
-				<%= m.resource.title || m.resource.content.html_safe %>
+			<%= link_to post_path(m.resource.id), class: "p-content dot" do %>
+				<div class="dot-collapse">
+					<%= m.resource.content.html_safe %>
+				</div>
 			<% end %>
 		</div>
 		<div class="p-footer">
