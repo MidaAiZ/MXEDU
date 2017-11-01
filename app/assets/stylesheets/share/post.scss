@@ -1,5 +1,17 @@
-//= require ../share/lightbox
-//= require ../share/post
+
+.p-text-area {
+	resize: none;
+	padding: 10px;
+}
+
+#post-content {
+	height: 180px;
+	overflow: auto;
+}
+
+.imgs-up-pane {
+	width: 100%;
+}
 
 .p-footer.info {
 	margin-top: -10px;
@@ -14,10 +26,35 @@
 	}
 }
 
-.school-info {
-	font-size: 8px;
-	color: #c0c0c0;
-	margin-top: -5px;
+.p-title {
+	border: none;
+	width: 100%;
+	padding: 10px;
+	outline: none;
+	font-size: 1.2em;
+	color: #5a5a5a;
+}
+
+.p-notice-pane {
+	background: white;
+	margin-bottom: 10px;
+	.p-notice {
+		display: block;
+		padding: 5px;
+		border-bottom: 1px solid #f6f6f6;
+	}
+	.n-title {
+		padding-left: 5px;
+		word-wrap: break-word;
+		line-height: 1.1em;
+		a {
+			color: #7c7c7c;
+		}
+	}
+	.n-time {
+		color: #a8a8a8;
+		font-size: 12px;
+	}
 }
 
 .dropload-down {
@@ -55,7 +92,6 @@
 		width: 100%;
 		color: #a6a6a6;
 		border-bottom: 1px #f6f6f6 solid;
-
 		> span {
 			padding: 3px 0px;
 			min-width: 100px;
@@ -66,6 +102,11 @@
 		}
 		.c-cmt {
 			float: right;
+			.fa {
+				cursor: pointer;
+				padding: 10px;
+				margin: -10px;
+			}
 		}
 	}
 }
@@ -80,6 +121,19 @@
 	}
 }
 
+.p-footer.fix-btm {
+	z-index: 100000;
+
+	a {
+		color: #6e6e6e;
+	}
+
+	.thumb-text {
+		font-size: .85em;
+		padding-left: 5px;
+	}
+}
+
 .new-btn-pane {
 	position: fixed;
 	right: 30px;
@@ -88,7 +142,7 @@
 	// box-shadow: 1px 1px 10px #ddd;
 	cursor: pointer;
 
-	.search {
+	.new, .search {
 		float: right;
 		font-size: 30px;
 		text-decoration: none;
@@ -98,14 +152,62 @@
 		height: 50px;
 		line-height: 50px;
 		display: inline-block;
-		background: #e56161;
 		&:hover {
 			box-shadow: 1px 1px 15px 3px rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	.new {
+		font-size: 50px;
+		margin-right: 0.5px;
+		background: #3989cd;
+	}
+
+	.search {
+		// border-right: 1px solid #eee;
+		background: #e56161;
+	}
+
+}
+
+form div.tagsinput {
+	border: 1px solid #f6f6f6;
+	height: 50px !important;
+}
+
+@media screen and (max-width: 768px) {
+	.fix-btm {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		padding: 5px;
+		width: 100%;
+		&.p-footer > div {
+			float: right;
+			margin-bottom: -3px;
 		}
 	}
 }
 
 @media screen and (min-width: 769px) {
+	.p-footer.fix-btm {
+		position: fixed;
+		left: 32%;
+		bottom: 8%;
+		padding: 5px;
+		width: auto;
+		border: 0;
+		box-shadow: 1px 1px 10px #f4f4f4;
+		border: 1px solid #8c92ff;
+		border-radius: 5px;
+
+		&.p-footer > div {
+			float: right;
+			min-width: 100px;
+			margin-bottom: -3px;
+		}
+
+	}
 	.new-btn-pane {
 		right: 50px;
 		bottom: 50px;

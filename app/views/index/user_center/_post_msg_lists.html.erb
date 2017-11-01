@@ -9,17 +9,26 @@
 			<p class="text-muted"><%= format_time m.created_at %></p>
 
 		</div>
-		<div class="text">
+		<div class="text msg">
 			<%= link_to post_path(m.resource.id) do %>
 				<%= (m.msg || "").html_safe %>
 			<% end %>
 		</div>
 		<div class="album gray-box">
-			<%= @user.nickname %>:
-			<%= link_to post_path(m.resource.id), class: "p-content dot" do %>
-				<div class="dot-collapse">
-					<%= m.resource.content.html_safe %>
-				</div>
+			<% if m.resource.class.name == "Index::Post" %>
+				<%= link_to post_path(m.resource_id), class: "p-content dot" do %>
+					<div class="dot-collapse">
+						<b><%= @user.nickname %>:</b>
+						<%= (m.resource.content || "").html_safe %>
+					</div>
+				<% end %>
+			<% elsif m.resource.class.name == "Index::PostComment" %>
+				<%= link_to post_path(m.resource.post), class: "p-content dot" do %>
+					<div class="dot-collapse">
+						<b><%= @user.nickname %>:</b>
+						<%= (m.resource.content || "").html_safe %>
+					</div>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="p-footer">

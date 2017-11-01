@@ -63,6 +63,7 @@ class Index::UsersController < IndexController
   def update
     respond_to do |format|
       if @user.update(update_user_params)
+        Cache.new["logged_user_#{@user.id}"] = nil
         format.html { redirect_to ucenter_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok }
       else

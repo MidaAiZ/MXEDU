@@ -37,20 +37,23 @@
                                         <li>
                                             <a href="javascript:void(0)" data-href="<%= manage_post_path(@post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除该贴？删除后用户将无法查看">删除</a>
                                         </li>
+                                        <% if @admin.super? %>
+                                          <li>
+                                             <%= link_to "修改", edit_manage_post_path(@post) %>
+                                          </li>
+                                        <% end %>
                                     </ul>
                                 </div>
                             <% elsif @post.state_bad? %>
                                 <div class="pull-right">
                                     <span class="label label-danger"><%= @post.is_deleted? ? "用户删除" : "管理员删除" %></span>
                                     <small>删除时间：<%= format_time @post.updated_at %></small>
-                                    <% if @post.is_forbidden? %>
-                                        <p>
-                                            <%= link_to manage_post_recover_path(@post), method: :post, class: "recover pull-right", data: { confirm: "确定要恢复该贴？恢复后用户可以查看该贴内容" } do %>
+                                    <p>
+                                        <%= link_to manage_post_recover_path(@post), method: :post, class: "recover pull-right", data: { confirm: "确定要恢复该贴？恢复后用户可以查看该贴内容" } do %>
                                             <i class="fa fa-refresh"></i>
                                             <span>恢复</span>
-                                            <% end %>
-                                        </p>
-                                    <% end %>
+                                        <% end %>
+                                    </p>
                                 </div>
                             <% end %>
                         <% end %>

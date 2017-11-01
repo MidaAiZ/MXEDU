@@ -3,30 +3,33 @@
 		<div class="panel post-pane" role='remove'>
 			<div class="panel-body n-p-b">
 				<div class="p-u-info">
-                    <% if @admin.super? %>
-                        <% if post.state_ok? %>
-                            <div class="opt-menu pull-right">
-                                <span class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class='fa fa-angle-down'></i>
-                                </span>
-                                <ul class="dropdown-menu pull-right">
-                                  <li>
-                                      <% if post.is_top? %>
-                                        <%= link_to "取消置顶", "javascript: void(0)" , "data-href" => manage_post_off_top_path(post), role: "post-top", method: :delete %>
-                                      <% else %>
-                                        <%= link_to "置顶", "javascript: void(0)", "data-href" => manage_post_on_top_path(post), role: "post-top", method: :post %>
-                                      <% end %>
-                                  </li>
-                                  <li>
-                                      <a href="javascript:void(0)" data-href="<%= manage_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除该贴？删除后用户将无法查看">删除</a>
-                                  </li>
-                                </ul>
-                            </div>
-                        <% elsif post.state_bad? %>
-                            <div class="pull-right">
-                                <small>删除时间：<%= format_time post.updated_at %></small>
-                            </div>
-                        <% end %>
+                    <% if post.state_ok? %>
+                        <div class="opt-menu pull-right">
+                            <span class="dropdown-toggle" data-toggle="dropdown">
+                                <i class='fa fa-angle-down'></i>
+                            </span>
+                            <ul class="dropdown-menu pull-right">
+                              <li>
+                                  <% if post.is_top? %>
+                                    <%= link_to "取消置顶", "javascript: void(0)" , "data-href" => manage_post_off_top_path(post), role: "post-top", method: :delete %>
+                                  <% else %>
+                                    <%= link_to "置顶", "javascript: void(0)", "data-href" => manage_post_on_top_path(post), role: "post-top", method: :post %>
+                                  <% end %>
+                              </li>
+                              <li>
+                                  <a href="javascript:void(0)" data-href="<%= manage_post_path(post) %>" role="delete-confirm" data-method="delete" data-info="确定要删除该贴？删除后用户将无法查看">删除</a>
+                              </li>
+                              <% if @admin.super? %>
+                                <li>
+                                   <%= link_to "修改", edit_manage_post_path(post) %>
+                                </li>
+                              <% end %>
+                            </ul>
+                        </div>
+                    <% elsif post.state_bad? %>
+                        <div class="pull-right">
+                            <small>删除时间：<%= format_time post.updated_at %></small>
+                        </div>
                     <% end %>
 
                     <% if post.is_top? %>

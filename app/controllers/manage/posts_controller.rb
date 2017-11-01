@@ -1,7 +1,7 @@
 class Manage::PostsController < ManageController
   before_action :require_login
-  before_action :check_super, only: [:destroy, :recover]
-  before_action :set_post, only: [:show, :destroy]
+  before_action :check_super, only: [:edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /index/posts
   # GET /index/posts.json
@@ -38,6 +38,32 @@ class Manage::PostsController < ManageController
   	set_cdts
 	@type = :forbidden
 	render :index
+  end
+
+  def edit
+
+  end
+
+  def update
+    prms = post_params
+
+  	unless @post.is_forbidden? # 被后台拉黑的帖子禁止更新
+        @post.images = params[:post][:images]
+        @post.title = prms[:title]
+        @post.tag = prms[:tag]
+        @post.record_timestamps = false # 不更新时间戳
+  	  code = 'Success' if @post.update(prms)
+  	end
+  	code ||= 'Fail'
+      respond_to do |format|
+        if code == 'Success'
+          format.html { redirect_to manage_post_url @post }
+          format.json { render :show, status: :created }
+        else
+          format.html { render :edit }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
   end
 
   def search
@@ -89,7 +115,7 @@ class Manage::PostsController < ManageController
   end
 
   def recover
-    @post = Index::Post.forbidden.find(params[:post_id])
+    @post = Index::Post.with_forbid.find(params[:post_id])
   	code = @post.publish!
 
       respond_to do |format|
@@ -106,7 +132,7 @@ class Manage::PostsController < ManageController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :images, :tag)
+      params.require(:post).permit(:title, :content, :images, :tag, :readtimes, :thumbs_count)
     end
 
 	def set_cdts

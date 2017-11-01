@@ -52,6 +52,15 @@
 	.p-footer {
 		border-top: 0;
 	}
+	.msg.text {
+		background: #fcfcfc;
+		border-radius: 2px;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+	b {
+		font-weight: 500;
+	}
 }
 
 @media screen and (max-width: 768px) {

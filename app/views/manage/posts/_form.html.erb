@@ -1,0 +1,183 @@
+<!--body wrapper start-->
+<div class="wrapper">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			<div class="panel">
+				<%= form_tag manage_posts_path, id: :post_form, "data-post-id" => @post.id do %>
+					<%#= text_area_tag "post[content]", @post.content, id: "post-content", class: "form-control input-lg p-text-area", rows: "5", contenteditable: "true", placeholder: "分享一下男朋友..." %>
+					<% if @post.title %>
+						<%= text_field_tag "post[title]", @post.title, class: "p-title", id: :post_title, placeholder: "添加个标题吧～"  %>
+					<% else %>
+						<%= hidden_field_tag "post[title]", '', class: "p-title", id: :post_title, placeholder: "添加个标题吧～"  %>
+					<% end %>
+					<div id="post-content" class="form-control input-lg p-text-area" rows="5" contenteditable="true" role="emoji-input">
+						<%= (@post.content || "").html_safe %>
+					</div>
+                    <%= hidden_field_tag "post[images]", '',  id: :post_images, "data-value" => @post.images.to_json %>
+					<div class="imgs-up-pane" id="img-pane">
+	                    <div class="parentFileBox">
+	        				<ul class="fileBoxUl img-gallery">
+	                            <% if @post.images && @post.images.class.name == "Hash" %>
+	                                <% $images = @post.images %>
+	                                <% $images.keys.each_with_index do |c, i| %>
+	                                    <li>
+	                                        <div class="viewThumb t-center">
+												<div class="blog-img-sm mul" style="background: url(<%= $images[c]['thumb'] %>)" data-url="<%=$images[c]['url'] %>" >
+													<a href="<%= $images[c]['url'] %>" data-caption="<%= i + 1 %>/<%= $images.length %>">
+														<img src="" alt="" style="opacity: 0";>
+													</a>
+												</div>
+	                                        </div>
+	                                        <div class="diyDel" data-img-id="<%= c %>">
+	                                            <i class="fa fa-times-circle"></i>
+	                                        </div>
+	                                    </li>
+	                                <% end %>
+	                            <% end %>
+	                            <li class="upload-btn">
+	                                <div id="img-upload"></div>
+	            				</li>
+	        				</ul>
+	        			</div>
+					</div>
+
+					<div class="form-group" id='tags-pane' style="display: none;">
+						<div class="col-md-12">
+							<input id="tags_input" type="text" class="tags form-control" name="post[tag]" value="<%= @post.tag %>" placeholder="添加标签"/>
+						</div>
+					</div>
+
+				<% end %>
+
+                <!-- <%= form_tag images_path, id: :image_form do %>
+                    <%= file_field_tag "image[link]", id: "img_input", accept: "image/*", multiple: true  %>
+                <% end %> -->
+				<footer class="panel-footer">
+					<ul class="nav nav-pills p-option">
+						<!-- <li>
+							<a href="#"><i class="fa fa-user"></i></a>
+						</li> -->
+						<li>
+							<a href="javascript: void(0)" id="open-img-btn"><i class="fa fa-camera"></i></a>
+						</li>
+						<li>
+							<a href="javascript: void(0)" id="emoji-btn"><i class="fa fa-meh-o"></i></a>
+						</li>
+						<li>
+							<a href="javascript: void(0)" id="tags-btn"><i class="fa fa-tags"></i></a>
+						</li>
+						<li>
+							<a href="javascript: void(0)" id="title-btn"><small class="glyphicon glyphicon-text-size">标题</small></a>
+						</li>
+						<!-- <li>
+							<a href="javascript: void(0)"><i class="fa fa-location-arrow"></i></a>
+						</li> -->
+					</ul>
+				</footer>
+                <!-- <%= form_tag images_path, method: :post, id: "my-awesome-dropzone", class: "dropzone", 'data-id' => @post.id do %> -->
+                <!-- <% end %> -->
+			</div>
+			<div>
+				<row>
+					<div class="col-xs-6">
+						<label for="read_input">浏览次数</label>
+						<input id="read_input" type="text" class="form-control" name="post[readtimes]" value="<%= @post.readtimes %>" placeholder="浏览次数"/>
+					</div>
+					<div class="col-xs-6">
+						<label for="thumb_input">点赞数</label>
+						<input id="thumb_input" type="text" class="form-control" name="post[thumbs_count]" value="<%= @post.thumbs_count %>" placeholder="点赞数"/>
+					</div>
+				</row>
+				<div class="text-center">
+					<small> 浏览数应大于点赞数十倍左右</small>
+				</div>
+			</div>
+			<br>
+			<div>
+				<input value='修改' type="button" class="btn btn-post btn-wide" id="post_submit" disabled="true">
+			</div>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/diyUpload.css">
+<%= stylesheet_link_tag "share/emoji" %>
+
+<script type="text/javascript" src="/assets/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/assets/diyUpload/js/diyUpload.js"></script>
+<%= javascript_include_tag "tags-input/tagsinput.min" %>
+<%= javascript_include_tag "share/emoji" %>
+
+<script type="text/javascript">
+
+    /*
+    * 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+    * 其他参数同WebUploader
+    */
+
+    $('#img-upload').diyUpload({
+    	url:'/images',
+    	success:function( data ) {
+    		console.info( data );
+    	},
+    	error:function( err ) {
+    		console.info( err );
+    	},
+        uploadButton: $('#post_submit'),
+    	chunked: true,
+    	// 分片大小
+    	// chunkSize:512 * 1024,
+    	//最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
+    	fileNumLimit:30,
+    	fileSizeLimit:500000 * 1024,
+    	fileSingleSizeLimit:50000 * 1024,
+    	accept: {
+            extensions:"gif,jpg,jpeg,bmp,png",
+            mimeTypes:"image/*"
+        },
+		onFileChange: function($fileBox) {
+			var index = ($fileBox.index() + 1);
+			var size = $fileBox.siblings().not('.upload-btn').length + 1;
+			$fileBox.siblings().andSelf().not(".upload-btn").each(function(i, e) {
+				var $this = $(this);
+				$(this).find("a[data-caption]").attr("data-caption", (i + 1) + '/' + size)
+			})
+			baguetteBox.run('.img-gallery');
+		},
+        success: function(res, $fileBox) {
+            var $imgInput = $("#post_images");
+            var val = $imgInput.data("value");
+            if (!val || typeof(val) != "object") val = {};
+            val[res.id] = {
+                url: res.url,
+                thumb: res.thumb
+            }
+            $imgInput.data("value", val);
+			$fileBox.removeAttr("error").find(".diyCancel").off("click").attr("data-img-id", res.id).removeClass("diyCancel").addClass("diyDel");
+			$.canSubmit = true
+        },
+        error: function(error, $fileBox) {
+			$fileBox.attr("error", true);
+			$.canSubmit = true
+        },
+        complete: function() {
+			if ($.canSubmit) {
+				submitPost();
+			}
+			$.canSubmit = false; // 防止重复提交
+            console.log($("#post_images").data("value"))
+        }
+    });
+
+	$(function() {
+		$("#tags-btn").on("click", function() {
+			$("#tags-pane").show();
+		})
+
+		$('#tags_input').tagsInput({width:'auto'});
+
+		$("#title-btn").on("click", function() {
+			$("#post_title").attr("type", "text");
+		})
+	})
+</script>

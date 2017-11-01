@@ -60,7 +60,7 @@ $(function() {
             for(var i in data) {
                 if (data[i].title.trim() == "") continue;
                 var label = $('\
-                    <a class="item btn btn-primary" title="热门帖子" href="javascript:void(0)">' + data[i].title + '</a>\
+                    <a class="item btn btn-primary" title="热门帖子" href="javascript:void(0)">' + data[i].title.slice(0, 8) + '</a>\
                 ')
                 label.find("br").remove().end().find("img").remove();
                 if (label.text().length) floatPane.append(label);

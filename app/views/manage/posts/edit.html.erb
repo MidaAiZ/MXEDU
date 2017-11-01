@@ -1,0 +1,13 @@
+<!-- page heading start-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li>
+            <a href="javascript:void(0)" class='url-back' role='back' data-back-url="<%= manage_post_path(@post) %>"><<返回</a>
+        </li>
+        <li>
+            <a href="#">修改内容</a>
+        </li>
+    </ul>
+</div>
+<!-- page heading end-->
+<%= render 'form', post: @post %>

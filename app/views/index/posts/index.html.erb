@@ -34,7 +34,7 @@
                                     <span class="n-title">
                                         <%= link_to n.title || "无标题", post_notice_path(n) %>
                                     </span>
-                                    <span class="pull-right n-time"><%= format_time n.updated_at %></span>
+                                    <span class="pull-right n-time"><%= format_time n.created_at %></span>
                                 </span>
                             <% end %>
                         </div>
