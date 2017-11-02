@@ -11,8 +11,8 @@ class Index::PostsController < IndexController
     cons = set_rec_cons params.slice(:keyword, :school, :cate, :tag)
     nonpaged_posts = Index::Post.sort(cons).published.hot
     @posts = nonpaged_posts.page(page).per(count).includes(:user, :cate)
-    if page.to_i == 1 && !params[:search]
-        @posts = Index::Post.top.hot + @posts
+    if page.to_i == 1 && !params[:search] && @user
+        @posts = Index::Post.sort(cons).top.hot + @posts
         get_notices unless params["dl"] # 公告
     end
 	set_title((params[:cate] && (@cate = Manage::PostCate.find_by_id params[:cate])) ? @cate.name : "校园BBS")
