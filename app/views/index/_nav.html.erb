@@ -165,6 +165,7 @@
                                 <%= image_tag @user.avatar.mini, class: "u-avatar" %>
                                 <%= @user.nickname || "#{@user.name.slice(0, 1)}同学" %>
                                 <span class="caret"></span>
+                                <span class="hide" role="userLogged"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                                 <li>

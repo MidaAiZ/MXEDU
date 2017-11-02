@@ -1,5 +1,10 @@
 $(function() {
 	$("body").on("click", "[role=thumb]", function() {
+		if (!$("[role=userLogged]").length) {
+			showTip("登录后即可点赞", 3000);
+			return;
+		}
+
 		if ($(this).hasClass("active")) {
 			thumbCancel($(this));
 		} else {
