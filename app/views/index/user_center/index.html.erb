@@ -54,9 +54,13 @@
                                     <div class="title">年级</div>
                                     <div class="desk"><%= @user.grade %></div>
                                 </li>
+                                <li>
+                                    <div class="title">密码</div>
+                                    <div class="desk"><a href="#" data-toggle="modal" data-target="#pwdModal">修改</a></div>
+                                </li>
                             </ul>
 							<%= link_to edit_user_url(@user), style: 'float: right' do %>
-							  <span>修改</span><i class='fa fa-pencil'></i>
+							  <span>修改信息</span><i class='fa fa-pencil'></i>
 							<% end %>
                         </div>
                     </div>
@@ -170,6 +174,32 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" class="btn btn-primary" data-loading-text="更新中..." id="subcrop">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog cropper">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p class="modal-title" id="Label">修改密码</p>
+      </div>
+      <div class="login-wrap">
+        <%= form_for(@user, url: user_url(@user), html: { class: 'form', id: 'pwd-form' }) do |f| %>
+          <label for="">请输入新密码</label>
+          <div class="row">
+              <div class="col-xs-8 col-sm-9">
+                  <%= f.text_field :password, id: :user_pwd, autofocus: "",  placeholder: "输入新密码", class: 'form-control', style: "margin-bottom: 3px" %>
+                  <small>数字/字母/下划线（8-16位）</small>
+                  <span id="pwd-tip" style="color: red; position: relative;"></span>
+              </div>
+              <div class="col-xs-4 col-sm-3">
+                  <button type="submit" class="btn btn-primary">修改</button>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
   </div>

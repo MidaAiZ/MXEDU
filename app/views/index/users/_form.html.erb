@@ -19,12 +19,17 @@
 
   <div class="login-wrap">
       <div class="base">
-          <%= f.text_field :name, id: :user_name, autofocus: "",  placeholder: "姓名", class: 'form-control' %>
+          <%= f.text_field :name, id: :user_name, autofocus: "",  placeholder: "真实姓名", class: 'form-control' %>
+          <span id="name-tip" style="color: red; position: relative; top: -10px;"></span>
           <div class="phone-group">
               <%= f.text_field :phone, id: :phone, autofocus: "",  placeholder: "手机号", class: 'form-control' %>
               <a href="JavaScript:void(0)" id="code" class="btn btn-default">获取验证码</a>
           </div>
           <input type='text' name='msg_code' autofocus  placeholder="短信验证码" class='form-control' id="code-text" >
+          <%= f.text_field :password, id: :user_pwd, autofocus: "",  placeholder: "设置密码", class: 'form-control', style: "margin-bottom: 3px" %>
+          <small>数字/字母/下划线（8-16位）</small>
+          <span id="pwd-tip" style="color: red; position: relative;"></span>
+
           <button type="button" class="btn btn-lg btn-login btn-block" id="next" disabled>
               <i class="fa fa-arrow-right"></i>
           </button>

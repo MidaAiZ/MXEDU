@@ -95,12 +95,45 @@
                 $("#user_name").on("input propertychange", function() {
                     var $this = $(this);
 
-                    if ($this.val().length > 1) {
-                        if ($("#code-text").hasClass("OK")) {
+                    if (/^[\u4E00-\u9FA5]{2,4}$/.test($this.val())) {
+                        $this.addClass("OK");
+                        $("#name-tip").text("");
+                        if ($("#code-text").hasClass("OK") && $("#user-pwd").hasClass("OK")) {
                             $("#next").removeAttr("disabled");
                         }
+                    } else {
+                        $this.removeClass("OK");
                     }
                 });
+
+                $("#user_name").on("blur", function() {
+                    var $this = $(this);
+                    if (!(/^[\u4E00-\u9FA5]{2,4}$/.test($this.val()))) {
+                        $("#name-tip").text("请输入正确姓名");
+                    }
+                })
+
+                $("#user_pwd").on("input propertychange", function() {
+                    var $this = $(this);
+
+                    if (/^([a-zA-Z0-9]|[._,@]){8,16}$/.test($this.val())) {
+                        $this.addClass("OK");
+                        $("#pwd-tip").text("");
+
+                        if ($("#code-text").hasClass("OK") && $("#user_name").hasClass("OK")) {
+                            $("#next").removeAttr("disabled");
+                        }
+                    } else {
+                        $this.removeClass("OK");
+                    }
+                });
+
+                $("#user_pwd").on("blur", function() {
+                    var $this = $(this);
+                    if (!(/^([a-zA-Z0-9]|[._,@]){8,16}$/.test($this.val()))) {
+                        $("#pwd-tip").text("密码不符合要求")
+                    }
+                })
 
                 $("#code-text").on("input propertychange", function() {
                     var $this = $(this);
@@ -118,10 +151,8 @@
                             if (res.code == 'Success') {
                                 $this.css("color", "green");
                                 $this.addClass("OK");
-                                if ($("#user_name").val().length > 1) {
+                                if ($("#user_name").hasClass("OK") && $("#user-pwd").hasClass("OK")) {
                                     $("#next").removeAttr("disabled");
-                                } else {
-                                    alert("请输入你的姓名");
                                 }
                             } else {
                                 $this.css("color", "red");
