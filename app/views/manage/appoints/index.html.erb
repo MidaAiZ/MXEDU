@@ -61,6 +61,7 @@
                   <th>姓名</th>
                   <th>联系方式</th>
                   <th>预约日期</th>
+                  <th>预约产品</th>
                   <th>内容</th>
                   <th>回电时间</th>
 				  <th>用户ID</th>
@@ -75,6 +76,7 @@
     					  <td><%= a.name %></td>
     					  <td><%= a.phone %></td>
     					  <td><%= format_time a.created_at %></td>
+                          <td><%= link_to a.product.name, manage_product_url(a.product_id) %></td>
     					  <td><%= a.content %></td>
     					  <td><%= a.time || '无说明' %></td>
     					  <td>

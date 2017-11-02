@@ -9,7 +9,9 @@ class Index::PostMsg < ApplicationRecord
 				foreign_key: :sender_id,
 				optional: true # 拒绝框架本身的频繁验证
 
-	belongs_to :resource, polymorphic: true, optional: true
+	belongs_to :resource, -> { with_all },
+	 			polymorphic: true,
+	 			optional: true
 
 	validates :state, inclusion: [0, 1]
 	validates :resource_id, presence: true

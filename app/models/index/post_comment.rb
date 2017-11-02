@@ -3,7 +3,7 @@ class Index::PostComment < ApplicationRecord
 			   class_name: 'Index::User',
 			   foreign_key: :user_id
 
-	belongs_to :post,
+	belongs_to :post, -> { with_all },
 				class_name: 'Index::Post',
 				foreign_key: :post_id
 
@@ -23,6 +23,7 @@ class Index::PostComment < ApplicationRecord
     validates :content, length: { minimum: 0, too_short: '内容不能为空', maximum: 5000, too_long: '评论内容最大长度为%{count}' }
 
 	scope :hot, -> { order(thumbs_count: :DESC) }
+	scope :with_all, -> { order(updated_at: :DESC) }
 	default_scope -> { hot.order(updated_at: :DESC) }
 
 	def _save user, post

@@ -134,7 +134,8 @@ class Index::PostsController < IndexController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Index::Post.state_ok.find(params[:id])
+      @post = Index::Post.with_all.find(params[:id])
+      redirect_to "/post_404" and return unless @post.state_ok?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
