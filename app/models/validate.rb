@@ -9,6 +9,6 @@ module Validate
   VALID_INT_REGEX = /\A[+-]?[1-9]\d*\z/
   VALID_COLOR_REGEX = /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/
   VALID_ID_REGEX = /(\A\d{15}\z)|(\A\d{17}([0-9]|X)\z)/
-  VALID_PASSWORD_REGEX = /[a-zA-Z0-9.!#$%&'*+\/\]\[=?^_`{|}~-]{6,}\z/
+  VALID_PASSWORD_REGEX = /[a-zA-Z0-9,.!#$%&'*+\/\]\[=?^_`{|}~-]{6,}\z/
   VALID_SEX_REGEX = /\A(\u7537|\u5973)\z/
 end

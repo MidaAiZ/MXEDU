@@ -24,7 +24,6 @@ class Index::UsersController < IndexController
       prms = user_params # 获取注册参数
       @user = Index::User.new(prms) # 新建用户
       @user.number = prms[:phone]
-      @user.password = '123456'
 
       @cache = Cache.new # 获取cache对象实例
       msg_cache_key = Valicode.msg_cache_key(prms[:phone], 'register') # 获取注册cache的key值

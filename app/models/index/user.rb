@@ -63,9 +63,9 @@ class Index::User < ApplicationRecord
                              maximum: 16, too_long: '姓名最长允许%{count}个字符' }
       validates :nickname,  uniqueness: { message: '该昵称已被占用' }, allow_blank: true,
                   length: { maximum: 16, too_long: '昵称最长允许%{count}个字符' }
-      validates :password, presence: true, length: { minimum: 6, maximum: 20 },
+      validates :password, presence: true, length: { minimum: 8, maximum: 16 },
                            format: { with: Validate::VALID_PASSWORD_REGEX },
-                           allow_blank: false, on: [:create   ]
+                           allow_blank: false, on: [:create]
       validates :password_digest, presence: true, allow_blank: false, on: [:update]
       validates :email, presence: false, uniqueness: { message: '该邮箱已被注册' },
                         length: { maximum: 255 },

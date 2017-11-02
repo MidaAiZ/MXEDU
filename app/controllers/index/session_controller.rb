@@ -50,7 +50,7 @@ class Index::SessionController < IndexController
             end
           end
         else #默认帐号密码登录
-          @user = Index::User.find_by_number(prms[:number]).try(:authenticate, prms[:password]) if prms[:number] && prms[:password]
+          @user = Index::User.find_by_phone(prms[:phone]).try(:authenticate, prms[:password]) if prms[:phone] && prms[:password]
         end
 
         # check_access # 当查找到用户时检查帐号是否被冻结

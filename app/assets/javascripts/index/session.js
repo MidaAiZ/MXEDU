@@ -45,12 +45,13 @@ $(function() {
 });
 
 $(function(){
-	$("#login").on("click", function() {
-		$(this).attr("disabled", true).html("<small>登录中...</small>");
+	$(".btn-login").on("click", function() {
+		var $this = $(this);
+		$this.attr("disabled", true).html("<small>登录中...</small>");
 		$.ajax({
 			url: "/login",
 			type: "post",
-			data: $("#login-form").serialize(),
+			data: $this.parents("form").serialize(),
 			dataType: "json",
 			success: function(res) {
 				if (res.code == 'Success') {
@@ -58,17 +59,30 @@ $(function(){
 				} else if (res.code == 'WrongMsgCode') {
 					alert("验证码错误")
 				} else {
-					alert("登录失败")
+					alert("帐号或密码错误")
 				}
 			},
 			error: function() {
 				alert("登录失败");
 			},
 			complete: function() {
-				$("#login").removeAttr("disabled", true).html("<i class='fa fa-check'></i>");
+				$this.removeAttr("disabled", true).html("<i class='fa fa-check'></i>");
 			}
 		})
 
 		return false;
 	})
 });
+
+// 登录方式切换
+$(function() {
+	$("#tab-pwd").click(function(e) {
+		$("#login-form-pwd").show(300);
+		$("#login-form-phone").hide(300);
+	})
+
+	$("#tab-phone").click(function() {
+		$("#login-form-phone").show(300);
+		$("#login-form-pwd").hide(300);
+	})
+})
