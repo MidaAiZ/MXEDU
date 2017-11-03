@@ -6,7 +6,7 @@ lock '3.6.1'
 set :application, 'MXEDU'
 
 # 源码地址
-set :repo_path, 'https://github.com/SinnerAiZ/MXEDU.git'
+set :repo_url, 'https://github.com/SinnerAiZ/MXEDU.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
