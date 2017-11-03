@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<%= render 'bt_nav', active: :home %>
+<%= render 'bt_nav', active: params[:search] ? :search : :home %>
 
 <div class="new-btn-pane pc-only">
     <%= link_to search_posts_path, class: "search" do %>
