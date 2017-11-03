@@ -55,7 +55,7 @@ class Manage::ProductsController < ManageController
     prms = index_product_params
     @product.need_login = prms[:need_login] ? true : false
     respond_to do |format|
-      if @product.update(prms)
+      if @product._update(prms)
         format.html { render html: manage_product_path(@product) }
         format.json { render :show, status: :ok, location: @product }
       else

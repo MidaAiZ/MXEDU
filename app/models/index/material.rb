@@ -8,13 +8,13 @@ class Index::Material < ApplicationRecord
 				foreign_key: 'admin_id'
 
 	belongs_to :school,
-	 			counter_cache: true,
+				# 	counter_cache: true,
 				class_name: 'Manage::School',
 				foreign_key: :school_id,
 				optional: true
 
 	belongs_to :cate,
-				counter_cache: true,
+				# counter_cache: true,
 				class_name: 'Manage::MaterialCate',
 				foreign_key: :cate_id,
 				optional: true
@@ -44,6 +44,26 @@ class Index::Material < ApplicationRecord
 			_self = _self.where("index_materials.tag LIKE ?", "%#{cons[:tag]}%" ) if cons[:tag]
 		end
 		_self ||= self.all
+	end
+
+	def _update prms
+		origin_cate = self.cate
+		origin_school = self.school
+		ApplicationRecord.transaction do # 出错将回滚
+			self.update prms
+			if (origin_cate && (cate != origin_cate))
+				cate.update materials_count: (cate.materials_count + 1)
+				p_count = origin_cate.materials_count - 1
+				p_count = 0 if p_count < 0
+				origin_cate.update materials_count: p_count
+			end
+			if (origin_school && (school != origin_school))
+				school.update materials_count: (school.materials_count + 1)
+				p_count = origin_school.materials_count - 1
+				p_count = 0 if p_count < 0
+				origin_school.update materials_count: p_count
+			end
+		end
 	end
 
 	def fake_readtimes

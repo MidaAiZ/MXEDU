@@ -71,7 +71,7 @@ class Manage::MaterialsController < ManageController
 	  prms = material_params
 	  @material.need_login = prms[:need_login] ? true : false
 	  respond_to do |format|
-		if @material.update(prms)
+		if @material._update(prms)
 		  format.html { render html: manage_material_upload_path(@material) }
 		  format.json { render :show, status: :ok, location: @material }
 		else

@@ -7,18 +7,18 @@ class Index::Product < ApplicationRecord
 	store_accessor :info, :recommend, :need_login
 
 	belongs_to :school,
-				counter_cache: true,
+				# counter_cache: true,
 				class_name: 'Manage::School',
 				foreign_key: :school_id,
 				optional: true
 
 	belongs_to :cate,
-				counter_cache: true,
+				# counter_cache: true,
 				class_name: 'Manage::ProductCate',
 				foreign_key: :cate_id
 
 	belongs_to :company,
-				counter_cache: true,
+				# counter_cache: true,
 				class_name: 'Manage::ProductCompany',
 				foreign_key: :company_id
 
@@ -59,6 +59,33 @@ class Index::Product < ApplicationRecord
 		end
 
 		_self ||= self.all
+	end
+
+	def _update prms
+		origin_cate = self.cate
+		origin_company = self.company
+		origin_school = self.school
+		ApplicationRecord.transaction do # 出错将回滚
+			self.update prms
+			if (origin_cate && (cate != origin_cate))
+				cate.update products_count: (cate.products_count + 1)
+				p_count = origin_cate.products_count - 1
+				p_count = 0 if p_count < 0
+				origin_cate.update products_count: p_count
+			end
+			if (origin_company && (company != origin_company))
+				company.update products_count: (company.products_count + 1)
+				p_count = origin_company.products_count - 1
+				p_count = 0 if p_count < 0
+				origin_company.update products_count: p_count
+			end
+			if (origin_school && (school != origin_school))
+				school.update products_count: (school.products_count + 1)
+				p_count = origin_school.products_count - 1
+				p_count = 0 if p_count < 0
+				origin_school.update products_count: p_count
+			end
+		end
 	end
 
 	def fake_readtimes
