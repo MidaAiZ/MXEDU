@@ -9,11 +9,11 @@ class Manage::MaterialFile < ApplicationRecord
 	validates :f_type, length: {  maximum: 64, too_long: '文件类型最大长度为%{count}' }
 	# default_scope { }
 
-	def dload_url
+	def dload_path
 		"/materials/download/#{self.id}/#{self.name}"
 	end
 
-	def manage_dload_url
+	def manage_dload_path
 		"/manage/materials/download/#{self.id}/#{self.name}"
 	end
 

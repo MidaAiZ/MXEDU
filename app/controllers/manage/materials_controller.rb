@@ -94,7 +94,7 @@ class Manage::MaterialsController < ManageController
   def destroy
     @material.update is_deleted: true
     respond_to do |format|
-      format.html { redirect_to manage_materials_url, notice: 'Material was successfully destroyed.' }
+      format.html { redirect_to manage_materials_path, notice: 'Material was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -103,7 +103,7 @@ class Manage::MaterialsController < ManageController
     @file = @material.files.find_by_id params[:file_id]
     @file.destroy
     respond_to do |format|
-      format.html { redirect_to manage_materials_url, notice: 'Material was successfully destroyed.' }
+      format.html { redirect_to manage_materials_path, notice: 'Material was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -120,7 +120,7 @@ class Manage::MaterialsController < ManageController
       @material = Index::Material.with_del.find(params[:material_id])
       @material.update is_deleted: false
       respond_to do |format|
-        format.html { redirect_to manage_material_url(@material) }
+        format.html { redirect_to manage_material_path(@material) }
         format.json { head :no_content }
       end
   end

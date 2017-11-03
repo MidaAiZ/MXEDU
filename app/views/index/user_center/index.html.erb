@@ -59,7 +59,7 @@
                                     <div class="desk"><a href="#" data-toggle="modal" data-target="#pwdModal">修改</a></div>
                                 </li>
                             </ul>
-							<%= link_to edit_user_url(@user), style: 'float: right' do %>
+							<%= link_to edit_user_path(@user), style: 'float: right' do %>
 							  <span>修改信息</span><i class='fa fa-pencil'></i>
 							<% end %>
                         </div>
@@ -187,7 +187,7 @@
         <p class="modal-title" id="Label">修改密码</p>
       </div>
       <div class="login-wrap">
-        <%= form_for(@user, url: user_url(@user), html: { class: 'form', id: 'pwd-form' }) do |f| %>
+        <%= form_for(@user, url: user_path(@user), html: { class: 'form', id: 'pwd-form' }) do |f| %>
           <label for="">请输入新密码</label>
           <div class="row">
               <div class="col-xs-8 col-sm-9">

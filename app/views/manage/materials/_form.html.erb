@@ -39,12 +39,12 @@
                                         <div class="form-group">
                                             <label for="material_cate">资料分类</label>
                                             <%= f.hidden_field :cate_id, class: "form-control", name: 'material[cate_id]', id: 'material_cate' %>
-                                            <div class="cdt-select" data-search-url="<%= cdts_search_material_cates_url %>" data-default="<%= @material.cate.name if @material.cate %>" data-json="<%= @cates.to_json %>"></div>
+                                            <div class="cdt-select" data-search-url="<%= cdts_search_material_cates_path %>" data-default="<%= @material.cate.name if @material.cate %>" data-json="<%= @cates.to_json %>"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="material_school">院校</label>
                                             <%= f.hidden_field :school_id, name: 'material[school_id]', id: 'material_school' %>
-                                            <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @material.school.name if @material.school %>" data-json="<%= @schools.to_json %>"></div>
+                                            <div class="cdt-select" data-search-url="<%= cdts_search_schools_path %>" data-default="<%= @material.school.name if @material.school %>" data-json="<%= @schools.to_json %>"></div>
                                         </div>
                                         <div class="form-group">
                                             <label for="material_tag">年级</label>

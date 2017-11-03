@@ -57,7 +57,7 @@ class Manage::PostsController < ManageController
   	code ||= 'Fail'
       respond_to do |format|
         if code == 'Success'
-          format.html { redirect_to manage_post_url @post }
+          format.html { redirect_to manage_post_path @post }
           format.json { render :show, status: :created }
         else
           format.html { render :edit }
@@ -86,7 +86,7 @@ class Manage::PostsController < ManageController
       @post = Index::Post.published.find(params[:post_id])
       code = @post.on_top!
       respond_to do |format|
-        format.html { redirect_to manage_post_url(@post) }
+        format.html { redirect_to manage_post_path(@post) }
         format.json { head :no_content, status: code ? 200 : 422 }
       end
   end
@@ -95,7 +95,7 @@ class Manage::PostsController < ManageController
       @post = Index::Post.top.find(params[:post_id])
       code = @post.off_top!
       respond_to do |format|
-        format.html { redirect_to manage_post_url(@post) }
+        format.html { redirect_to manage_post_path(@post) }
         format.json { head :no_content, status: code ? 200 : 422 }
       end
   end
@@ -109,7 +109,7 @@ class Manage::PostsController < ManageController
 	end
 
     respond_to do |format|
-      format.html { redirect_to "#{manage_posts_url}?page=#{params[:page]}" }
+      format.html { redirect_to "#{manage_posts_path}?page=#{params[:page]}" }
       format.json { head :no_content, status: code ? 200 : 422 }
     end
   end
@@ -119,7 +119,7 @@ class Manage::PostsController < ManageController
   	code = @post.publish!
 
       respond_to do |format|
-        format.html { redirect_to manage_post_url(@post) }
+        format.html { redirect_to manage_post_path(@post) }
         format.json { head :no_content, status: code ? 200 : 422 }
       end
   end

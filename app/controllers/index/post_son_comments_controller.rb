@@ -50,7 +50,7 @@ class Index::PostSonCommentsController < IndexController
 	def destroy
 	  @son_comment._destroy
 	  respond_to do |format|
-		format.html { redirect_to post_son_comments_url, notice: 'Post son_comment was successfully destroyed.' }
+		format.html { redirect_to post_son_comments_path, notice: 'Post son_comment was successfully destroyed.' }
 		format.json { head :no_content }
 	  end
 	end

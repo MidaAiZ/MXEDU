@@ -2,7 +2,7 @@
 <div class="page-heading">
     <ul class="breadcrumb">
         <li>
-            <a href="javascript:void(0)" class='url-back' role='back' data-back-url="<%= posts_url %>"><<取消</a>
+            <a href="javascript:void(0)" class='url-back' role='back' data-back-url="<%= posts_path %>"><<取消</a>
         </li>
         <li>
             <a href="#">发表新贴</a>
@@ -28,7 +28,7 @@
                             <div class="form-group">
                                  <label for=""><small style="color: red">*</small>所在学校</label>
                                  <%= hidden_field_tag :school_id, '', id: 'user_school', name: 'index_user[school_id]' %>
-                                 <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-json="<%= Manage::School.limit(8).to_json %>"></div>
+                                 <div class="cdt-select" data-search-url="<%= cdts_search_schools_path %>" data-json="<%= Manage::School.limit(8).to_json %>"></div>
                              </div>
                         <% end %>
                         <div id="err"></div>

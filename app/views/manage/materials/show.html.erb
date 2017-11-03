@@ -80,7 +80,7 @@
                                                 <% else %>
                                                     <i class="fa fa-file-text ico-mini f-type"></i>
                                                 <% end %>
-                                                <a class="dload" data-src="<%= f.manage_dload_url %>">
+                                                <a class="dload" data-src="<%= f.manage_dload_path %>">
                                                     <i class="fa fa-cloud-download ico-mini"></i>
                                                 </a>
                                             </div>
@@ -118,10 +118,10 @@
             </button>
             <ul role="menu" class="dropdown-menu">
                 <li>
-                    <%= link_to '修改信息', edit_manage_material_url(@material) %>
+                    <%= link_to '修改信息', edit_manage_material_path(@material) %>
                 </li>
                 <li>
-                    <%= link_to '上传资料', manage_material_upload_url(@material) + "?step=false" %>
+                    <%= link_to '上传资料', manage_material_upload_path(@material) + "?step=false" %>
                 </li>
                 <li>
                     <%= link_to '删除', manage_material_path(@material), method: :delete, data: { confirm: "确定要删除资料 '#{@material.name}'?" } %>

@@ -19,7 +19,7 @@
                 <div class="col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
-							<%= form_tag manage_posts_url, id: "search_post_form" do  %>
+							<%= form_tag manage_posts_path, id: "search_post_form" do  %>
 	                            <input type="text" id="search_input" placeholder="<%= @placeholder %>" class="form-control blog-search" data-search-type="<%= @type %>">
 							<% end %>
                         </div>

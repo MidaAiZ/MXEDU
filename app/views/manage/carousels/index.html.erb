@@ -60,19 +60,19 @@
               <li data-carousel-id="<%= c.id %>">
                 <div class="btn-group left">
                   <% unless c == @carousels.first %>
-                    <a href="javascript: void(0)" data-href='<%= lct_control_manage_carousels_url(c.id) + "?lct=advance" %>' class="btn-sm btn-danger" role='carousel-clt-control' data-method='post'>
+                    <a href="javascript: void(0)" data-href='<%= lct_control_manage_carousels_path(c.id) + "?lct=advance" %>' class="btn-sm btn-danger" role='carousel-clt-control' data-method='post'>
                       <span class="glyphicon glyphicon-arrow-left"></span>
                     </a>
                   <% end %>
                   <% unless c == @carousels.last %>
-                    <a href="javascript: void(0)" data-href='<%= lct_control_manage_carousels_url(c.id) + "?lct=back" %>' class="btn-sm btn-danger" role='carousel-clt-control' data-method='post'>
+                    <a href="javascript: void(0)" data-href='<%= lct_control_manage_carousels_path(c.id) + "?lct=back" %>' class="btn-sm btn-danger" role='carousel-clt-control' data-method='post'>
                       <span class="glyphicon glyphicon-arrow-right"></span>
                     </a>
                   <% end %>
                 </div>
                 <div class="btn-group right">
                   <%= link_to '编辑', edit_manage_carousel_path(c), class: "btn-sm btn-primary" %>
-                  <a id="rm-carousel" href="javascript: void(0)" data-href="<%= unshow_manage_carousels_url(c) %>" class="btn-sm btn-primary">移除</a>
+                  <a id="rm-carousel" href="javascript: void(0)" data-href="<%= unshow_manage_carousels_path(c) %>" class="btn-sm btn-primary">移除</a>
                 </div>
                 <%= image_tag c.image %>
                 <a href="<%= c.link %>" class="link"><%= c.link %></a>

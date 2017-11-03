@@ -73,7 +73,7 @@
             </button>
             <ul role="menu" class="dropdown-menu">
                 <li>
-                    <%= link_to '修改信息', edit_manage_product_url(@product) %>
+                    <%= link_to '修改信息', edit_manage_product_path(@product) %>
                 </li>
                 <li>
                   <%= link_to "删除", manage_product_path(@product), method: :delete, data: { confirm: "确定要删除产品 '#{@product.name}'？" } %>

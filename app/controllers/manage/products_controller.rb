@@ -71,7 +71,7 @@ class Manage::ProductsController < ManageController
   def destroy
     @product.update is_deleted: true
     respond_to do |format|
-      format.html { redirect_to manage_products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to manage_products_path, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -88,7 +88,7 @@ class Manage::ProductsController < ManageController
       @product = Index::Product.with_del.find(params[:product_id])
       @product.update is_deleted: false
       respond_to do |format|
-        format.html { redirect_to manage_product_url(@product) }
+        format.html { redirect_to manage_product_path(@product) }
         format.json { head :no_content }
       end
   end

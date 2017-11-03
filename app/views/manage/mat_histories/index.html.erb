@@ -79,7 +79,7 @@
                               <td>IP: <%= h.remote_ip %></td>
                               <td>无</td>
                           <% end %>
-    					  <td><%= link_to h.material_name, manage_material_url(h.material_id) %></td>
+    					  <td><%= link_to h.material_name, manage_material_path(h.material_id) %></td>
     					  <td><%= format_time h.updated_at %></td>
     					  <td><%= h.times %></td>
     					</tr>

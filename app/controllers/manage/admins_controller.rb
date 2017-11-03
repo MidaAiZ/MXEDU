@@ -70,10 +70,10 @@ class Manage::AdminsController < ManageController
     end
     respond_to do |format|
       if @code
-        format.html { redirect_to manage_material_cates_url, notice: 'MaterialCate was successfully destroyed.' }
+        format.html { redirect_to manage_material_cates_path, notice: 'MaterialCate was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to manage_material_cates_url, notice: '删除失败,无法删除超级管理员', status: 422 }
+        format.html { redirect_to manage_material_cates_path, notice: '删除失败,无法删除超级管理员', status: 422 }
         format.json { render json: { error: '删除失败,无法删除超级管理员' }, status: 422 }
       end
     end

@@ -34,17 +34,17 @@
                                 <div class="form-group">
                                     <label for="product_cate">产品分类</label>
                                     <%= f.hidden_field :cate_id, name: 'product[cate_id]', id: 'product_cate' %>
-                                    <div class="cdt-select" data-search-url="<%= cdts_search_product_cates_url %>" data-default="<%= @product.cate.name if @product.cate %>" data-json="<%= @cates.to_json %>"></div>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_product_cates_path %>" data-default="<%= @product.cate.name if @product.cate %>" data-json="<%= @cates.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_cate">针对院校</label>
                                     <%= f.hidden_field :school_id, name: 'product[school_id]', id: 'product_school' %>
-                                    <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @product.school.name if @product.school %>" data-json="<%= @schools.to_json %>"></div>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_schools_path %>" data-default="<%= @product.school.name if @product.school %>" data-json="<%= @schools.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_company">品牌</label>
                                     <%= f.hidden_field :company_id, name: 'product[company_id]', id: 'product_company' %>
-                                    <div class="cdt-select" data-search-url="<%= cdts_search_companies_url %>" data-default="<%= @product.company.name if @product.company %>" data-json="<%= @companies.to_json %>"></div>
+                                    <div class="cdt-select" data-search-url="<%= cdts_search_companies_path %>" data-default="<%= @product.company.name if @product.company %>" data-json="<%= @companies.to_json %>"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">价格</label>

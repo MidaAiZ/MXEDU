@@ -64,7 +64,7 @@ class Manage::PostNoticesController < ManageController
     def destroy
       @post_notice.update is_deleted: true
       respond_to do |format|
-        format.html { redirect_to manage_post_notices_url, notice: 'PostNotice was successfully destroyed.' }
+        format.html { redirect_to manage_post_notices_path, notice: 'PostNotice was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -81,7 +81,7 @@ class Manage::PostNoticesController < ManageController
         @post_notice = Manage::PostNotice.with_del.find(params[:post_notice_id])
         @post_notice.update is_deleted: false
         respond_to do |format|
-          format.html { redirect_to manage_post_notice_url(@post_notice) }
+          format.html { redirect_to manage_post_notice_path(@post_notice) }
           format.json { head :no_content }
         end
     end

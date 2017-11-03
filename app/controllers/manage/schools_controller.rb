@@ -61,10 +61,10 @@ class Manage::SchoolsController < ManageController
     end
     respond_to do |format|
       if @code
-        format.html { redirect_to schools_url, notice: 'School was successfully destroyed.' }
+        format.html { redirect_to schools_path, notice: 'School was successfully destroyed.' }
         format.json { head :no_content }
       else
-         format.html { redirect_to schools_url, notice: '删除失败,该院校已经绑定相关资料', status: 422 }
+         format.html { redirect_to schools_path, notice: '删除失败,该院校已经绑定相关资料', status: 422 }
         format.json { render json: { error: '删除失败,该院校已经绑定相关资料' }, status: 422 }
       end
     end

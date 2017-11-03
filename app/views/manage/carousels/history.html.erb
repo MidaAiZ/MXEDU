@@ -29,7 +29,7 @@
 				      <li data-carousel-id="<%= c.id %>">
 				        <div class="btn-group right">
 				          <a id="reshow-carousel" href="javascript: void(0)" data-href="<%= reshow_manage_carousels_path(c) %>" class="btn-sm btn-primary">重新展示</a>
-				          <a id="delete-carousel" href="javascript: void(0)" data-href="<%= delete_manage_carousels_url(c) + "?page="+ (params[:page] || "1") %>" class="btn-sm btn-primary">彻底删除</a>
+				          <a id="delete-carousel" href="javascript: void(0)" data-href="<%= delete_manage_carousels_path(c) + "?page="+ (params[:page] || "1") %>" class="btn-sm btn-primary">彻底删除</a>
 				        </div>
 				        <%= image_tag c.image.thumb %>
 				        <a href="<%= c.link %>" class="link"><%= c.link %></a>

@@ -21,7 +21,7 @@ class Index::SessionController < IndexController
       if @fail_times >= 2 && !verify_rucaptcha?(params[:_rucaptcha]) #, keep_session: true)
         #当连续登录失败两次时返回验证码,如果第三次登录时验证码错误则返回'WrongMsgCode'
         @code = @fail_times == 2 ? @code : 'WrongImgCode' # 验证码错误 'WrongMsgCode'
-        @url = root_url + 'rucaptcha' #验证码地址
+        @url = root_path + 'rucaptcha' #验证码地址
       elsif prms.blank?
         @code = 'InvalidParams' #参数错误
       else

@@ -32,7 +32,7 @@ class Manage::CarouselsController <  ManageController
       respond_to do |format|
         if @carousel.save
           format.html { redirect_to manage_carousel_path(@carousel) }
-          format.json { render json: { target: manage_carousels_url } }
+          format.json { render json: { target: manage_carousels_path } }
         else
           format.html { redirect_to new_manage_carousel_path }
           format.json { render json: @admin.errors }
@@ -47,7 +47,7 @@ class Manage::CarouselsController <  ManageController
         old_img = @carousel.image
         if @carousel.update(manage_carousel_params)
           old_img.remove! if old_img && old_img != @carousel.image
-          format.json { render json: { target: manage_carousels_url } }
+          format.json { render json: { target: manage_carousels_path } }
           format.html { redirect_to manage_carousels_path }
         else
           format.html { head :no_content }
@@ -92,7 +92,7 @@ class Manage::CarouselsController <  ManageController
       change_location
       respond_to do |format|
         format.html { redirect_to manage_carousels_path }
-        format.json { render json: { target: manage_carousels_url } }
+        format.json { render json: { target: manage_carousels_path } }
       end
   end
 

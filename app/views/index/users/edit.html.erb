@@ -13,7 +13,7 @@
 	<div class="text-center edit-heading">
 		<h2 class="">编辑个人信息</h2>
 	</div>
-	<%= form_for(@user, url: user_url(@user), html: { class: 'form-signin', id: 'register-form' }) do |f| %>
+	<%= form_for(@user, url: user_path(@user), html: { class: 'form-signin', id: 'register-form' }) do |f| %>
 
 	  <div>
 
@@ -45,7 +45,7 @@
 				  <div class="form-group">
 					  <label for="">学校</label>
 					  <%= f.hidden_field :school_id, id: 'user_school' %>
-					  <div class="cdt-select" data-search-url="<%= cdts_search_schools_url %>" data-default="<%= @user.school.name if @user.school %>" data-json="<%= @schools.to_json %>"></div>
+					  <div class="cdt-select" data-search-url="<%= cdts_search_schools_path %>" data-default="<%= @user.school.name if @user.school %>" data-json="<%= @schools.to_json %>"></div>
 				  </div>
 				  <div class="form-group">
 					  <label for="">专业</label>

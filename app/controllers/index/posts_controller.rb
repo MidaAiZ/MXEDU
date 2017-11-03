@@ -64,7 +64,7 @@ class Index::PostsController < IndexController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post) }
+        format.html { redirect_to post_path(@post) }
         format.json { render :show, status: :created }
       else
         format.html { render :new }
@@ -88,7 +88,7 @@ class Index::PostsController < IndexController
 	code ||= 'Fail'
     respond_to do |format|
       if code == 'Success'
-        format.html { redirect_to post_url @post }
+        format.html { redirect_to post_path @post }
         format.json { render :show, status: :created }
       else
         format.html { render :edit }
@@ -121,7 +121,7 @@ class Index::PostsController < IndexController
     @post = @user.posts.find(params[:id])
     @post.del!
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
