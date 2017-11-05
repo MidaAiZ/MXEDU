@@ -91,6 +91,16 @@ $(function() {
             [8, data.m_0_count]
         ];
 
+        var d3 = [
+            [1, data.pt_7_count],
+            [2, data.pt_6_count],
+            [3, data.pt_5_count],
+            [4, data.pt_4_count],
+            [5, data.pt_3_count],
+            [6, data.pt_2_count],
+            [7, data.pt_1_count],
+            [8, data.pt_0_count]
+        ]
         var data = ([
             {
                 label: "产品点击量",
@@ -111,6 +121,17 @@ $(function() {
                     fill: true,
                     fillColor: {
                         colors: ["rgba(255,255,255,.0)", "rgba(253,96,91,.7)"]
+                    }
+                }
+            },
+            {
+                label: "论坛点击量",
+                data: d3,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: ["rgba(255,255,255,.0)", "rgba(75, 204, 174, .1)"]
                     }
                 }
             }
@@ -171,7 +192,7 @@ $(function() {
                 radius: 3,
                 symbol: "circle"
             },
-            colors: ["#5abcdf", "#ff8673"]
+            colors: ["#5abcdf", "#ff8673", "#65cea7"]
         };
         var plot = $.plot($("#main-chart #main-chart-container"), data, options);
     }

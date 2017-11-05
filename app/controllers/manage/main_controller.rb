@@ -63,12 +63,11 @@ class Manage::MainController < ManageController
         {
            u_count: Index::User.count, # 用户总数
            p_count: Index::Product.count, # 产品总数
-           a_count: Index::Appoint.count, # 预约总数
+           pt_count: Index::Post.state_ok.count, # 帖子总数
            m_count: Index::Material.count, # 总资料数
         #    t_u_count: Index::History.where(created_at: Time.now.midnight..Time.now).count, # 今日新增用户
            t_a_count: Index::Appoint.where(created_at: Time.now.midnight..Time.now).count, # 今日预约数
-           t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count +
-                      Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).count # 今日访客
+           t_v_count: Manage::LoginRecord.where(time: Time.now.midnight..Time.now).count # 今日访客
         }
     end
 
@@ -92,6 +91,15 @@ class Manage::MainController < ManageController
           m_5_count: Index::MatHistory.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天访客量
           m_7_count: Index::MatHistory.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天访客量
 
+          # 帖子点击量
+          pt_1_count: Index::PostHistory.where(updated_at: 1.day.ago.midnight..Time.now.midnight).sum(:times), # 昨天访客量
+          pt_2_count: Index::PostHistory.where(updated_at: 2.days.ago.midnight..1.day.ago.midnight).sum(:times), # 前天访客量
+          pt_3_count: Index::PostHistory.where(updated_at: 3.days.ago.midnight..2.days.ago.midnight).sum(:times), # 大前天访客量
+          pt_4_count: Index::PostHistory.where(updated_at: 4.days.ago.midnight..3.days.ago.midnight).sum(:times), # 前四天访客量
+          pt_6_count: Index::PostHistory.where(updated_at: 6.days.ago.midnight..5.days.ago.midnight).sum(:times), # 前六天访客量
+          pt_5_count: Index::PostHistory.where(updated_at: 5.days.ago.midnight..4.days.ago.midnight).sum(:times), # 前五天访客量
+          pt_7_count: Index::PostHistory.where(updated_at: 7.days.ago.midnight..6.days.ago.midnight).sum(:times), # 前七天访客量
+
           # 记录缓存时间
           time: Time.now
         }
@@ -99,18 +107,20 @@ class Manage::MainController < ManageController
 
     def set_v_info_0
         {
-            p_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 今天浏览量
-            m_0_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).sum(:times)  # 今天访客量
+            p_0_count: Index::History.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 产品今天浏览量
+            m_0_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 资料今天浏览量
+            pt_0_count: Index::PostHistory.where(updated_at: Time.now.midnight..Time.now).sum(:times),  # 帖子今天浏览量
         }
     end
 
     def set_m_p_v_info
         {
-            m_t_v_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).count,  # 今天访客量
+            m_t_v_count: Index::MatHistory.where(updated_at: Time.now.midnight..Time.now).count,  # 资料今天访客量
             m_v_count: Index::MatHistory.count,  # 资料总访客量
             m_d_count: Index::Material.sum(:dload_count),  # 总下载次数
-            p_t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count,  # 今天访客量
+            p_t_v_count: Index::History.where(updated_at: Time.now.midnight..Time.now).count,  # 产品今天访客量
             p_v_count: Index::History.count,  # 产品总访客量
+            total_viewers_count: Manage::LoginRecord.count #本站总访客量
         }
     end
 end

@@ -38,6 +38,7 @@ class Index::PostsController < IndexController
     @comments = nonpaged_comments.page(page).per(count).includes(:user)
     @post.read! if params[:share]
 	set_title @post.title
+    Index::PostHistory.add @post, request.remote_ip, @user
   end
 
   # GET /index/posts/new

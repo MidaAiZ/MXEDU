@@ -21,9 +21,9 @@ class Index::ProductsController < IndexController
     if !@user && @product.need_login
       Cache.new[request.remote_ip + '_history'] = request.url
     else
-        Index::History.add @user, @product, request.remote_ip
-        @likes = Index::Product.sort({school: @product.school_id, cate: @product.cate_id}).where.not(id: @product.id).limit(5).includes(:cate)
-        @user ||= Index::User.new
+      Index::History.add @product, request.remote_ip, @user
+      @likes = Index::Product.sort({school: @product.school_id, cate: @product.cate_id}).where.not(id: @product.id).limit(5).includes(:cate)
+      @user ||= Index::User.new
     end
     set_title @product.name
   end

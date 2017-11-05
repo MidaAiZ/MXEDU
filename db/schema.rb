@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008033109) do
+ActiveRecord::Schema.define(version: 20171105154907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,17 @@ ActiveRecord::Schema.define(version: 20171008033109) do
     t.jsonb "images"
     t.index ["post_id"], name: "index_post_comments_on_post_id"
     t.index ["user_id"], name: "index_post_comments_on_user_id"
+  end
+
+  create_table "index_post_histories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "remote_ip"
+    t.bigint "post_id"
+    t.integer "times", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_histories_on_post_id"
+    t.index ["user_id"], name: "index_post_histories_on_user_id"
   end
 
   create_table "index_post_msgs", force: :cascade do |t|
@@ -237,6 +248,14 @@ ActiveRecord::Schema.define(version: 20171008033109) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "manage_login_records", force: :cascade do |t|
+    t.string "ip"
+    t.datetime "time"
+    t.bigint "user_id"
+    t.index ["ip"], name: "index_mng_login_records_on_ip"
+    t.index ["user_id"], name: "index_mng_login_records_on_user_id"
   end
 
   create_table "manage_material_cates", force: :cascade do |t|

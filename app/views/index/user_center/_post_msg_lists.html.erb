@@ -2,12 +2,13 @@
 	<li role="remove">
 		<% user = m.sender %>
 		<div class="avatar mini">
-			<%= image_tag user.avatar.mini %>
+			<%= link_to v_ucenter_posts_path(user) do %>
+				<%= image_tag user.avatar.mini %>
+			<% end %>
 		</div>
 		<div class="activity-desk narrow">
 			<span><%= user.nickname %></span>
 			<p class="text-muted"><%= format_time m.created_at %></p>
-
 		</div>
 		<div class="text">
 			<%= link_to post_path(m.resource.id) do %>
