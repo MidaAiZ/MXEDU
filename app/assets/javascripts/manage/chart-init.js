@@ -109,7 +109,7 @@ $(function() {
                     show: true,
                     fill: true,
                     fillColor: {
-                        colors: ["rgba(255,255,255,.4)", "rgba(183,236,240,.4)"]
+                        colors: ["rgba(255,255,255,.0)", "rgba(183,236,240,.4)"]
                     }
                 }
             },
@@ -131,7 +131,7 @@ $(function() {
                     show: true,
                     fill: true,
                     fillColor: {
-                        colors: ["rgba(255,255,255,.0)", "rgba(75, 204, 174, .1)"]
+                        colors: ["rgba(255,255,255,.4)", "rgba(75, 204, 174, .1)"]
                     }
                 }
             }
@@ -192,7 +192,7 @@ $(function() {
                 radius: 3,
                 symbol: "circle"
             },
-            colors: ["#5abcdf", "#ff8673", "#65cea7"]
+            colors: ["#6a8abe", "#ff8673", "#65cea7"]
         };
         var plot = $.plot($("#main-chart #main-chart-container"), data, options);
     }
