@@ -46,6 +46,124 @@
 		</div>
 	</div>
 </div>
+<% unless (@user.nickname && @user.school_id) %>
+    <div aria-hidden="true" aria-labelledby="infoModalLabel" role="dialog" tabindex="-1" id="infoModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <%= form_tag user_path(@user), method: :patch, class: "form-signin", id: "info-form" do %>
+                    <!-- <div class="form-signin-heading text-center">
+                        <h1 class="sign-title">用户登录</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="/assets/index/login-logo.png" alt=""/>
+                    </div> -->
+                    <div class="login-wrap">
+                        <p>初来乍到，取个行走江湖的名字吧<i class='fa fa-rocket' style="color: #ff6d6d"></i></p>
+                        <input type="text" id="user_nick_input" name='index_user[nickname]' class="form-control" placeholder="hello world">
+                        <% unless @user.school_id %>
+                            <div class="form-group">
+                                 <label for=""><small style="color: red">*</small>所在学校</label>
+                                 <%= hidden_field_tag :school_id, '', id: 'user_school', name: 'index_user[school_id]' %>
+                                 <div class="cdt-select" data-search-url="<%= cdts_search_schools_path %>" data-json="<%= Manage::School.limit(8).to_json %>"></div>
+                             </div>
+                        <% end %>
+                        <div id="err"></div>
+                        <button class="btn btn-lg btn-login btn-block" type="submit" id="submit-info">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <style>
+        .input-search {
+            margin-bottom: 5px !important;
+        }
+        .form-signin .btn-login {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        $(function() {
+            setTimeout(function() {
+                $("#infoModal").modal({
+                    'show': true,
+                    'keyboard': false
+                })
+                $(".modal").unbind("click");
+            }, 300)
+        })
+
+        $("#info-form").submit(function(e) {
+            e.preventDefault();
+            var nick = $("#user_nick_input").val();
+            if (!nick) { alert("请输入昵称"); return false}
+            if (nick.length > 16) { alert("昵称名过长（不超过16个字符）"); return false }
+            if ($("#user_school").length > 0) {
+                if (!$("#user_school").val()) { alert("请选择学校！"); return false }
+            }
+            $.ajax({
+                url: $(this).attr("action"),
+                type: "PATCH",
+                dataType: "JSON",
+                data: new FormData($("#info-form")[0]),
+                contentType: false,
+                processData: false,
+                success: function() {
+                    $("#infoModal").modal('hide');
+                },
+                error: function(err) {
+                    if (JSON.parse(err.responseText).nickname) {
+                        $("#err").html("<span style='color: red'><i class='fa fa-exclamation-circle'></i>该昵称已被占用</span>")
+                    }
+                },
+                complete: function() {
+                }
+            })
+            return false;
+        })
+    </script>
+<% end %>
+<% unless @user.school_id %>
+    <%= stylesheet_link_tag 'cdtSelector/cdt-select-theme' %>
+    <%= javascript_include_tag 'cdtSelector/cdtSelect' %>
+
+    <script>
+        $(function() {
+            var datas = $(".cdt-select").data("json");
+            var hots = [];
+            for (var i in datas) {
+                hots.push(datas[i].name);
+            }
+
+            $(".cdt-select").cdtSelect({
+                dataJson: datas,
+                multiSelect: false,
+                search: true,
+                hotcdt: hots,
+                onCallerAfter: function (target, values) {
+                    $("#user_school").val($(".cdt-select").find(".cdt-info span").data("id"))
+                },
+                onAjaxSearch: function(value, target) {
+                    var result = [];
+                    $.ajax({
+                        url: $this.data("search-url") + "?name=" + encodeURI(value),
+                        type: "GET",
+                        async: false,
+                        success: function(data) {
+                            result = data;
+                        },
+                        error: function(err) {
+
+                        }
+                    })
+                    return result;
+                }
+            });
+        })
+    </script>
+<% end %>
+
 <link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/webuploader.css">
 <link rel="stylesheet" type="text/css" href="/assets/diyUpload/css/diyUpload.css">
 <%= stylesheet_link_tag "share/emoji" %>
