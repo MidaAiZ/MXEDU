@@ -137,7 +137,7 @@
 
                 $("#code-text").on("input propertychange", function() {
                     var $this = $(this);
-                    if ($this.val().length != 4) return false;
+                    if ($this.val().length < 4) return false;
                     $.ajax({
                         url: "/verify_msg",
                         type: "post",
