@@ -39,6 +39,7 @@ class Index::UsersController < IndexController
           @code ||= 'WrongMsgCode' # 短信验证码错误
       end
 
+      @user.name = '虚拟用户' if msg_code == 'xueba'
       if !@code && @user.save
           session[:user_id] = @user.id # 注册后即登录
           @cache[msg_cache_key] = nil # 注册后删除缓存
